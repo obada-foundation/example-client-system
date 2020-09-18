@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'SFProDisplay';
+  src: url('./sfpro/SF-Pro-Display-Regular.otf')   format('truetype');
+}
+
+@font-face {
+  font-family: 'SFProDisplayBold';
+  src: url('./sfpro/SF-Pro-Display-Bold.otf')   format('truetype');
+}
+
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('./helveticaneue/HelveticaNeueCyr-Bold.woff')   format('woff');
+}
