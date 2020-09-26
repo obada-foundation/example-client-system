@@ -20,6 +20,16 @@ RUN set -e \
 	&& composer install --prefer-dist --no-scripts --no-progress --no-suggest --no-interaction $ARGS \
 	&& composer dump-autoload --classmap-authoritative
 
+FROM node as assets
+
+COPY src/ /assets
+
+WORKDIR /assets
+
+RUN set -e \
+	&& npm install \
+	&& npm run dev
+
 FROM base
 
 RUN mkdir -p /run/php \
@@ -33,6 +43,9 @@ COPY docker/app/etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 COPY docker/app/etc/supervisord.conf /etc/supervisord.conf
 
 COPY --from=composer /var/www/ /app
+COPY --from=assets /assets/public /app/public
+
+RUN chown -R www-data:www-data /app
 
 STOPSIGNAL SIGQUIT
 

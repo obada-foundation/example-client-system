@@ -31,6 +31,8 @@ services:
   app:
     image: obada/reference-design:develop
     container_name: reference-design
+    volumes:
+      - ./etc/.env:/app/.env
     restart: always
     networks:
       - backend
@@ -42,7 +44,7 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD={{ db_password }}
-      - MYSQL_DATABASE=gateway
+      - MYSQL_DATABASE=reference-design
     ports:
       - 127.0.0.1:3306:3303
     volumes:

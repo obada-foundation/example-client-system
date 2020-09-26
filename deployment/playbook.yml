@@ -14,10 +14,16 @@
         - docker-compose
       loop: [ "nginx" ]
 
+    - name: "Copy Laravel environment file"
+      template:
+        src: env.j2
+        dest: "{{ config_path }}/.env"
+        mode: 0644
+
     - name: "Copy nginx service file"
       template:
         src: etc/nginx/service.conf.j2
-        dest: "{{ deployment_path }}/etc/nginx/service.conf"
+        dest: "{{ config_path }}/nginx/service.conf"
         mode: 0644
 
     - name: "Copy docker-compose.yml"
@@ -34,3 +40,10 @@
         files:
           - docker-compose.yml
         recreate: smart
+
+    - name: "Execute database migrations"
+      shell: |
+        docker exec reference-design sh -l -c "php artisan migrate -n --force "
+      register: migrations
+
+    - debug: msg="{{ migrations.stdout }}"
