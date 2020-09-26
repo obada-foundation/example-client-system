@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/obada-protocol/reference-design/workflows/Reference design branch workflow/badge.svg)](https://github.com/obada-protocol/reference-design/actions)
+[![Actions Status](https://github.com/obada-protocol/reference-design/workflows/Reference%20design%20branch%20workflow/badge.svg)](https://github.com/obada-protocol/reference-design/actions)
 
 # Installation
 
