@@ -23,6 +23,7 @@ jobs:
 
   deploy:
     needs: build
+    runs-on: ubuntu-latest
     steps:
       - id: checkout-code
         uses: actions/checkout@v2
