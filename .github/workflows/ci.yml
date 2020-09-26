@@ -30,4 +30,7 @@ jobs:
 
       - id: build-docker-image
         run: make deploy-staging
+        env:
+          STAGING_DEPLOY_KEY: ${{ secrets.STAGING_DEPLOY_KEY }}
+          ANSIBLE_STAGING_VARS: ${{ secrets.ANSIBLE_STAGING_VARS }}
 

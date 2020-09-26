@@ -14,7 +14,15 @@ deploy-production:
 	ansible-playbook deployment/playbook.yml --limit rd.obada.io
 
 deploy-staging:
-	ansible-playbook deployment/playbook.yml --limit dev.rd.obada.io
+	@echo "$$ANSIBLE_STAGING_VARS" >> $$(pwd)/hosts
+	@echo "$$STAGING_DEPLOY_KEY" >> $$(pwd)/id_rsa
+	docker run \
+		--rm \
+		-t \
+		-v $$(pwd)/deployment:/home/ansible/deployment \
+		-v $$(pwd)/hosts:/etc/ansible/hosts \
+		-v $$(pwd)/id_rsa:/home/ansible/.ssh/id_rsa \
+		securityrobot/ansible ansible-playbook deployment/playbook.yml --limit dev.rd.obada.io
 
 deploy-local:
 	ansible-playbook deployment/playbook.yml --limit rd.obada.local --connection=local
