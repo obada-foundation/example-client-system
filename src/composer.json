@@ -9,7 +9,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/obada-protocol/php-client-library.git"
+            "url": "git@github.com:obada-protocol/php-client-library.git"
         }
     ],
     "license": "MIT",
