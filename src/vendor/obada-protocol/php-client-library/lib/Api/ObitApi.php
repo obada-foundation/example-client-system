@@ -967,11 +967,12 @@ class ObitApi
      *
      * @throws \Obada\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \Obada\Entities\Obit|\Obada\Entities\NotFound
      */
     public function showObit($obitDid)
     {
-        $this->showObitWithHttpInfo($obitDid);
+        list($response) = $this->showObitWithHttpInfo($obitDid);
+        return $response;
     }
 
     /**
@@ -981,7 +982,7 @@ class ObitApi
      *
      * @throws \Obada\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Obada\Entities\Obit|\Obada\Entities\NotFound, HTTP status code, HTTP response headers (array of strings)
      */
     public function showObitWithHttpInfo($obitDid)
     {
@@ -1015,10 +1016,58 @@ class ObitApi
                 );
             }
 
-            return [null, $statusCode, $response->getHeaders()];
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\Obada\Entities\Obit' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Obada\Entities\Obit', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Obada\Entities\NotFound' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Obada\Entities\NotFound', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Obada\Entities\Obit';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Obada\Entities\Obit',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1064,14 +1113,25 @@ class ObitApi
      */
     public function showObitAsyncWithHttpInfo($obitDid)
     {
-        $returnType = '';
+        $returnType = '\Obada\Entities\Obit';
         $request = $this->showObitRequest($obitDid);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -1488,28 +1548,30 @@ class ObitApi
      * Operation updateObit
      *
      * @param  string $obitDid The given ObitDID argument (required)
+     * @param  \Obada\Entities\Obit $obit obit (optional)
      *
      * @throws \Obada\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function updateObit($obitDid)
+    public function updateObit($obitDid, $obit = null)
     {
-        $this->updateObitWithHttpInfo($obitDid);
+        $this->updateObitWithHttpInfo($obitDid, $obit);
     }
 
     /**
      * Operation updateObitWithHttpInfo
      *
      * @param  string $obitDid The given ObitDID argument (required)
+     * @param  \Obada\Entities\Obit $obit (optional)
      *
      * @throws \Obada\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateObitWithHttpInfo($obitDid)
+    public function updateObitWithHttpInfo($obitDid, $obit = null)
     {
-        $request = $this->updateObitRequest($obitDid);
+        $request = $this->updateObitRequest($obitDid, $obit);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1562,13 +1624,14 @@ class ObitApi
      * 
      *
      * @param  string $obitDid The given ObitDID argument (required)
+     * @param  \Obada\Entities\Obit $obit (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateObitAsync($obitDid)
+    public function updateObitAsync($obitDid, $obit = null)
     {
-        return $this->updateObitAsyncWithHttpInfo($obitDid)
+        return $this->updateObitAsyncWithHttpInfo($obitDid, $obit)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1582,14 +1645,15 @@ class ObitApi
      * 
      *
      * @param  string $obitDid The given ObitDID argument (required)
+     * @param  \Obada\Entities\Obit $obit (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateObitAsyncWithHttpInfo($obitDid)
+    public function updateObitAsyncWithHttpInfo($obitDid, $obit = null)
     {
         $returnType = '';
-        $request = $this->updateObitRequest($obitDid);
+        $request = $this->updateObitRequest($obitDid, $obit);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1618,11 +1682,12 @@ class ObitApi
      * Create request for operation 'updateObit'
      *
      * @param  string $obitDid The given ObitDID argument (required)
+     * @param  \Obada\Entities\Obit $obit (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function updateObitRequest($obitDid)
+    protected function updateObitRequest($obitDid, $obit = null)
     {
         // verify the required parameter 'obitDid' is set
         if ($obitDid === null || (is_array($obitDid) && count($obitDid) === 0)) {
@@ -1651,6 +1716,9 @@ class ObitApi
 
         // body params
         $_tempBody = null;
+        if (isset($obit)) {
+            $_tempBody = $obit;
+        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -1659,7 +1727,7 @@ class ObitApi
         } else {
             $headers = $this->headerSelector->selectHeaders(
                 ['application/json'],
-                []
+                ['application/json']
             );
         }
 
