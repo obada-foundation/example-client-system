@@ -9,6 +9,8 @@ use App\Models\StructuredData;
 use App\Models\ClientObit;
 use App\ObitManager\ObitManager;
 use App\Http\Requests\UsnRequest;
+use Obada\Api\ObitApi;
+use Obada\Entities\NewObit;
 
 class ServiceController extends Controller
 {
@@ -255,8 +257,8 @@ class ServiceController extends Controller
             ], 400);
         }
 
-        $apiInstance = new \Obada\Api\ObitApi();
-        $obit = new \Obada\Entities\NewObit();
+        $obitApi = app()->make(ObitApi::class);
+        $obit = new NewObit();
         $obit->obitDid = $client_obit->obitDID;
         $obit->usn = $client_obit->usn;
         $obit->ownerDid = $client_obit->owner;
@@ -268,7 +270,7 @@ class ServiceController extends Controller
         $obit->structuredData = $client_obit->structuredData;
 
         try {
-            $apiInstance->createObit($obit);
+            $obitApi->createObit($obit);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 1,
