@@ -13,6 +13,11 @@
         <div class="collapse navbar-collapse show">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
+                    <a href="/devices/0/edit" class="nav-link">
+                        ADD DEVICE
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/devices" class="nav-link">
                         DEVICES
                     </a>

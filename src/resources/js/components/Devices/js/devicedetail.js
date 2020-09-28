@@ -15,12 +15,19 @@ export default {
     methods: {
         getDevice: function(){
             axios.get('/api/internal/device/'+this.device_id, {}).then((response) => {
+                this.isLoading = false;
                 console.log(response);
                 if(response.data.status == 0) {
                     this.device = response.data.device;
                 }
-            }).catch(() => {
-                swal("Unable To Get Device!", "We could not find this device in the database.", "error");
+            }).catch((e) => {
+                this.isLoading = false;
+                if(e.response.hasOwnProperty('errorMessage')) {
+                    swal("Error!", e.data.errorMessage, "error");
+                } else {
+                    swal("Unable To Get Device!", "We could not find this device in the database.", "error");
+                }
+
             });
         },
         getMetadataValue(metadata) {
@@ -33,6 +40,54 @@ export default {
                 return JSON.parse(data);
             }
             return data;
+        },
+        createObit: function(){
+            if(this.isLoading) return;
+            this.isLoading = true;
+            axios('/api/internal/device/obit', {
+                method:'post',
+                data: {
+                    device_id: parseInt(this.device_id)
+                },
+                responseType: 'json',
+            })
+            .then((response) => {
+                this.isLoading = false;
+                this.device.synced_with_client_obits = 1;
+                swal("Done!", "Obit has been successfully created.", "success");
+            })
+            .catch((e) => {
+                this.isLoading = false;
+                if(e.response.hasOwnProperty('errorMessage')) {
+                    swal("Error!", e.data.errorMessage, "error");
+                } else {
+                    swal("Error!", "We could not create the obit.", "error");
+                }
+            });
+        },
+        syncData: function(){
+            if(this.isLoading) return;
+            this.isLoading = true;
+            axios('/api/internal/device/sync', {
+                method:'post',
+                data: {
+                    device_id: parseInt(this.device_id)
+                },
+                responseType: 'json',
+            })
+                .then((response) => {
+                    this.isLoading = false;
+                    this.device.synced_with_obada = 1;
+                    swal("Done!", "Obit has been successfully synchronized.", "success");
+                })
+                .catch((e) => {
+                    this.isLoading = false;
+                    if(e.response.hasOwnProperty('errorMessage')) {
+                        swal("Error!", e.data.errorMessage, "error");
+                    } else {
+                        swal("Error!", "We could not synchronize the Obit data", "error");
+                    }
+                });
         }
     }
 }

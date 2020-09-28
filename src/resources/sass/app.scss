@@ -94,6 +94,10 @@ label {
     display: none;
 }
 
+.sweet-alert h2 {
+    font-size: 2.25rem !important;
+}
+
 #shopDrop:hover>.dropdown-menu {
     display: block;
     opacity: 1;
@@ -180,6 +184,10 @@ label {
     text-transform: capitalize;
 }
 
+.btn.btn-sm.btn-fab> i, .btn-group-sm .btn.btn-fab>i {
+    font-size: 0.8rem !important;
+}
+
 .card .card-header-plain {
     background: transparent !important;
 }
@@ -241,8 +249,12 @@ label {
 
 /* Designer & Viewer */
 
+.btn .material-icons, .btn:not(.btn-just-icon):not(.btn-fab) .fa {
+    top: -2px;
+}
+
 .input-group.colored {
-    background: #F1F6F6;
+    background: #ebf6fb;
     border-radius: 5px;
     margin-top: 5px;
 }
@@ -262,11 +274,11 @@ label {
 }
 
 .form-group.select-colored .bootstrap-select {
-    background: #F1F6F6;
+    background: #ebf6fb;
     border-radius: 5px;
     padding: 0.375rem 0.75rem;
     padding-left: 1em;
-    margin-top: 0px;
+    margin-top: 5px;
 }
 
 .form-group.select-colored .bootstrap-select .select-with-transition {
@@ -382,4 +394,61 @@ label {
             }
         }
     }
+}
+
+.card {
+    box-shadow: none;
+
+    .card-header {
+        background: transparent;
+        border-radius: 0px;
+        padding: 0px !important;
+        margin: 0px;
+        border-bottom: 1px solid #454545;
+        box-shadow: none !important;
+
+        label {
+            font-family: "Barlow Condensed", sans-serif !important;
+            font-size: 1.25rem !important;
+            color: #3c4858;
+            font-weight: 800;
+            line-height: 1.2rem;
+            display: block;
+        }
+
+    }
+}
+
+.loader {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    background: rgba(0,0,0,0.12);
+
+    .loading-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -o-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+
+        width: 250px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.16);
+        background: #FFFFFF;
+
+        i.fa {
+            font-size: 3rem !important;
+            color: #D4D4D4;
+        }
+
+    }
+
 }

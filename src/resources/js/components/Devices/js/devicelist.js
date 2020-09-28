@@ -3,6 +3,7 @@ export default {
     data: function () {
         return {
             deviceList: null,
+            isLoading: true
         };
     },
     mounted: function () {
@@ -24,7 +25,8 @@ export default {
                 ajax: {
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     url: '/api/data/devices',
-                    dataSrc: function (data) {
+                    dataSrc: (data) => {
+                        this.isLoading = false;
                         if (data.status === 1) {
                             return [];
                         } else {
@@ -62,11 +64,27 @@ export default {
                         }
                     },
                     {
-                        sortable: false,
+                        sortable: true,
+                        className: "dt-center",
                         "render": function (data, type, full, meta) {
-                            return '<button class="btn btn-round btn-sm btn-danger btn-remove"  data-id="'+full.id+'">Remove</button>';
+                            if(full.synced_with_client_obits == 1) {
+                                return '<button class="btn btn-fab btn-success btn-round btn-sm text-center m-auto"><i class="fa fa-check"></i></button>'
+                            } else {
+                                return '<button class="btn btn-fab btn-warning btn-round btn-sm text-center m-auto"><i class="fa fa-exclamation-triangle"></i></button>'
+                            }
                         }
                     },
+                    {
+                        sortable: true,
+                        className: "dt-center",
+                        "render": function (data, type, full, meta) {
+                            if(full.synced_with_obada == 1) {
+                                return '<button class="btn btn-fab btn-success btn-round btn-sm text-center m-auto"><i class="fa fa-check"></i></button>'
+                            }else {
+                                return '<button class="btn btn-fab btn-warning btn-round btn-sm text-center m-auto"><i class="fa fa-exclamation-triangle"></i></button>'
+                            }
+                        }
+                    }
                 ]
             });
         })
@@ -99,8 +117,12 @@ export default {
                                 swal("Unable To Remove Device!", response.data.errorMessage, "error");
                             }
 
-                        }).catch(() => {
-                            swal("Unable To Remove Device!", "We could not remove this device.", "error");
+                        }).catch((e) => {
+                            if(e.response.hasOwnProperty('errorMessage')) {
+                                swal("Error!", e.data.errorMessage, "error");
+                            } else {
+                                swal("Error!", "We could not delete the device", "error");
+                            }
                         });
 
                     }

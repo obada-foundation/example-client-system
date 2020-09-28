@@ -6,6 +6,12 @@
         "framework",
         "laravel"
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/obada-protocol/php-client-library.git"
+        }
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
@@ -16,7 +22,8 @@
         "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
         "tuupola/base58": "^2.1",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "obada-protocol/php-client-library": "*@dev"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

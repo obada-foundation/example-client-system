@@ -1,5 +1,10 @@
 <template>
     <div>
+        <div v-if="isLoading" class="loader">
+            <div class="loading-card text-center">
+                <i class="fa fa-circle-notch fa-spin"></i>
+            </div>
+        </div>
         <ul v-if="device != null" class="device-information-list">
             <device-row :bold_title="true"  :title="'Serial Number'" :value="device.serial_number"></device-row>
             <device-row :bold_title="true" :title="'Manufacturer'" :value="device.manufacturer"></device-row>
@@ -38,8 +43,10 @@
             <structured-data-row key="index"  v-for="(data,index) in device.structured_data" :structured_data="getStructuredData(data.data_array)"></structured-data-row>
 
         </ul>
-        <div class="text-center mt-5">
-            <a v-bind:href="'/devices/'+device.id+'/edit'" class="btn btn-primary btn-round">EDIT</a>
+        <div v-if="device != null" class="text-center mt-5">
+            <a v-bind:href="'/devices/'+device_id+'/edit'" class="btn btn-primary btn-round">EDIT</a>
+            <button v-show="device.synced_with_client_obits == 0" class="btn btn-primary btn-round" @click="createObit">CREATE OBIT</button>
+            <button v-show="device.synced_with_client_obits == 1 && device.synced_with_obada == 0" class="btn btn-primary btn-round" @click="syncData">SYNC</button>
         </div>
     </div>
 </template>

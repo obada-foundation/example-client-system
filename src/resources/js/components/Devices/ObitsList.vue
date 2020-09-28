@@ -3,7 +3,6 @@
         <thead>
         <tr>
             <th>USN</th>
-            <th>Obit</th>
             <th>Part Number</th>
             <th>Manufacturer</th>
             <th>Owner</th>

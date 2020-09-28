@@ -16,7 +16,15 @@
     @include('common.nav',['fixed'=>false])
     <div class="main">
         <div class="container">
-            <h1 class="text-center">Edit Device</h1>
+            <h1 class="text-center">
+                <?php if($device_id == 0) { ?>
+                    Add Device
+
+                <?php } else { ?>
+                    Edit Device
+
+                <?php } ?>
+            </h1>
             <section class="py-5 my-5">
                 <edit-device :device_id="_device_id"></edit-device>
             </section>

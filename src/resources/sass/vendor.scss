@@ -9,3 +9,8 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 @import "../vendor/scss/material-kit.scss";
+@import "../vendor/bootstrap-sweetalert/bootstrap-sweetalert.css";
+
+@import "../vendor/codemirror/lib/codemirror.css";
+@import "../vendor/codemirror/theme/base16-light.css";
+@import "../vendor/codemirror/addon/hint/show-hint.css";

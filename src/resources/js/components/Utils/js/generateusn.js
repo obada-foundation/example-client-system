@@ -131,12 +131,12 @@ export default {
                 .then((response) => {
                     this.usn_data = response.data.usn;
                 })
-                .catch((error) => {
-                    _app.notify({
-                        message: 'Something went wrong.',
-                        type: 'error',
-                        autoclose: true
-                    });
+                .catch((e) => {
+                    if(e.response.hasOwnProperty('errorMessage')) {
+                        swal("Error!", e.data.errorMessage, "error");
+                    } else {
+                        swal("Error!", "Unable to generate USN", "error");
+                    }
                 });
             }
         },

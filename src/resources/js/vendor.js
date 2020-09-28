@@ -7,4 +7,10 @@ require('../vendor/js/plugins/jquery.flexisel.js');
 require('../vendor/js/plugins/bootstrap-datetimepicker.min.js');
 require('../vendor/js/plugins/nouislider.min.js');
 require('../vendor/js/material-kit.js');
-
+require('../vendor/bootstrap-sweetalert/bootstrap-sweetalert.js');
+require('../vendor/codemirror/lib/codemirror.js');
+require('../vendor/codemirror/mode/javascript/javascript.js');
+require('../vendor/codemirror/mode/css/css.js');
+require('../vendor/codemirror/addon/hint/show-hint.js');
+require('../vendor/codemirror/addon/hint/css-hint.js');
+require('../vendor/codemirror/addon/hint/javascript-hint.js');

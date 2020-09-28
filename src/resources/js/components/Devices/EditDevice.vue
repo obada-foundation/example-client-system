@@ -1,11 +1,16 @@
 <template>
     <div>
+        <div v-if="isLoading" class="loader">
+            <div class="loading-card text-center">
+                <i class="fa fa-circle-notch fa-spin"></i>
+            </div>
+        </div>
         <form action="" onsubmit="return false;">
             <div class="text-left">
                 <div class="form-group">
                     <label for="">Manufacturer</label>
                     <div class="input-group colored">
-                        <input type="text" class="form-control no-shadow is-normal"
+                        <input v-bind:disabled="device_id != 0" type="text" class="form-control no-shadow is-normal"
                                v-bind:class="{'is-normal':deviceForm.manufacturer.isClean,'is-invalid':!deviceForm.manufacturer.isClean && !deviceForm.manufacturer.isValid,'is-valid':!deviceForm.manufacturer.isClean && deviceForm.manufacturer.isValid}"
                                v-model="deviceForm.manufacturer.value"
                                @focus="handleFocus(deviceForm.manufacturer)"
@@ -16,7 +21,7 @@
                 <div class="form-group">
                     <label for="">Serial Number</label>
                     <div class="input-group colored">
-                        <input type="text" class="form-control no-shadow is-normal"
+                        <input v-bind:disabled="device_id != 0" type="text" class="form-control no-shadow is-normal"
                                v-bind:class="{'is-normal':deviceForm.serial_number.isClean,'is-invalid':!deviceForm.serial_number.isClean && !deviceForm.serial_number.isValid,'is-valid':!deviceForm.serial_number.isClean && deviceForm.serial_number.isValid}"
                                v-model="deviceForm.serial_number.value"
                                @focus="handleFocus(deviceForm.serial_number)"
@@ -27,7 +32,7 @@
                 <div class="form-group">
                     <label for="">Part Number</label>
                     <div class="input-group colored">
-                        <input type="text" class="form-control no-shadow is-normal"
+                        <input v-bind:disabled="device_id != 0" type="text" class="form-control no-shadow is-normal"
                                v-bind:class="{'is-normal':deviceForm.part_number.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
                                v-model="deviceForm.part_number.value"
                                @focus="handleFocus(deviceForm.part_number)"
@@ -47,8 +52,125 @@
                     </div>
                 </div>
 
+                <div class="card">
+                    <div class="card-header">
+                        <label>Metadata</label>
+                    </div>
+                    <div class="card-body">
+                        <div v-for="(mdata,i) in metadata" class="row">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <div class="input-group colored">
+                                        <input type="text" class="form-control no-shadow is-normal"
+                                               v-bind:class="{'is-normal':mdata.type.isClean,'is-invalid':!mdata.type.isClean && !mdata.type.isValid,'is-valid':!mdata.type.isClean && mdata.type.isValid}"
+                                               v-model="mdata.type.value"
+                                               @focus="handleFocus(mdata.type)"
+                                               @blur="handleBlur(mdata.type)"
+                                               placeholder="Type">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <div class="input-group colored">
+                                        <input type="text" class="form-control no-shadow is-normal"
+                                               v-bind:class="{'is-normal':mdata.type_id.isClean,'is-invalid':!mdata.type_id.isClean && !mdata.type_id.isValid,'is-valid':!mdata.type_id.isClean && mdata.type_id.isValid}"
+                                               v-model="mdata.type_id.value"
+                                               @focus="handleFocus(mdata.type_id)"
+                                               @blur="handleBlur(mdata.type_id)"
+                                               placeholder="Type ID">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group select-colored">
+                                    <select class="selectpicker" v-bind:id="'datatype-picker'+i" data-style="select-with-transition" title="Data Type" v-model="mdata.data_type">
+                                        <option selected value="text">Text</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <div class="input-group colored">
+                                        <input type="text" class="form-control no-shadow is-normal"
+                                               v-bind:class="{'is-normal':mdata.value.isClean,'is-invalid':!mdata.value.isClean && !mdata.value.isValid,'is-valid':!mdata.value.isClean && mdata.value.isValid}"
+                                               v-model="mdata.value.value"
+                                               @focus="handleFocus(mdata.value)"
+                                               @blur="handleBlur(mdata.value)"
+                                               placeholder="Value">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-danger btn-sm btn-round" @click="removeMetadata(i)">x</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button class="btn btn-white" @click="addMetadataRow()"><i class="fa fa-plus"></i> Metadata</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <label>Documents</label>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <label>Structured Data</label>
+                    </div>
+                    <div class="card-body">
+                        <div v-for="(sdata,i) in structured_data" class="row">
+                            <div class="col-5">
+                                <div class="form-group">
+                                    <div class="input-group colored">
+                                        <input type="text" class="form-control no-shadow is-normal"
+                                               v-bind:class="{'is-normal':sdata.key.isClean,'is-invalid':!sdata.key.isClean && !sdata.key.isValid,'is-valid':!sdata.key.isClean && sdata.key.isValid}"
+                                               v-model="sdata.key.value"
+                                               @focus="handleFocus(sdata.key)"
+                                               @blur="handleBlur(sdata.key)"
+                                               placeholder="Key">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="input-group colored">
+                                        <input type="text" class="form-control no-shadow is-normal"
+                                               v-bind:class="{'is-normal':sdata.value.isClean,'is-invalid':!sdata.value.isClean && !sdata.value.isValid,'is-valid':!sdata.value.isClean && sdata.value.isValid}"
+                                               v-model="sdata.value.value"
+                                               @focus="handleFocus(sdata.value)"
+                                               @blur="handleBlur(sdata.value)"
+                                               placeholder="Value">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-danger btn-sm btn-round" @click="removeStructuredData(i)">x</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button class="btn btn-white" @click="addStructuredDataRow()"><i class="fa fa-plus"></i> Structured Data</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
                 <div class="text-right">
-                    <button class="btn btn-primary btn-round">SAVE</button>
+                    <button class="btn btn-primary btn-round" @click="saveDevice">SAVE</button>
                 </div>
 
             </div>

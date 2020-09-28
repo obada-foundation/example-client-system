@@ -26,12 +26,25 @@ class SiteController extends Controller
         return view('pages.devices',$this->getData([]));
     }
 
+    public function obitsList(Request $request)
+    {
+        return view('pages.obits',$this->getData([]));
+    }
+
     public function deviceDetail(Request $request, $obit_id)
     {
         return view('pages.device_detail',$this->getData([
             'device_id'=>$obit_id
         ]));
     }
+
+    public function obitDetail(Request $request, $usn)
+    {
+        return view('pages.obit_detail',$this->getData([
+            'usn'=>$usn
+        ]));
+    }
+
     public function editDevice(Request $request, $obit_id)
     {
         return view('pages.edit_device',$this->getData([

@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"/>
 
     <script>
-        var _obit_id = '<?php echo $obit_id; ?>';
+        var _usn = '<?php echo $usn; ?>';
     </script>
 
 @endsection
@@ -18,7 +18,7 @@
         <div class="container">
             <h1 class="text-center">OBIT Detail</h1>
             <section class="py-5 my-5">
-                <obit-detail :obit_id="_obit_id"></obit-detail>
+                <obit-detail :usn="_usn"></obit-detail>
             </section>
         </div>
 
