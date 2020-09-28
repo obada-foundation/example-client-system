@@ -1,0 +1,36 @@
+name: Reference design branch workflow
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout-code
+        uses: actions/checkout@v2
+
+      - id: build-docker-image
+        run: make build-branch
+
+      - id: login-to-dockerhub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - id: publish-docker-image
+        run: make publish-branch-image
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout-code
+        uses: actions/checkout@v2
+
+      - id: build-docker-image
+        run: make deploy-staging
+        env:
+          STAGING_DEPLOY_KEY: ${{ secrets.STAGING_DEPLOY_KEY }}
+          ANSIBLE_STAGING_VARS: ${{ secrets.ANSIBLE_STAGING_VARS }}
+

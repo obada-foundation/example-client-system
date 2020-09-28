@@ -1,0 +1,49 @@
+---
+- hosts: all
+
+  vars:
+    deployment_path: .
+    config_path: "{{ deployment_path }}/etc"
+
+  tasks:
+    - name: Create config directories
+      file:
+        path: "{{ config_path }}/{{ item }}"
+        state: directory
+      tags:
+        - docker-compose
+      loop: [ "nginx" ]
+
+    - name: "Copy Laravel environment file"
+      template:
+        src: env.j2
+        dest: "{{ config_path }}/.env"
+        mode: 0644
+
+    - name: "Copy nginx service file"
+      template:
+        src: etc/nginx/service.conf.j2
+        dest: "{{ config_path }}/nginx/service.conf"
+        mode: 0644
+
+    - name: "Copy docker-compose.yml"
+      template:
+        src: docker-compose.yml.j2
+        dest: "{{ deployment_path }}/docker-compose.yml"
+        mode: 0644
+
+    - name: "Run `docker-compose up`"
+      docker_compose:
+        project_src: "{{ deployment_path }}"
+        build: no
+        pull: yes
+        files:
+          - docker-compose.yml
+        recreate: smart
+
+    - name: "Execute database migrations"
+      shell: |
+        docker exec reference-design sh -l -c "php artisan migrate -n --force "
+      register: migrations
+
+    - debug: msg="{{ migrations.stdout }}"

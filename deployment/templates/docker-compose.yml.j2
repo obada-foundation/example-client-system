@@ -1,0 +1,60 @@
+version: "3.7"
+
+services:
+  nginx:
+    image: umputun/nginx-le:latest
+    hostname: nginx
+    restart: always
+    container_name: nginx
+
+    logging:
+      driver: json-file
+      options:
+          max-size: "10m"
+          max-file: "5"
+
+    volumes:
+        - ./etc/ssl:/etc/nginx/ssl
+        - ./etc/nginx/service.conf:/etc/nginx/service.conf
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - frontend
+
+    environment:
+      - TZ=America/Chicago
+      - LETSENCRYPT=true
+      - LE_EMAIL=techops@obada.io
+      - LE_FQDN={{ rd_fqdn }}
+
+  app:
+    image: obada/reference-design:develop
+    container_name: reference-design
+    volumes:
+      - ./etc/.env:/app/.env
+    restart: always
+    networks:
+      - backend
+      - frontend
+
+  db:
+    image: mysql:8
+    container_name: db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD={{ db_password }}
+      - MYSQL_DATABASE=reference-design
+    ports:
+      - 127.0.0.1:3306:3303
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - backend
+
+networks:
+  backend:
+  frontend:
+
+volumes:
+  db_data: {}
