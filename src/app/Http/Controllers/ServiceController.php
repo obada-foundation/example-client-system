@@ -257,23 +257,44 @@ class ServiceController extends Controller
                 'errorMessage'=>'Unable to find Obit'
             ], 400);
         }
-
         $obitApi = app()->make(ObitApi::class);
-        $obit = new NewObit([
-            'obitDid'=>$client_obit->obitDID,
-            'usn'=>$client_obit->usn,
-            'ownerDid'=>$client_obit->owner,
-            'manufacturer'=> $client_obit->manufacturer,
-            'partNumber'=>$client_obit->part_number,
-            'serialNumberHash'=>$client_obit->serial_number_hash,
-            'metadata'=>[],
-            'docLinks'=>[],
-            'structuredData'=>[],
-            'modifiedAt'=>$client_obit->updated_at
-        ]);
 
         try {
-            $obitApi->createObit($obit);
+            $obit = $obitApi->showObit($client_obit->obitDID);
+
+            if($obit != null) {
+
+                $updatedObit = new Obit([
+                    'obitDid'=>$client_obit->obitDID,
+                    'usn'=>$client_obit->usn,
+                    'ownerDid'=>$client_obit->owner,
+                    'manufacturer'=> $client_obit->manufacturer,
+                    'partNumber'=>$client_obit->part_number,
+                    'serialNumberHash'=>$client_obit->serial_number_hash,
+                    'metadata'=>[],
+                    'docLinks'=>[],
+                    'structuredData'=>[],
+                    'rootHash'=>$client_obit->root_hash,
+                    'modifiedAt'=>$client_obit->updated_at
+                ]);
+                $obitApi->updateObit($client_obit->obitDID,$obit);
+
+            } else {
+                $newObit = new NewObit([
+                    'obitDid'=>$client_obit->obitDID,
+                    'usn'=>$client_obit->usn,
+                    'ownerDid'=>$client_obit->owner,
+                    'manufacturer'=> $client_obit->manufacturer,
+                    'partNumber'=>$client_obit->part_number,
+                    'serialNumberHash'=>$client_obit->serial_number_hash,
+                    'metadata'=>[],
+                    'docLinks'=>[],
+                    'structuredData'=>[],
+                    'modifiedAt'=>$client_obit->updated_at
+                ]);
+                $obitApi->createObit($obit);
+            }
+
         } catch (Exception $e) {
             return response()->json([
                 'status' => 1,

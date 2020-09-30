@@ -19,7 +19,7 @@
                 <h5>Links</h5>
                 <a href="/devices">Device List</a> <br>
                 <a href="/obits">Obit List</a> <br>
-                <a href="/device/0/edit">Add New Device</a> <br>
+                <a href="/devices/0/edit">Add New Device</a> <br>
                 <a href="/generate/usn">Generate USN</a> <br>
             </section>
         </div>
