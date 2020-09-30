@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **manufacturer** | **string** | Waiting more specific details from Rohi | 
 **partNumber** | **string** | Manufacturer provided. In cases where no part number is provided for the product, use model, or the most specific ID available from the manufacturer. MWCN2LL/A (an iPhone 11 Pro, Silver, 256GB, model A2160) | 
 **serialNumberHash** | **string** | Serial number hashed with sha256 hash function | 
-**metadata** | **object[]** | Get description from Rohi | [optional] 
-**docLinks** | **object[]** | To generate this link, take an SHA-256 hash of the document, and link to it as https://www.some-website.com?h1&#x3D;hash-of-document. Note this does not yet adhere to the hashlink standard. | [optional] 
-**structuredData** | **object[]** | Same as metadata but bigger. Key (string) &#x3D;&gt; Value (string) (hash per line sha256(key + value)) | [optional] 
+**metadata** | [**\Obada\Entities\MetaDataRecord[]**](MetaDataRecord.md) | Get description from Rohi | [optional] 
+**docLinks** | [**\Obada\Entities\DocumentLink[]**](DocumentLink.md) | To generate this link, take an SHA-256 hash of the document, and link to it as https://www.some-website.com?h1&#x3D;hash-of-document. Note this does not yet adhere to the hashlink standard. | [optional] 
+**structuredData** | [**\Obada\Entities\StructureDataRecord[]**](StructureDataRecord.md) | Same as metadata but bigger. Key (string) &#x3D;&gt; Value (string) (hash per line sha256(key + value)) | [optional] 
 **modifiedAt** | [**\DateTime**](\DateTime.md) |  | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

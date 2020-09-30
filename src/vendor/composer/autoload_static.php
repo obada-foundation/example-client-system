@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit077d2855df2db0c77cf7f5695045c05c
+class ComposerStaticInit6b136bbf8d31d16c82eeaf4f06c8f7b5
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -1609,8 +1609,11 @@ class ComposerStaticInit077d2855df2db0c77cf7f5695045c05c
         'GuzzleHttp\\Promise\\AggregateException' => __DIR__ . '/..' . '/guzzlehttp/promises/src/AggregateException.php',
         'GuzzleHttp\\Promise\\CancellationException' => __DIR__ . '/..' . '/guzzlehttp/promises/src/CancellationException.php',
         'GuzzleHttp\\Promise\\Coroutine' => __DIR__ . '/..' . '/guzzlehttp/promises/src/Coroutine.php',
+        'GuzzleHttp\\Promise\\Create' => __DIR__ . '/..' . '/guzzlehttp/promises/src/Create.php',
+        'GuzzleHttp\\Promise\\Each' => __DIR__ . '/..' . '/guzzlehttp/promises/src/Each.php',
         'GuzzleHttp\\Promise\\EachPromise' => __DIR__ . '/..' . '/guzzlehttp/promises/src/EachPromise.php',
         'GuzzleHttp\\Promise\\FulfilledPromise' => __DIR__ . '/..' . '/guzzlehttp/promises/src/FulfilledPromise.php',
+        'GuzzleHttp\\Promise\\Is' => __DIR__ . '/..' . '/guzzlehttp/promises/src/Is.php',
         'GuzzleHttp\\Promise\\Promise' => __DIR__ . '/..' . '/guzzlehttp/promises/src/Promise.php',
         'GuzzleHttp\\Promise\\PromiseInterface' => __DIR__ . '/..' . '/guzzlehttp/promises/src/PromiseInterface.php',
         'GuzzleHttp\\Promise\\PromisorInterface' => __DIR__ . '/..' . '/guzzlehttp/promises/src/PromisorInterface.php',
@@ -1618,18 +1621,23 @@ class ComposerStaticInit077d2855df2db0c77cf7f5695045c05c
         'GuzzleHttp\\Promise\\RejectionException' => __DIR__ . '/..' . '/guzzlehttp/promises/src/RejectionException.php',
         'GuzzleHttp\\Promise\\TaskQueue' => __DIR__ . '/..' . '/guzzlehttp/promises/src/TaskQueue.php',
         'GuzzleHttp\\Promise\\TaskQueueInterface' => __DIR__ . '/..' . '/guzzlehttp/promises/src/TaskQueueInterface.php',
+        'GuzzleHttp\\Promise\\Utils' => __DIR__ . '/..' . '/guzzlehttp/promises/src/Utils.php',
         'GuzzleHttp\\Psr7\\AppendStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/AppendStream.php',
         'GuzzleHttp\\Psr7\\BufferStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/BufferStream.php',
         'GuzzleHttp\\Psr7\\CachingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/CachingStream.php',
         'GuzzleHttp\\Psr7\\DroppingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/DroppingStream.php',
         'GuzzleHttp\\Psr7\\FnStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/FnStream.php',
+        'GuzzleHttp\\Psr7\\Header' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Header.php',
         'GuzzleHttp\\Psr7\\InflateStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/InflateStream.php',
         'GuzzleHttp\\Psr7\\LazyOpenStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/LazyOpenStream.php',
         'GuzzleHttp\\Psr7\\LimitStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/LimitStream.php',
+        'GuzzleHttp\\Psr7\\Message' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Message.php',
         'GuzzleHttp\\Psr7\\MessageTrait' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/MessageTrait.php',
+        'GuzzleHttp\\Psr7\\MimeType' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/MimeType.php',
         'GuzzleHttp\\Psr7\\MultipartStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/MultipartStream.php',
         'GuzzleHttp\\Psr7\\NoSeekStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/NoSeekStream.php',
         'GuzzleHttp\\Psr7\\PumpStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/PumpStream.php',
+        'GuzzleHttp\\Psr7\\Query' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Query.php',
         'GuzzleHttp\\Psr7\\Request' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Request.php',
         'GuzzleHttp\\Psr7\\Response' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Response.php',
         'GuzzleHttp\\Psr7\\Rfc7230' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Rfc7230.php',
@@ -1641,6 +1649,7 @@ class ComposerStaticInit077d2855df2db0c77cf7f5695045c05c
         'GuzzleHttp\\Psr7\\Uri' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Uri.php',
         'GuzzleHttp\\Psr7\\UriNormalizer' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriNormalizer.php',
         'GuzzleHttp\\Psr7\\UriResolver' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriResolver.php',
+        'GuzzleHttp\\Psr7\\Utils' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Utils.php',
         'GuzzleHttp\\RedirectMiddleware' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/RedirectMiddleware.php',
         'GuzzleHttp\\RequestOptions' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/RequestOptions.php',
         'GuzzleHttp\\RetryMiddleware' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/RetryMiddleware.php',
@@ -3471,25 +3480,17 @@ class ComposerStaticInit077d2855df2db0c77cf7f5695045c05c
         'Nyholm\\Psr7\\Uri' => __DIR__ . '/..' . '/nyholm/psr7/src/Uri.php',
         'Obada\\ApiException' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/ApiException.php',
         'Obada\\Api\\ObitApi' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Api/ObitApi.php',
-        'Obada\\Client\\Api\\DefaultApi' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Api/DefaultApi.php',
-        'Obada\\Client\\Api\\ObitsAPIApi' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Api/ObitsAPIApi.php',
-        'Obada\\Client\\Model\\InlineResponse200' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Model/InlineResponse200.php',
-        'Obada\\Client\\Model\\InlineResponse2001' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Model/InlineResponse2001.php',
-        'Obada\\Client\\Model\\ModelInterface' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Model/ModelInterface.php',
-        'Obada\\Client\\Model\\NewObit' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Model/NewObit.php',
-        'Obada\\Client\\Model\\NotFound' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Model/NotFound.php',
-        'Obada\\Client\\Model\\Obit' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Model/Obit.php',
-        'Obada\\Client\\Model\\ObitHistory' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Model/ObitHistory.php',
-        'Obada\\Client\\Model\\Transaction' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Model/Transaction.php',
-        'Obada\\Client\\Model\\UnprocessableEntity' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Model/UnprocessableEntity.php',
         'Obada\\Configuration' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Configuration.php',
+        'Obada\\Entities\\DocumentLink' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/DocumentLink.php',
         'Obada\\Entities\\InlineResponse200' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/InlineResponse200.php',
         'Obada\\Entities\\InlineResponse2001' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/InlineResponse2001.php',
+        'Obada\\Entities\\MetaDataRecord' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/MetaDataRecord.php',
         'Obada\\Entities\\ModelInterface' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/ModelInterface.php',
         'Obada\\Entities\\NewObit' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/NewObit.php',
         'Obada\\Entities\\NotFound' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/NotFound.php',
         'Obada\\Entities\\Obit' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/Obit.php',
         'Obada\\Entities\\ObitHistory' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/ObitHistory.php',
+        'Obada\\Entities\\StructureDataRecord' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/StructureDataRecord.php',
         'Obada\\Entities\\UnprocessableEntity' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/Entities/UnprocessableEntity.php',
         'Obada\\HeaderSelector' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/HeaderSelector.php',
         'Obada\\ObjectSerializer' => __DIR__ . '/..' . '/obada-protocol/php-client-library/lib/ObjectSerializer.php',
@@ -4217,8 +4218,10 @@ class ComposerStaticInit077d2855df2db0c77cf7f5695045c05c
         'Prophecy\\Argument\\Token\\CallbackToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/CallbackToken.php',
         'Prophecy\\Argument\\Token\\ExactValueToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/ExactValueToken.php',
         'Prophecy\\Argument\\Token\\IdenticalValueToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/IdenticalValueToken.php',
+        'Prophecy\\Argument\\Token\\InArrayToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/InArrayToken.php',
         'Prophecy\\Argument\\Token\\LogicalAndToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/LogicalAndToken.php',
         'Prophecy\\Argument\\Token\\LogicalNotToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/LogicalNotToken.php',
+        'Prophecy\\Argument\\Token\\NotInArrayToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/NotInArrayToken.php',
         'Prophecy\\Argument\\Token\\ObjectStateToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/ObjectStateToken.php',
         'Prophecy\\Argument\\Token\\StringContainsToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/StringContainsToken.php',
         'Prophecy\\Argument\\Token\\TokenInterface' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/TokenInterface.php',
@@ -4245,8 +4248,11 @@ class ComposerStaticInit077d2855df2db0c77cf7f5695045c05c
         'Prophecy\\Doubler\\Generator\\ClassCreator' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/Generator/ClassCreator.php',
         'Prophecy\\Doubler\\Generator\\ClassMirror' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/Generator/ClassMirror.php',
         'Prophecy\\Doubler\\Generator\\Node\\ArgumentNode' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/Generator/Node/ArgumentNode.php',
+        'Prophecy\\Doubler\\Generator\\Node\\ArgumentTypeNode' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/Generator/Node/ArgumentTypeNode.php',
         'Prophecy\\Doubler\\Generator\\Node\\ClassNode' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/Generator/Node/ClassNode.php',
         'Prophecy\\Doubler\\Generator\\Node\\MethodNode' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/Generator/Node/MethodNode.php',
+        'Prophecy\\Doubler\\Generator\\Node\\ReturnTypeNode' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/Generator/Node/ReturnTypeNode.php',
+        'Prophecy\\Doubler\\Generator\\Node\\TypeNodeAbstract' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/Generator/Node/TypeNodeAbstract.php',
         'Prophecy\\Doubler\\Generator\\ReflectionInterface' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/Generator/ReflectionInterface.php',
         'Prophecy\\Doubler\\Generator\\TypeHintReference' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/Generator/TypeHintReference.php',
         'Prophecy\\Doubler\\LazyDouble' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Doubler/LazyDouble.php',
@@ -5777,10 +5783,10 @@ class ComposerStaticInit077d2855df2db0c77cf7f5695045c05c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit077d2855df2db0c77cf7f5695045c05c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit077d2855df2db0c77cf7f5695045c05c::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit077d2855df2db0c77cf7f5695045c05c::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit077d2855df2db0c77cf7f5695045c05c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6b136bbf8d31d16c82eeaf4f06c8f7b5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6b136bbf8d31d16c82eeaf4f06c8f7b5::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit6b136bbf8d31d16c82eeaf4f06c8f7b5::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit6b136bbf8d31d16c82eeaf4f06c8f7b5::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -93,12 +93,15 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [DocumentLink](docs/Model/DocumentLink.md)
  - [InlineResponse200](docs/Model/InlineResponse200.md)
  - [InlineResponse2001](docs/Model/InlineResponse2001.md)
+ - [MetaDataRecord](docs/Model/MetaDataRecord.md)
  - [NewObit](docs/Model/NewObit.md)
  - [NotFound](docs/Model/NotFound.md)
  - [Obit](docs/Model/Obit.md)
  - [ObitHistory](docs/Model/ObitHistory.md)
+ - [StructureDataRecord](docs/Model/StructureDataRecord.md)
  - [UnprocessableEntity](docs/Model/UnprocessableEntity.md)
 
 

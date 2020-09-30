@@ -1174,26 +1174,26 @@
     },
     {
         "name": "guzzlehttp/promises",
-        "version": "v1.3.1",
-        "version_normalized": "1.3.1.0",
+        "version": "1.4.0",
+        "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/promises.git",
-            "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
+            "reference": "60d379c243457e073cff02bc323a2a86cb355631"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-            "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+            "url": "https://api.github.com/repos/guzzle/promises/zipball/60d379c243457e073cff02bc323a2a86cb355631",
+            "reference": "60d379c243457e073cff02bc323a2a86cb355631",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.5.0"
+            "php": ">=5.5"
         },
         "require-dev": {
-            "phpunit/phpunit": "^4.0"
+            "symfony/phpunit-bridge": "^4.4 || ^5.1"
         },
-        "time": "2016-12-20T10:07:11+00:00",
+        "time": "2020-09-30T07:37:28+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1227,17 +1227,17 @@
     },
     {
         "name": "guzzlehttp/psr7",
-        "version": "1.6.1",
-        "version_normalized": "1.6.1.0",
+        "version": "1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/psr7.git",
-            "reference": "239400de7a173fe9901b9ac7c06497751f00727a"
+            "reference": "53330f47520498c0ae1f61f7e2c90f55690c06a3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/psr7/zipball/239400de7a173fe9901b9ac7c06497751f00727a",
-            "reference": "239400de7a173fe9901b9ac7c06497751f00727a",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/53330f47520498c0ae1f61f7e2c90f55690c06a3",
+            "reference": "53330f47520498c0ae1f61f7e2c90f55690c06a3",
             "shasum": ""
         },
         "require": {
@@ -1250,16 +1250,16 @@
         },
         "require-dev": {
             "ext-zlib": "*",
-            "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
+            "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
         },
         "suggest": {
-            "zendframework/zend-httphandlerrunner": "Emit PSR-7 responses"
+            "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
         },
-        "time": "2019-07-01T23:21:34+00:00",
+        "time": "2020-09-30T07:37:11+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.6-dev"
+                "dev-master": "1.7-dev"
             }
         },
         "installation-source": "dist",
@@ -2758,12 +2758,12 @@
         "source": {
             "type": "git",
             "url": "git@github.com:obada-protocol/php-client-library.git",
-            "reference": "50e7ae2c856763e39162138fdcae168df286318b"
+            "reference": "59b73e64eaa906e75d41cbdf0818cfa8dab855e3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/obada-protocol/php-client-library/zipball/50e7ae2c856763e39162138fdcae168df286318b",
-            "reference": "50e7ae2c856763e39162138fdcae168df286318b",
+            "url": "https://api.github.com/repos/obada-protocol/php-client-library/zipball/59b73e64eaa906e75d41cbdf0818cfa8dab855e3",
+            "reference": "59b73e64eaa906e75d41cbdf0818cfa8dab855e3",
             "shasum": ""
         },
         "require": {
@@ -2777,7 +2777,7 @@
             "friendsofphp/php-cs-fixer": "^2.12",
             "phpunit/phpunit": "^8.0 || ^9.0"
         },
-        "time": "2020-09-28T07:42:12+00:00",
+        "time": "2020-09-29T21:09:59+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3717,31 +3717,31 @@
     },
     {
         "name": "phpspec/prophecy",
-        "version": "1.11.1",
-        "version_normalized": "1.11.1.0",
+        "version": "1.12.1",
+        "version_normalized": "1.12.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpspec/prophecy.git",
-            "reference": "b20034be5efcdab4fb60ca3a29cba2949aead160"
+            "reference": "8ce87516be71aae9b956f81906aaf0338e0d8a2d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/b20034be5efcdab4fb60ca3a29cba2949aead160",
-            "reference": "b20034be5efcdab4fb60ca3a29cba2949aead160",
+            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/8ce87516be71aae9b956f81906aaf0338e0d8a2d",
+            "reference": "8ce87516be71aae9b956f81906aaf0338e0d8a2d",
             "shasum": ""
         },
         "require": {
             "doctrine/instantiator": "^1.2",
-            "php": "^7.2",
-            "phpdocumentor/reflection-docblock": "^5.0",
+            "php": "^7.2 || ~8.0, <8.1",
+            "phpdocumentor/reflection-docblock": "^5.2",
             "sebastian/comparator": "^3.0 || ^4.0",
             "sebastian/recursion-context": "^3.0 || ^4.0"
         },
         "require-dev": {
             "phpspec/phpspec": "^6.0",
-            "phpunit/phpunit": "^8.0"
+            "phpunit/phpunit": "^8.0 || ^9.0 <9.3"
         },
-        "time": "2020-07-08T12:44:21+00:00",
+        "time": "2020-09-29T09:10:42+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -7370,17 +7370,17 @@
     },
     {
         "name": "symfony/psr-http-message-bridge",
-        "version": "v2.0.1",
-        "version_normalized": "2.0.1.0",
+        "version": "v2.0.2",
+        "version_normalized": "2.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/psr-http-message-bridge.git",
-            "reference": "e44f249afab496b4e8c0f7461fb8140eaa4b24d2"
+            "reference": "51a21cb3ba3927d4b4bf8f25cc55763351af5f2e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/e44f249afab496b4e8c0f7461fb8140eaa4b24d2",
-            "reference": "e44f249afab496b4e8c0f7461fb8140eaa4b24d2",
+            "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/51a21cb3ba3927d4b4bf8f25cc55763351af5f2e",
+            "reference": "51a21cb3ba3927d4b4bf8f25cc55763351af5f2e",
             "shasum": ""
         },
         "require": {
@@ -7395,7 +7395,7 @@
         "suggest": {
             "nyholm/psr7": "For a super lightweight PSR-7/17 implementation"
         },
-        "time": "2020-06-25T08:21:47+00:00",
+        "time": "2020-09-29T08:17:46+00:00",
         "type": "symfony-bridge",
         "extra": {
             "branch-alias": {

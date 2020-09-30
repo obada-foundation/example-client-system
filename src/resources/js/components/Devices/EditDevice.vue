@@ -86,6 +86,8 @@
                                 <div class="form-group select-colored">
                                     <select class="selectpicker" v-bind:id="'datatype-picker'+i" data-style="select-with-transition" title="Data Type" v-model="mdata.data_type">
                                         <option selected value="text">Text</option>
+                                        <option selected value="float">Float</option>
+                                        <option selected value="int">Integer</option>
                                     </select>
                                 </div>
                             </div>
@@ -120,7 +122,11 @@
                         <label>Documents</label>
                     </div>
                     <div class="card-body">
-
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button class="btn btn-white" @click="uploadDocument()"><i class="fa fa-plus"></i> Document</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -129,33 +135,37 @@
                         <label>Structured Data</label>
                     </div>
                     <div class="card-body">
-                        <div v-for="(sdata,i) in structured_data" class="row">
-                            <div class="col-5">
+                        <div v-for="(sdata,i) in structured_data" class="row justify-content-between">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <div class="input-group colored">
                                         <input type="text" class="form-control no-shadow is-normal"
-                                               v-bind:class="{'is-normal':sdata.key.isClean,'is-invalid':!sdata.key.isClean && !sdata.key.isValid,'is-valid':!sdata.key.isClean && sdata.key.isValid}"
-                                               v-model="sdata.key.value"
-                                               @focus="handleFocus(sdata.key)"
-                                               @blur="handleBlur(sdata.key)"
-                                               placeholder="Key">
+                                               v-bind:class="{'is-normal':sdata.type.isClean,'is-invalid':!sdata.type.isClean && !sdata.type.isValid,'is-valid':!sdata.type.isClean && sdata.type.isValid}"
+                                               v-model="sdata.type.value"
+                                               @focus="handleFocus(sdata.type)"
+                                               @blur="handleBlur(sdata.type)"
+                                               placeholder="Type">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-2">
                                 <div class="form-group">
                                     <div class="input-group colored">
                                         <input type="text" class="form-control no-shadow is-normal"
-                                               v-bind:class="{'is-normal':sdata.value.isClean,'is-invalid':!sdata.value.isClean && !sdata.value.isValid,'is-valid':!sdata.value.isClean && sdata.value.isValid}"
-                                               v-model="sdata.value.value"
-                                               @focus="handleFocus(sdata.value)"
-                                               @blur="handleBlur(sdata.value)"
-                                               placeholder="Value">
+                                               v-bind:class="{'is-normal':sdata.type_id.isClean,'is-invalid':!sdata.type_id.isClean && !sdata.type_id.isValid,'is-valid':!sdata.type_id.isClean && sdata.type_id.isValid}"
+                                               v-model="sdata.type_id.value"
+                                               @focus="handleFocus(sdata.type_id)"
+                                               @blur="handleBlur(sdata.type_id)"
+                                               placeholder="Type ID">
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-1">
                                 <button class="btn btn-danger btn-sm btn-round" @click="removeStructuredData(i)">x</button>
+                            </div>
+                            <div class="col-12">
+                                <codemirror v-model="sdata.value.value" :options="cmOptions"></codemirror>
                             </div>
                         </div>
 

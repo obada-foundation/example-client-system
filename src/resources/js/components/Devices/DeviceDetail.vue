@@ -40,7 +40,7 @@
 
                 </ul>
             </li>
-            <structured-data-row key="index"  v-for="(data,index) in device.structured_data" :structured_data="getStructuredData(data.data_array)"></structured-data-row>
+            <structured-data-row key="index"  v-for="(data,index) in device.structured_data" :structured_data="getStructuredData(data)"></structured-data-row>
 
         </ul>
         <div v-if="device != null" class="text-center mt-5">

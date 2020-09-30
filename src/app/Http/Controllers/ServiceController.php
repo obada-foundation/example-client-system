@@ -11,6 +11,7 @@ use App\ObitManager\ObitManager;
 use App\Http\Requests\UsnRequest;
 use Obada\Api\ObitApi;
 use Obada\Entities\NewObit;
+use Obada\Entities\Obit;
 
 class ServiceController extends Controller
 {
@@ -256,21 +257,44 @@ class ServiceController extends Controller
                 'errorMessage'=>'Unable to find Obit'
             ], 400);
         }
-
         $obitApi = app()->make(ObitApi::class);
-        $obit = new NewObit();
-        $obit->obitDid = $client_obit->obitDID;
-        $obit->usn = $client_obit->usn;
-        $obit->ownerDid = $client_obit->owner;
-        $obit->manufacturer = $client_obit->manufacturer;
-        $obit->partNumber = $client_obit->part_number;
-        $obit->serialNumberHash = $client_obit->serial_number_hash;
-        $obit->metadata = $client_obit->metadata;
-        $obit->docLinks = $client_obit->documents;
-        $obit->structuredData = $client_obit->structuredData;
 
         try {
-            $obitApi->createObit($obit);
+            $obit = $obitApi->showObit($client_obit->obitDID);
+
+            if($obit != null) {
+
+                $updatedObit = new Obit([
+                    'obitDid'=>$client_obit->obitDID,
+                    'usn'=>$client_obit->usn,
+                    'ownerDid'=>$client_obit->owner,
+                    'manufacturer'=> $client_obit->manufacturer,
+                    'partNumber'=>$client_obit->part_number,
+                    'serialNumberHash'=>$client_obit->serial_number_hash,
+                    'metadata'=>[],
+                    'docLinks'=>[],
+                    'structuredData'=>[],
+                    'rootHash'=>$client_obit->root_hash,
+                    'modifiedAt'=>$client_obit->updated_at
+                ]);
+                $obitApi->updateObit($client_obit->obitDID,$obit);
+
+            } else {
+                $newObit = new NewObit([
+                    'obitDid'=>$client_obit->obitDID,
+                    'usn'=>$client_obit->usn,
+                    'ownerDid'=>$client_obit->owner,
+                    'manufacturer'=> $client_obit->manufacturer,
+                    'partNumber'=>$client_obit->part_number,
+                    'serialNumberHash'=>$client_obit->serial_number_hash,
+                    'metadata'=>[],
+                    'docLinks'=>[],
+                    'structuredData'=>[],
+                    'modifiedAt'=>$client_obit->updated_at
+                ]);
+                $obitApi->createObit($obit);
+            }
+
         } catch (Exception $e) {
             return response()->json([
                 'status' => 1,

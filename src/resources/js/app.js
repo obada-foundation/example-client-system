@@ -1,8 +1,15 @@
 let token = document.head.querySelector('meta[name="csrf-token"]')
 
 import Vue from 'vue'
+import VueCodemirror from 'vue-codemirror'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue);
+Vue.use(VueCodemirror, /* {
+  options: { theme: 'base16-dark', ... },
+  events: ['scroll', ...]
+} */);
+
+window.beautifyJS = require('js-beautify').js_beautify
 
 Vue.component('alerts', require('./components/alerts/Alerts.vue').default);
 Vue.component('device-list', require('./components/Devices/DeviceList.vue').default);
