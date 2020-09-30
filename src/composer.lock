@@ -1897,12 +1897,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:obada-protocol/php-client-library.git",
-                "reference": "de3efa5fb4f2918c87e54049088850f557085c3d"
+                "reference": "59b73e64eaa906e75d41cbdf0818cfa8dab855e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/obada-protocol/php-client-library/zipball/de3efa5fb4f2918c87e54049088850f557085c3d",
-                "reference": "de3efa5fb4f2918c87e54049088850f557085c3d",
+                "url": "https://api.github.com/repos/obada-protocol/php-client-library/zipball/59b73e64eaa906e75d41cbdf0818cfa8dab855e3",
+                "reference": "59b73e64eaa906e75d41cbdf0818cfa8dab855e3",
                 "shasum": ""
             },
             "require": {
@@ -1951,7 +1951,7 @@
                 "source": "https://github.com/obada-protocol/php-client-library/tree/master",
                 "issues": "https://github.com/obada-protocol/php-client-library/issues"
             },
-            "time": "2020-09-28T14:13:44+00:00"
+            "time": "2020-09-29T21:09:59+00:00"
         },
         {
             "name": "opis/closure",

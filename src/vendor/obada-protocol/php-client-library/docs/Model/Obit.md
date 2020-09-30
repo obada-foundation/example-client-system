@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 **manufacturer** | **string** | Waiting more specific details from Rohi | 
 **partNumber** | **string** | Manufacturer provided. In cases where no part number is provided for the product, use model, or the most specific ID available from the manufacturer. MWCN2LL/A (an iPhone 11 Pro, Silver, 256GB, model A2160) | 
 **serialNumberHash** | **string** | Serial number hashed with sha256 hash function | 
-**metadata** | **object[]** | Get description from Rohi | [optional] 
-**docLinks** | **object[]** |  | [optional] 
-**structuredData** | **object[]** |  | [optional] 
+**metadata** | [**\Obada\Entities\MetaDataRecord[]**](MetaDataRecord.md) | Get description from Rohi | [optional] 
+**docLinks** | [**\Obada\Entities\DocumentLink[]**](DocumentLink.md) |  | [optional] 
+**structuredData** | [**\Obada\Entities\StructureDataRecord[]**](StructureDataRecord.md) |  | [optional] 
 **modifiedAt** | [**\DateTime**](\DateTime.md) |  | [optional] 
 **rootHash** | **string** | Hash calculated by SHA256 (previous Obit root hash + Obit data) | [optional] 
 

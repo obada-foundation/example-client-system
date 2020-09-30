@@ -12,6 +12,7 @@ use App\Http\Requests\UsnRequest;
 use Obada\Api\ObitApi;
 use Obada\Entities\NewObit;
 use Obada\Entities\Obit;
+use Log;
 
 class ServiceController extends Controller
 {
@@ -261,9 +262,9 @@ class ServiceController extends Controller
 
         try {
             $obit = $obitApi->showObit($client_obit->obitDID);
-
+            Log::info("-- Retrieving Obit --");
             if($obit != null) {
-
+                Log::info("-- Retrieving Obit: Found --");
                 $updatedObit = new Obit([
                     'obitDid'=>$client_obit->obitDID,
                     'usn'=>$client_obit->usn,
@@ -280,6 +281,7 @@ class ServiceController extends Controller
                 $obitApi->updateObit($client_obit->obitDID,$obit);
 
             } else {
+                Log::info("-- Retrieving Obit: Not Found --");
                 $newObit = new NewObit([
                     'obitDid'=>$client_obit->obitDID,
                     'usn'=>$client_obit->usn,
