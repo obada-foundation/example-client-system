@@ -33,13 +33,17 @@ export default {
         getMetadataValue(metadata) {
             if(metadata.data_txt !== null && metadata.data_txt !== '') {
                 return metadata.data_txt;
+            } else if (metadata.data_fp !== null) {
+                return parseFloat(metadata.data_fp);
+            } else if (metadata.data_int != null) {
+                return parseInt(metadata.data_int);
             }
         },
         getStructuredData(data) {
-            if(typeof data === 'string') {
-                return JSON.parse(data);
+            if(data.data_array != null) {
+                data.data_array = beautifyJS(data.data_array,{indent_size: 2});
+                return data;
             }
-            return data;
         },
         createObit: function(){
             if(this.isLoading) return;

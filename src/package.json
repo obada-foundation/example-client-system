@@ -28,6 +28,8 @@
     },
     "dependencies": {
         "datatables.net": "^1.10.21",
-        "datatables.net-dt": "^1.10.21"
+        "datatables.net-dt": "^1.10.21",
+        "js-beautify": "^1.13.0",
+        "vue-codemirror": "^4.0.6"
     }
 }

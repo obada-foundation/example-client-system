@@ -15,7 +15,7 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@300;400&family=Material+Icons&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Cutive+Mono&family=Barlow:wght@300;400&family=Material+Icons&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ mix('/css/vendor.css') }}">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">

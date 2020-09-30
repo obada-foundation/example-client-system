@@ -1,5 +1,8 @@
 <template>
     <li class="data-row">
+        <p class="value">{{structured_data.structured_data_type}}</p>
+        <codemirror v-model="structured_data.data_array" :options="cmOptions"></codemirror>
+        <!--
         <ul v-if="rows.length > 0" class="sub-list">
             <template v-for="data in rows">
                 <li v-if="data.type === 'data-row'" class="data-row" >
@@ -14,7 +17,7 @@
                 </li>
             </template>
         </ul>
-
+        -->
 
 
     </li>
@@ -26,11 +29,22 @@ export default {
     name: "StructuredDataRow",
     data: function () {
         return {
-            rows: []
+            rows: [],
+            cmOptions: {
+                // codemirror options
+                tabSize: 2,
+                mode: 'json',
+                theme: 'base16-light',
+                lineNumbers: true,
+                line: true,
+                autoRefresh: true,
+                readOnly: true
+                // more codemirror options, 更多 codemirror 的高级配置...
+            },
         }
     },
     mounted: function(){
-        this.parseData();
+        //this.parseData();
     },
     methods: {
         parseData: function(){

@@ -4,6 +4,16 @@ export default {
         return {
             device: null,
             isLoading: true,
+            cmOptions: {
+                // codemirror options
+                tabSize: 2,
+                mode: 'json',
+                theme: 'base16-light',
+                lineNumbers: true,
+                line: true,
+                autoRefresh: true
+                // more codemirror options, 更多 codemirror 的高级配置...
+            },
             deviceForm: {
                 manufacturer: {
                     value: '',
@@ -78,7 +88,13 @@ export default {
         },
         addStructuredDataRow: function() {
             this.structured_data.push({
-                key: {
+                type: {
+                    value: '',
+                    isValid: true,
+                    isClean: true,
+                    validations: ['required']
+                },
+                type_id: {
                     value: '',
                     isValid: true,
                     isClean: true,
@@ -188,17 +204,17 @@ export default {
             });
         },
         getMetdataValue: function(metadata){
-            if(metadata.data_txt !== null && metadata.data_txt !== null) {
+            if(metadata.data_txt !== null) {
                 return {
                     data_type: 'text',
                     value: metadata.data_txt
                 };
-            } else if (metadata.data_fp !== null && metadata.data_fp !== null) {
+            } else if (metadata.data_fp !== null) {
                 return {
                     data_type: 'float',
                     value: metadata.data_fp
                 };
-            } else if (metadata.data_int !== null && metadata.data_int !== null) {
+            } else if (metadata.data_int !== null) {
                 return {
                     data_type: 'int',
                     value: metadata.data_int
@@ -219,9 +235,9 @@ export default {
                     if(m.data_type === 'text') {
                         mdata.data_txt = m.value.value;
                     } else if(m.data_type === 'int') {
-                        mdata.data_int = m.value.value;
+                        mdata.data_int = parseInt(m.value.value);
                     } else if(m.data_type === 'float') {
-                        mdata.data_fp = m.value.value;
+                        mdata.data_fp = parseFloat(m.value.value);
                     }
 
                     if(m.id) {
@@ -233,13 +249,11 @@ export default {
                 var structured_data = [];
                 this.structured_data.forEach((s)=>{
                     var sdata = {
-                        structured_data_type: s.key.value,
-                        structured_data_type_id: 1
+                        structured_data_type: s.type.value,
+                        structured_data_type_id: s.type_id.value
                     };
 
-                    sdata.data_array = {};
-                    sdata.data_array[s.key.value] = s.value.value;
-                    sdata.data_array = JSON.stringify(sdata.data_array);
+                    sdata.data_array = s.value.value;
 
                     if(s.id) {
                         sdata.id = s.id;
@@ -329,24 +343,26 @@ export default {
             this.structured_data = [];
             if(this.device.hasOwnProperty('structured_data')) {
                 this.device.structured_data.forEach((s)=>{
-                    var dataObject = JSON.parse(s.data_array);
-                    var dataKeys = Object.keys(dataObject);
-                    dataKeys.forEach((k)=>{
-                        this.structured_data.push({
-                            id: s.id,
-                            key: {
-                                value: k,
-                                isValid: true,
-                                isClean: true,
-                                validations: ['required']
-                            },
-                            value: {
-                                value: dataObject[k],
-                                isValid: true,
-                                isClean: true,
-                                validations: ['required']
-                            }
-                        });
+                    this.structured_data.push({
+                        id: s.id,
+                        type: {
+                            value: s.structured_data_type,
+                            isValid: true,
+                            isClean: true,
+                            validations: ['required']
+                        },
+                        type_id: {
+                            value: s.structured_data_type_id,
+                            isValid: true,
+                            isClean: true,
+                            validations: ['required']
+                        },
+                        value: {
+                            value: beautifyJS(s.data_array,{indent_size: 2}),
+                            isValid: true,
+                            isClean: true,
+                            validations: ['required']
+                        }
                     });
                 });
             }
