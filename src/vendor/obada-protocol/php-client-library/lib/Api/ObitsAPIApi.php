@@ -190,7 +190,7 @@ class ObitsAPIApi
     /**
      * Operation createObitAsync
      *
-     * 
+     *
      *
      * @param  \Obada\Client\Model\NewObit $new_obit (optional)
      *
@@ -210,7 +210,7 @@ class ObitsAPIApi
     /**
      * Operation createObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  \Obada\Client\Model\NewObit $new_obit (optional)
      *
@@ -408,7 +408,7 @@ class ObitsAPIApi
     /**
      * Operation removeObitAsync
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
@@ -428,7 +428,7 @@ class ObitsAPIApi
     /**
      * Operation removeObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
@@ -680,7 +680,7 @@ class ObitsAPIApi
     /**
      * Operation searchObitsAsync
      *
-     * 
+     *
      *
      * @param  string $serial_number_hash (optional)
      * @param  string $obit_status (optional)
@@ -707,7 +707,7 @@ class ObitsAPIApi
     /**
      * Operation searchObitsAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $serial_number_hash (optional)
      * @param  string $obit_status (optional)
@@ -1026,7 +1026,7 @@ class ObitsAPIApi
     /**
      * Operation showObitAsync
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
@@ -1046,7 +1046,7 @@ class ObitsAPIApi
     /**
      * Operation showObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
@@ -1304,7 +1304,7 @@ class ObitsAPIApi
     /**
      * Operation showObitHistoryAsync
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
@@ -1324,7 +1324,7 @@ class ObitsAPIApi
     /**
      * Operation showObitHistoryAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
@@ -1544,7 +1544,7 @@ class ObitsAPIApi
     /**
      * Operation updateObitAsync
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
@@ -1564,7 +1564,7 @@ class ObitsAPIApi
     /**
      * Operation updateObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *

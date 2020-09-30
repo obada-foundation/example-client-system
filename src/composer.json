@@ -21,9 +21,10 @@
         "laravel/framework": "^7.24",
         "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
+        "obada-protocol/php-client-library": "*@dev",
+        "sentry/sentry-laravel": "^2.0",
         "tuupola/base58": "^2.1",
-        "yajra/laravel-datatables-oracle": "~9.0",
-        "obada-protocol/php-client-library": "*@dev"
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

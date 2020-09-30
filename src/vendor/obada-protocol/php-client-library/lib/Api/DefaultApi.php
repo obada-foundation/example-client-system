@@ -190,7 +190,7 @@ class DefaultApi
     /**
      * Operation createObitAsync
      *
-     * 
+     *
      *
      * @param  \Obada\Client\Model\NewObit $new_obit (optional)
      *
@@ -210,7 +210,7 @@ class DefaultApi
     /**
      * Operation createObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  \Obada\Client\Model\NewObit $new_obit (optional)
      *
@@ -408,7 +408,7 @@ class DefaultApi
     /**
      * Operation removeObitAsync
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
@@ -428,7 +428,7 @@ class DefaultApi
     /**
      * Operation removeObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
@@ -672,7 +672,7 @@ class DefaultApi
     /**
      * Operation searchObitsAsync
      *
-     * 
+     *
      *
      * @param  string $usn Universal serial number (optional)
      * @param  string $owner_did OBADA owner DID (optional)
@@ -695,7 +695,7 @@ class DefaultApi
     /**
      * Operation searchObitsAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $usn Universal serial number (optional)
      * @param  string $owner_did OBADA owner DID (optional)
@@ -962,7 +962,7 @@ class DefaultApi
     /**
      * Operation showObitAsync
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
@@ -982,7 +982,7 @@ class DefaultApi
     /**
      * Operation showObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $obit_did The given ObitDID argument (required)
      *
