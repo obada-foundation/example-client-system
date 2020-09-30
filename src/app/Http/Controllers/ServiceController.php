@@ -12,6 +12,7 @@ use App\Http\Requests\UsnRequest;
 use Obada\Api\ObitApi;
 use Obada\Entities\NewObit;
 use Obada\Entities\Obit;
+use Obada\ApiException;
 use Log;
 
 class ServiceController extends Controller
@@ -259,57 +260,73 @@ class ServiceController extends Controller
             ], 400);
         }
         $obitApi = app()->make(ObitApi::class);
-
+        $obit = null;
         try {
-            $obit = $obitApi->showObit($client_obit->obitDID);
             Log::info("-- Retrieving Obit --");
-            if($obit != null) {
-                Log::info("-- Retrieving Obit: Found --");
-                $updatedObit = new Obit([
-                    'obitDid'=>$client_obit->obitDID,
-                    'usn'=>$client_obit->usn,
-                    'ownerDid'=>$client_obit->owner,
-                    'manufacturer'=> $client_obit->manufacturer,
-                    'partNumber'=>$client_obit->part_number,
-                    'serialNumberHash'=>$client_obit->serial_number_hash,
-                    'metadata'=>[],
-                    'docLinks'=>[],
-                    'structuredData'=>[],
-                    'rootHash'=>$client_obit->root_hash,
-                    'modifiedAt'=>$client_obit->updated_at
-                ]);
-                $obitApi->updateObit($client_obit->obitDID,$obit);
-
+            $obit = $obitApi->showObit($client_obit->obitDID);
+        } catch (ApiException | Exception $e) {
+            if($e->getCode() == 404) {
+                $obit = null;
             } else {
-                Log::info("-- Retrieving Obit: Not Found --");
-                $newObit = new NewObit([
-                    'obitDid'=>$client_obit->obitDID,
-                    'usn'=>$client_obit->usn,
-                    'ownerDid'=>$client_obit->owner,
-                    'manufacturer'=> $client_obit->manufacturer,
-                    'partNumber'=>$client_obit->part_number,
-                    'serialNumberHash'=>$client_obit->serial_number_hash,
-                    'metadata'=>[],
-                    'docLinks'=>[],
-                    'structuredData'=>[],
-                    'modifiedAt'=>$client_obit->updated_at
-                ]);
-                $obitApi->createObit($obit);
+                return response()->json([
+                    'status' => 1,
+                    'errorMessage'=>$e->getMessage()
+                ], $e->getCode());
+            }
+        } finally {
+
+            try {
+                if($obit != null) {
+                    Log::info("-- Retrieving Obit: Found --");
+                    $updatedObit = new Obit([
+                        'obitDid'=>$client_obit->obitDID,
+                        'usn'=>$client_obit->usn,
+                        'ownerDid'=>$client_obit->owner,
+                        'manufacturer'=> $client_obit->manufacturer,
+                        'partNumber'=>$client_obit->part_number,
+                        'serialNumberHash'=>$client_obit->serial_number_hash,
+                        'metadata'=>null,
+                        'docLinks'=>null,
+                        'structuredData'=>null,
+                        'rootHash'=>$client_obit->root_hash,
+                        'modifiedAt'=>$client_obit->updated_at
+                    ]);
+                    $obitApi->updateObit($client_obit->obitDID,$obit);
+
+                } else {
+                    Log::info("-- Retrieving Obit: Not Found --");
+                    $newObit = new NewObit([
+                        'obitDid'=>$client_obit->obitDID,
+                        'usn'=>$client_obit->usn,
+                        'ownerDid'=>$client_obit->owner,
+                        'manufacturer'=> $client_obit->manufacturer,
+                        'partNumber'=>$client_obit->part_number,
+                        'serialNumberHash'=>$client_obit->serial_number_hash,
+                        'metadata'=>null,
+                        'docLinks'=>null,
+                        'structuredData'=>null,
+                        'modifiedAt'=>$client_obit->updated_at
+                    ]);
+                    $obitApi->createObit($newObit);
+                }
+
+            } catch (ApiException | Exception $e) {
+                Log::error($e->getMessage());
+                return response()->json([
+                    'status' => 1,
+                    'errorMessage'=>$e->getMessage()
+                ], $e->getCode() ?? 500);
             }
 
-        } catch (Exception $e) {
+            $device->synced_with_obada = 1;
+            $device->save();
+
             return response()->json([
-                'status' => 1,
-                'errorMessage'=>$e->getMessage()
-            ], 500);
+                'status' => 0
+            ], 200);
+
         }
 
-        $device->synced_with_obada = 1;
-        $device->save();
-
-        return response()->json([
-            'status' => 0
-        ], 200);
     }
 
 }
