@@ -21,6 +21,7 @@
                 <a href="/obits">Obit List</a> <br>
                 <a href="/devices/0/edit">Add New Device</a> <br>
                 <a href="/generate/usn">Generate USN</a> <br>
+                <a href="/retrieve/obit">Retrieve Obit From Obada</a> <br>
             </section>
         </div>
 

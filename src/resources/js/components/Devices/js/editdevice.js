@@ -1,5 +1,5 @@
 export default {
-    props:['is_mobile','events','device_id'],
+    props:['is_mobile','events','device_id','schema'],
     data: function () {
         return {
             device: null,
@@ -83,6 +83,7 @@ export default {
             });
             setTimeout(()=>{
                 var i = this.metadata.length - 1;
+                $('#type-picker'+i).selectpicker('render');
                 $('#datatype-picker'+i).selectpicker('render');
             },1000);
         },
@@ -107,6 +108,10 @@ export default {
                     validations: ['required']
                 }
             });
+            setTimeout(()=>{
+                var i = this.structured_data.length - 1;
+                $('#schema-type-picker'+i).selectpicker('render');
+            },1000);
         },
         addDocument: function() {
 
@@ -335,6 +340,7 @@ export default {
                         setTimeout(()=>{
                             var i = this.metadata.length - 1;
                             $('#datatype-picker'+i).selectpicker('render');
+                            $('#type-picker'+i).selectpicker('render');
                         },1000);
                     });
                 }
@@ -365,6 +371,10 @@ export default {
                         }
                     });
                 });
+                setTimeout(()=>{
+                    var i = this.structured_data.length - 1;
+                    $('#schema-type-picker'+i).selectpicker('render');
+                },1000);
             }
         }
     }

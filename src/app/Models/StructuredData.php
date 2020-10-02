@@ -11,7 +11,7 @@ class StructuredData extends Model
 
     public function getHash()
     {
-        $str = $this->structured_data_type.$this->structured_data_type_id.json_encode($this->data_array);
+        $str = $this->structured_data_type_id.json_encode($this->data_array);
         return hash('sha256',$str);
     }
 

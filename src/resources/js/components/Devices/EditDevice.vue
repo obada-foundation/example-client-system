@@ -66,28 +66,23 @@
                                                v-model="mdata.type.value"
                                                @focus="handleFocus(mdata.type)"
                                                @blur="handleBlur(mdata.type)"
-                                               placeholder="Type">
+                                               placeholder="Label">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-2">
-                                <div class="form-group">
-                                    <div class="input-group colored">
-                                        <input type="text" class="form-control no-shadow is-normal"
-                                               v-bind:class="{'is-normal':mdata.type_id.isClean,'is-invalid':!mdata.type_id.isClean && !mdata.type_id.isValid,'is-valid':!mdata.type_id.isClean && mdata.type_id.isValid}"
-                                               v-model="mdata.type_id.value"
-                                               @focus="handleFocus(mdata.type_id)"
-                                               @blur="handleBlur(mdata.type_id)"
-                                               placeholder="Type ID">
-                                    </div>
+                                <div class="form-group select-colored">
+                                    <select class="selectpicker" v-bind:id="'type-picker'+i" data-style="select-with-transition" title="Type" v-model="mdata.type_id.value">
+                                        <option v-for="type in schema" v-bind:value="type.id">{{type.name}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group select-colored">
                                     <select class="selectpicker" v-bind:id="'datatype-picker'+i" data-style="select-with-transition" title="Data Type" v-model="mdata.data_type">
                                         <option selected value="text">Text</option>
-                                        <option selected value="float">Float</option>
-                                        <option selected value="int">Integer</option>
+                                        <option value="float">Float</option>
+                                        <option value="int">Integer</option>
                                     </select>
                                 </div>
                             </div>
@@ -144,19 +139,16 @@
                                                v-model="sdata.type.value"
                                                @focus="handleFocus(sdata.type)"
                                                @blur="handleBlur(sdata.type)"
-                                               placeholder="Type">
+                                               placeholder="Label">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
-                                    <div class="input-group colored">
-                                        <input type="text" class="form-control no-shadow is-normal"
-                                               v-bind:class="{'is-normal':sdata.type_id.isClean,'is-invalid':!sdata.type_id.isClean && !sdata.type_id.isValid,'is-valid':!sdata.type_id.isClean && sdata.type_id.isValid}"
-                                               v-model="sdata.type_id.value"
-                                               @focus="handleFocus(sdata.type_id)"
-                                               @blur="handleBlur(sdata.type_id)"
-                                               placeholder="Type ID">
+                                    <div class="form-group select-colored">
+                                        <select class="selectpicker" v-bind:id="'schema-type-picker'+i" data-style="select-with-transition" title="Type" v-model="sdata.type_id.value">
+                                            <option v-for="type in schema" v-bind:value="type.id">{{type.name}}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

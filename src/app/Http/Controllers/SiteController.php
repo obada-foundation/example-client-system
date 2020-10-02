@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Schema;
 
 class SiteController extends Controller
 {
@@ -47,12 +48,18 @@ class SiteController extends Controller
 
     public function editDevice(Request $request, $obit_id)
     {
+        $schema = Schema::all(); //Temporarily adding schema to page. This should be converted into a web-service eventually.
         return view('pages.edit_device',$this->getData([
-            'device_id'=>$obit_id
+            'device_id'=>$obit_id,
+            'schema'=>$schema
         ]));
     }
     public function generateUsn(Request $request)
     {
         return view('pages.generate_usn',$this->getData([]));
+    }
+    public function retrieveObit(Request $request)
+    {
+        return view('pages.retrieve_obit',$this->getData([]));
     }
 }

@@ -17,7 +17,6 @@ class CreateClientObitsTable extends Migration
             $table->id();
             $table->string('obit_id');
             $table->string('usn');
-            $table->string('obit');
             $table->string('owner');
             $table->integer('status');
             $table->string('manufacturer');

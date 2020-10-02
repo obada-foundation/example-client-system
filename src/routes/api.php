@@ -22,10 +22,13 @@ Route::middleware('api')->group(function(){
     Route::get('/internal/device/{device_id}', 'ServiceController@getDeviceById');
     Route::get('/internal/obit/{usn}', 'ServiceController@getObitByUsn');
 
+
     Route::post('internal/document/upload', 'ServiceController@uploadDocument');
     Route::post('internal/device', 'ServiceController@saveDevice');
     Route::post('internal/device/obit', 'ServiceController@createObit');
     Route::post('internal/device/sync', 'ServiceController@syncDevice');
+    Route::post('internal/obit', 'ServiceController@retrieveObit');
+    Route::post('internal/obit/device', 'ServiceController@mapObitToDevice');
     Route::post('internal/usn', 'ServiceController@generateUsn');
     Route::post('internal/device/metadata', 'ServiceController@saveDeviceMetadata');
     Route::post('internal/device/document', 'ServiceController@saveDeviceDocument');
