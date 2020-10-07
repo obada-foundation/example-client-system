@@ -18,6 +18,16 @@ class DataController extends Controller
     public function get_obits_data(Datatables $datatables){
         return $datatables->eloquent(ClientObit::orderBy('id', 'asc'))
             ->rawColumns(['id', 'usn', 'part_number','manufacturer','owner'])
+            ->addColumn('is_mapped', function(ClientObit $client_obit) {
+                $device = Device::where([
+                    'usn'=>$client_obit->usn
+                ])->first();
+                if($device) {
+                    return true;
+                }
+
+                return false;
+            })
             ->make(true);
     }
 }

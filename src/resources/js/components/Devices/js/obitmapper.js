@@ -132,6 +132,7 @@ export default {
                 swal("Done!", "Data has been successfully retrieved from Obada", "success");
             })
             .catch((e) => {
+                console.log(e);
                 this.deviceStatus.inventory = 2;
                 this.isLoading = false;
                 if(e.response.hasOwnProperty('errorMessage')) {
