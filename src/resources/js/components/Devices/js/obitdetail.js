@@ -104,7 +104,7 @@ export default {
                     swal("Done!", "Device added to Local Inventory", "success");
                 })
                 .catch((e) => {
-                    console.log(e);
+                    console.log(e.response);
                     this.isLoading = false;
                     if(e.response.hasOwnProperty('errorMessage')) {
                         swal("Error!", e.data.errorMessage, "error");

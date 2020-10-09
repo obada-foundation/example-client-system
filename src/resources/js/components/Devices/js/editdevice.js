@@ -296,6 +296,7 @@ export default {
             }
         },
         parseDevice: function(){
+            console.log(this.device);
             var keys = Object.keys(this.device);
             keys.forEach((k)=>{
                 if(this.deviceForm.hasOwnProperty(k) && typeof this.device[k] !== 'object' &&  typeof this.device[k] !== 'array') {
@@ -324,14 +325,20 @@ export default {
                                 validations: ['required']
                             }
                         });
+                        var i = this.metadata.length - 1;
+
                         setTimeout(()=>{
-                            var i = this.metadata.length - 1;
                             $('#datatype-picker'+i).selectpicker('render');
                             $('#type-picker'+i).selectpicker('render');
+                            $('#datatype-picker'+i).val(this.metadata[i].data_type).trigger('change');
+                            $('#type-picker'+i).val(this.metadata[i].type_id.value).trigger('change');
+                            console.log("Rendered "+i);
                         },1000);
                     });
                 }
             }
+
+            console.log(this.metadata);
 
             this.structured_data = [];
             if(this.device.hasOwnProperty('structured_data')) {

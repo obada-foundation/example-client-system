@@ -461,7 +461,8 @@ class ServiceController extends Controller
 
         $mdata = @json_decode($client_obit->metadata,true);
         if($mdata && is_array($mdata)) {
-            foreach($mdata as $key=>$metadataValue) {
+            foreach($mdata as $metadataRow) {
+                foreach($metadataRow as $key=>$value)
                 $metadata = $device->metadata()->where([
                     'metadata_type_id'=>$key
                 ])->first();
@@ -478,12 +479,19 @@ class ServiceController extends Controller
                 }
 
                 $metadata->metadata_type_id = $key;
-                if($schema->data_type == 'float' && is_float($metadataValue)) {
-                    $metadata->data_fp = $metadataValue;
-                } else if($schema->data_type == 'int' && is_int($metadataValue)) {
-                    $metadata->data_int = $metadataValue;
+
+                if($schema->data_type == 'float' && is_numeric($value)) {
+                    $metadata->data_fp = $value;
+                    $metadata->data_int = null;
+                    $metadata->data_txt = null;
+                } else if($schema->data_type == 'int' && is_int($value)) {
+                    $metadata->data_fp = null;
+                    $metadata->data_int = $value;
+                    $metadata->data_txt = null;
                 } else {
-                    $metadata->data_txt = $metadataValue;
+                    $metadata->data_fp = null;
+                    $metadata->data_int = null;
+                    $metadata->data_txt = $value;
                 }
 
                 $metadata->data_hash = $metadata->getHash();
@@ -498,7 +506,7 @@ class ServiceController extends Controller
                     'structured_data_type_id'=>$structuredDataRow['structured_data_type_id']
                 ])->first();
 
-                $schema = Schema::find($metadataValue['structured_data_type_id']);
+                $schema = Schema::find($metadataRow['structured_data_type_id']);
                 if(!$schema) {
                     $schema = Schema::where(['name'=>'Other'])->first();
                 }

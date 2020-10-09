@@ -16,7 +16,7 @@
                     <li v-if="device.metadata.length === 0">
                         <p class="text-center">There are no additional data related to this device</p>
                     </li>
-                    <device-row key="index" v-for="(data,index) in device.metadata" :bold_title="false" :title="data.metadata_type_id" :value="getMetadataValue(data)"></device-row>
+                    <device-row v-bind:key="index" v-for="(data,index) in device.metadata" :bold_title="false" :title="data.metadata_type_id" :value="getMetadataValue(data)"></device-row>
 
                 </ul>
             </li>
@@ -40,7 +40,7 @@
 
                 </ul>
             </li>
-            <structured-data-row key="index"  v-for="(data,index) in device.structured_data" :structured_data="getStructuredData(data)"></structured-data-row>
+            <structured-data-row v-bind:key="index"  v-for="(data,index) in device.structured_data" :structured_data="getStructuredData(data)"></structured-data-row>
 
         </ul>
         <div v-if="device != null" class="text-center mt-5">

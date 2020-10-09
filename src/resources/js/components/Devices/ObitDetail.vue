@@ -13,7 +13,7 @@
                     <li v-if="obit.metadata.length === 0">
                         <p class="text-center">There are no additional data related to this device</p>
                     </li>
-                    <device-row key="index" v-for="(data,mindex) in obit.metadata" :bold_title="false" :title="getKey(data)" :value="getValue(data)"></device-row>
+                    <device-row v-bind:key="index" v-for="(data,mindex) in obit.metadata" :bold_title="false" :title="getKey(data)" :value="getValue(data)"></device-row>
 
                 </ul>
             </li>
@@ -37,7 +37,7 @@
 
                 </ul>
             </li>
-            <device-row key="index" v-for="(data,sindex) in obit.structured_data" :bold_title="false" :title="getKey(data)" :value="getValue(data)"></device-row>
+            <device-row v-bind:key="index" v-for="(data,sindex) in obit.structured_data" :bold_title="false" :title="getKey(data)" :value="getValue(data)"></device-row>
 
         </ul>
 
