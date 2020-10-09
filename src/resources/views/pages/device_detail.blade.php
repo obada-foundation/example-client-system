@@ -16,7 +16,7 @@
     @include('common.nav',['fixed'=>false])
     <div class="main">
         <div class="container">
-            <h1 class="text-center">Device Detail</h1>
+            <h1 class="text-center">Device Details</h1>
             <section class="py-5 my-5">
                 <device-detail :device_id="_device_id"></device-detail>
             </section>

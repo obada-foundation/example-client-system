@@ -13,7 +13,7 @@
                     <li v-if="obit.metadata.length === 0">
                         <p class="text-center">There are no additional data related to this device</p>
                     </li>
-                    <device-row key="index" v-for="(data,mindex) in obit.metadata" :bold_title="false" :title="data.metadata_type" :value="data.value"></device-row>
+                    <device-row key="index" v-for="(data,mindex) in obit.metadata" :bold_title="false" :title="getKey(data)" :value="getValue(data)"></device-row>
 
                 </ul>
             </li>
@@ -40,6 +40,17 @@
             <device-row key="index" v-for="(data,sindex) in obit.structured_data" :bold_title="false" :title="getKey(data)" :value="getValue(data)"></device-row>
 
         </ul>
+
+        <div v-if="obit != null" class="text-center mt-5">
+            <button v-show="obit.root_hash != obit.obada_hash" class="btn btn-primary btn-round" @click="syncData">SYNC WITH BLOCKCHAIN</button>
+            <button v-show="obit.root_hash != obit.obada_hash" class="btn btn-primary btn-round" @click="downloadObit">DOWNLOAD FROM BLOCKCHAIN</button>
+            <button class="btn btn-primary btn-round" @click="mapData">UPDTAE IN INVENTORY</button>
+
+            <!--
+            <button v-show="device.synced_with_client_obits == 1 && device.synced_with_obada == 0" class="btn btn-primary btn-round" @click="syncData">SYNC</button>
+            -->
+        </div>
+
     </div>
 </template>
 

@@ -8,11 +8,21 @@
         <table class="table table-striped" id="obitsList">
             <thead>
             <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th class="text-center" colspan="2">Hashes</th>
+            </tr>
+            <tr>
                 <th>USN</th>
-                <th>Part Number</th>
+                <th>Serial #</th>
+                <th>Part #</th>
                 <th>Manufacturer</th>
                 <th>Owner</th>
-                <th>Is Mapped</th>
+                <th>Local</th>
+                <th>Blockchain</th>
             </tr>
             </thead>
         </table>

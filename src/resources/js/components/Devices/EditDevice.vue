@@ -6,7 +6,23 @@
             </div>
         </div>
         <form action="" onsubmit="return false;">
-            <div class="text-left">
+            <h2>Owner Information</h2>
+            <div class="text-left py-5">
+                <div class="form-group">
+                    <label for="">Owner</label>
+                    <div class="input-group colored">
+                        <input type="text" class="form-control no-shadow is-normal"
+                               v-bind:class="{'is-normal':deviceForm.owner.isClean,'is-invalid':!deviceForm.owner.isClean && !deviceForm.owner.isValid,'is-valid':!deviceForm.owner.isClean && deviceForm.owner.isValid}"
+                               v-model="deviceForm.owner.value"
+                               @focus="handleFocus(deviceForm.owner)"
+                               @blur="handleBlur(deviceForm.owner)"
+                               placeholder="Owner">
+                    </div>
+                </div>
+
+            </div>
+            <h2>Device Identification</h2>
+            <div class="text-left py-5">
                 <div class="form-group">
                     <label for="">Manufacturer</label>
                     <div class="input-group colored">
@@ -40,40 +56,19 @@
                                placeholder="Part Number">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="">Owner</label>
-                    <div class="input-group colored">
-                        <input type="text" class="form-control no-shadow is-normal"
-                               v-bind:class="{'is-normal':deviceForm.owner.isClean,'is-invalid':!deviceForm.owner.isClean && !deviceForm.owner.isValid,'is-valid':!deviceForm.owner.isClean && deviceForm.owner.isValid}"
-                               v-model="deviceForm.owner.value"
-                               @focus="handleFocus(deviceForm.owner)"
-                               @blur="handleBlur(deviceForm.owner)"
-                               placeholder="Owner">
-                    </div>
-                </div>
-
+            </div>
+            <h2>Device Data & Information</h2>
+            <div class="text-left py-5">
                 <div class="card">
                     <div class="card-header">
                         <label>Metadata</label>
                     </div>
                     <div class="card-body">
                         <div v-for="(mdata,i) in metadata" class="row">
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <div class="input-group colored">
-                                        <input type="text" class="form-control no-shadow is-normal"
-                                               v-bind:class="{'is-normal':mdata.type.isClean,'is-invalid':!mdata.type.isClean && !mdata.type.isValid,'is-valid':!mdata.type.isClean && mdata.type.isValid}"
-                                               v-model="mdata.type.value"
-                                               @focus="handleFocus(mdata.type)"
-                                               @blur="handleBlur(mdata.type)"
-                                               placeholder="Label">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-2">
                                 <div class="form-group select-colored">
                                     <select class="selectpicker" v-bind:id="'type-picker'+i" data-style="select-with-transition" title="Type" v-model="mdata.type_id.value">
-                                        <option v-for="type in schema" v-bind:value="type.id">{{type.name}}</option>
+                                        <option v-for="type in schema" v-bind:value="type.name">{{type.name}}</option>
                                     </select>
                                 </div>
                             </div>

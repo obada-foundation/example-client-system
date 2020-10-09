@@ -8,12 +8,19 @@
         <table class="table table-striped" id="deviceList">
             <thead>
             <tr>
-                <th>Serial Number</th>
-                <th>Part Number</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th class="text-center" colspan="2">Hashes</th>
+            </tr>
+            <tr>
+                <th>Serial #</th>
+                <th>Part #</th>
                 <th>Manufacturer</th>
                 <th>Owner</th>
-                <th>Obit Created</th>
-                <th>Data Synced</th>
+                <th>Local</th>
+                <th>Blockchain</th>
             </tr>
             </thead>
         </table>

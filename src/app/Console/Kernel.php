@@ -27,15 +27,6 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
 
-            $devices = Device::where([
-                'synced_with_client_obits'=>0,
-                'synced_with_obada'=>0
-            ])->get();
-
-            if($devices) {
-
-            }
-
 
         })->everyFiveMinutes();
     }

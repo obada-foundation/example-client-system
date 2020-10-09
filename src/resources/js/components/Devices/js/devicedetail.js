@@ -57,8 +57,7 @@ export default {
             })
             .then((response) => {
                 this.isLoading = false;
-                this.device.synced_with_client_obits = 1;
-                swal("Done!", "Obit has been successfully created.", "success");
+                swal("Done!", "Local Obit created.  View obit to synch to blockchain.", "success");
             })
             .catch((e) => {
                 this.isLoading = false;
@@ -69,29 +68,6 @@ export default {
                 }
             });
         },
-        syncData: function(){
-            if(this.isLoading) return;
-            this.isLoading = true;
-            axios('/api/internal/device/sync', {
-                method:'post',
-                data: {
-                    device_id: parseInt(this.device_id)
-                },
-                responseType: 'json',
-            })
-                .then((response) => {
-                    this.isLoading = false;
-                    this.device.synced_with_obada = 1;
-                    swal("Done!", "Obit has been successfully synchronized.", "success");
-                })
-                .catch((e) => {
-                    this.isLoading = false;
-                    if(e.response.hasOwnProperty('errorMessage')) {
-                        swal("Error!", e.data.errorMessage, "error");
-                    } else {
-                        swal("Error!", "We could not synchronize the Obit data", "error");
-                    }
-                });
-        }
+
     }
 }

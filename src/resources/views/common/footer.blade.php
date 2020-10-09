@@ -9,18 +9,18 @@
             <div class="col-md-12 text-center">
                 <ul class="footer-links">
                     <li>
-                        <a href="/obits">
-                            OBITS
+                        <a href="https://www.obada.io">
+                            OBADA Foundation Home
                         </a>
                     </li>
                     <li>
-                        <a href="/privacy">
-                            Privacy Policy
+                        <a href="/">
+                            Reference Design
                         </a>
                     </li>
                     <li>
-                        <a href="/user-agreement">
-                            User Agreement
+                        <a href="https://gateway.obada.io/explorer/">
+                            Gateway Server
                         </a>
                     </li>
                 </ul>

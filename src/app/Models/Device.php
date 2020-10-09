@@ -21,9 +21,7 @@ class Device extends Model
         return $this->hasMany(StructuredData::class,'device_id','id');
     }
 
-    public function generateObitData()
-    {
-
+    public function obit(){
+        return $this->hasOne(ClientObit::class,'usn','usn');
     }
-
 }

@@ -61,12 +61,6 @@ export default {
     methods: {
         addMetadataRow: function() {
             this.metadata.push({
-                type: {
-                    value: '',
-                    isValid: true,
-                    isClean: true,
-                    validations: ['required']
-                },
                 type_id: {
                     value: '',
                     isValid: true,
@@ -234,7 +228,6 @@ export default {
                 var metadata = [];
                 this.metadata.forEach((m)=>{
                     var mdata = {
-                        metadata_type: m.type.value,
                         metadata_type_id: m.type_id.value
                     };
                     if(m.data_type === 'text') {
@@ -317,12 +310,6 @@ export default {
                         var metadataValue = this.getMetdataValue(m);
                         this.metadata.push({
                             id: m.id,
-                            type: {
-                                value: m.metadata_type,
-                                isValid: true,
-                                isClean: true,
-                                validations: ['required']
-                            },
                             type_id: {
                                 value: m.metadata_type_id,
                                 isValid: true,

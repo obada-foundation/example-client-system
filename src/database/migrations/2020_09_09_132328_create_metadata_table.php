@@ -16,7 +16,6 @@ class CreateMetadataTable extends Migration
         Schema::create('metadata', function (Blueprint $table) {
             $table->id();
             $table->integer('device_id');
-            $table->string('metadata_type');
             $table->string('metadata_type_id');
             $table->float('data_fp',8,2)->nullable();
             $table->integer('data_int')->nullable();

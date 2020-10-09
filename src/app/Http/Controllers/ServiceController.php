@@ -26,7 +26,7 @@ class ServiceController extends Controller
      */
     public function getDeviceById($device_id)
     {
-        $device = Device::with('metadata','documents','structured_data')->find($device_id);
+        $device = Device::with('metadata','metadata.schema','obit','documents','structured_data')->find($device_id);
         if(!$device) {
             return response()->json([
                 'status' => 1,
@@ -46,7 +46,7 @@ class ServiceController extends Controller
      * @return ClientObit
      */
     public function getObitByUsn(Request $request, $usn){
-        $obit = ClientObit::where([
+        $obit = ClientObit::with('device')->where([
             'usn'=>$usn
         ])->first();
         if(!$obit) {
@@ -55,6 +55,8 @@ class ServiceController extends Controller
                 'errorMessage'=>'Unable to find obit'
             ], 400);
         }
+
+
 
         return response()->json([
             'status' => 0,
@@ -94,8 +96,6 @@ class ServiceController extends Controller
         $device->part_number = $input['part_number'];
         $device->serial_number = $input['serial_number'];
         $device->owner = $input['owner'];
-        $device->synced_with_client_obits = 0;
-        $device->synced_with_obada = 0;
         $device->save();
 
         $usn = $manager->GenerateUSN($device->manufacturer,$device->part_number, $device->serial_number);
@@ -113,7 +113,6 @@ class ServiceController extends Controller
                     $metadata = new Metadata();
                 }
                 $metadata->device_id = $device->id;
-                $metadata->metadata_type = $m['metadata_type'];
                 $metadata->metadata_type_id = $m['metadata_type_id'];
                 if(isset($m['data_fp']))
                     $metadata->data_fp = $m['data_fp'];
@@ -193,13 +192,6 @@ class ServiceController extends Controller
             ], 400);
         }
 
-        if($device->synced_with_client_obits != 0) {
-            return response()->json([
-                'status' => 1,
-                'errorMessage'=>'Device is already in sync'
-            ], 400);
-        }
-
         $usn = $manager->GenerateUSN($device->manufacturer,$device->part_number, $device->serial_number);
         $client_obit = ClientObit::where([
             'usn'=>$usn['usn']
@@ -214,8 +206,7 @@ class ServiceController extends Controller
         if($device->metadata) {
             foreach($device->metadata as $m) {
                 $mdata = [];
-                $mdata['metadata_type_id'] = $m->metadata_type_id;
-                $mdata['value'] = $m->data_txt == null ? ($m->data_int == null ? $m->data_fp : $m->data_int) : $m->data_txt;
+                $mdata[$m->metadata_type_id] = $m->data_txt == null ? ($m->data_int == null ? $m->data_fp : $m->data_int) : $m->data_txt;
                 $metadata[] = $mdata;
             }
         }
@@ -236,7 +227,11 @@ class ServiceController extends Controller
         $client_obit->manufacturer = $device->manufacturer;
         $client_obit->owner = $device->owner;
         $client_obit->part_number = $device->part_number;
-        $client_obit->serial_number_hash = $usn['serial_hash'];
+
+        //Temporarily Saving Unhashed Serial Number.
+        //$device->serial_number should be replaced by $usn['serial_hash'];
+        $client_obit->serial_number_hash = $device->serial_number;
+
         $client_obit->status = 0;
 
         $client_obit->metadata = json_encode($metadata);
@@ -246,8 +241,6 @@ class ServiceController extends Controller
 
         $client_obit->save();
 
-        $device->synced_with_client_obits = 1;
-        $device->save();
         return response()->json([
             'status' => 0
         ], 200);
@@ -259,34 +252,18 @@ class ServiceController extends Controller
      *
      * @return void
      */
-    public function syncDevice(Request $request, ObitManager $manager){
+    public function syncObit(Request $request, ObitManager $manager){
         //Integrate API
 
-        if(!$request->has('device_id')) {
+        if(!$request->has('usn')) {
             return response()->json([
                 'status' => 1,
                 'errorMessage'=>'Unable to find device'
             ], 400);
         }
 
-        $device = Device::find($request->input('device_id'));
-        if(!$device) {
-            return response()->json([
-                'status' => 1,
-                'errorMessage'=>'Unable to find device'
-            ], 400);
-        }
-
-        if($device->synced_with_obada != 0) {
-            return response()->json([
-                'status' => 1,
-                'errorMessage'=>'Obit is already in sync'
-            ], 400);
-        }
-
-        $usn = $manager->GenerateUSN($device->manufacturer,$device->part_number, $device->serial_number);
         $client_obit = ClientObit::where([
-            'usn'=>$usn['usn']
+            'usn'=>$request->input('usn')
         ])->first();
 
         if(!$client_obit) {
@@ -295,9 +272,6 @@ class ServiceController extends Controller
                 'errorMessage'=>'Unable to find Obit'
             ], 400);
         }
-
-
-
 
         $obitApi = app()->make(ObitApi::class);
         $obit = null;
@@ -360,9 +334,6 @@ class ServiceController extends Controller
                 ], $e->getCode() ?? 500);
             }
 
-            $device->synced_with_obada = 1;
-            $device->save();
-
             return response()->json([
                 'status' => 0
             ], 200);
@@ -409,10 +380,9 @@ class ServiceController extends Controller
             $mdata = $obit->getMetadata();
             if($mdata && is_array($mdata)) {
                 foreach($mdata as $metadataRow) {
-                    $metadata[] = [
-                        'metadata_type_id'=>$metadataRow['key'],
-                        'value'=>$metadataRow['value']
-                    ];
+                    $mdata = [];
+                    $mdata[$metadataRow['key']] = $metadataRow['value'];
+                    $metadata[] = $mdata;
                 }
             }
             $client_obit->metadata = @json_encode($metadata);
@@ -483,8 +453,6 @@ class ServiceController extends Controller
         $device->serial_number = $client_obit->serial_number_hash;
         $device->manufacturer = $client_obit->manufacturer;
 
-        $device->synced_with_client_obits = 1;
-        $device->synced_with_obada = 1;
         $device->save();
 
         $usn = $manager->GenerateUSN($device->manufacturer,$device->part_number, $device->serial_number);
@@ -493,11 +461,13 @@ class ServiceController extends Controller
 
         $mdata = @json_decode($client_obit->metadata,true);
         if($mdata && is_array($mdata)) {
-            foreach($mdata as $metadataRow) {
+            foreach($mdata as $key=>$metadataValue) {
                 $metadata = $device->metadata()->where([
-                    'metadata_type_id'=>$metadataRow['metadata_type_id']
+                    'metadata_type_id'=>$key
                 ])->first();
-                $schema = Schema::find($metadataRow['metadata_type_id']);
+                $schema = Schema::where([
+                    'name'=>$key
+                ])->first();
                 if(!$schema) {
                     $schema = Schema::where(['name'=>'Other'])->first();
                 }
@@ -505,16 +475,15 @@ class ServiceController extends Controller
                 if(!$metadata) {
                     $metadata = new Metadata();
                     $metadata->device_id = $device->id;
-                    $metadata->metadata_type = $schema->name;
                 }
 
-                $metadata->metadata_type_id = $metadataRow['metadata_type_id'];
-                if($schema->data_type == 'float' && is_float($metadataRow['value'])) {
-                    $metadata->data_fp = $metadataRow['value'];
-                } else if($schema->data_type == 'int' && is_int($metadataRow['value'])) {
-                    $metadata->data_int = $metadataRow['value'];
+                $metadata->metadata_type_id = $key;
+                if($schema->data_type == 'float' && is_float($metadataValue)) {
+                    $metadata->data_fp = $metadataValue;
+                } else if($schema->data_type == 'int' && is_int($metadataValue)) {
+                    $metadata->data_int = $metadataValue;
                 } else {
-                    $metadata->data_txt = $metadataRow['value'];
+                    $metadata->data_txt = $metadataValue;
                 }
 
                 $metadata->data_hash = $metadata->getHash();
@@ -529,7 +498,7 @@ class ServiceController extends Controller
                     'structured_data_type_id'=>$structuredDataRow['structured_data_type_id']
                 ])->first();
 
-                $schema = Schema::find($metadataRow['structured_data_type_id']);
+                $schema = Schema::find($metadataValue['structured_data_type_id']);
                 if(!$schema) {
                     $schema = Schema::where(['name'=>'Other'])->first();
                 }
@@ -558,4 +527,4 @@ class ServiceController extends Controller
 }
 
 
-//569b77788ac9c75a42ccd262dfd7b60168303accc1d9b7369dbe37fbec91e3d5
+//ed92bd9cb904074ac01be4875da7818341eaa0c5afeb21623ac2927eb8ead205

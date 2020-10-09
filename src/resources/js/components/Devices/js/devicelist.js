@@ -18,10 +18,25 @@ export default {
                 this.removeDevice(rowData);
             });
 
+            $(document).on('click', '.btn-clipboard', (event)=>{
+                var $btn=$(event.currentTarget);
+                var sid = $btn.attr('data-value');
+                _app.copyToClipboard(sid);
+                _app.notify({
+                    message: 'Copied',
+                    type: 'message',
+                    autoclose: true
+                })
+            });
+
             this.deviceList = $('#deviceList').DataTable({
                 "language": {
-                    "emptyTable": "There are no devices to show at the moment"
+                    "emptyTable": "There are no devices to show at the moment",
+                    search: '',
+                    searchPlaceholder: 'Search Serial #, Part #, Manufacturer or Owner',
+                    lengthMenu: ''
                 },
+                pageLength: 250,
                 ajax: {
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     url: '/api/data/devices',
@@ -42,13 +57,11 @@ export default {
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
-                            return '<a href="/devices/'+full.id+'"><b>'+full.serial_number+'</b></a>';
-                        }
-                    },
-                    {
-                        sortable: true,
-                        "render": function (data, type, full, meta) {
-                            return full.manufacturer;
+
+                            var lastFour = full.serial_number.substr(full.serial_number.length - 8);
+                            lastFour = '...'+lastFour;
+
+                            return type === 'display'?'<a href="/devices/'+full.id+'"><b>'+lastFour+'</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.serial_number+'"><i class="fa fa-copy"></i></button>':full.serial_number;
                         }
                     },
                     {
@@ -60,31 +73,38 @@ export default {
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
+                            return full.manufacturer;
+                        }
+                    },
+                    {
+                        sortable: true,
+                        "render": function (data, type, full, meta) {
                             return full.owner
                         }
                     },
                     {
                         sortable: true,
-                        className: "dt-center",
                         "render": function (data, type, full, meta) {
-                            if(full.synced_with_client_obits == 1) {
-                                return '<button class="btn btn-fab btn-success btn-round btn-sm text-center m-auto"><i class="fa fa-check"></i></button>'
-                            } else {
-                                return '<button class="btn btn-fab btn-warning btn-round btn-sm text-center m-auto"><i class="fa fa-exclamation-triangle"></i></button>'
+                            console.log(full);
+                            if(full.root_hash === '') {
+                                return '-';
                             }
+                            var lastFour = full.root_hash.substr(full.root_hash.length - 8);
+                            return type === 'display'?'...'+lastFour+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.root_hash+'"><i class="fa fa-copy"></i></button>':full.root_hash;
+
                         }
                     },
                     {
                         sortable: true,
-                        className: "dt-center",
                         "render": function (data, type, full, meta) {
-                            if(full.synced_with_obada == 1) {
-                                return '<button class="btn btn-fab btn-success btn-round btn-sm text-center m-auto"><i class="fa fa-check"></i></button>'
-                            }else {
-                                return '<button class="btn btn-fab btn-warning btn-round btn-sm text-center m-auto"><i class="fa fa-exclamation-triangle"></i></button>'
+                            if(full.obada_hash === '') {
+                                return '-';
                             }
+                            var lastFour = full.obada_hash.substr(full.obada_hash.length - 8);
+                            return type === 'display'?'...'+lastFour+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.obada_hash+'"><i class="fa fa-copy"></i></button>':full.obada_hash;
+
                         }
-                    }
+                    },
                 ]
             });
         })

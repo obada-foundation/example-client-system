@@ -26,7 +26,7 @@ Route::middleware('api')->group(function(){
     Route::post('internal/document/upload', 'ServiceController@uploadDocument');
     Route::post('internal/device', 'ServiceController@saveDevice');
     Route::post('internal/device/obit', 'ServiceController@createObit');
-    Route::post('internal/device/sync', 'ServiceController@syncDevice');
+    Route::post('internal/obit/sync', 'ServiceController@syncObit');
     Route::post('internal/obit', 'ServiceController@retrieveObit');
     Route::post('internal/obit/device', 'ServiceController@mapObitToDevice');
     Route::post('internal/usn', 'ServiceController@generateUsn');

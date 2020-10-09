@@ -16,7 +16,7 @@
                     <li v-if="device.metadata.length === 0">
                         <p class="text-center">There are no additional data related to this device</p>
                     </li>
-                    <device-row key="index" v-for="(data,index) in device.metadata" :bold_title="false" :title="data.metadata_type" :value="getMetadataValue(data)"></device-row>
+                    <device-row key="index" v-for="(data,index) in device.metadata" :bold_title="false" :title="data.metadata_type_id" :value="getMetadataValue(data)"></device-row>
 
                 </ul>
             </li>
@@ -45,8 +45,12 @@
         </ul>
         <div v-if="device != null" class="text-center mt-5">
             <a v-bind:href="'/devices/'+device_id+'/edit'" class="btn btn-primary btn-round">EDIT</a>
-            <button v-show="device.synced_with_client_obits == 0" class="btn btn-primary btn-round" @click="createObit">CREATE OBIT</button>
+            <button v-show="device.obit === null" class="btn btn-primary btn-round" @click="createObit">CREATE OBIT</button>
+            <button v-show="device.obit !== null" class="btn btn-primary btn-round" @click="createObit">UPDATE OBIT</button>
+
+            <!--
             <button v-show="device.synced_with_client_obits == 1 && device.synced_with_obada == 0" class="btn btn-primary btn-round" @click="syncData">SYNC</button>
+            -->
         </div>
     </div>
 </template>

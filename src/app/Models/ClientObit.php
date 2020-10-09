@@ -11,16 +11,22 @@ class ClientObit extends Model
     protected $table = 'client_obits';
     public $timestamps = true;
 
+    public function device(){
+        return $this->hasOne(Device::class,'usn','usn');
+    }
+
     public function getMetadata()
     {
         $metadata = [];
         $metadata_array = @json_decode($this->metadata, true);
         if($metadata_array) {
             foreach($metadata_array as $mdata) {
-                $metadata[] = new MetaDataRecord([
-                    'key'=>$mdata['metadata_type_id'],
-                    'value'=>$mdata['value']
-                ]);
+                foreach($mdata as $key=>$value) {
+                    $metadata[] = new MetaDataRecord([
+                        'key'=>$key,
+                        'value'=>$value
+                    ]);
+                }
             }
         }
         return $metadata;

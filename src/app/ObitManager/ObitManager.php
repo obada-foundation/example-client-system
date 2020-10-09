@@ -12,10 +12,10 @@ class ObitManager{
     public function GenerateObit($manufacturer, $part_number, $serial_number)
     {
         $serial_hash = $this->GenerateHash($serial_number);
-        $obit = $this->GenerateHash($manufacturer.$part_number.$serial_hash);
+        $obit = $this->GenerateHash($manufacturer.$part_number.$serial_number);
         return [
             'obit'=>$obit,
-            'serial_hash'=>$serial_hash
+            'serial_hash'=>$serial_number
         ];
     }
 

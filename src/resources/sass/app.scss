@@ -8,7 +8,7 @@ h1 {
 
 h2 {
     font-family: 'Barlow Condensed', sans-serif !important;
-    font-size: 3.25rem !important;
+    font-size: 2.25rem !important;
     color: #3c4858;
     font-weight: 800;
 }
@@ -48,6 +48,26 @@ p.bold {
     font-weight: 800;
 }
 
+.navbar-brand  {
+    p.bold {
+        line-height: 1em;
+        margin: 0px;
+        font-size: 2rem !important;
+
+        small {
+            color: #3c4858;
+        }
+    }
+    span {
+        font-family: 'Barlow', monospace;
+        font-size: 1rem !important;
+        color: #3c4858;
+        line-height: 1em;
+        font-weight: normal;
+        position: relative;
+        top: -5px;
+    }
+}
 label {
     font-family: 'Barlow', monospace;
     font-size: 1.25rem;
@@ -203,6 +223,19 @@ label {
 
 .alerts-container .alert {
     border-radius: 5px;
+    width: max-content;
+    margin: auto;
+    border-radius: 30px;
+    padding: 15px 30px;
+}
+
+.alerts-container .alert.alert-dismissable {
+    padding-right: 15px;
+}
+
+.alerts-container .alert .close{
+    margin-top: -4px;
+    margin-left: 10px;
 }
 
 .alert p {
@@ -456,4 +489,62 @@ label {
 .CodeMirror {
     font-family: 'Cutive Mono', monospace;
     font-size: 1.25rem !important;
+}
+
+.dataTables_filter {
+    width: 100%;
+    float: none;
+    text-align: center;
+    padding-bottom: 20px;
+
+    label {
+        background: #ebf6fb;
+        border-radius: 25px;
+        margin-top: 5px;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        width: 100%;
+
+        input {
+            font-family: 'Barlow', monospace;
+            width: 100%;
+            background: no-repeat center bottom, center calc(100% - 1px);
+            background-size: 0 100%, 100% 100%;
+            border: 0;
+            height: 50px;
+            transition: background 0s ease-out;
+            padding: 10px;
+            border-radius: 0;
+            font-size: 18px;
+
+            &::placeholder {
+                font-family: 'Barlow', monospace;
+                color: #888888;
+            }
+
+        }
+    }
+
+}
+
+.bullet-list {
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    li {
+        font-family: 'Barlow', monospace;
+        font-size: 1.25rem !important;
+        color: #3c4858;
+        line-height: 1.2em;
+        margin-bottom: 10px;
+    }
+}
+
+.navDropDown:hover>.dropdown-menu{
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+    top: 99%;
 }
