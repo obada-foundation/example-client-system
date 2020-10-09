@@ -62,4 +62,9 @@ class SiteController extends Controller
     {
         return view('pages.retrieve_obit',$this->getData([]));
     }
+
+    public function generateHashing(Request $request)
+    {
+        return view('pages.generate_hashing',$this->getData([]));
+    }
 }

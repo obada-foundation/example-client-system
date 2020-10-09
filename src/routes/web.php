@@ -24,6 +24,7 @@ Route::get('/obits/{obit_id}', 'SiteController@obitDetail');
 
 
 Route::get('/generate/usn', 'SiteController@generateUsn');
+Route::get('/generate/hashing', 'SiteController@generateHashing');
 Route::get('/retrieve/obit', 'SiteController@retrieveObit');
 
 

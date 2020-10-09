@@ -85,12 +85,13 @@ export default {
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
-                            console.log(full);
-                            if(full.root_hash === '') {
-                                return '-';
-                            }
-                            var lastFour = full.root_hash.substr(full.root_hash.length - 8);
-                            return type === 'display'?'...'+lastFour+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.root_hash+'"><i class="fa fa-copy"></i></button>':full.root_hash;
+
+                            var displayString = full.root_hash.substr(full.root_hash.length - 8);
+
+                            var displayString = '<span class="'+(full.root_hash != full.obada_hash?'text-danger':'')+'">...'+displayString+'</span>'
+
+
+                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.root_hash+'"><i class="fa fa-copy"></i></button>':full.root_hash;
 
                         }
                     },
@@ -100,8 +101,10 @@ export default {
                             if(full.obada_hash === '') {
                                 return '-';
                             }
-                            var lastFour = full.obada_hash.substr(full.obada_hash.length - 8);
-                            return type === 'display'?'...'+lastFour+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.obada_hash+'"><i class="fa fa-copy"></i></button>':full.obada_hash;
+                            var displayString = full.obada_hash.substr(full.obada_hash.length - 8);
+                            var displayString = '<span class="'+(full.root_hash != full.obada_hash?'text-danger':'')+'">...'+displayString+'</span>'
+
+                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.obada_hash+'"><i class="fa fa-copy"></i></button>':full.obada_hash;
 
                         }
                     },
