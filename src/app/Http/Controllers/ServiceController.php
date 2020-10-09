@@ -306,7 +306,7 @@ class ServiceController extends Controller
                         'rootHash'=>$client_obit->root_hash,
                         'modifiedAt'=>$client_obit->updated_at
                     ]);
-                    $obitApi->updateObit($client_obit->obitDID,$obit);
+                    $obitApi->updateObit($client_obit->obitDID,$updatedObit);
 
                 } else {
                     Log::info("-- Retrieving Obit: Not Found --");
