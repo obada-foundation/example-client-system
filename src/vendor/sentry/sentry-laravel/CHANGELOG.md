@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+## 2.1.1
+
+- Fix for potential `Undefined index: controllers_base_namespace.` notice
+
+## 2.1.0
+
+- Added a option (`controllers_base_namespace`) to strip away the controller base namespace for cleaner transaction names (#393)
+- Fix incompatibility with other packages that also decorate the view engine, like Livewire (#395)
+
+## 2.0.1
+
+- Improve performance tracing by nesting `view.render` spans and adding a `app.handle` span showing how long the actual application code runs after Laravel bootstrapping (#387)
+- Improve UX of `sentry:publish` command
+
 ## 2.0.0
 
 **Breaking Change**: This version uses the [envelope endpoint](https://develop.sentry.dev/sdk/envelopes/). If you are

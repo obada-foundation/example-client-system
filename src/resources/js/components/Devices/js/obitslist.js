@@ -89,7 +89,7 @@ export default {
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
-                            return full.owner
+                            return full.owner_did
                         }
                     },
                     {

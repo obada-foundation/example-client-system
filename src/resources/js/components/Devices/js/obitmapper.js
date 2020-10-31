@@ -94,7 +94,7 @@ export default {
                 axios('/api/internal/obit', {
                     method:'post',
                     data: {
-                        obitDID: this.obitForm.obit_did.value
+                        obit_did: this.obitForm.obit_did.value
                     },
                     responseType: 'json',
                 })

@@ -8,7 +8,6 @@ docs/Model/DocumentLink.md
 docs/Model/InlineResponse200.md
 docs/Model/InlineResponse2001.md
 docs/Model/MetaDataRecord.md
-docs/Model/NewObit.md
 docs/Model/NotFound.md
 docs/Model/Obit.md
 docs/Model/ObitHistory.md
@@ -23,7 +22,6 @@ lib/Entities/InlineResponse200.php
 lib/Entities/InlineResponse2001.php
 lib/Entities/MetaDataRecord.php
 lib/Entities/ModelInterface.php
-lib/Entities/NewObit.php
 lib/Entities/NotFound.php
 lib/Entities/Obit.php
 lib/Entities/ObitHistory.php

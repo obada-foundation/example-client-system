@@ -15,10 +15,11 @@ class CreateClientObitsTable extends Migration
     {
         Schema::create('client_obits', function (Blueprint $table) {
             $table->id();
-            $table->string('obit_id');
+            $table->string('obit_did');
             $table->string('usn');
-            $table->string('owner');
-            $table->integer('status');
+            $table->string('owner_did');
+            $table->string('obd_did');
+            $table->enum('obit_status',['FUNCTIONAL','NON_FUNCTIONAL','DISPOSED','STOLEN','DISABLED_BY_OWNER']);
             $table->string('manufacturer');
             $table->string('part_number');
             $table->string('serial_number_hash');

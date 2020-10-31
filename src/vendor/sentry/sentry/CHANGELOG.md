@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 3.0.3 (2020-10-12)
+
+- Fix missing source code excerpts for stacktrace frames whose absolute file path is equal to the file path (#1104)
+- Fix requirements to construct a valid object instance of the `UserDataBag` class (#1108)
+
+## 3.0.2 (2020-10-02)
+
+- fix: Use the traces sample rate for traces instead of the event sample rate (#1106)
+
+## 3.0.1 (2020-10-01)
+
+- fix: Use Span on Scope instead of Transaction for GuzzleMiddleware (#1099)
+
 ## 3.0.0 (2020-09-28)
 
 **Tracing API**

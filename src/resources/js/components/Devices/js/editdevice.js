@@ -38,13 +38,20 @@ export default {
                     isValid: true,
                     isClean: true,
                     validations: ['required']
+                },
+                status: {
+                    value: '',
+                    isValid: true,
+                    isClean: true,
+                    validations: ['required']
                 }
             },
             metadata: [],
             documents: [],
             structured_data: [],
             metadata_to_remove: [],
-            structured_data_to_remove: []
+            structured_data_to_remove: [],
+            documents_to_remove: [],
         };
     },
     mounted: function () {
@@ -59,6 +66,7 @@ export default {
 
     },
     methods: {
+
         addMetadataRow: function() {
             this.metadata.push({
                 type_id: {
@@ -83,12 +91,6 @@ export default {
         },
         addStructuredDataRow: function() {
             this.structured_data.push({
-                type: {
-                    value: '',
-                    isValid: true,
-                    isClean: true,
-                    validations: ['required']
-                },
                 type_id: {
                     value: '',
                     isValid: true,
@@ -108,7 +110,24 @@ export default {
             },1000);
         },
         addDocument: function() {
-
+            this.documents.push({
+                type_id: {
+                    value: '',
+                    isValid: true,
+                    isClean: true,
+                    validations: ['required']
+                },
+                value: {
+                    value: '',
+                    isValid: true,
+                    isClean: true,
+                    validations: ['required']
+                }
+            });
+            setTimeout(()=>{
+                var i = this.documents.length - 1;
+                $('#doc-type-picker'+i).selectpicker('render');
+            },1000);
         },
         removeStructuredData: function(i) {
             var sdata = this.structured_data[i];
@@ -124,12 +143,81 @@ export default {
             }
             this.metadata.splice(i,1);
         },
+        removeDocument: function(i) {
+            var doc = this.documents[i];
+            if(doc.id) {
+                this.documents_to_remove.push(doc.id);
+            }
+            this.documents.splice(i,1);
+        },
         handleFocus: function(v){
             v.isClean = false;
         },
         handleBlur: function(v) {
             console.log("Blur")
             this.validate(v)
+        },
+        handleFileUpload: function(event) {
+            if(event.target.files.length === 0) {
+                swal("Unable To Upload File!", "Your file could not be uploaded. Please try again.", "error");
+                return;
+            }
+            var file = event.target.files[0];
+
+            if(file.size > 500*1024*1024) {
+                this.toast("error",'File Too Large',"The file you are uploading is too large");
+                $('#upload-background').val('');
+                return;
+            }
+            this.fileUploading = true;
+            var reader = new FileReader();
+            this.progressWidth = 0;
+            reader.onprogress = (e) => {
+                var perc = Math.ceil((e.loaded / e.total) * 100);
+                this.progressWidth = perc * 0.5;
+            }
+            reader.onload = (e) => {
+                var d = new Date();
+                var n = d.getTime();
+
+                var uid = n;
+                var data = {
+                    uid: uid,
+                    status: 0,
+                    uploaded: e.target.result,
+                    file: file,
+                    file_type: file.type
+                };
+
+                this.beginUpload(data);
+
+            }
+            reader.readAsDataURL(file);
+        },
+        beginUpload: function(data){
+            this.progressWidth = 50;
+            let formData = new FormData();
+            formData.append('file', data.file);
+            formData.append('file_type', data.file_type);
+            formData.append('folder', 'documents');
+
+            axios.post( '/api/internal/document/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then((response) => {
+                console.log(response);
+                var url = response.data.url;
+                this.documents[this.documentUploadIndex].value.value = url;
+                this.progressWidth = 100;
+                this.fileUploading = false;
+            }).catch(() => {
+                this.fileUploading = false;
+            });
+        },
+        uploadDocument: function(i){
+            this.documentUploadIndex = i;
+            $('#upload-file').click();
         },
         is_valid: function(set) {
             var keys = Object.keys(set);
@@ -247,7 +335,6 @@ export default {
                 var structured_data = [];
                 this.structured_data.forEach((s)=>{
                     var sdata = {
-                        structured_data_type: s.type.value,
                         structured_data_type_id: s.type_id.value
                     };
 
@@ -259,6 +346,20 @@ export default {
                     structured_data.push(sdata)
                 });
 
+                var documents = [];
+                this.documents.forEach((s)=>{
+                    var docs = {
+                        doc_type_id: s.type_id.value
+                    };
+
+                    docs.doc_path = s.value.value;
+
+                    if(s.id) {
+                        docs.id = s.id;
+                    }
+                    documents.push(docs)
+                });
+
                 var data = {
                     device_id: parseInt(this.device_id),
                     manufacturer: this.deviceForm.manufacturer.value,
@@ -268,7 +369,10 @@ export default {
                     metadata: metadata,
                     structured_data: structured_data,
                     structured_data_to_remove: this.structured_data_to_remove,
-                    metadata_to_remove: this.metadata_to_remove
+                    metadata_to_remove: this.metadata_to_remove,
+                    status: this.deviceForm.status.value,
+                    documents: documents,
+                    documents_to_remove: this.documents_to_remove
                 };
 
                 console.log(data);
@@ -293,6 +397,10 @@ export default {
 
 
 
+            } else
+            {
+                console.log(this.deviceForm);
+                swal("Error!", "Something went wrong trying to save the device", "error");
             }
         },
         parseDevice: function(){
@@ -303,6 +411,9 @@ export default {
                     this.deviceForm[k].value = this.device[k];
                 }
             });
+
+            $('#status-picker').selectpicker('render');
+            $('#status-picker').val(this.deviceForm.status.value).trigger('change');
 
             this.metadata = [];
             if(this.device.hasOwnProperty('metadata')) {
@@ -338,19 +449,11 @@ export default {
                 }
             }
 
-            console.log(this.metadata);
-
             this.structured_data = [];
-            if(this.device.hasOwnProperty('structured_data')) {
+            if(this.device.hasOwnProperty('structured_data') && this.device.structured_data.length > 0) {
                 this.device.structured_data.forEach((s)=>{
                     this.structured_data.push({
                         id: s.id,
-                        type: {
-                            value: s.structured_data_type,
-                            isValid: true,
-                            isClean: true,
-                            validations: ['required']
-                        },
                         type_id: {
                             value: s.structured_data_type_id,
                             isValid: true,
@@ -368,8 +471,36 @@ export default {
                 setTimeout(()=>{
                     var i = this.structured_data.length - 1;
                     $('#schema-type-picker'+i).selectpicker('render');
+                    $('#schema-type-picker'+i).val(this.structured_data[i].type_id.value).trigger('change');
                 },1000);
             }
+
+            this.documents = [];
+            if(this.device.hasOwnProperty('documents') && this.device.documents.length > 0) {
+                this.device.documents.forEach((s)=>{
+                    this.documents.push({
+                        id: s.id,
+                        type_id: {
+                            value: s.doc_type_id,
+                            isValid: true,
+                            isClean: true,
+                            validations: ['required']
+                        },
+                        value: {
+                            value: s.doc_path,
+                            isValid: true,
+                            isClean: true,
+                            validations: ['required']
+                        }
+                    });
+                });
+                setTimeout(()=>{
+                    var i = this.documents.length - 1;
+                    $('#doc-type-picker'+i).selectpicker('render');
+                    $('#doc-type-picker'+i).val(this.documents[i].type_id.value).trigger('change');
+                },1000);
+            }
+
         }
     }
 }

@@ -17,6 +17,7 @@
             <device-row :bold_title="true"  :title="'Serial Number'" :value="device.serial_number"></device-row>
             <device-row :bold_title="true" :title="'Manufacturer'" :value="device.manufacturer"></device-row>
             <device-row :bold_title="true"  :title="'Part Number'" :value="device.part_number"></device-row>
+            <device-row :bold_title="true"  :title="'Status'" :value="device.status"></device-row>
         </ul>
 
 
@@ -39,8 +40,11 @@
                    <li v-if="device.documents.length === 0">
                        <p class="text-center">There are no documents attached to this device</p>
                    </li>
+                   <device-row v-bind:key="index" v-for="(data,index) in device.documents" :classes="{lower:true}" :bold_title="false" :title="data.doc_type_id" :value="data.doc_path"></device-row>
+
                </ul>
             </li>
+
 
             <device-row :bold_title="true"  :title="'Structured Data'" :value="''"></device-row>
 

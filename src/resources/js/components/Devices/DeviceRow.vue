@@ -5,7 +5,7 @@
                 <p v-bind:class="{'title':bold_title,'value':!bold_title}">{{title}}</p>
             </div>
             <div class="col-md-8">
-                <p class="value">{{ value }}</p>
+                <p class="value" v-bind:class="classes">{{ value }}</p>
             </div>
         </div>
     </li>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    props: ['title','value','bold_title'],
+    props: ['title','value','bold_title','classes'],
     name: "DeviceRow"
 }
 </script>

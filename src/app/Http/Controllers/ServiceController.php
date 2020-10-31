@@ -1,10 +1,13 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Http\Controllers;
 
+use App;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Models\Metadata;
+use App\Models\Documents;
 use App\Models\StructuredData;
 use App\Models\ClientObit;
 use App\Models\Schema;
@@ -22,9 +25,9 @@ class ServiceController extends Controller
     /**
      * Returns Device object based on device_id
      *
-     * @return Device
+     * @return Device | JsonResponse
      */
-    public function getDeviceById($device_id)
+    public function getDeviceById(ObitManager $manager, $device_id)
     {
         $device = Device::with('metadata','metadata.schema','obit','documents','structured_data')->find($device_id);
         if(!$device) {
@@ -33,6 +36,8 @@ class ServiceController extends Controller
                 'errorMessage'=>'Unable to find device'
             ], 404);
         }
+
+        $device->root_hash = $manager->GenerateDeviceRootHash($device);
 
         return response()->json([
             'status' => 0,
@@ -43,12 +48,14 @@ class ServiceController extends Controller
     /**
      * Returns Obit object based on usn
      *
-     * @return ClientObit
+     * @return ClientObit | JsonResponse
      */
-    public function getObitByUsn(Request $request, $usn){
+    public function getObitByUsn(Request $request, ObitManager $manager, $usn){
         $obit = ClientObit::with('device')->where([
             'usn'=>$usn
         ])->first();
+
+
         if(!$obit) {
             return response()->json([
                 'status' => 1,
@@ -56,18 +63,40 @@ class ServiceController extends Controller
             ], 400);
         }
 
-
+        $root_hash = $manager->GenerateRootHash($obit);
 
         return response()->json([
             'status' => 0,
-            'obit' => $obit
+            'obit' => $obit,
+            'root_hash'=>$root_hash
+        ], 200);
+    }
+
+    public function getObitHistoryByUsn(Request $request, ObitManager $manager, $usn){
+        $obit = ClientObit::with('device')->where([
+            'usn'=>$usn
+        ])->first();
+
+
+        if(!$obit) {
+            return response()->json([
+                'status' => 1,
+                'errorMessage'=>'Unable to find obit'
+            ], 400);
+        }
+        $obitApi = new ObitApi();
+        $history = $obitApi->showObitHistory($obit->obit_did);
+        dd($history);
+        return response()->json([
+            'status' => 0,
+            'obit_history' => $history
         ], 200);
     }
 
     /**
      * Returns generated USN for provided manufacturer, part_number and serial_number.
      *
-     * @return array
+     * @return Array | JsonResponse
      */
     public function generateUsn(UsnRequest $request, ObitManager $manager){
         $input = $request->input();
@@ -96,7 +125,7 @@ class ServiceController extends Controller
         $device->part_number = $input['part_number'];
         $device->serial_number = $input['serial_number'];
         $device->owner = $input['owner'];
-        $device->save();
+        $device->status = $input['status'];
 
         $usn = $manager->GenerateUSN($device->manufacturer,$device->part_number, $device->serial_number);
         $device->usn = $usn['usn'];
@@ -138,11 +167,28 @@ class ServiceController extends Controller
                     $structured_data = new StructuredData();
                 }
                 $structured_data->device_id = $device->id;
-                $structured_data->structured_data_type= $s['structured_data_type'];
                 $structured_data->structured_data_type_id = $s['structured_data_type_id'];
                 $structured_data->data_array = $s['data_array'];
                 $structured_data->data_hash = $structured_data->getHash();
                 $structured_data->save();
+            }
+        }
+
+        if(isset($input['documents']) && $input['documents']) {
+            foreach($input['documents'] as $d) {
+                if(isset($d['id'])) {
+                    $document = Documents::find($d['id']);
+                    if(!$document) {
+                        $document = new Documents();
+                    }
+                } else {
+                    $document = new Documents();
+                }
+                $document->device_id = $device->id;
+                $document->doc_type_id = $d['doc_type_id'];
+                $document->doc_path = $d['doc_path'];
+                $document->data_hash = $document->getHash();
+                $document->save();
             }
         }
 
@@ -160,6 +206,15 @@ class ServiceController extends Controller
                 $metadata = Metadata::find($m);
                 if($metadata){
                     $metadata->delete();
+                }
+            }
+        }
+
+        if(isset($input['documents_to_remove']) && $input['documents_to_remove']) {
+            foreach($input['documents_to_remove'] as $d) {
+                $document = Documents::find($d);
+                if($document){
+                    $document->delete();
                 }
             }
         }
@@ -202,49 +257,47 @@ class ServiceController extends Controller
             $client_obit->usn = $usn['usn'];
         }
 
-        $metadata = [];
-        if($device->metadata) {
-            foreach($device->metadata as $m) {
-                $mdata = [];
-                $mdata[$m->metadata_type_id] = $m->data_txt == null ? ($m->data_int == null ? $m->data_fp : $m->data_int) : $m->data_txt;
-                $metadata[] = $mdata;
-            }
-        }
+        $metadata = $device->getMetadataArray();
+        $structured_data = $device->getStructuredDataArray();
+        $documents = $device->getDocumentsArray();
 
-        $structured_data = [];
 
-        if($device->structured_data) {
-            foreach($device->structured_data as $s) {
-                $sdata = [
-                    'structured_data_type_id'=>$s->structured_data_type_id,
-                    'value'=>@json_decode($s->data_array)
-                ];
-                $structured_data[] = $sdata;
-            }
-        }
-
-        $client_obit->obitDID = $usn['obit'];
+        $client_obit->obit_did = $usn['obit'];
         $client_obit->manufacturer = $device->manufacturer;
-        $client_obit->owner = $device->owner;
+        $client_obit->owner_did = $device->owner;
+        $client_obit->obd_did = '';
         $client_obit->part_number = $device->part_number;
 
         //Temporarily Saving Unhashed Serial Number.
         //$device->serial_number should be replaced by $usn['serial_hash'];
         $client_obit->serial_number_hash = $device->serial_number;
 
-        $client_obit->status = 0;
+        $client_obit->obit_status = $device->status;
 
         $client_obit->metadata = json_encode($metadata);
-        $client_obit->documents = "[]";
+        $client_obit->documents = json_encode($documents);
         $client_obit->structured_data = json_encode($structured_data);
         $client_obit->root_hash = $manager->GenerateRootHash($client_obit);
-
         $client_obit->save();
 
         return response()->json([
             'status' => 0
         ], 200);
 
+    }
+
+    public function testObit(Request $request, ObitManager $manager)
+    {
+        $id = $request->input('id');
+        $client_obit = ClientObit::find($id);
+        $mappedObit = $manager->GetMappedObit($client_obit);
+        dd($mappedObit);
+
+        $obitApi = new ObitApi();
+        $obit = $obitApi->showObit($client_obit->obit_did);
+
+        $docs = $obit->getDocLinks();
+        dd($docs);
     }
 
     /**
@@ -273,13 +326,14 @@ class ServiceController extends Controller
             ], 400);
         }
 
-        $obitApi = app()->make(ObitApi::class);
+        $obitApi = new ObitApi();
         $obit = null;
         try {
             Log::info("-- Retrieving Obit --");
-            $obit = $obitApi->showObit($client_obit->obitDID);
+            $obit = $obitApi->showObit($client_obit->obit_did);
         } catch (ApiException | Exception $e) {
             if($e->getCode() == 404) {
+                Log::info("-- Obit Not Found --");
                 $obit = null;
             } else {
                 return response()->json([
@@ -288,49 +342,20 @@ class ServiceController extends Controller
                 ], $e->getCode());
             }
         } finally {
-
+            $updatedObit = $manager->GetMappedObit($client_obit);
             try {
                 if($obit != null) {
-                    Log::info("-- Retrieving Obit: Found --");
-                    $updatedObit = new Obit([
-                        'obitDid'=>$client_obit->obitDID,
-                        'usn'=>$client_obit->usn,
-                        'ownerDid'=>$client_obit->owner,
-                        'manufacturer'=> $client_obit->manufacturer,
-                        'partNumber'=>$client_obit->part_number,
-                        'serialNumberHash'=>$client_obit->serial_number_hash,
-                        'obitStatus'=>'FUNCTIONAL',
-                        'metadata'=>$client_obit->getMetadata(),
-                        'docLinks'=>$client_obit->getDocuments(),
-                        'structuredData'=>$client_obit->getStructuredData(),
-                        'rootHash'=>$client_obit->root_hash,
-                        'modifiedAt'=>$client_obit->updated_at
-                    ]);
-                    $obitApi->updateObit($client_obit->obitDID,$updatedObit);
-
+                    $obitApi->updateObit($client_obit->obit_did,$updatedObit);
                 } else {
-                    Log::info("-- Retrieving Obit: Not Found --");
-                    $newObit = new NewObit([
-                        'obitDid'=>$client_obit->obitDID,
-                        'usn'=>$client_obit->usn,
-                        'ownerDid'=>$client_obit->owner,
-                        'manufacturer'=> $client_obit->manufacturer,
-                        'partNumber'=>$client_obit->part_number,
-                        'serialNumberHash'=>$client_obit->serial_number_hash,
-                        'obitStatus'=>'FUNCTIONAL',
-                        'metadata'=>$client_obit->getMetadata(),
-                        'docLinks'=>$client_obit->getDocuments(),
-                        'structuredData'=>$client_obit->getStructuredData(),
-                        'modifiedAt'=>$client_obit->updated_at
-                    ]);
-                    $obitApi->createObit($newObit);
+                    $obitApi->createObit($updatedObit);
                 }
 
             } catch (ApiException | Exception $e) {
                 Log::error($e->getMessage());
                 return response()->json([
                     'status' => 1,
-                    'errorMessage'=>$e->getMessage()
+                    'errorMessage'=>$e->getMessage(),
+                    'payload'=>$updatedObit
                 ], $e->getCode() ?? 500);
             }
 
@@ -350,20 +375,20 @@ class ServiceController extends Controller
      */
     public function retrieveObit(Request $request){
 
-        if(!$request->has('obitDID')) {
+        if(!$request->has('obit_did')) {
             return response()->json([
                 'status' => 1,
                 'errorMessage'=>'Missing Obit DID'
             ], 400);
         }
-        $obit_did = $request->input('obitDID');
+        $obit_did = $request->input('obit_did');
         $client_obit = ClientObit::where([
-            'obitDID'=>$obit_did
+            'obit_did'=>$obit_did
         ])->first();
 
         if(!$client_obit) {
             $client_obit = new ClientObit();
-            $client_obit->obitDID = $obit_did;
+            $client_obit->obit_did = $obit_did;
         }
         $obitApi = app()->make(ObitApi::class);
         $obit = null;
@@ -373,16 +398,24 @@ class ServiceController extends Controller
             $client_obit->manufacturer = $obit->getManufacturer();
             $client_obit->part_number = $obit->getPartNumber();
             $client_obit->serial_number_hash = $obit->getSerialNumberHash();
-            $client_obit->owner = $obit->getOwnerDid();
-            $client_obit->status = 0;
-            $client_obit->documents = "[]";
+            $client_obit->owner_did = $obit->getOwnerDid();
+            $client_obit->obit_status = $obit->getObitStatus();
+            $client_obit->obd_did = '';
+
+            $documents = [];
+            $docs = $obit->getDocLinks();
+            if($docs && is_array($docs)) {
+                foreach($docs as $documentLink) {
+                    $documents[$documentLink['name']] = $documentLink['hashlink'];
+                }
+            }
+            $client_obit->documents = @json_encode($documents);
+
             $metadata = [];
             $mdata = $obit->getMetadata();
             if($mdata && is_array($mdata)) {
                 foreach($mdata as $metadataRow) {
-                    $mdata = [];
-                    $mdata[$metadataRow['key']] = $metadataRow['value'];
-                    $metadata[] = $mdata;
+                    $metadata[$metadataRow['key']] = $metadataRow['value'];
                 }
             }
             $client_obit->metadata = @json_encode($metadata);
@@ -392,10 +425,7 @@ class ServiceController extends Controller
             $sdata = $obit->getStructuredData();
             if($sdata && is_array($sdata)) {
                 foreach($sdata as $structuredDataRow) {
-                    $structured_data[] = [
-                        'structured_data_type_id'=>$structuredDataRow['key'],
-                        'value'=>@json_decode($structuredDataRow['value'], true)
-                    ];
+                    $structured_data[$structuredDataRow['key']] = @json_decode($structuredDataRow['value'], true);
                 }
             }
             $client_obit->structured_data = @json_encode($structured_data);
@@ -447,22 +477,18 @@ class ServiceController extends Controller
         if(!$device) {
             $device = new Device();
         }
-
-        $device->owner = $client_obit->owner;
+        $device->usn = $client_obit->usn;
+        $device->owner = $client_obit->owner_did;
         $device->part_number = $client_obit->part_number;
         $device->serial_number = $client_obit->serial_number_hash;
         $device->manufacturer = $client_obit->manufacturer;
 
         $device->save();
 
-        $usn = $manager->GenerateUSN($device->manufacturer,$device->part_number, $device->serial_number);
-        $device->usn = $usn['usn'];
-        $device->save();
-
         $mdata = @json_decode($client_obit->metadata,true);
         if($mdata && is_array($mdata)) {
-            foreach($mdata as $metadataRow) {
-                foreach($metadataRow as $key=>$value)
+            foreach($mdata as $key=>$value) {
+
                 $metadata = $device->metadata()->where([
                     'metadata_type_id'=>$key
                 ])->first();
@@ -501,12 +527,14 @@ class ServiceController extends Controller
 
         $sdata = @json_decode($client_obit->structured_data,true);
         if($sdata && is_array($sdata)) {
-            foreach($sdata as $structuredDataRow) {
+            foreach($sdata as $key => $value) {
                 $structured_data = $device->structured_data()->where([
-                    'structured_data_type_id'=>$structuredDataRow['structured_data_type_id']
+                    'structured_data_type_id'=>$key
                 ])->first();
 
-                $schema = Schema::find($metadataRow['structured_data_type_id']);
+                $schema = Schema::where([
+                    'name'=>$key
+                ])->first();
                 if(!$schema) {
                     $schema = Schema::where(['name'=>'Other'])->first();
                 }
@@ -514,13 +542,39 @@ class ServiceController extends Controller
                 if(!$structured_data) {
                     $structured_data = new StructuredData();
                     $structured_data->device_id = $device->id;
-                    $structured_data->structured_data_type = $schema->name;
                 }
 
-                $structured_data->structured_data_type_id = $structuredDataRow['structured_data_type_id'];
-                $structured_data->data_array = $structuredDataRow['value'];
+                $structured_data->structured_data_type_id = $key;
+                $structured_data->data_array = $value;
                 $structured_data->data_hash = $structured_data->getHash();
                 $structured_data->save();
+            }
+        }
+
+        $docs = @json_decode($client_obit->documents,true);
+        if($docs && is_array($docs)) {
+            foreach($docs as $key => $value) {
+                $document = $device->documents()->where([
+                    'doc_type_id'=>$key
+                ])->first();
+
+                $schema = Schema::where([
+                    'name'=>$key
+                ])->first();
+
+                if(!$schema) {
+                    $schema = Schema::where(['name'=>'Other'])->first();
+                }
+
+                if(!$document) {
+                    $document = new Document();
+                    $document->device_id = $device->id;
+                }
+
+                $document->doc_type_id = $key;
+                $document->doc_path = $value;
+                $document->data_hash = $document->getHash();
+                $document->save();
             }
         }
 
@@ -532,6 +586,30 @@ class ServiceController extends Controller
 
     }
 
+
+    public function uploadDocument(Request $request)
+    {
+        $data = $request->all();
+        $file = $data['file'];
+        $file_type = $data['file_type'];
+        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+
+        $s3 = App::make('aws')->createClient('s3');
+        $bucket = env('AWS_BUCKET');
+        $result = $s3->putObject([
+            'Bucket' => $bucket,
+            'Key' => $data['folder'] . '/' . $filename,
+            'Body' => file_get_contents($file),
+            'ContentType' => $file_type,
+            'ACL' => 'public-read'
+        ]);
+
+        return response()->json([
+            'status' => 0,
+            'url'=>$result['ObjectURL']
+        ], 200);
+
+    }
 }
 
 

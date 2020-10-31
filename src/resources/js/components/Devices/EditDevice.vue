@@ -56,6 +56,20 @@
                                placeholder="Part Number">
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="status-picker">Status</label>
+                    <div class="form-group select-colored">
+                        <select class="selectpicker" id="status-picker" data-style="select-with-transition" title="Status" v-model="deviceForm.status.value">
+                            <option selected value="FUNCTIONAL">FUNCTIONAL</option>
+                            <option value="NON_FUNCTIONAL">NON FUNCTIONAL</option>
+                            <option value="DISPOSED">DISPOSED</option>
+                            <option value="STOLEN">STOLEN</option>
+                            <option value="DISABLED_BY_OWNER">DISABLED BY OWNER</option>
+                        </select>
+                    </div>
+                </div>
+
             </div>
             <h2>Device Data & Information</h2>
             <div class="text-left py-5">
@@ -94,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button class="btn btn-danger btn-sm btn-round" @click="removeMetadata(i)">x</button>
+                                <button class="btn btn-danger btn-sm btn-fab btn-round" @click="removeMetadata(i)"><i class="fa fa-minus"></i></button>
                             </div>
                         </div>
 
@@ -112,9 +126,40 @@
                         <label>Documents</label>
                     </div>
                     <div class="card-body">
+                        <input type="file" id="upload-file" style="position: absolute; top: -9999999px;" ref="sfile" v-on:change="handleFileUpload">
+
+                        <div v-for="(doc,i) in documents" class="row">
+                            <div class="col-4">
+                                <div class="form-group select-colored">
+                                    <select class="selectpicker" v-bind:id="'doc-type-picker'+i" data-style="select-with-transition" title="Type" v-model="doc.type_id.value">
+                                        <option v-for="type in schema" v-bind:value="type.name">{{type.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="input-group colored">
+                                        <input type="text" class="form-control no-shadow is-normal"
+                                               v-bind:class="{'is-normal':doc.value.isClean,'is-invalid':!doc.value.isClean && !doc.value.isValid,'is-valid':!doc.value.isClean && doc.value.isValid}"
+                                               v-model="doc.value.value"
+                                               @focus="handleFocus(doc.value)"
+                                               @blur="handleBlur(doc.value)"
+                                               placeholder="URL">
+                                        <div class="input-group-append" @click="uploadDocument(i)">
+                                            <span class="fa fa-upload"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-danger btn-fab btn-sm btn-round" @click="removeDocument(i)"><i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-12 text-center">
-                                <button class="btn btn-white" @click="uploadDocument()"><i class="fa fa-plus"></i> Document</button>
+                                <button class="btn btn-white" @click="addDocument()"><i class="fa fa-plus"></i> Document</button>
                             </div>
                         </div>
                     </div>
@@ -128,28 +173,16 @@
                         <div v-for="(sdata,i) in structured_data" class="row justify-content-between">
                             <div class="col-3">
                                 <div class="form-group">
-                                    <div class="input-group colored">
-                                        <input type="text" class="form-control no-shadow is-normal"
-                                               v-bind:class="{'is-normal':sdata.type.isClean,'is-invalid':!sdata.type.isClean && !sdata.type.isValid,'is-valid':!sdata.type.isClean && sdata.type.isValid}"
-                                               v-model="sdata.type.value"
-                                               @focus="handleFocus(sdata.type)"
-                                               @blur="handleBlur(sdata.type)"
-                                               placeholder="Label">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="form-group">
                                     <div class="form-group select-colored">
                                         <select class="selectpicker" v-bind:id="'schema-type-picker'+i" data-style="select-with-transition" title="Type" v-model="sdata.type_id.value">
-                                            <option v-for="type in schema" v-bind:value="type.id">{{type.name}}</option>
+                                            <option v-for="type in schema" v-bind:value="type.name">{{type.name}}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-1">
-                                <button class="btn btn-danger btn-sm btn-round" @click="removeStructuredData(i)">x</button>
+                                <button class="btn btn-danger btn-fab btn-sm btn-round" @click="removeStructuredData(i)"><i class="fa fa-minus"></i></button>
                             </div>
                             <div class="col-12">
                                 <codemirror v-model="sdata.value.value" :options="cmOptions"></codemirror>

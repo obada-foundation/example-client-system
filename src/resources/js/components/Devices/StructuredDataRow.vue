@@ -1,6 +1,6 @@
 <template>
     <li class="data-row">
-        <p class="value">{{structured_data.structured_data_type}}</p>
+        <p class="value">{{structured_data.structured_data_type_id}}</p>
         <codemirror v-model="structured_data.data_array" :options="cmOptions"></codemirror>
         <!--
         <ul v-if="rows.length > 0" class="sub-list">

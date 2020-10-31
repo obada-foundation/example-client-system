@@ -16,8 +16,7 @@ class CreateStructuredDataTable extends Migration
         Schema::create('structured_data', function (Blueprint $table) {
             $table->id();
             $table->integer('device_id');
-            $table->integer('structured_data_type_id');
-            $table->string('structured_data_type');
+            $table->string('structured_data_type_id');
             $table->json('data_array');
             $table->string('data_hash');
             $table->timestamps();

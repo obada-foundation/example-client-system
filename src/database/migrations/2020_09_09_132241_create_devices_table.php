@@ -19,6 +19,8 @@ class CreateDevicesTable extends Migration
             $table->string('manufacturer');
             $table->string('part_number');
             $table->string('serial_number');
+            $table->string('usn');
+            $table->enum('status',['FUNCTIONAL','NON_FUNCTIONAL','DISPOSED','STOLEN','DISABLED_BY_OWNER']);
             $table->timestamps();
         });
     }

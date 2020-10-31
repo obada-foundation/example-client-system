@@ -290,7 +290,20 @@ label {
     background: #ebf6fb;
     border-radius: 5px;
     margin-top: 5px;
+
+    .input-group-append {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+        border-left: 1px solid #CACACA;
+        background: #007bff;
+        color: #FFFFFF;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        cursor: pointer;
+    }
 }
+
 
 .input-group .form-control {
     padding-left: 1em;
@@ -407,7 +420,13 @@ label {
         margin-bottom: 10px;
         min-height: 22px;
         text-transform: capitalize;
+
+        &.lower {
+            text-transform: lowercase;
+        }
     }
+
+
 
     .sub-list {
         list-style: none;

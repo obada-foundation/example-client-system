@@ -10,11 +10,17 @@
         {
             "type": "vcs",
             "url": "git@github.com:obada-protocol/php-client-library.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:obada-protocol/php-sdk.git"
         }
     ],
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "aws/aws-sdk-php": "^3.158",
+        "aws/aws-sdk-php-laravel": "^3.6",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -22,6 +28,7 @@
         "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
         "obada-protocol/php-client-library": "*@dev",
+        "obada-protocol/php-sdk": "dev-develop",
         "sentry/sentry-laravel": "^2.0",
         "tuupola/base58": "^2.1",
         "yajra/laravel-datatables-oracle": "~9.0"
