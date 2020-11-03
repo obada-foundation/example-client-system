@@ -86,7 +86,6 @@ export default {
             setTimeout(()=>{
                 var i = this.metadata.length - 1;
                 $('#type-picker'+i).selectpicker('render');
-                $('#datatype-picker'+i).selectpicker('render');
             },1000);
         },
         addStructuredDataRow: function() {
@@ -439,11 +438,8 @@ export default {
                         var i = this.metadata.length - 1;
 
                         setTimeout(()=>{
-                            $('#datatype-picker'+i).selectpicker('render');
                             $('#type-picker'+i).selectpicker('render');
-                            $('#datatype-picker'+i).val(this.metadata[i].data_type).trigger('change');
                             $('#type-picker'+i).val(this.metadata[i].type_id.value).trigger('change');
-                            console.log("Rendered "+i);
                         },1000);
                     });
                 }

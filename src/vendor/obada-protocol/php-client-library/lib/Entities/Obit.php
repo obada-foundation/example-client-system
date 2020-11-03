@@ -40,13 +40,10 @@ use \Obada\ObjectSerializer;
  * @package  Obada
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null  
  */
-class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
+class Obit implements ModelInterface, ArrayAccess
 {
-    public const DISCRIMINATOR = null;
+    const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
@@ -81,8 +78,6 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
-      * @phpstan-var array<string, string|null>
-      * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
         'obitDid' => null,
@@ -248,20 +243,20 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['obitDid'] = $data['obitDid'] ?? null;
-        $this->container['usn'] = $data['usn'] ?? null;
-        $this->container['obitDidVersions'] = $data['obitDidVersions'] ?? null;
-        $this->container['ownerDid'] = $data['ownerDid'] ?? null;
-        $this->container['obdDid'] = $data['obdDid'] ?? null;
-        $this->container['obitStatus'] = $data['obitStatus'] ?? null;
-        $this->container['manufacturer'] = $data['manufacturer'] ?? null;
-        $this->container['partNumber'] = $data['partNumber'] ?? null;
-        $this->container['serialNumberHash'] = $data['serialNumberHash'] ?? null;
-        $this->container['metadata'] = $data['metadata'] ?? null;
-        $this->container['docLinks'] = $data['docLinks'] ?? null;
-        $this->container['structuredData'] = $data['structuredData'] ?? null;
-        $this->container['modifiedAt'] = $data['modifiedAt'] ?? null;
-        $this->container['rootHash'] = $data['rootHash'] ?? null;
+        $this->container['obitDid'] = isset($data['obitDid']) ? $data['obitDid'] : null;
+        $this->container['usn'] = isset($data['usn']) ? $data['usn'] : null;
+        $this->container['obitDidVersions'] = isset($data['obitDidVersions']) ? $data['obitDidVersions'] : null;
+        $this->container['ownerDid'] = isset($data['ownerDid']) ? $data['ownerDid'] : null;
+        $this->container['obdDid'] = isset($data['obdDid']) ? $data['obdDid'] : null;
+        $this->container['obitStatus'] = isset($data['obitStatus']) ? $data['obitStatus'] : null;
+        $this->container['manufacturer'] = isset($data['manufacturer']) ? $data['manufacturer'] : null;
+        $this->container['partNumber'] = isset($data['partNumber']) ? $data['partNumber'] : null;
+        $this->container['serialNumberHash'] = isset($data['serialNumberHash']) ? $data['serialNumberHash'] : null;
+        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
+        $this->container['docLinks'] = isset($data['docLinks']) ? $data['docLinks'] : null;
+        $this->container['structuredData'] = isset($data['structuredData']) ? $data['structuredData'] : null;
+        $this->container['modifiedAt'] = isset($data['modifiedAt']) ? $data['modifiedAt'] : null;
+        $this->container['rootHash'] = isset($data['rootHash']) ? $data['rootHash'] : null;
     }
 
     /**
@@ -333,7 +328,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $obitDid OBADA decentralized identifier
      *
-     * @return self
+     * @return $this
      */
     public function setObitDid($obitDid)
     {
@@ -357,7 +352,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $usn Test An 8-12 character “URL Shortened” obit. Create the USN by Base(58) encoding the OBIT ID. Take the first 8 characters. Check for duplicates. With 16 million OBITs there is a 40% chance of collision. If so, add 4 characters. Repeat as necessary until a unique USN is generated.
      *
-     * @return self
+     * @return $this
      */
     public function setUsn($usn)
     {
@@ -381,7 +376,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string[] $obitDidVersions Client generated things. First hash + last hash
      *
-     * @return self
+     * @return $this
      */
     public function setObitDidVersions($obitDidVersions)
     {
@@ -405,7 +400,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $ownerDid Owner is the person/entity that owns the obit and the physical asset it represents. Format is a DID like did:obada:owner:1234. However in the current version only test numbers will be used.
      *
-     * @return self
+     * @return $this
      */
     public function setOwnerDid($ownerDid)
     {
@@ -429,7 +424,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $obdDid Future use. The OBD DID is formatted like did:obada:obd:1234, which represents a utility token tracking orders and proofs.
      *
-     * @return self
+     * @return $this
      */
     public function setObdDid($obdDid)
     {
@@ -453,7 +448,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $obitStatus Represent available Obit statuses:   - FUNCTIONAL   - NON_FUNCTIONAL   - DISPOSED   - STOLEN   - DISABLED_BY_OWNER
      *
-     * @return self
+     * @return $this
      */
     public function setObitStatus($obitStatus)
     {
@@ -477,7 +472,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $manufacturer Waiting more specific details from Rohi
      *
-     * @return self
+     * @return $this
      */
     public function setManufacturer($manufacturer)
     {
@@ -501,7 +496,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $partNumber Manufacturer provided. In cases where no part number is provided for the product, use model, or the most specific ID available from the manufacturer. MWCN2LL/A (an iPhone 11 Pro, Silver, 256GB, model A2160)
      *
-     * @return self
+     * @return $this
      */
     public function setPartNumber($partNumber)
     {
@@ -525,7 +520,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $serialNumberHash Serial number hashed with sha256 hash function
      *
-     * @return self
+     * @return $this
      */
     public function setSerialNumberHash($serialNumberHash)
     {
@@ -549,7 +544,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param \Obada\Entities\MetaDataRecord[]|null $metadata Get description from Rohi
      *
-     * @return self
+     * @return $this
      */
     public function setMetadata($metadata)
     {
@@ -573,7 +568,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param \Obada\Entities\DocumentLink[]|null $docLinks To generate this link, take an SHA-256 hash of the document, and link to it as https://www.some-website.com?h1=hash-of-document. Note this does not yet adhere to the hashlink standard.
      *
-     * @return self
+     * @return $this
      */
     public function setDocLinks($docLinks)
     {
@@ -597,7 +592,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param \Obada\Entities\StructureDataRecord[]|null $structuredData Same as metadata but bigger. Key (string) => Value (string) (hash per line sha256(key + value))
      *
-     * @return self
+     * @return $this
      */
     public function setStructuredData($structuredData)
     {
@@ -621,7 +616,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param \DateTime|null $modifiedAt modifiedAt
      *
-     * @return self
+     * @return $this
      */
     public function setModifiedAt($modifiedAt)
     {
@@ -645,7 +640,7 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $rootHash Hash calculated by SHA256 (previous Obit root hash + Obit data). TODO: Discuss root hash with Rohi.
      *
-     * @return self
+     * @return $this
      */
     public function setRootHash($rootHash)
     {
@@ -670,18 +665,18 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param integer $offset Offset
      *
-     * @return mixed|null
+     * @return mixed
      */
     public function offsetGet($offset)
     {
-        return $this->container[$offset] ?? null;
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
-     * @param mixed    $value  Value to be set
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
      *
      * @return void
      */
@@ -704,18 +699,6 @@ class Obit implements ModelInterface, ArrayAccess, \JsonSerializable
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
-    }
-
-    /**
-     * Serializes the object to a value that can be serialized natively by json_encode().
-     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
-     *
-     * @return mixed Returns data which can be serialized by json_encode(), which is a value
-     * of any type other than a resource.
-     */
-    public function jsonSerialize()
-    {
-       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**

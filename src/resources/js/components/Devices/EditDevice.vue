@@ -79,19 +79,10 @@
                     </div>
                     <div class="card-body">
                         <div v-for="(mdata,i) in metadata" class="row">
-                            <div class="col-2">
+                            <div class="col-4">
                                 <div class="form-group select-colored">
                                     <select class="selectpicker" v-bind:id="'type-picker'+i" data-style="select-with-transition" title="Type" v-model="mdata.type_id.value">
                                         <option v-for="type in schema" v-bind:value="type.name">{{type.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="form-group select-colored">
-                                    <select class="selectpicker" v-bind:id="'datatype-picker'+i" data-style="select-with-transition" title="Data Type" v-model="mdata.data_type">
-                                        <option selected value="text">Text</option>
-                                        <option value="float">Float</option>
-                                        <option value="int">Integer</option>
                                     </select>
                                 </div>
                             </div>

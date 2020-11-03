@@ -20,6 +20,7 @@ Route::middleware('api')->group(function(){
 
     Route::get('/internal/devices', 'ServiceController@getDevices');
     Route::get('/internal/device/{device_id}', 'ServiceController@getDeviceById');
+    Route::get('/internal/device/usn/{usn}', 'ServiceController@getDeviceByUsn');
     Route::get('/internal/obit/{usn}', 'ServiceController@getObitByUsn');
     Route::get('/internal/obit/{usn}/history', 'ServiceController@getObitHistoryByUsn');
     Route::get('/internal/testing', 'ServiceController@testObit');

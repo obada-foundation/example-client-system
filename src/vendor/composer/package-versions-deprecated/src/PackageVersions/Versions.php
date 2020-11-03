@@ -69,7 +69,7 @@ final class Versions
   'nesbot/carbon' => '2.41.5@c4a9caf97cfc53adfc219043bcecf42bc663acee',
   'nikic/php-parser' => 'v4.10.2@658f1be311a230e0907f5dfe0213742aff0596de',
   'nyholm/psr7' => '1.3.1@21b71a31eab5c0c2caf967b9c0fd97020254ed75',
-  'obada-protocol/php-client-library' => 'dev-master@3a68fb026aa057ecb97dbd7414a8ef397ba26e11',
+  'obada-protocol/php-client-library' => 'dev-master@d99a8f352a52b8dade78784c36a851ccaf751861',
   'obada-protocol/php-sdk' => 'dev-develop@aea97301192040d943978240a13c106c9053b051',
   'opis/closure' => '3.6.0@c547f8262a5fa9ff507bd06cc394067b83a75085',
   'paragonie/random_compat' => 'v9.99.100@996434e5492cb4c3edcb9168db6fbb1359ef965a',
@@ -168,7 +168,7 @@ final class Versions
   'sebastian/version' => '2.0.1@99732be0ddb3361e16ad77b68ba41efc8e979019',
   'theseer/tokenizer' => '1.2.0@75a63c33a8577608444246075ea0af0d052e452a',
   'webmozart/assert' => '1.9.1@bafc69caeb4d49c39fd0779086c03a3738cbb389',
-  'laravel/laravel' => 'dev-develop@b75bb9649e40590de87c0195ab5d871f75380953',
+  'laravel/laravel' => 'dev-develop@73c6deaee02dd270f28708d2ac5a82ca2f7bd89e',
 );
 
     private function __construct()

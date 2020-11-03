@@ -1,22 +1,21 @@
 # Obada\ObitApi
 
-All URIs are relative to https://dev.api.obada.io.
+All URIs are relative to *https://dev.api.obada.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createObit()**](ObitApi.md#createObit) | **POST** /obits | 
-[**removeObit()**](ObitApi.md#removeObit) | **DELETE** /obits/{obit_did} | 
-[**searchObits()**](ObitApi.md#searchObits) | **GET** /obits | 
-[**showObit()**](ObitApi.md#showObit) | **GET** /obits/{obit_did} | 
-[**showObitHistory()**](ObitApi.md#showObitHistory) | **GET** /obits/{obit_did}/history | 
-[**updateObit()**](ObitApi.md#updateObit) | **PUT** /obits/{obit_did} | 
+[**createObit**](ObitApi.md#createObit) | **POST** /obits | 
+[**removeObit**](ObitApi.md#removeObit) | **DELETE** /obits/{obit_did} | 
+[**searchObits**](ObitApi.md#searchObits) | **GET** /obits | 
+[**showObit**](ObitApi.md#showObit) | **GET** /obits/{obit_did} | 
+[**showObitHistory**](ObitApi.md#showObitHistory) | **GET** /obits/{obit_did}/history | 
+[**updateObit**](ObitApi.md#updateObit) | **PUT** /obits/{obit_did} | 
 
 
-## `createObit()`
 
-```php
-createObit($obit)
-```
+## createObit
+
+> createObit($obit)
 
 
 
@@ -29,22 +28,23 @@ Creates a new obit.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-
 $apiInstance = new Obada\Api\ObitApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$obit = new \Obada\Entities\Obit(); // \Obada\Entities\Obit
+$obit = new \Obada\Entities\Obit(); // \Obada\Entities\Obit | 
 
 try {
     $apiInstance->createObit($obit);
 } catch (Exception $e) {
     echo 'Exception when calling ObitApi->createObit: ', $e->getMessage(), PHP_EOL;
 }
+?>
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -60,18 +60,17 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
+- **Content-Type**: application/json
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
 [[Back to README]](../../README.md)
 
-## `removeObit()`
 
-```php
-removeObit($obitDid)
-```
+## removeObit
+
+> removeObit($obitDid)
 
 
 
@@ -82,7 +81,6 @@ Changes Obit status to DISABLED_BY_OWNER
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-
 
 
 $apiInstance = new Obada\Api\ObitApi(
@@ -97,9 +95,11 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ObitApi->removeObit: ', $e->getMessage(), PHP_EOL;
 }
+?>
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -116,17 +116,16 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `application/json`
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
 [[Back to README]](../../README.md)
 
-## `searchObits()`
 
-```php
-searchObits($serialNumberHash, $obitStatus, $manufacturer, $partNumber, $usn, $ownerDid, $offset, $limit): \Obada\Entities\InlineResponse200
-```
+## searchObits
+
+> \Obada\Entities\InlineResponse200 searchObits($serialNumberHash, $obitStatus, $manufacturer, $partNumber, $usn, $ownerDid, $offset, $limit)
 
 
 
@@ -137,7 +136,6 @@ Search obits by given filters.
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-
 
 
 $apiInstance = new Obada\Api\ObitApi(
@@ -160,9 +158,11 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ObitApi->searchObits: ', $e->getMessage(), PHP_EOL;
 }
+?>
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -186,17 +186,16 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `application/json`
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
 [[Back to README]](../../README.md)
 
-## `showObit()`
 
-```php
-showObit($obitDid): \Obada\Entities\Obit
-```
+## showObit
+
+> \Obada\Entities\Obit showObit($obitDid)
 
 
 
@@ -207,7 +206,6 @@ Shows the information about single Obit by given ObitDID
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-
 
 
 $apiInstance = new Obada\Api\ObitApi(
@@ -223,9 +221,11 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ObitApi->showObit: ', $e->getMessage(), PHP_EOL;
 }
+?>
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -242,17 +242,16 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `application/json`
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
 [[Back to README]](../../README.md)
 
-## `showObitHistory()`
 
-```php
-showObitHistory($obitDid): \Obada\Entities\InlineResponse2001
-```
+## showObitHistory
+
+> \Obada\Entities\ObitHistoryResponse showObitHistory($obitDid)
 
 
 
@@ -263,7 +262,6 @@ Shows the history of changes by given Obit with ObitDID
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-
 
 
 $apiInstance = new Obada\Api\ObitApi(
@@ -279,9 +277,11 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ObitApi->showObitHistory: ', $e->getMessage(), PHP_EOL;
 }
+?>
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Obada\Entities\InlineResponse2001**](../Model/InlineResponse2001.md)
+[**\Obada\Entities\ObitHistoryResponse**](../Model/ObitHistoryResponse.md)
 
 ### Authorization
 
@@ -298,17 +298,16 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `application/json`
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
 [[Back to README]](../../README.md)
 
-## `updateObit()`
 
-```php
-updateObit($obitDid, $obit)
-```
+## updateObit
+
+> updateObit($obitDid, $obit)
 
 
 
@@ -321,23 +320,24 @@ Updates Obit by given ObitDID with payload
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-
 $apiInstance = new Obada\Api\ObitApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
 $obitDid = did:obada:fe096095-e0f0-4918-9607-6567bd5756b5; // string | The given ObitDID argument
-$obit = new \Obada\Entities\Obit(); // \Obada\Entities\Obit
+$obit = new \Obada\Entities\Obit(); // \Obada\Entities\Obit | 
 
 try {
     $apiInstance->updateObit($obitDid, $obit);
 } catch (Exception $e) {
     echo 'Exception when calling ObitApi->updateObit: ', $e->getMessage(), PHP_EOL;
 }
+?>
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -354,9 +354,10 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
+- **Content-Type**: application/json
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
 [[Back to README]](../../README.md)
+

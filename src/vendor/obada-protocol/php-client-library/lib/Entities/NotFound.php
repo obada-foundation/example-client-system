@@ -40,13 +40,10 @@ use \Obada\ObjectSerializer;
  * @package  Obada
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null  
  */
-class NotFound implements ModelInterface, ArrayAccess, \JsonSerializable
+class NotFound implements ModelInterface, ArrayAccess
 {
-    public const DISCRIMINATOR = null;
+    const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
@@ -69,8 +66,6 @@ class NotFound implements ModelInterface, ArrayAccess, \JsonSerializable
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
-      * @phpstan-var array<string, string|null>
-      * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
         'code' => null,
@@ -188,8 +183,8 @@ class NotFound implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['code'] = $data['code'] ?? 404;
-        $this->container['message'] = $data['message'] ?? 'The requested resource could not be found.';
+        $this->container['code'] = isset($data['code']) ? $data['code'] : 404;
+        $this->container['message'] = isset($data['message']) ? $data['message'] : 'The requested resource could not be found.';
     }
 
     /**
@@ -231,7 +226,7 @@ class NotFound implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param int|null $code code
      *
-     * @return self
+     * @return $this
      */
     public function setCode($code)
     {
@@ -255,7 +250,7 @@ class NotFound implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string|null $message message
      *
-     * @return self
+     * @return $this
      */
     public function setMessage($message)
     {
@@ -280,18 +275,18 @@ class NotFound implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param integer $offset Offset
      *
-     * @return mixed|null
+     * @return mixed
      */
     public function offsetGet($offset)
     {
-        return $this->container[$offset] ?? null;
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
-     * @param mixed    $value  Value to be set
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
      *
      * @return void
      */
@@ -314,18 +309,6 @@ class NotFound implements ModelInterface, ArrayAccess, \JsonSerializable
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
-    }
-
-    /**
-     * Serializes the object to a value that can be serialized natively by json_encode().
-     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
-     *
-     * @return mixed Returns data which can be serialized by json_encode(), which is a value
-     * of any type other than a resource.
-     */
-    public function jsonSerialize()
-    {
-       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**

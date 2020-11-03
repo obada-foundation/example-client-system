@@ -39,6 +39,15 @@ class SiteController extends Controller
         ]));
     }
 
+
+    public function deviceObitDetail(Request $request, $usn)
+    {
+        return view('pages.device_obit_detail',$this->getData([
+            'usn'=>$usn
+        ]));
+    }
+
+
     public function obitDetail(Request $request, $usn)
     {
         return view('pages.obit_detail',$this->getData([

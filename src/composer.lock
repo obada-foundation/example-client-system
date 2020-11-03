@@ -2317,12 +2317,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:obada-protocol/php-client-library.git",
-                "reference": "3a68fb026aa057ecb97dbd7414a8ef397ba26e11"
+                "reference": "d99a8f352a52b8dade78784c36a851ccaf751861"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/obada-protocol/php-client-library/zipball/3a68fb026aa057ecb97dbd7414a8ef397ba26e11",
-                "reference": "3a68fb026aa057ecb97dbd7414a8ef397ba26e11",
+                "url": "https://api.github.com/repos/obada-protocol/php-client-library/zipball/d99a8f352a52b8dade78784c36a851ccaf751861",
+                "reference": "d99a8f352a52b8dade78784c36a851ccaf751861",
                 "shasum": ""
             },
             "require": {
@@ -2344,7 +2344,7 @@
             },
             "autoload-dev": {
                 "psr-4": {
-                    "Obada\\Test\\": "test/"
+                    "Obada\\": "test/"
                 }
             },
             "license": [
@@ -2371,7 +2371,7 @@
                 "source": "https://github.com/obada-protocol/php-client-library/tree/master",
                 "issues": "https://github.com/obada-protocol/php-client-library/issues"
             },
-            "time": "2020-10-29T11:11:31+00:00"
+            "time": "2020-10-31T18:05:28+00:00"
         },
         {
             "name": "obada-protocol/php-sdk",

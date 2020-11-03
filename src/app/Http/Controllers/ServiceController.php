@@ -37,11 +37,38 @@ class ServiceController extends Controller
             ], 404);
         }
 
-        $device->root_hash = $manager->GenerateDeviceRootHash($device);
+        $root_hash = $manager->GenerateDeviceRootHash($device);
 
         return response()->json([
             'status' => 0,
-            'device' => $device
+            'device' => $device,
+            'root_hash'=>$root_hash
+        ], 200);
+    }
+
+    /**
+     * Returns Device object based on device_id
+     *
+     * @return Device | JsonResponse
+     */
+    public function getDeviceByUsn(ObitManager $manager, $usn)
+    {
+        $device = Device::with('metadata','metadata.schema','obit','documents','structured_data')->where([
+            'usn'=>$usn
+        ])->first();
+        if(!$device) {
+            return response()->json([
+                'status' => 1,
+                'errorMessage'=>'Unable to find device'
+            ], 404);
+        }
+
+        $root_hash = $manager->GenerateDeviceRootHash($device);
+
+        return response()->json([
+            'status' => 0,
+            'device' => $device,
+            'root_hash'=>$root_hash
         ], 200);
     }
 
@@ -64,15 +91,25 @@ class ServiceController extends Controller
         }
 
         $root_hash = $manager->GenerateRootHash($obit);
-
-        return response()->json([
-            'status' => 0,
-            'obit' => $obit,
-            'root_hash'=>$root_hash
-        ], 200);
+        $obitApi = new ObitApi();
+        $blockchainObit = null;
+        try {
+            $blockchainObit = $obitApi->showObit($obit->obit_did);
+        } catch(\Throwable $e) {
+            $blockchainObit = null;
+        } finally {
+            return response()->json([
+                'status' => 0,
+                'obit' => $obit,
+                'blockchain_obit'=>[
+                    'root_hash'=>$blockchainObit->getRootHash()
+                ]
+            ], 200);
+        }
     }
 
     public function getObitHistoryByUsn(Request $request, ObitManager $manager, $usn){
+        /*
         $obit = ClientObit::with('device')->where([
             'usn'=>$usn
         ])->first();
@@ -84,9 +121,15 @@ class ServiceController extends Controller
                 'errorMessage'=>'Unable to find obit'
             ], 400);
         }
+        */
         $obitApi = new ObitApi();
-        $history = $obitApi->showObitHistory($obit->obit_did);
-        dd($history);
+        try {
+            $history = $obitApi->showObitHistory('did:obada:edddeb1cdd8cf9c5d3c5ebe625fc0044aee908446efcdecb24f4b9a8b5cc6876');
+            dd($history);
+        } catch(\Throwable $e) {
+            dd($e);
+        }
+
         return response()->json([
             'status' => 0,
             'obit_history' => $history

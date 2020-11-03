@@ -73,34 +73,34 @@ class ObitApi
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
-     * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
+     * @param int             $host_index (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
         ClientInterface $client = null,
         Configuration $config = null,
         HeaderSelector $selector = null,
-        $hostIndex = 0
+        $host_index = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: new Configuration();
         $this->headerSelector = $selector ?: new HeaderSelector();
-        $this->hostIndex = $hostIndex;
+        $this->hostIndex = $host_index;
     }
 
     /**
      * Set the host index
      *
-     * @param int $hostIndex Host index (required)
+     * @param  int Host index (required)
      */
-    public function setHostIndex($hostIndex)
+    public function setHostIndex($host_index)
     {
-        $this->hostIndex = $hostIndex;
+        $this->hostIndex = $host_index;
     }
 
     /**
      * Get the host index
      *
-     * @return int Host index
+     * @return Host index
      */
     public function getHostIndex()
     {
@@ -190,7 +190,7 @@ class ObitApi
     /**
      * Operation createObitAsync
      *
-     * 
+     *
      *
      * @param  \Obada\Entities\Obit $obit (optional)
      *
@@ -210,7 +210,7 @@ class ObitApi
     /**
      * Operation createObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  \Obada\Entities\Obit $obit (optional)
      *
@@ -253,7 +253,7 @@ class ObitApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createObitRequest($obit = null)
+    protected function createObitRequest($obit = null)
     {
 
         $resourcePath = '/obits';
@@ -266,6 +266,11 @@ class ObitApi
 
 
 
+        // body params
+        $_tempBody = null;
+        if (isset($obit)) {
+            $_tempBody = $obit;
+        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -279,11 +284,12 @@ class ObitApi
         }
 
         // for model (json/xml)
-        if (isset($obit)) {
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($obit));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
             } else {
-                $httpBody = $obit;
+                $httpBody = $_tempBody;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -405,7 +411,7 @@ class ObitApi
     /**
      * Operation removeObitAsync
      *
-     * 
+     *
      *
      * @param  string $obitDid The given ObitDID argument (required)
      *
@@ -425,7 +431,7 @@ class ObitApi
     /**
      * Operation removeObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $obitDid The given ObitDID argument (required)
      *
@@ -468,7 +474,7 @@ class ObitApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function removeObitRequest($obitDid)
+    protected function removeObitRequest($obitDid)
     {
         // verify the required parameter 'obitDid' is set
         if ($obitDid === null || (is_array($obitDid) && count($obitDid) === 0)) {
@@ -495,6 +501,8 @@ class ObitApi
             );
         }
 
+        // body params
+        $_tempBody = null;
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -508,7 +516,14 @@ class ObitApi
         }
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -671,7 +686,7 @@ class ObitApi
     /**
      * Operation searchObitsAsync
      *
-     * 
+     *
      *
      * @param  string $serialNumberHash Query argument that filters by serial number hash (optional)
      * @param  string $obitStatus Query argument that filters by obit status (optional)
@@ -698,7 +713,7 @@ class ObitApi
     /**
      * Operation searchObitsAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $serialNumberHash Query argument that filters by serial number hash (optional)
      * @param  string $obitStatus Query argument that filters by obit status (optional)
@@ -766,7 +781,7 @@ class ObitApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function searchObitsRequest($serialNumberHash = null, $obitStatus = null, $manufacturer = null, $partNumber = null, $usn = null, $ownerDid = null, $offset = 0, $limit = 0)
+    protected function searchObitsRequest($serialNumberHash = null, $obitStatus = null, $manufacturer = null, $partNumber = null, $usn = null, $ownerDid = null, $offset = 0, $limit = 0)
     {
         if ($offset !== null && $offset < 0) {
             throw new \InvalidArgumentException('invalid value for "$offset" when calling ObitApi.searchObits, must be bigger than or equal to 0.');
@@ -878,6 +893,8 @@ class ObitApi
 
 
 
+        // body params
+        $_tempBody = null;
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -891,7 +908,14 @@ class ObitApi
         }
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -1060,7 +1084,7 @@ class ObitApi
     /**
      * Operation showObitAsync
      *
-     * 
+     *
      *
      * @param  string $obitDid The given ObitDID argument (required)
      *
@@ -1080,7 +1104,7 @@ class ObitApi
     /**
      * Operation showObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $obitDid The given ObitDID argument (required)
      *
@@ -1134,7 +1158,7 @@ class ObitApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function showObitRequest($obitDid)
+    protected function showObitRequest($obitDid)
     {
         // verify the required parameter 'obitDid' is set
         if ($obitDid === null || (is_array($obitDid) && count($obitDid) === 0)) {
@@ -1161,6 +1185,8 @@ class ObitApi
             );
         }
 
+        // body params
+        $_tempBody = null;
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -1174,7 +1200,14 @@ class ObitApi
         }
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -1226,7 +1259,7 @@ class ObitApi
      *
      * @throws \Obada\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Obada\Entities\InlineResponse2001|\Obada\Entities\NotFound
+     * @return \Obada\Entities\ObitHistoryResponse|\Obada\Entities\NotFound
      */
     public function showObitHistory($obitDid)
     {
@@ -1241,7 +1274,7 @@ class ObitApi
      *
      * @throws \Obada\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Obada\Entities\InlineResponse2001|\Obada\Entities\NotFound, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Obada\Entities\ObitHistoryResponse|\Obada\Entities\NotFound, HTTP status code, HTTP response headers (array of strings)
      */
     public function showObitHistoryWithHttpInfo($obitDid)
     {
@@ -1278,14 +1311,14 @@ class ObitApi
             $responseBody = $response->getBody();
             switch($statusCode) {
                 case 200:
-                    if ('\Obada\Entities\InlineResponse2001' === '\SplFileObject') {
+                    if ('\Obada\Entities\ObitHistoryResponse' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Obada\Entities\InlineResponse2001', []),
+                        ObjectSerializer::deserialize($content, '\Obada\Entities\ObitHistoryResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1303,7 +1336,7 @@ class ObitApi
                     ];
             }
 
-            $returnType = '\Obada\Entities\InlineResponse2001';
+            $returnType = '\Obada\Entities\ObitHistoryResponse';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -1322,7 +1355,7 @@ class ObitApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Obada\Entities\InlineResponse2001',
+                        '\Obada\Entities\ObitHistoryResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1343,7 +1376,7 @@ class ObitApi
     /**
      * Operation showObitHistoryAsync
      *
-     * 
+     *
      *
      * @param  string $obitDid The given ObitDID argument (required)
      *
@@ -1363,7 +1396,7 @@ class ObitApi
     /**
      * Operation showObitHistoryAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $obitDid The given ObitDID argument (required)
      *
@@ -1372,7 +1405,7 @@ class ObitApi
      */
     public function showObitHistoryAsyncWithHttpInfo($obitDid)
     {
-        $returnType = '\Obada\Entities\InlineResponse2001';
+        $returnType = '\Obada\Entities\ObitHistoryResponse';
         $request = $this->showObitHistoryRequest($obitDid);
 
         return $this->client
@@ -1417,7 +1450,7 @@ class ObitApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function showObitHistoryRequest($obitDid)
+    protected function showObitHistoryRequest($obitDid)
     {
         // verify the required parameter 'obitDid' is set
         if ($obitDid === null || (is_array($obitDid) && count($obitDid) === 0)) {
@@ -1444,6 +1477,8 @@ class ObitApi
             );
         }
 
+        // body params
+        $_tempBody = null;
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -1457,7 +1492,14 @@ class ObitApi
         }
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -1579,7 +1621,7 @@ class ObitApi
     /**
      * Operation updateObitAsync
      *
-     * 
+     *
      *
      * @param  string $obitDid The given ObitDID argument (required)
      * @param  \Obada\Entities\Obit $obit (optional)
@@ -1600,7 +1642,7 @@ class ObitApi
     /**
      * Operation updateObitAsyncWithHttpInfo
      *
-     * 
+     *
      *
      * @param  string $obitDid The given ObitDID argument (required)
      * @param  \Obada\Entities\Obit $obit (optional)
@@ -1645,7 +1687,7 @@ class ObitApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateObitRequest($obitDid, $obit = null)
+    protected function updateObitRequest($obitDid, $obit = null)
     {
         // verify the required parameter 'obitDid' is set
         if ($obitDid === null || (is_array($obitDid) && count($obitDid) === 0)) {
@@ -1672,6 +1714,11 @@ class ObitApi
             );
         }
 
+        // body params
+        $_tempBody = null;
+        if (isset($obit)) {
+            $_tempBody = $obit;
+        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -1685,11 +1732,12 @@ class ObitApi
         }
 
         // for model (json/xml)
-        if (isset($obit)) {
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($obit));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
             } else {
-                $httpBody = $obit;
+                $httpBody = $_tempBody;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

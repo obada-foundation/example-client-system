@@ -1,6 +1,6 @@
 <?php
 /**
- * ObitHistory
+ * ObitHistoryResponse
  *
  * PHP version 7.2
  *
@@ -33,15 +33,15 @@ use \ArrayAccess;
 use \Obada\ObjectSerializer;
 
 /**
- * ObitHistory Class Doc Comment
+ * ObitHistoryResponse Class Doc Comment
  *
  * @category Class
- * @description New Obit request payload.
+ * @description Collection of historical changes for given obit
  * @package  Obada
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ObitHistory implements ModelInterface, ArrayAccess
+class ObitHistoryResponse implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ObitHistory implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ObitHistory';
+    protected static $openAPIModelName = 'ObitHistoryResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,12 +58,7 @@ class ObitHistory implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'obitDid' => 'string',
-        'event' => 'string',
-        'oldValues' => 'object',
-        'newValues' => 'object',
-        'createdAt' => '\DateTime',
-        'updatedAt' => '\DateTime'
+        'data' => '\Obada\Entities\ObitHistory[]'
     ];
 
     /**
@@ -72,12 +67,7 @@ class ObitHistory implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'obitDid' => null,
-        'event' => null,
-        'oldValues' => null,
-        'newValues' => null,
-        'createdAt' => 'date-time',
-        'updatedAt' => 'date-time'
+        'data' => null
     ];
 
     /**
@@ -107,12 +97,7 @@ class ObitHistory implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'obitDid' => 'obit_did',
-        'event' => 'event',
-        'oldValues' => 'old_values',
-        'newValues' => 'new_values',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at'
+        'data' => 'data'
     ];
 
     /**
@@ -121,12 +106,7 @@ class ObitHistory implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'obitDid' => 'setObitDid',
-        'event' => 'setEvent',
-        'oldValues' => 'setOldValues',
-        'newValues' => 'setNewValues',
-        'createdAt' => 'setCreatedAt',
-        'updatedAt' => 'setUpdatedAt'
+        'data' => 'setData'
     ];
 
     /**
@@ -135,12 +115,7 @@ class ObitHistory implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'obitDid' => 'getObitDid',
-        'event' => 'getEvent',
-        'oldValues' => 'getOldValues',
-        'newValues' => 'getNewValues',
-        'createdAt' => 'getCreatedAt',
-        'updatedAt' => 'getUpdatedAt'
+        'data' => 'getData'
     ];
 
     /**
@@ -203,12 +178,7 @@ class ObitHistory implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['obitDid'] = isset($data['obitDid']) ? $data['obitDid'] : null;
-        $this->container['event'] = isset($data['event']) ? $data['event'] : null;
-        $this->container['oldValues'] = isset($data['oldValues']) ? $data['oldValues'] : null;
-        $this->container['newValues'] = isset($data['newValues']) ? $data['newValues'] : null;
-        $this->container['createdAt'] = isset($data['createdAt']) ? $data['createdAt'] : null;
-        $this->container['updatedAt'] = isset($data['updatedAt']) ? $data['updatedAt'] : null;
+        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
     }
 
     /**
@@ -219,10 +189,6 @@ class ObitHistory implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!is_null($this->container['obitDid']) && (mb_strlen($this->container['obitDid']) > 256)) {
-            $invalidProperties[] = "invalid value for 'obitDid', the character length must be smaller than or equal to 256.";
-        }
 
         return $invalidProperties;
     }
@@ -240,149 +206,25 @@ class ObitHistory implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets obitDid
+     * Gets data
      *
-     * @return string|null
+     * @return \Obada\Entities\ObitHistory[]|null
      */
-    public function getObitDid()
+    public function getData()
     {
-        return $this->container['obitDid'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets obitDid
+     * Sets data
      *
-     * @param string|null $obitDid OBADA decentralized identifier (max length Rohi?)
+     * @param \Obada\Entities\ObitHistory[]|null $data data
      *
      * @return $this
      */
-    public function setObitDid($obitDid)
+    public function setData($data)
     {
-        if (!is_null($obitDid) && (mb_strlen($obitDid) > 256)) {
-            throw new \InvalidArgumentException('invalid length for $obitDid when calling ObitHistory., must be smaller than or equal to 256.');
-        }
-
-        $this->container['obitDid'] = $obitDid;
-
-        return $this;
-    }
-
-    /**
-     * Gets event
-     *
-     * @return string|null
-     */
-    public function getEvent()
-    {
-        return $this->container['event'];
-    }
-
-    /**
-     * Sets event
-     *
-     * @param string|null $event History event
-     *
-     * @return $this
-     */
-    public function setEvent($event)
-    {
-        $this->container['event'] = $event;
-
-        return $this;
-    }
-
-    /**
-     * Gets oldValues
-     *
-     * @return object|null
-     */
-    public function getOldValues()
-    {
-        return $this->container['oldValues'];
-    }
-
-    /**
-     * Sets oldValues
-     *
-     * @param object|null $oldValues oldValues
-     *
-     * @return $this
-     */
-    public function setOldValues($oldValues)
-    {
-        $this->container['oldValues'] = $oldValues;
-
-        return $this;
-    }
-
-    /**
-     * Gets newValues
-     *
-     * @return object|null
-     */
-    public function getNewValues()
-    {
-        return $this->container['newValues'];
-    }
-
-    /**
-     * Sets newValues
-     *
-     * @param object|null $newValues newValues
-     *
-     * @return $this
-     */
-    public function setNewValues($newValues)
-    {
-        $this->container['newValues'] = $newValues;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'];
-    }
-
-    /**
-     * Sets createdAt
-     *
-     * @param \DateTime|null $createdAt createdAt
-     *
-     * @return $this
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'];
-    }
-
-    /**
-     * Sets updatedAt
-     *
-     * @param \DateTime|null $updatedAt updatedAt
-     *
-     * @return $this
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->container['updatedAt'] = $updatedAt;
+        $this->container['data'] = $data;
 
         return $this;
     }

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'SiteController@welcome');
 Route::get('/devices', 'SiteController@deviceList');
 Route::get('/devices/{device_id}', 'SiteController@deviceDetail');
+Route::get('/devices/usn/{usn}', 'SiteController@deviceObitDetail');
 Route::get('/devices/{device_id}/edit', 'SiteController@editDevice');
 
 Route::get('/obits', 'SiteController@obitsList');

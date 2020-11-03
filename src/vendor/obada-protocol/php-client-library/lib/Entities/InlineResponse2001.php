@@ -39,13 +39,10 @@ use \Obada\ObjectSerializer;
  * @package  Obada
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null  
  */
-class InlineResponse2001 implements ModelInterface, ArrayAccess, \JsonSerializable
+class InlineResponse2001 implements ModelInterface, ArrayAccess
 {
-    public const DISCRIMINATOR = null;
+    const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
@@ -67,8 +64,6 @@ class InlineResponse2001 implements ModelInterface, ArrayAccess, \JsonSerializab
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
-      * @phpstan-var array<string, string|null>
-      * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
         'data' => null
@@ -182,7 +177,7 @@ class InlineResponse2001 implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->container['data'] = $data['data'] ?? null;
+        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
     }
 
     /**
@@ -224,7 +219,7 @@ class InlineResponse2001 implements ModelInterface, ArrayAccess, \JsonSerializab
      *
      * @param \Obada\Entities\ObitHistory[]|null $data data
      *
-     * @return self
+     * @return $this
      */
     public function setData($data)
     {
@@ -249,18 +244,18 @@ class InlineResponse2001 implements ModelInterface, ArrayAccess, \JsonSerializab
      *
      * @param integer $offset Offset
      *
-     * @return mixed|null
+     * @return mixed
      */
     public function offsetGet($offset)
     {
-        return $this->container[$offset] ?? null;
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
-     * @param mixed    $value  Value to be set
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
      *
      * @return void
      */
@@ -283,18 +278,6 @@ class InlineResponse2001 implements ModelInterface, ArrayAccess, \JsonSerializab
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
-    }
-
-    /**
-     * Serializes the object to a value that can be serialized natively by json_encode().
-     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
-     *
-     * @return mixed Returns data which can be serialized by json_encode(), which is a value
-     * of any type other than a resource.
-     */
-    public function jsonSerialize()
-    {
-       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**

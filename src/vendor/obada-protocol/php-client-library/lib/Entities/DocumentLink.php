@@ -40,13 +40,10 @@ use \Obada\ObjectSerializer;
  * @package  Obada
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<TKey, TValue>
- * @template TKey int|null
- * @template TValue mixed|null  
  */
-class DocumentLink implements ModelInterface, ArrayAccess, \JsonSerializable
+class DocumentLink implements ModelInterface, ArrayAccess
 {
-    public const DISCRIMINATOR = null;
+    const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
@@ -69,8 +66,6 @@ class DocumentLink implements ModelInterface, ArrayAccess, \JsonSerializable
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
-      * @phpstan-var array<string, string|null>
-      * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
         'name' => null,
@@ -188,8 +183,8 @@ class DocumentLink implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['hashlink'] = $data['hashlink'] ?? null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['hashlink'] = isset($data['hashlink']) ? $data['hashlink'] : null;
     }
 
     /**
@@ -237,7 +232,7 @@ class DocumentLink implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $name Associative name of hashlink
      *
-     * @return self
+     * @return $this
      */
     public function setName($name)
     {
@@ -261,7 +256,7 @@ class DocumentLink implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param string $hashlink Hashlink
      *
-     * @return self
+     * @return $this
      */
     public function setHashlink($hashlink)
     {
@@ -286,18 +281,18 @@ class DocumentLink implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @param integer $offset Offset
      *
-     * @return mixed|null
+     * @return mixed
      */
     public function offsetGet($offset)
     {
-        return $this->container[$offset] ?? null;
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
-     * @param mixed    $value  Value to be set
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
      *
      * @return void
      */
@@ -320,18 +315,6 @@ class DocumentLink implements ModelInterface, ArrayAccess, \JsonSerializable
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
-    }
-
-    /**
-     * Serializes the object to a value that can be serialized natively by json_encode().
-     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
-     *
-     * @return mixed Returns data which can be serialized by json_encode(), which is a value
-     * of any type other than a resource.
-     */
-    public function jsonSerialize()
-    {
-       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**

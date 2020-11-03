@@ -15,6 +15,7 @@ Vue.component('alerts', require('./components/alerts/Alerts.vue').default);
 Vue.component('device-list', require('./components/Devices/DeviceList.vue').default);
 Vue.component('obit-list', require('./components/Devices/ObitsList.vue').default);
 Vue.component('device-detail', require('./components/Devices/DeviceDetail.vue').default);
+Vue.component('device-obit-detail', require('./components/Devices/DeviceObitDetail.vue').default);
 Vue.component('obit-detail', require('./components/Devices/ObitDetail.vue').default);
 Vue.component('edit-device', require('./components/Devices/EditDevice.vue').default);
 Vue.component('usn-generator', require('./components/Utils/GenerateUsn.vue').default);
