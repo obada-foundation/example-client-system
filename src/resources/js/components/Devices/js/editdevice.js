@@ -220,18 +220,20 @@ export default {
             formData.append('file', data.file);
             formData.append('file_type', data.file_type);
             formData.append('folder', 'documents');
-
+            this.isLoading = true;
             axios.post( '/api/internal/document/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then((response) => {
                 console.log(response);
+                this.isLoading = false;
                 var url = response.data.url;
                 this.documents[this.documentUploadIndex].value.value = url;
                 this.progressWidth = 100;
                 this.fileUploading = false;
             }).catch(() => {
+                swal('Unable to upload file.','error');
                 this.fileUploading = false;
             });
         },

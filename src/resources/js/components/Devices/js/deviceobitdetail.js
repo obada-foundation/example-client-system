@@ -129,7 +129,7 @@ export default {
                 this.isLoading = false;
                 this.getDevice();
                 this.getObit();
-                swal("Done!", "Local Obit created.  View obit to synch to blockchain.", "success");
+                swal("Done!", "Local Obit saved.", "success");
             })
             .catch((e) => {
                 this.isLoading = false;
@@ -203,7 +203,7 @@ export default {
                     this.isLoading = false;
                     this.getDevice();
                     this.getObit();
-                    swal("Done!", "Device added to Local Inventory", "success");
+                    swal("Done!", "Obit data added to Local Inventory", "success");
 
                 })
                 .catch((e) => {
