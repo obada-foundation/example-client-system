@@ -320,6 +320,9 @@ class ServiceController extends Controller
         $client_obit->metadata = json_encode($metadata);
         $client_obit->documents = json_encode($documents);
         $client_obit->structured_data = json_encode($structured_data);
+        $client_obit->root_hash = '';
+        $client_obit->save();
+
         $client_obit->root_hash = $manager->GenerateRootHash($client_obit);
         $client_obit->save();
 

@@ -404,7 +404,7 @@ export default {
                     .then((response) => {
                         this.isLoading = false;
                         this.clearForm(this.deviceForm);
-                        window.location = '/devices/'+response.data.device.id;
+                        window.location = '/devices/usn/'+response.data.device.usn;
                     })
                     .catch((e) => {
                         this.isLoading = false;
