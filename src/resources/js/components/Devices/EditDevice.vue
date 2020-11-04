@@ -82,7 +82,15 @@
                             <div class="col-4">
                                 <div class="form-group select-colored">
                                     <select class="selectpicker" v-bind:id="'type-picker'+i" data-style="select-with-transition" title="Type" v-model="mdata.type_id.value">
-                                        <option v-for="type in schema" v-bind:value="type.name">{{type.name}}</option>
+                                        <optgroup label="Device Properties">
+                                            <option v-for="type in schema_list.device" v-bind:value="type.name">{{type.name}}</option>
+                                        </optgroup>
+                                        <optgroup label="Events">
+                                            <option v-for="type in schema_list.events" v-bind:value="type.name">{{type.name}}</option>
+                                        </optgroup>
+                                        <optgroup label="Other">
+                                            <option v-for="type in schema_list.other" v-bind:value="type.name">{{type.name}}</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                             </div>
@@ -123,7 +131,15 @@
                             <div class="col-4">
                                 <div class="form-group select-colored">
                                     <select class="selectpicker" v-bind:id="'doc-type-picker'+i" data-style="select-with-transition" title="Type" v-model="doc.type_id.value">
-                                        <option v-for="type in schema" v-bind:value="type.name">{{type.name}}</option>
+                                        <optgroup label="Device Properties">
+                                            <option v-for="type in schema_list.device" v-bind:value="type.name">{{type.name}}</option>
+                                        </optgroup>
+                                        <optgroup label="Events">
+                                            <option v-for="type in schema_list.events" v-bind:value="type.name">{{type.name}}</option>
+                                        </optgroup>
+                                        <optgroup label="Other">
+                                            <option v-for="type in schema_list.other" v-bind:value="type.name">{{type.name}}</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                             </div>
@@ -166,7 +182,15 @@
                                 <div class="form-group">
                                     <div class="form-group select-colored">
                                         <select class="selectpicker" v-bind:id="'schema-type-picker'+i" data-style="select-with-transition" title="Type" v-model="sdata.type_id.value">
-                                            <option v-for="type in schema" v-bind:value="type.name">{{type.name}}</option>
+                                            <optgroup label="Device Properties">
+                                                <option v-for="type in schema_list.device" v-bind:value="type.name">{{type.name}}</option>
+                                            </optgroup>
+                                            <optgroup label="Events">
+                                                <option v-for="type in schema_list.events" v-bind:value="type.name">{{type.name}}</option>
+                                            </optgroup>
+                                            <optgroup label="Other">
+                                                <option v-for="type in schema_list.other" v-bind:value="type.name">{{type.name}}</option>
+                                            </optgroup>
                                         </select>
                                     </div>
                                 </div>

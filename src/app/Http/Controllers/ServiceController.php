@@ -101,7 +101,7 @@ class ServiceController extends Controller
             return response()->json([
                 'status' => 0,
                 'obit' => $obit,
-                'blockchain_obit'=>[
+                'blockchain_obit'=>$blockchainObit == null?null:[
                     'root_hash'=>$blockchainObit->getRootHash()
                 ]
             ], 200);
@@ -333,14 +333,8 @@ class ServiceController extends Controller
     {
         $id = $request->input('id');
         $client_obit = ClientObit::find($id);
-        $mappedObit = $manager->GetMappedObit($client_obit);
-        dd($mappedObit);
+        $manager->GenerateDeviceRootHash($client_obit->device);
 
-        $obitApi = new ObitApi();
-        $obit = $obitApi->showObit($client_obit->obit_did);
-
-        $docs = $obit->getDocLinks();
-        dd($docs);
     }
 
     /**

@@ -18,6 +18,7 @@ class CreateSchemaTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('data_type')->default('text');
+            $table->string('category')->nullable();
             $table->timestamps();
         });
     }

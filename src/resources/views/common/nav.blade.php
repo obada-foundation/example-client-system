@@ -35,7 +35,7 @@
                             <a href="/obits" class="dropdown-item">Obit List</a>
                         </li>
                         <li>
-                            <a href="/retrieve/obit" class="dropdown-item">Download Obit</a>
+                            <a href="/retrieve/obit" class="dropdown-item">Import From Blockchain</a>
                         </li>
                     </ul>
                 </li>

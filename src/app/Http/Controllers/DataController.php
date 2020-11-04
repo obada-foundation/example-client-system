@@ -10,6 +10,7 @@ use Obada\Api\ObitApi;
 use Obada\ApiException;
 use Yajra\DataTables\DataTables;
 use Exception;
+use App\ObitManager\ObitManager;
 
 class DataController extends Controller
 {
@@ -19,10 +20,13 @@ class DataController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws Exception
      */
-    public function get_devices_data(Datatables $datatables){
+    public function get_devices_data(Datatables $datatables, ObitManager $manager){
         $obitApi = new ObitApi();
         return $datatables->eloquent(Device::orderBy('id', 'asc'))
             ->rawColumns(['id', 'manufacturer','part_number','serial_number','owner'])
+            ->addColumn('local_hash', function(Device $device) use($manager) {
+                return $manager->GenerateDeviceRootHash($device);
+            })
             ->addColumn('root_hash', function(Device $device) {
 
                 $client_obit = ClientObit::where([
@@ -61,11 +65,18 @@ class DataController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws Exception
      */
-    public function get_obits_data(Datatables $datatables){
+    public function get_obits_data(Datatables $datatables, ObitManager $manager){
         $obitApi = new ObitApi();
 
         return $datatables->eloquent(ClientObit::orderBy('id', 'asc'))
             ->rawColumns(['id', 'usn', 'serial_number_hash', 'part_number','manufacturer','owner_did','root_hash'])
+            ->addColumn('local_hash', function(ClientObit $client_obit) use($manager) {
+                if($client_obit->device) {
+                    return $manager->GenerateDeviceRootHash($client_obit->device);
+                } else {
+                    return '';
+                }
+            })
             ->addColumn('obada_hash', function(ClientObit $client_obit) use ($obitApi) {
                 try {
                     $obit = $obitApi->showObit($client_obit->obit_did);

@@ -13,7 +13,7 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th class="text-center" colspan="2">Hashes</th>
+                <th class="text-center" colspan="3">Hashes</th>
             </tr>
             <tr>
                 <th>USN</th>
@@ -21,6 +21,7 @@
                 <th>Part #</th>
                 <th>Manufacturer</th>
                 <th>Owner</th>
+                <th>Local</th>
                 <th>Obit</th>
                 <th>Blockchain</th>
             </tr>

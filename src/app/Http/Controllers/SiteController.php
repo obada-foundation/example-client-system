@@ -58,6 +58,7 @@ class SiteController extends Controller
     public function editDevice(Request $request, $obit_id)
     {
         $schema = Schema::all(); //Temporarily adding schema to page. This should be converted into a web-service eventually.
+
         return view('pages.edit_device',$this->getData([
             'device_id'=>$obit_id,
             'schema'=>$schema

@@ -61,7 +61,7 @@ export default {
 
                             var lastFour = full.usn.substr(full.usn.length - 4);
                             var firstFour = full.usn.substr(0,4);
-                            return type === 'display'?'<a href="/obits/'+full.usn+'"><b>'+firstFour+'-'+lastFour+'</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.usn+'"><i class="fa fa-copy"></i></button>':full.usn;
+                            return type === 'display'?'<a href="/devices/usn/'+full.usn+'"><b>'+firstFour+'-'+lastFour+'</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.usn+'"><i class="fa fa-copy"></i></button>':full.usn;
 
                         }
                     },
@@ -90,6 +90,19 @@ export default {
                         sortable: true,
                         "render": function (data, type, full, meta) {
                             return full.owner_did
+                        }
+                    },
+                    {
+                        sortable: true,
+                        "render": function (data, type, full, meta) {
+
+                            var displayString = full.local_hash.substr(full.local_hash.length - 8);
+
+                            var displayString = '<span class="'+(full.root_hash != full.local_hash?'text-danger':'')+'">...'+displayString+'</span>'
+
+
+                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.local_hash+'"><i class="fa fa-copy"></i></button>':full.local_hash;
+
                         }
                     },
                     {

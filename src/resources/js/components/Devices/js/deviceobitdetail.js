@@ -96,11 +96,8 @@ export default {
                 }
             }).catch((e) => {
                 this.isLoading = false;
-                if(e.response.hasOwnProperty('errorMessage')) {
-                    swal("Error!", e.data.errorMessage, "error");
-                } else {
-                    swal("Unable To Get Obit!", "We could not find this obit in the database.", "error");
-                }
+                this.obit = null;
+                this.blockChainObit = null;
             });
         },
         getMetadataValue(metadata) {
@@ -130,6 +127,8 @@ export default {
             })
             .then((response) => {
                 this.isLoading = false;
+                this.getDevice();
+                this.getObit();
                 swal("Done!", "Local Obit created.  View obit to synch to blockchain.", "success");
             })
             .catch((e) => {
@@ -153,6 +152,8 @@ export default {
             })
                 .then((response) => {
                     this.isLoading = false;
+                    this.getDevice();
+                    this.getObit();
                     swal("Done!", "Obit synched to the blockchain.", "success");
                 })
                 .catch((e) => {
@@ -175,10 +176,9 @@ export default {
                 responseType: 'json',
             })
                 .then((response) => {
-                    this.obit = response.data.client_obit;
-                    this.obit.metadata = JSON.parse(this.obit.metadata);
-                    this.obit.documents = JSON.parse(this.obit.documents);
-                    this.obit.structured_data = JSON.parse(this.obit.structured_data);
+                    this.isLoading = false;
+                    this.getDevice();
+                    this.getObit();
                     swal("Done!", "Obit downloaded form blockchain.", "success");
                 })
                 .catch((e) => {
@@ -201,7 +201,10 @@ export default {
             })
                 .then((response) => {
                     this.isLoading = false;
+                    this.getDevice();
+                    this.getObit();
                     swal("Done!", "Device added to Local Inventory", "success");
+
                 })
                 .catch((e) => {
                     console.log(e.response);

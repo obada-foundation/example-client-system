@@ -52,6 +52,11 @@ export default {
             metadata_to_remove: [],
             structured_data_to_remove: [],
             documents_to_remove: [],
+            schema_list: {
+                device : [],
+                events: [],
+                other: []
+            }
         };
     },
     mounted: function () {
@@ -60,10 +65,26 @@ export default {
         } else {
             this.isLoading = false;
         }
-
+        this.schema_list = {
+            device : [],
+            events: [],
+            other: []
+        };
+        this.schema.forEach((schema)=>{
+            this.schema_list[schema.category].push(schema);
+        })
     },
     watch: {
-
+        schema: function(){
+            this.schema_list = {
+                device : [],
+                    events: [],
+                    other: []
+            };
+            this.schema.forEach((schema)=>{
+                this.schema_list[schema.category].push(schema);
+            })
+        }
     },
     methods: {
 

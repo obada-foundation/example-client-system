@@ -8,45 +8,57 @@
 
         <div class="row">
             <div class="col-12">
-                <table class="table table-bordered">
-                    <tr>
-                        <td>Inventory</td>
-                        <td>{{inventoryHash}}</td>
-                        <td><button class="btn btn-sm btn-outline-primary" v-if="device !== null" @click="currentView = 'device_view'">View</button></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="text-center">
-                            <button data-toggle="tooltip" data-placement="top" title="Root Hashes Synced" v-if="localHashMatch" class="btn-fab btn-round btn btn-success"><i class="fa fa-check"></i></button>
-                            <button @click="mapData()" v-if="!localHashMatch" data-toggle="tooltip" data-placement="top" title="Map Obit To Inventory" class="btn-fab btn-round btn btn-warning"><i class="fa fa-arrow-up"></i></button>
-                            &nbsp;&nbsp;&nbsp;
-                            <button data-toggle="tooltip" data-placement="top" title="Root Hashes Synced" v-if="localHashMatch" class="btn-fab btn-round btn btn-success"><i class="fa fa-check"></i></button>
-                            <button @click="createObit" v-if="!localHashMatch" data-toggle="tooltip" data-placement="top" title="Create / Update Local Obit" class="btn-fab btn-round btn btn-warning"><i class="fa fa-arrow-down"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Local Obit</td>
-                        <td>{{obitHash}}</td>
-                        <td><button class="btn btn-sm btn-outline-primary" @click="currentView = 'obit_view'" v-if="hasObitHash">View</button></td>
-                    </tr>
-                    <tr>
-                        <td  colspan="3" class="text-center">
-                            <button data-toggle="tooltip" data-placement="top" title="Root Hashes Synced" v-if="blockchainHashMatch" class="btn-fab btn-round btn btn-success"><i class="fa fa-check"></i></button>
-                            <button @click="downloadObit()" v-if="!blockchainHashMatch" data-toggle="tooltip" data-placement="top" title="Download Obit" class="btn-fab btn-round btn btn-warning"><i class="fa fa-arrow-up"></i></button>
-                            &nbsp;&nbsp;&nbsp;
-                            <button data-toggle="tooltip" data-placement="top" title="Root Hashes Synced" v-if="blockchainHashMatch" class="btn-fab btn-round btn btn-success"><i class="fa fa-check"></i></button>
-                            <button @click="syncData()" v-if="!blockchainHashMatch" data-toggle="tooltip" data-placement="top" title="Upload To Blockchain" class="btn-fab btn-round btn btn-warning"><i class="fa fa-arrow-down"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Blockchain Obit</td>
-                        <td>{{blockchainHash}}</td>
-                        <td><a v-if="hasBlockchainHash">View</a></td>
-                    </tr>
-                </table>
+
+                <h3>Root Hash Checker</h3>
+
+                <div class="outer-row">
+                    <div class="title-bubble">Local Inventory</div>
+                    <p>{{inventoryHash}}</p>
+                    <button class="btn btn-sm btn-primary btn-round btn-view" v-if="device !== null" @click="currentView = 'device_view'">View</button>
+                </div>
+                <div class="action-row text-center">
+                    <div class="btn-holder" v-if="localHashMatch">
+                        <button data-toggle="tooltip" data-placement="top" title="Root Hashes Synced"  class="btn-fab btn-round btn btn-success"><i class="fa fa-check"></i></button>
+                    </div>
+                    <div class="btn-holder" v-if="!localHashMatch && obit != null">
+                        <button @click="mapData()"  data-toggle="tooltip" data-placement="top" title="Map Obit To Inventory" class="btn-round btn btn-outline-warning"><i class="fa fa-arrow-up"></i> Update Local Inventory</button>
+                    </div>
+                    <div class="btn-holder" v-if="!localHashMatch && device !== null">
+                        <button @click="createObit"  data-toggle="tooltip" data-placement="top" v-bind:title="obit == null?'Create A Local Obit':'Update Local Obit'" class=" btn-round btn btn-outline-warning"><i class="fa fa-arrow-down"></i> {{obit == null?'Create A Local Obit':'Update Local Obit'}}</button>
+                    </div>
+                </div>
+                <div class="outer-row">
+                    <div class="title-bubble">Local Obit</div>
+                    <p>{{obitHash}}</p>
+                    <button class="btn btn-sm btn-primary btn-round btn-view" @click="currentView = 'obit_view'" v-if="hasObitHash">View</button>
+                </div>
+                <div class="action-row text-center">
+                    <div class="btn-holder"  v-if="blockchainHashMatch">
+                    <button data-toggle="tooltip" data-placement="top" title="Root Hashes Synced" class="btn-fab btn-round btn btn-success"><i class="fa fa-check"></i></button>
+                    </div>
+                    <div class="btn-holder" v-if="!blockchainHashMatch && blockChainObit !== null">
+                        <button @click="downloadObit()"  data-toggle="tooltip" data-placement="top" title="Download Obit From Blockchain" class="btn-round btn btn-outline-warning"><i class="fa fa-arrow-up"></i> Download From Blockchain</button>
+                    </div>
+                    <div class="btn-holder" v-if="!blockchainHashMatch && obit !== null" >
+                        <button @click="syncData()" data-toggle="tooltip" data-placement="top" title="Upload Obit To Blockchain" class=" btn-round btn btn-outline-warning"><i class="fa fa-arrow-down"></i> Upload To Blockchain</button>
+                    </div>
+                    <div class="btn-holder" v-if="obit == null && blockChainObit == null" >
+                        <button disabled data-toggle="tooltip" data-placement="top" title="Upload Obit To Blockchain" class="btn-fab btn-round btn btn-outline-danger"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="outer-row">
+                    <div class="title-bubble">Blockchain</div>
+                    <p>{{blockchainHash}}</p>
+                    <a href="https://gateway.obada.io" class="btn btn-sm btn-primary btn-round btn-view" v-if="hasBlockchainHash">View</a>
+                </div>
+
             </div>
         </div>
 
         <div v-if="currentView === 'device_view'">
+
+            <h2 class="text-center">Local Inventory View</h2>
+
             <div v-if="device != null">
                 <div v-if="device != null" class="text-center">
                     <a v-bind:href="'/devices/'+device.id+'/edit'" class="btn btn-primary btn-round">EDIT</a>
@@ -114,6 +126,9 @@
         </div>
 
         <div v-if="currentView === 'obit_view'">
+
+            <h2 class="text-center">Local Obit View</h2>
+
             <div v-if="obit !== null">
                 <h2>Owner Information</h2>
                 <ul v-if="obit != null" class="device-information-list py-5">

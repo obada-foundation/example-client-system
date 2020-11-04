@@ -91,12 +91,11 @@ class ObitManager{
                 'owner_did'          => $client_obit->owner_did,
                 'obd_did'            => $client_obit->obd_did,
                 'obit_status'        => $client_obit->obit_status,
-                'modified_at'        => new \DateTime($client_obit->updated_at),
+                'modified_at'        => new \DateTime($client_obit->device?$client_obit->device->updated_at:$client_obit->updated_at),
                 'metadata'           => $client_obit->getMetadataRecords(),
                 'structured_data'    => $client_obit->getStructuredDataRecords(),
                 'documents'          => $client_obit->getDocumentRecords()
             ]);
-
 
             return (string)$obit->rootHash();
 
@@ -161,7 +160,7 @@ class ObitManager{
                 'owner_did'          => $client_obit->owner_did,
                 'obd_did'            => $client_obit->obd_did,
                 'obit_status'        => $client_obit->obit_status,
-                'modified_at'        => new \DateTime($client_obit->updated_at),
+                'modified_at'        => new \DateTime($client_obit->device?$client_obit->device->updated_at:$client_obit->updated_at),
                 'metadata'           => $client_obit->getMetadataRecords(),
                 'structured_data'    => $client_obit->getStructuredDataRecords(),
                 'documents'          => $client_obit->getDocumentRecords()

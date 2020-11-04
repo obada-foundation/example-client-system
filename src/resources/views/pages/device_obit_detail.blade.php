@@ -17,6 +17,7 @@
     <div class="main">
         <div class="container">
             <h1 class="text-center">Device Details</h1>
+            <p class="text-center bold">USN: {{$usn}}</p>
             <section class="py-5 my-5">
                 <device-obit-detail :usn="_usn"></device-obit-detail>
             </section>

@@ -567,3 +567,50 @@ label {
     transform: scale(1);
     top: 99%;
 }
+
+
+.outer-row {
+    margin-top: 30px;
+    border: 1px solid #454545;
+    position: relative;
+    padding: 10px;
+    padding-left: 30px;
+    .title-bubble {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        box-shadow: 0 2px 2px 0 rgba(0, 123, 255, 0.14), 0 3px 1px -2px rgba(0, 123, 255, 0.2), 0 1px 5px 0 rgba(0, 123, 255, 0.12);
+        font-family: "Barlow", monospace;
+        font-size: 1.25rem;
+        padding: 0.25rem 1.25rem;
+        position: absolute;
+        top: -30px;
+        left: 20px;
+    }
+    .btn-view {
+        position: absolute;
+        top: calc(50% - 5px);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        right: 10px;
+    }
+    p {
+        line-height: 1em;
+        margin: 0px;
+    }
+}
+
+.action-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    div.btn-holder {
+        padding: 10px;
+        padding-top: 30px;
+    }
+
+}
