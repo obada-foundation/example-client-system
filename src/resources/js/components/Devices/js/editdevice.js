@@ -233,8 +233,9 @@ export default {
                 this.progressWidth = 100;
                 this.fileUploading = false;
             }).catch(() => {
-                swal('Unable to upload file.','error');
+                swal('Unable to upload file.','','error');
                 this.fileUploading = false;
+                this.isLoading = false;
             });
         },
         uploadDocument: function(i){
