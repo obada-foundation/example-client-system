@@ -10,10 +10,7 @@ server {
 
     limit_conn perip 10;
 
-    client_body_buffer_size  200M;
-    client_header_buffer_size 200M;
-    client_max_body_size 200M;
-    large_client_header_buffers 2 200M;
+    client_max_body_size 10m;
 
     access_log off;
 
