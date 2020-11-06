@@ -207,7 +207,6 @@ export default {
 
                 })
                 .catch((e) => {
-                    console.log(e.response);
                     this.isLoading = false;
                     if(e.response.hasOwnProperty('errorMessage')) {
                         swal("Error!", e.data.errorMessage, "error");

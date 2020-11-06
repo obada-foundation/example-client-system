@@ -109,11 +109,10 @@ class ServiceController extends Controller
     }
 
     public function getObitHistoryByUsn(Request $request, ObitManager $manager, $usn){
-        /*
+
         $obit = ClientObit::with('device')->where([
             'usn'=>$usn
         ])->first();
-
 
         if(!$obit) {
             return response()->json([
@@ -121,11 +120,10 @@ class ServiceController extends Controller
                 'errorMessage'=>'Unable to find obit'
             ], 400);
         }
-        */
+
         $obitApi = new ObitApi();
         try {
-            $history = $obitApi->showObitHistory('did:obada:edddeb1cdd8cf9c5d3c5ebe625fc0044aee908446efcdecb24f4b9a8b5cc6876');
-            dd($history);
+            $history = $obitApi->showObitHistory($obit->obit_did);
         } catch(\Throwable $e) {
             dd($e);
         }
@@ -329,14 +327,6 @@ class ServiceController extends Controller
         return response()->json([
             'status' => 0
         ], 200);
-
-    }
-
-    public function testObit(Request $request, ObitManager $manager)
-    {
-        $id = $request->input('id');
-        $client_obit = ClientObit::find($id);
-        $manager->GenerateDeviceRootHash($client_obit->device);
 
     }
 

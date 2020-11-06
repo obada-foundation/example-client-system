@@ -23,8 +23,6 @@ Route::middleware('api')->group(function(){
     Route::get('/internal/device/usn/{usn}', 'ServiceController@getDeviceByUsn');
     Route::get('/internal/obit/{usn}', 'ServiceController@getObitByUsn');
     Route::get('/internal/obit/{usn}/history', 'ServiceController@getObitHistoryByUsn');
-    Route::get('/internal/testing', 'ServiceController@testObit');
-
 
     Route::post('internal/document/upload', 'ServiceController@uploadDocument');
     Route::post('internal/device', 'ServiceController@saveDevice');
