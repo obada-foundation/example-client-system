@@ -121,7 +121,7 @@ export default {
                     value: '',
                     isValid: true,
                     isClean: true,
-                    validations: ['required']
+                    validations: ['required','json']
                 }
             });
             setTimeout(()=>{
@@ -281,6 +281,16 @@ export default {
                     return false;
                 }
             }
+
+            if(f.validations.includes('json')) {
+                try {
+                    var json = JSON.parse(f.value);
+                } catch(e) {
+                    f.isValid = false;
+                    return false;
+                }
+            }
+
             f.isValid = true;
         },
         clearForm: function(set) {
@@ -337,51 +347,86 @@ export default {
             if(this.is_valid(this.deviceForm)) {
                 this.isLoading = true;
                 var metadata = [];
+                var isMetadataValid = true;
                 this.metadata.forEach((m)=>{
-                    var mdata = {
-                        metadata_type_id: m.type_id.value
-                    };
-                    if(m.data_type === 'text') {
-                        mdata.data_txt = m.value.value;
-                    } else if(m.data_type === 'int') {
-                        mdata.data_int = parseInt(m.value.value);
-                    } else if(m.data_type === 'float') {
-                        mdata.data_fp = parseFloat(m.value.value);
+                    if(this.is_valid(m)) {
+                        var mdata = {
+                            metadata_type_id: m.type_id.value
+                        };
+                        if(m.data_type === 'text') {
+                            mdata.data_txt = m.value.value;
+                        } else if(m.data_type === 'int') {
+                            mdata.data_int = parseInt(m.value.value);
+                        } else if(m.data_type === 'float') {
+                            mdata.data_fp = parseFloat(m.value.value);
+                        }
+
+                        if(m.id) {
+                            mdata.id = m.id;
+                        }
+                        metadata.push(mdata)
+                    } else {
+                        isMetadataValid = false;
+                        return;
                     }
 
-                    if(m.id) {
-                        mdata.id = m.id;
-                    }
-                    metadata.push(mdata)
                 });
 
+                if(!isMetadataValid) {
+                    this.isLoading = false;
+                    swal("Error!", "Metadata Type or Value Is Invalid", "error");
+                    return;
+                }
+
+                var isStructuredDataValid = true;
                 var structured_data = [];
                 this.structured_data.forEach((s)=>{
-                    var sdata = {
-                        structured_data_type_id: s.type_id.value
-                    };
+                    if(this.is_valid(s)) {
+                        var sdata = {
+                            structured_data_type_id: s.type_id.value
+                        };
 
-                    sdata.data_array = s.value.value;
+                        sdata.data_array = s.value.value;
 
-                    if(s.id) {
-                        sdata.id = s.id;
+                        if (s.id) {
+                            sdata.id = s.id;
+                        }
+                        structured_data.push(sdata)
+                    } else {
+                        isStructuredDataValid = false;
                     }
-                    structured_data.push(sdata)
                 });
 
+                if(!isStructuredDataValid) {
+                    this.isLoading = false;
+                    swal("Error!", "Structured Data Type or Value Is Invalid", "error");
+                    return;
+                }
+
+                var isDocumentInvalid = true;
                 var documents = [];
                 this.documents.forEach((s)=>{
-                    var docs = {
-                        doc_type_id: s.type_id.value
-                    };
+                    if(this.is_valid(s)) {
+                        var docs = {
+                            doc_type_id: s.type_id.value
+                        };
 
-                    docs.doc_path = s.value.value;
+                        docs.doc_path = s.value.value;
 
-                    if(s.id) {
-                        docs.id = s.id;
+                        if (s.id) {
+                            docs.id = s.id;
+                        }
+                        documents.push(docs)
+                    } else {
+                        isDocumentInvalid = false
                     }
-                    documents.push(docs)
                 });
+
+                if(!isDocumentInvalid) {
+                    this.isLoading = false;
+                    swal("Error!", "Document Type or URL Is Invalid", "error");
+                    return;
+                }
 
                 var data = {
                     device_id: parseInt(this.device_id),
@@ -484,7 +529,7 @@ export default {
                             value: beautifyJS(s.data_array,{indent_size: 2}),
                             isValid: true,
                             isClean: true,
-                            validations: ['required']
+                            validations: ['required','json']
                         }
                     });
                 });

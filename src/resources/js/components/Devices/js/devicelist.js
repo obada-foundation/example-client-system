@@ -85,26 +85,32 @@ export default {
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
+                            if(full.local_hash === '') {
+                                return '-';
+                            }
+                            var localHash = full.local_hash;
+                            var displayString = localHash.substr(localHash.length - 8);
 
-                            var displayString = full.local_hash.substr(full.local_hash.length - 8);
-
-                            var displayString = '<span class="'+(full.local_hash != full.root_hash?'text-danger':'')+'">...'+displayString+'</span>'
+                            var displayString = '<span class="'+(localHash != full.root_hash?'text-danger':'')+'">...'+displayString+'</span>'
 
 
-                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.local_hash+'"><i class="fa fa-copy"></i></button>':full.local_hash;
+                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+localHash+'"><i class="fa fa-copy"></i></button>':localHash;
 
                         }
                     },
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
+                            if(full.root_hash === '') {
+                                return '-';
+                            }
+                            var rootHash = full.root_hash;
+                            var displayString = rootHash.substr(rootHash.length - 8);
 
-                            var displayString = full.root_hash.substr(full.root_hash.length - 8);
-
-                            var displayString = '<span class="'+(full.root_hash != full.obada_hash?'text-danger':'')+'">...'+displayString+'</span>'
+                            var displayString = '<span class="'+(rootHash != full.obada_hash?'text-danger':'')+'">...'+displayString+'</span>'
 
 
-                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.root_hash+'"><i class="fa fa-copy"></i></button>':full.root_hash;
+                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+rootHash+'"><i class="fa fa-copy"></i></button>':rootHash;
 
                         }
                     },
