@@ -278,6 +278,14 @@ class ServiceController extends Controller
             }
         }
 
+        $root_hash = $manager->GenerateDeviceRootHash($device);
+        if($root_hash === null) {
+            return response()->json([
+                'status' => 1,
+                'errorMessage'=>'Error Generating Device Root Hash'
+            ], 400);
+        }
+
         return response()->json([
             'status' => 0,
             'device' => $device

@@ -506,12 +506,7 @@ export default {
                                 validations: ['required']
                             }
                         });
-                        var i = this.metadata.length - 1;
-
-                        setTimeout(()=>{
-                            $('#type-picker'+i).selectpicker('render');
-                            $('#type-picker'+i).val(this.metadata[i].type_id.value).trigger('change');
-                        },1000);
+                        this.triggerPickerChange('metadata',this.metadata.length - 1);
                     });
                 }
             }
@@ -534,12 +529,8 @@ export default {
                             validations: ['required','json']
                         }
                     });
+                    this.triggerPickerChange('structured_data',this.structured_data.length - 1);
                 });
-                setTimeout(()=>{
-                    var i = this.structured_data.length - 1;
-                    $('#schema-type-picker'+i).selectpicker('render');
-                    $('#schema-type-picker'+i).val(this.structured_data[i].type_id.value).trigger('change');
-                },1000);
             }
 
             this.documents = [];
@@ -560,14 +551,25 @@ export default {
                             validations: ['required']
                         }
                     });
+                    this.triggerPickerChange('documents',this.documents.length - 1);
                 });
-                setTimeout(()=>{
-                    var i = this.documents.length - 1;
-                    $('#doc-type-picker'+i).selectpicker('render');
-                    $('#doc-type-picker'+i).val(this.documents[i].type_id.value).trigger('change');
-                },1000);
+
             }
 
+        },
+        triggerPickerChange: function (type, i) {
+            setTimeout(()=>{
+                if(type === 'documents') {
+                    $('#doc-type-picker'+i).selectpicker('render');
+                    $('#doc-type-picker'+i).val(this.documents[i].type_id.value).trigger('change');
+                } else if (type === 'structured_data') {
+                    $('#schema-type-picker'+i).selectpicker('render');
+                    $('#schema-type-picker'+i).val(this.structured_data[i].type_id.value).trigger('change');
+                } else if (type === 'metadata') {
+                    $('#type-picker'+i).selectpicker('render');
+                    $('#type-picker'+i).val(this.metadata[i].type_id.value).trigger('change');
+                }
+            },1000);
         }
     }
 }
