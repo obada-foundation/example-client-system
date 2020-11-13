@@ -110,8 +110,8 @@ export default {
                     this.deviceStatus.obit = 2;
                     this.deviceStatus.obada = 2;
                     this.deviceStatus.inventory = 0;
-                    if(e.response.hasOwnProperty('errorMessage')) {
-                        swal("Error!", e.data.errorMessage, "error");
+                    if(e.response.data.hasOwnProperty('errorMessage')) {
+                        swal("Error!", e.response.data.errorMessage, "error");
                     } else {
                         swal("Error!", "Unable to retrieve obit", "error");
                     }
@@ -135,8 +135,8 @@ export default {
                 console.log(e);
                 this.deviceStatus.inventory = 2;
                 this.isLoading = false;
-                if(e.response.hasOwnProperty('errorMessage')) {
-                    swal("Error!", e.data.errorMessage, "error");
+                if(e.response.data.hasOwnProperty('errorMessage')) {
+                    swal("Error!", e.response.data.errorMessage, "error");
                 } else {
                     swal("Error!", "Unable to map Obit to Inventory", "error");
                 }

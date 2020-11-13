@@ -316,8 +316,8 @@ export default {
                 }
             }).catch((e) => {
                 this.isLoading = false;
-                if(e.response.hasOwnProperty('errorMessage')) {
-                    swal("Error!", e.data.errorMessage, "error");
+                if(e.response.data.hasOwnProperty('errorMessage')) {
+                    swal("Error!", e.response.data.errorMessage, "error");
                 } else {
                     swal("Unable To Get Device!", "We could not find this device in the database.", "error");
                 }
@@ -455,9 +455,11 @@ export default {
                         window.location = '/devices/usn/'+response.data.device.usn;
                     })
                     .catch((e) => {
+                        console.log("R",e.response);
+                        console.log("D",e.data);
                         this.isLoading = false;
-                        if(e.response.hasOwnProperty('errorMessage')) {
-                            swal("Error!", e.data.errorMessage, "error");
+                        if(e.response.data.hasOwnProperty('errorMessage')) {
+                            swal("Error!", e.response.data.errorMessage, "error");
                         } else {
                             swal("Error!", "Something went wrong trying to save the device", "error");
                         }

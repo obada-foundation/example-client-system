@@ -157,8 +157,8 @@ export default {
             .catch((e) => {
                 console.log(e);
                 this.isLoading = false;
-                if(e.response && e.response.hasOwnProperty('errorMessage')) {
-                    swal("Error!", e.data.errorMessage, "error");
+                if(e.response && e.response.data.hasOwnProperty('errorMessage')) {
+                    swal("Error!", e.response.data.errorMessage, "error");
                 } else {
                     swal("Error!", "Unable to map Obit to Inventory", "error");
                 }

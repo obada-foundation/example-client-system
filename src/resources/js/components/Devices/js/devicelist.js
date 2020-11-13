@@ -160,8 +160,8 @@ export default {
                             }
 
                         }).catch((e) => {
-                            if(e.response.hasOwnProperty('errorMessage')) {
-                                swal("Error!", e.data.errorMessage, "error");
+                            if(e.response.data.hasOwnProperty('errorMessage')) {
+                                swal("Error!", e.response.data.errorMessage, "error");
                             } else {
                                 swal("Error!", "We could not delete the device", "error");
                             }

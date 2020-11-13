@@ -22,8 +22,8 @@ export default {
                 }
             }).catch((e) => {
                 this.isLoading = false;
-                if(e.response.hasOwnProperty('errorMessage')) {
-                    swal("Error!", e.data.errorMessage, "error");
+                if(e.response.data.hasOwnProperty('errorMessage')) {
+                    swal("Error!", e.response.data.errorMessage, "error");
                 } else {
                     swal("Unable To Get Device!", "We could not find this device in the database.", "error");
                 }
@@ -61,8 +61,8 @@ export default {
             })
             .catch((e) => {
                 this.isLoading = false;
-                if(e.response.hasOwnProperty('errorMessage')) {
-                    swal("Error!", e.data.errorMessage, "error");
+                if(e.response.data.hasOwnProperty('errorMessage')) {
+                    swal("Error!", e.response.data.errorMessage, "error");
                 } else {
                     swal("Error!", "We could not create the obit.", "error");
                 }
