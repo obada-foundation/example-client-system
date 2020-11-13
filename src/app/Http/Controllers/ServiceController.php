@@ -102,7 +102,8 @@ class ServiceController extends Controller
                 'status' => 0,
                 'obit' => $obit,
                 'blockchain_obit'=>$blockchainObit == null?null:[
-                    'root_hash'=>$blockchainObit->getRootHash()
+                    'root_hash'=>$blockchainObit->getRootHash(),
+                    'obit_did'=>$blockchainObit->getObitDid()
                 ]
             ], 200);
         }
@@ -155,20 +156,37 @@ class ServiceController extends Controller
      */
     public function saveDevice(Request $request, ObitManager $manager)
     {
+        $input = $request->input();
+
+        $usn = $manager->GenerateUSN($input['manufacturer'],$input['part_number'], $input['serial_number']);
+
+
         if($request->input('device_id') != 0) {
             $device = Device::with('metadata','documents','structured_data')->find($request->input('device_id'));
         } else {
+
+            $existingDevice = Device::where([
+                'usn'=>$usn['usn']
+            ])->first();
+
+            if($existingDevice) {
+                return response()->json([
+                    'status' => 1,
+                    'errorMessage'=>'Device With This USN Already Exists'
+                ], 400);
+            }
+
             $device = new Device();
         }
 
-        $input = $request->input();
+
+
         $device->manufacturer = $input['manufacturer'];
         $device->part_number = $input['part_number'];
         $device->serial_number = $input['serial_number'];
         $device->owner = $input['owner'];
         $device->status = $input['status'];
 
-        $usn = $manager->GenerateUSN($device->manufacturer,$device->part_number, $device->serial_number);
         $device->usn = $usn['usn'];
         $device->save();
 

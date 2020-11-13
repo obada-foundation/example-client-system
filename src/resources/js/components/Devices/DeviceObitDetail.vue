@@ -49,7 +49,7 @@
                 <div class="outer-row">
                     <div class="title-bubble">Blockchain</div>
                     <p>{{blockchainHash}}</p>
-                    <a href="https://gateway.obada.io" class="btn btn-sm btn-primary btn-round btn-view" v-if="hasBlockchainHash">View</a>
+                    <a v-bind:href="'https://gateway.obada.io/obits/'+blockChainObit.obit_did" class="btn btn-sm btn-primary btn-round btn-view" v-if="hasBlockchainHash">View</a>
                 </div>
 
             </div>
