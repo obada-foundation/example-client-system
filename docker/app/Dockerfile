@@ -7,7 +7,7 @@ RUN apt update \
 
 WORKDIR /app
 
-FROM composer:latest AS composer
+FROM composer:1.10.19 AS composer
 
 ARG APP_ENV=prod
 
