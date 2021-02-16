@@ -1,4 +1,8 @@
 server {
+{% if app_env == 'local' %}
+    listen   8080;
+    server_name {{ rd_fqdn }};
+{% else %}
     listen   443 ssl;
     server_name {{ rd_fqdn }};
 
@@ -7,6 +11,7 @@ server {
     ssl_trusted_certificate SSL_CHAIN_CERT;
 
     add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
+{% endif %}
 
     limit_conn perip 10;
 

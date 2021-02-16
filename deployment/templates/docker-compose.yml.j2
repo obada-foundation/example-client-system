@@ -15,8 +15,12 @@ services:
         - ./etc/ssl:/etc/nginx/ssl
         - ./etc/nginx/service.conf:/etc/nginx/service.conf
     ports:
+{% if app_env == 'local' %}
+      - "8080:8080"
+{% else %}
       - "80:80"
       - "443:443"
+{% endif %}
     networks:
       - frontend
     environment:
