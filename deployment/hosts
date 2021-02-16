@@ -1,0 +1,13 @@
+[rd.obada.local]
+127.0.0.1
+
+[rd.obada.local:vars]
+app_env=local
+app_key=base64:hOavL29V1sN+SEZqGS+ngiIkIR24pNv3Gm90CwifAq8=
+sentry_dsn=http://senty.io
+db_password=secret
+aws_access_key=
+aws_access_secret=
+aws_region=
+aws_bucket=
+rd_fqdn=rd.obada.local

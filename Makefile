@@ -25,7 +25,7 @@ deploy-staging:
 		securityrobot/ansible ansible-playbook deployment/playbook.yml --limit dev.rd.obada.io
 
 deploy-local:
-	ansible-playbook deployment/playbook.yml --limit rd.obada.local --connection=local
+	ansible-playbook deployment/playbook.yml --limit rd.obada.local --connection=local -i deployment/hosts
 
 build-branch:
 	docker build -t $(PROJECT_IMAGE) -f docker/app/Dockerfile . --build-arg APP_ENV=dev

@@ -6,6 +6,15 @@
     config_path: "{{ deployment_path }}/etc"
 
   tasks:
+    - name: Find out playbook's path
+      shell: sh -c 'cd .. && pwd'
+      register: deployment_path_out
+      when: inventory_hostname == "127.0.0.1"
+
+    - set_fact:
+        deployment_path={{ deployment_path_out.stdout }}
+      when: inventory_hostname == "127.0.0.1"
+
     - name: Create config directories
       file:
         path: "{{ config_path }}/{{ item }}"
