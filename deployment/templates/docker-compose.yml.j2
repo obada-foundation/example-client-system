@@ -21,7 +21,11 @@ services:
       - frontend
     environment:
       - TZ=America/Chicago
+{% if app_env != 'local' %}
       - LETSENCRYPT=true
+{% else %}
+      - LETSENCRYPT=false
+{% endif %}
       - LE_EMAIL=techops@obada.io
       - LE_FQDN={{ rd_fqdn }}
 
