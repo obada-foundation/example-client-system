@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Schema;
+use App\Facades\ObadaClient;
 
 class SiteController extends Controller
 {
@@ -32,18 +33,10 @@ class SiteController extends Controller
         return view('pages.obits',$this->getData([]));
     }
 
-    public function deviceDetail(Request $request, $obit_id)
-    {
-        return view('pages.device_detail',$this->getData([
-            'device_id'=>$obit_id
-        ]));
-    }
-
-
-    public function deviceObitDetail(Request $request, $usn)
+    public function deviceObitDetail(Request $request, $obit_did)
     {
         return view('pages.device_obit_detail',$this->getData([
-            'usn'=>$usn
+            'obit_did'=>$obit_did
         ]));
     }
 

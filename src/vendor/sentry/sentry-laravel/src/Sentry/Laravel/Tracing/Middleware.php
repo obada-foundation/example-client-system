@@ -3,10 +3,13 @@
 namespace Sentry\Laravel\Tracing;
 
 use Closure;
+use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Route;
+use Sentry\Laravel\Integration;
 use Sentry\SentrySdk;
-use Sentry\State\Hub;
+use Sentry\State\HubInterface;
 use Sentry\Tracing\SpanContext;
 use Sentry\Tracing\TransactionContext;
 
@@ -62,22 +65,26 @@ class Middleware
             // If the transaction is not on the scope during finish, the trace.context is wrong
             SentrySdk::getCurrentHub()->setSpan($this->transaction);
 
+            if ($request instanceof Request) {
+                $this->hydrateRequestData($request);
+            }
+
             if ($response instanceof Response) {
-                $this->transaction->setHttpStatus($response->status());
+                $this->hydrateResponseData($response);
             }
 
             $this->transaction->finish();
         }
     }
 
-    private function startTransaction(Request $request, Hub $sentry): void
+    private function startTransaction(Request $request, HubInterface $sentry): void
     {
         $path = '/' . ltrim($request->path(), '/');
         $fallbackTime = microtime(true);
         $sentryTraceHeader = $request->header('sentry-trace');
 
         $context = $sentryTraceHeader
-            ? TransactionContext::fromTraceparent($sentryTraceHeader)
+            ? TransactionContext::fromSentryTrace($sentryTraceHeader)
             : new TransactionContext;
 
         $context->setOp('http.server');
@@ -93,7 +100,7 @@ class Middleware
         // Setting the Transaction on the Hub
         SentrySdk::getCurrentHub()->setSpan($this->transaction);
 
-        if (!$this->addBootTimeSpans()) {
+        if (!$this->addBootTimeSpans() && app() instanceof Laravel) {
             // @TODO: We might want to move this together with the `RouteMatches` listener to some central place and or do this from the `EventHandler`
             app()->booted(function () use ($request, $fallbackTime): void {
                 $spanContextStart = new SpanContext();
@@ -139,5 +146,26 @@ class Middleware
         $this->transaction->startChild($spanContextStart);
 
         return true;
+    }
+
+    private function hydrateRequestData(Request $request): void
+    {
+        $route = $request->route();
+
+        if ($route instanceof Route) {
+            $routeName = Integration::extractNameForRoute($route) ?? '<unlabeled transaction>';
+
+            $this->transaction->setName($routeName);
+            $this->transaction->setData([
+                'name' => $route->getName(),
+                'action' => $route->getActionName(),
+                'method' => $request->getMethod(),
+            ]);
+        }
+    }
+
+    private function hydrateResponseData(Response $response): void
+    {
+        $this->transaction->setHttpStatus($response->status());
     }
 }

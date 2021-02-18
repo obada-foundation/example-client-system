@@ -41,6 +41,7 @@ export default {
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     url: '/api/data/devices',
                     dataSrc: (data) => {
+                        console.log(data);
                         this.isLoading = false;
                         if (data.status === 1) {
                             return [];
@@ -85,7 +86,7 @@ export default {
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
-                            if(full.local_hash === '') {
+                            if(full.local_hash === '' || full.local_hash === null) {
                                 return '-';
                             }
                             var localHash = full.local_hash;
@@ -101,7 +102,7 @@ export default {
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
-                            if(full.root_hash === '') {
+                            if(full.root_hash === '' || full.root_hash === null) {
                                 return '-';
                             }
                             var rootHash = full.root_hash;
@@ -117,7 +118,7 @@ export default {
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
-                            if(full.obada_hash === '') {
+                            if(full.obada_hash === '' || full.obada_hash === null) {
                                 return '-';
                             }
                             var displayString = full.obada_hash.substr(full.obada_hash.length - 8);

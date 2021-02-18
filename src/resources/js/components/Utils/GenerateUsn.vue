@@ -42,8 +42,8 @@
                 <div class="input-group colored">
                     <input type="text" class="form-control no-shadow is-normal"
                            disabled
-                           v-model="usn_data.obit"
-                           placeholder="Owner">
+                           v-model="usn_data.obit_did"
+                           placeholder="Obit DID">
                 </div>
             </div>
             <div v-if="usn_data != null" class="form-group">
@@ -52,7 +52,7 @@
                     <input type="text" class="form-control no-shadow is-normal"
                            disabled
                            v-model="usn_data.usn"
-                           placeholder="Owner">
+                           placeholder="Universal Serial Number">
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
                 <tr>
                     <td><h3>2</h3></td>
                     <td>obit = sha256(manufacturer + part_number + serial_hash)</td>
-                    <td>{{usn_data.obit}}</td>
+                    <td>{{usn_data.obit_did}}</td>
                 </tr>
                 <tr>
                     <td><h3>3</h3></td>

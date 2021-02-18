@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Aws\Laravel\AwsServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -174,7 +175,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\GatewayServiceProvider::class
+        App\Providers\GatewayServiceProvider::class,
+        App\Providers\ObadaServiceProvider::class,
 
     ],
 

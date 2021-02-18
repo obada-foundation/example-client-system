@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Facades\ObadaClient;
 use App\Models\Device;
-use App\Models\ClientObit;
 use Log;
-use Obada\Api\ObitApi;
-use Obada\ApiException;
 use Yajra\DataTables\DataTables;
 use Exception;
-use App\ObitManager\ObitManager;
 
 class DataController extends Controller
 {
@@ -20,37 +16,35 @@ class DataController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws Exception
      */
-    public function get_devices_data(Datatables $datatables, ObitManager $manager){
-        $obitApi = new ObitApi();
+    public function get_devices_data(Datatables $datatables){
         return $datatables->eloquent(Device::orderBy('id', 'asc'))
             ->rawColumns(['id', 'manufacturer','part_number','serial_number','owner'])
-            ->addColumn('local_hash', function(Device $device) use($manager) {
-                return $manager->GenerateDeviceRootHash($device);
+            ->addColumn('local_hash', function(Device $device) {
+                try {
+                    $result = ObadaClient::generateRootHash($device->getLocalObit());
+                    return $result['rootHash'];
+                } catch(\Exception $e) {
+                    return '';
+                }
             })
             ->addColumn('root_hash', function(Device $device) {
-
-                $client_obit = ClientObit::where([
-                    'usn'=>$device->usn
-                ])->first();
-                if($client_obit) {
-                    return $client_obit->root_hash;
+                //Get Client Obit
+                try {
+                    $result = ObadaClient::getClientObit($device->obit_did);
+                    return $result['obit']['rootHash'];
+                } catch(\Exception $e) {
+                    return '';
                 }
 
-                return '';
+
 
             })
-            ->addColumn('obada_hash', function(Device $device) use ($obitApi) {
+            ->addColumn('obada_hash', function(Device $device) {
+                //Get Server Obit
                 try {
-                    $client_obit = ClientObit::where([
-                        'usn'=>$device->usn
-                    ])->first();
-                    if(!$client_obit) {
-                        return '';
-                    }
-
-                    $obit = $obitApi->showObit($client_obit->obit_did);
-                    return $obit->getRootHash();
-                } catch(ApiException | Exception $e) {
+                    $result = ObadaClient::fetchObitFromChain($device->obit_did);
+                    return $result['blockchainObit']['rootHash'];
+                } catch(\Exception $e) {
                     return '';
                 }
 
@@ -65,26 +59,28 @@ class DataController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws Exception
      */
-    public function get_obits_data(Datatables $datatables, ObitManager $manager){
-        $obitApi = new ObitApi();
+    public function get_obits_data(Datatables $datatables){
 
-        return $datatables->eloquent(ClientObit::orderBy('id', 'asc'))
+        $result = ObadaClient::getClientObits();
+        $obits = collect($result['obits']->toArray());
+
+
+        return $datatables->collection($obits)
             ->rawColumns(['id', 'usn', 'serial_number_hash', 'part_number','manufacturer','owner_did','root_hash'])
-            ->addColumn('local_hash', function(ClientObit $client_obit) use($manager) {
-                if($client_obit->device) {
-                    return $manager->GenerateDeviceRootHash($client_obit->device);
+            ->addColumn('local_hash', function($client_obit) {
+                $device = Device::where([
+                    'obit_did'=>$client_obit->obit_did
+                ])->first();
+                if($device) {
+                    $result = ObadaClient::generateRootHash($device->getLocalObit());
+                    return $result['root_hash'];
                 } else {
                     return '';
                 }
             })
-            ->addColumn('obada_hash', function(ClientObit $client_obit) use ($obitApi) {
-                try {
-                    $obit = $obitApi->showObit($client_obit->obit_did);
-                    return $obit->getRootHash();
-                } catch(ApiException | Exception $e) {
-                    Log::info($e->getMessage());
-                    return '';
-                }
+            ->addColumn('obada_hash', function($client_obit) {
+                $result = ObadaClient::fetchObitFromChain($client_obit->obit_did);
+                return $result['blockchain_obit']['root_hash'];
             })
             ->make(true);
     }

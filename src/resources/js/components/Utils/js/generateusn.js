@@ -129,9 +129,11 @@ export default {
                     responseType: 'json',
                 })
                 .then((response) => {
+                    console.log(response);
                     this.usn_data = response.data.usn;
                 })
                 .catch((e) => {
+                    console.log(e.response);
                     if(e.response.hasOwnProperty('errorMessage')) {
                         swal("Error!", e.data.errorMessage, "error");
                     } else {

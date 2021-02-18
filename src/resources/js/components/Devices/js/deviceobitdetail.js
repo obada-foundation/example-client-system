@@ -1,5 +1,5 @@
 export default {
-    props:['is_mobile','events','usn'],
+    props:['is_mobile','events','obit_did'],
     data: function () {
         return {
             device: null,
@@ -12,6 +12,7 @@ export default {
     mounted: function () {
         this.getDevice();
         this.getObit();
+        this.getBlockchainObit();
     },
     computed:{
         hasObitHash: function(){
@@ -21,6 +22,7 @@ export default {
             return !(this.blockChainObit === null || !this.blockChainObit.hasOwnProperty('root_hash'));
         },
         obitHash: function(){
+            console.log(this.obit);
             if(this.obit === null || !this.obit.hasOwnProperty('root_hash')) {
                 return 'Obit Does Not Exist';
             } else {
@@ -65,7 +67,7 @@ export default {
     },
     methods: {
         getDevice: function(){
-            axios.get('/api/internal/device/usn/'+this.usn, {}).then((response) => {
+            axios.get('/api/internal/device/'+this.obit_did, {}).then((response) => {
                 this.isLoading = false;
                 console.log(response);
                 if(response.data.status == 0) {
@@ -73,6 +75,7 @@ export default {
                     this.device.root_hash = response.data.root_hash;
                 }
             }).catch((e) => {
+                console.log(e.response);
                 this.isLoading = false;
                 if(e.response.data.hasOwnProperty('errorMessage')) {
                     swal("Error!", e.response.data.errorMessage, "error");
@@ -83,20 +86,33 @@ export default {
             });
         },
         getObit: function(){
-            axios.get('/api/internal/obit/'+this.usn, {}).then((response) => {
+            axios.get('/api/internal/obit/'+this.obit_did, {}).then((response) => {
                 console.log(response);
-                if(response.data.status == 0) {
+                if(response.data.status === 0) {
                     this.isLoading = false;
                     this.obit = response.data.obit;
-                    this.obit.metadata = JSON.parse(this.obit.metadata);
-                    this.obit.documents = JSON.parse(this.obit.documents);
-                    this.obit.structured_data = JSON.parse(this.obit.structured_data);
-
-                    this.blockChainObit = response.data.blockchain_obit;
+                    this.$forceUpdate();
+                    //this.blockChainObit = response.data.blockchain_obit;
                 }
             }).catch((e) => {
+                console.log(e.response);
                 this.isLoading = false;
                 this.obit = null;
+                this.blockChainObit = null;
+            });
+        },
+        getBlockchainObit: function(){
+            axios.get('/api/internal/blockchain/obit/'+this.obit_did, {}).then((response) => {
+                console.log(response);
+                if(response.data.status === 0) {
+                    this.isLoading = false;
+                    this.blockChainObit = response.data.obit;
+                    this.$forceUpdate();
+                    //this.blockChainObit = response.data.blockchain_obit;
+                }
+            }).catch((e) => {
+                console.log(e.response);
+                this.isLoading = false;
                 this.blockChainObit = null;
             });
         },
@@ -132,6 +148,7 @@ export default {
                 swal("Done!", "Local Obit saved.", "success");
             })
             .catch((e) => {
+                console.log(e.response);
                 this.isLoading = false;
                 if(e.response.data.hasOwnProperty('errorMessage')) {
                     swal("Error!", e.response.data.errorMessage, "error");
@@ -140,20 +157,20 @@ export default {
                 }
             });
         },
-        syncData: function(){
+        uploadObit: function(){
             if(this.isLoading) return;
             this.isLoading = true;
-            axios('/api/internal/obit/sync', {
+            axios('/api/internal/obit/upload', {
                 method:'post',
                 data: {
-                    usn: this.obit.usn
+                    obit_did: this.obit_did
                 },
                 responseType: 'json',
             })
                 .then((response) => {
                     this.isLoading = false;
                     this.getDevice();
-                    this.getObit();
+                    this.getBlockchainObit();
                     swal("Done!", "Obit synched to the blockchain.", "success");
                 })
                 .catch((e) => {
@@ -168,17 +185,17 @@ export default {
         },
         downloadObit: function(){
             this.isLoading = true;
-            axios('/api/internal/obit', {
+            axios('/api/internal/obit/download', {
                 method:'post',
                 data: {
-                    obitDID: this.obit.obitDID
+                    obit_did: this.obit_did
                 },
                 responseType: 'json',
             })
                 .then((response) => {
                     this.isLoading = false;
                     this.getDevice();
-                    this.getObit();
+                    this.obit = response.data.obit
                     swal("Done!", "Obit downloaded form blockchain.", "success");
                 })
                 .catch((e) => {
@@ -195,7 +212,7 @@ export default {
             axios('/api/internal/obit/device', {
                 method:'post',
                 data: {
-                    usn: this.obit.usn
+                    obit_did: this.obit_did
                 },
                 responseType: 'json',
             })
@@ -207,6 +224,7 @@ export default {
 
                 })
                 .catch((e) => {
+                    console.log(e.response);
                     this.isLoading = false;
                     if(e.response.data.hasOwnProperty('errorMessage')) {
                         swal("Error!", e.response.data.errorMessage, "error");

@@ -4,7 +4,7 @@
 [rd.obada.local:vars]
 app_env=local
 app_key=base64:hOavL29V1sN+SEZqGS+ngiIkIR24pNv3Gm90CwifAq8=
-sentry_dsn=http://senty.io
+sentry_dsn=null
 db_password=secret
 aws_access_key=
 aws_access_secret=

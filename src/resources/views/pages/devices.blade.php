@@ -15,7 +15,7 @@
 @section('content')
     @include('common.nav',['fixed'=>false])
     <div class="main">
-        <div class="container">
+        <div class="container-fluid px-5">
             <h1 class="text-center">Inventory List</h1>
             <section class="py-5 my-5">
                 <device-list></device-list>

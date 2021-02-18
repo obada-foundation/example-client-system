@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"/>
 
     <script>
-        var _usn = '<?php echo $usn; ?>';
+        var _obit_did = '<?php echo $obit_did; ?>';
     </script>
 
 @endsection
@@ -16,10 +16,9 @@
     @include('common.nav',['fixed'=>false])
     <div class="main">
         <div class="container">
-            <h1 class="text-center">Device Details</h1>
-            <p class="text-center bold">USN: {{$usn}}</p>
+
             <section class="py-5 my-5">
-                <device-obit-detail :usn="_usn"></device-obit-detail>
+                <device-obit-detail :obit_did="_obit_did"></device-obit-detail>
             </section>
         </div>
 

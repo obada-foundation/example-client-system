@@ -308,7 +308,7 @@ export default {
             });
         },
         getDevice: function(){
-            axios.get('/api/internal/device/'+this.device_id, {}).then((response) => {
+            axios.get('/api/internal/device/id/'+this.device_id, {}).then((response) => {
                 this.isLoading = false;
                 if(response.data.status == 0) {
                     this.device = response.data.device;
@@ -452,11 +452,9 @@ export default {
                     .then((response) => {
                         this.isLoading = false;
                         this.clearForm(this.deviceForm);
-                        window.location = '/devices/usn/'+response.data.device.usn;
+                        window.location = '/devices/'+response.data.device.obit_did;
                     })
                     .catch((e) => {
-                        console.log("R",e.response);
-                        console.log("D",e.data);
                         this.isLoading = false;
                         if(e.response.data.hasOwnProperty('errorMessage')) {
                             swal("Error!", e.response.data.errorMessage, "error");

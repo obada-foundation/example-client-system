@@ -148,8 +148,15 @@ class Integration implements IntegrationInterface
         }
 
         if (empty($routeName) && $route->getActionName()) {
-            // SomeController@someAction (controller action)
-            $routeName = ltrim($route->getActionName(), (self::$baseControllerNamespace ?? '') . '\\');
+            // Some\Controller@someAction (controller action)
+            $routeName = ltrim($route->getActionName(), '\\');
+
+            $baseNamespace = self::$baseControllerNamespace ?? '';
+
+            // Strip away the base namespace from the action name
+            if (!empty($baseNamespace)) {
+                $routeName = Str::after($routeName, $baseNamespace . '\\');
+            }
         }
 
         if (empty($routeName) || $routeName === 'Closure') {

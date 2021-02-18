@@ -5,6 +5,12 @@
                 <i class="fa fa-circle-notch fa-spin"></i>
             </div>
         </div>
+        <div class="row">
+            <div v-if="device !== null" class="col-12">
+                <h1 class="text-center">Device Details</h1>
+                <p class="text-center bold">USN: {{device.usn}}</p>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-12">
@@ -28,7 +34,7 @@
                     </div>
                 </div>
                 <div class="outer-row">
-                    <div class="title-bubble">Local Obit</div>
+                    <div class="title-bubble">Client Obit</div>
                     <p>{{obitHash}}</p>
                     <button class="btn btn-sm btn-primary btn-round btn-view" @click="currentView = 'obit_view'" v-if="hasObitHash">View</button>
                 </div>
@@ -40,7 +46,7 @@
                         <button @click="downloadObit()"  data-toggle="tooltip" data-placement="top" title="Download Obit From Blockchain" class="btn-round btn btn-outline-warning"><i class="fa fa-arrow-up"></i> Download From Blockchain</button>
                     </div>
                     <div class="btn-holder" v-if="!blockchainHashMatch && obit !== null" >
-                        <button @click="syncData()" data-toggle="tooltip" data-placement="top" title="Upload Obit To Blockchain" class=" btn-round btn btn-outline-warning"><i class="fa fa-arrow-down"></i> Upload To Blockchain</button>
+                        <button @click="uploadObit()" data-toggle="tooltip" data-placement="top" title="Upload Obit To Blockchain" class=" btn-round btn btn-outline-warning"><i class="fa fa-arrow-down"></i> Upload To Blockchain</button>
                     </div>
                     <div class="btn-holder" v-if="obit == null && blockChainObit == null" >
                         <button disabled data-toggle="tooltip" data-placement="top" title="Upload Obit To Blockchain" class="btn-fab btn-round btn btn-outline-danger"><i class="fa fa-times"></i></button>

@@ -91,7 +91,7 @@ export default {
         submitRequest: function(){
             if(this.is_valid(this.obitForm)) {
                 this.isLoading = true;
-                axios('/api/internal/obit', {
+                axios('/api/internal/obit/download', {
                     method:'post',
                     data: {
                         obit_did: this.obitForm.obit_did.value
@@ -99,7 +99,7 @@ export default {
                     responseType: 'json',
                 })
                 .then((response) => {
-                    this.client_obit = response.data.client_obit;
+                    this.client_obit = response.data.obit;
                     this.deviceStatus.obada = 1;
                     this.deviceStatus.obit = 1;
                     this.mapToDevice();
@@ -122,7 +122,7 @@ export default {
             axios('/api/internal/obit/device', {
                 method:'post',
                 data: {
-                    usn: this.client_obit.usn
+                    obit_did: this.obitForm.obit_did.value
                 },
                 responseType: 'json',
             })

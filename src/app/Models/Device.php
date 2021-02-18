@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Obada\ClientHelper\LocalObit;
 
 /**
  * Class Device
@@ -28,11 +29,6 @@ class Device extends Model
         return $this->hasMany(StructuredData::class,'device_id','id');
     }
 
-    public function obit(){
-        return $this->hasOne(ClientObit::class,'usn','usn');
-    }
-
-
     /*
      * Methods
      */
@@ -46,10 +42,7 @@ class Device extends Model
         $metadata = [];
         if($this->metadata) {
             foreach($this->metadata as $m) {
-                $metadata[] = [
-                    'key'=>$m->metadata_type_id,
-                    'value'=>$m->data_txt == null ? ($m->data_int == null ? $m->data_fp : $m->data_int) : $m->data_txt
-                ];
+                $metadata[] = $m->getLocalMetadata();
             }
         }
         return $metadata;
@@ -141,7 +134,21 @@ class Device extends Model
         return $documents;
     }
 
+    public function getLocalObit()
+    {
 
+        return new LocalObit([
+            'owner' => $this->owner,
+            'obitStatus' => $this->status,
+            'manufacturer' => $this->manufacturer,
+            'partNumber' => $this->part_number,
+            'serialNumber' => $this->serial_number,
+            'metadata' => $this->getMetadataRecords(),
+            'documents' => [],
+            'structuredData' => [],
+            'modifiedAt' => (new \DateTime($this->updated_at))
+        ]);
+    }
 
 
 
