@@ -62,7 +62,7 @@ export default {
                             var lastFour = full.serial_number.substr(full.serial_number.length - 8);
                             lastFour = '...'+lastFour;
 
-                            return type === 'display'?'<a href="/devices/usn/'+full.usn+'"><b>'+lastFour+'</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.serial_number+'"><i class="fa fa-copy"></i></button>':full.serial_number;
+                            return type === 'display'?'<a href="/devices/'+full.obit_did+'"><b>'+lastFour+'</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.serial_number+'"><i class="fa fa-copy"></i></button>':full.serial_number;
                         }
                     },
                     {
