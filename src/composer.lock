@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72c6b3b95aa1282f2b23291bda5bd828",
+    "content-hash": "54f4d869cd19da65baeea910f9891ef3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2367,17 +2367,17 @@
             "time": "2020-11-14T17:35:34+00:00"
         },
         {
-            "name": "obada-foundation/client-api-library-php",
-            "version": "dev-main",
+            "name": "obada-foundation/node-api-library",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "https://github.com/obada-foundation/client-api-library-php.git",
-                "reference": "a9547227363854f99c8cd0bf9b6bdd561ee6cf99"
+                "url": "git@github.com:obada-foundation/node-api-library.git",
+                "reference": "a2b272113e1635085c4e1e007ccb96291454999f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/obada-foundation/client-api-library-php/zipball/a9547227363854f99c8cd0bf9b6bdd561ee6cf99",
-                "reference": "a9547227363854f99c8cd0bf9b6bdd561ee6cf99",
+                "url": "https://api.github.com/repos/obada-foundation/node-api-library/zipball/a2b272113e1635085c4e1e007ccb96291454999f",
+                "reference": "a2b272113e1635085c4e1e007ccb96291454999f",
                 "shasum": ""
             },
             "require": {
@@ -2423,10 +2423,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/obada-foundation/client-api-library-php/tree/main",
-                "issues": "https://github.com/obada-foundation/client-api-library-php/issues"
+                "source": "https://github.com/obada-foundation/node-api-library/tree/develop",
+                "issues": "https://github.com/obada-foundation/node-api-library/issues"
             },
-            "time": "2021-02-18T01:45:00+00:00"
+            "time": "2021-07-20T22:50:22+00:00"
         },
         {
             "name": "opis/closure",
@@ -8085,12 +8085,13 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "obada-foundation/client-api-library-php": 20
+        "obada-foundation/node-api-library": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.2.5"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

@@ -9,7 +9,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/obada-foundation/client-api-library-php.git"
+            "url": "https://github.com/obada-foundation/node-api-library.git"
         }
     ],
     "license": "MIT",
@@ -23,7 +23,7 @@
         "laravel/framework": "^7.24",
         "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
-        "obada-foundation/client-api-library-php": "*@dev",
+        "obada-foundation/node-api-library": "dev-develop",
         "sentry/sentry-laravel": "^2.0",
         "tuupola/base58": "^2.1",
         "yajra/laravel-datatables-oracle": "~9.0"
