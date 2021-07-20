@@ -33,15 +33,6 @@ services:
       - LE_EMAIL=techops@obada.io
       - LE_FQDN={{ rd_fqdn }}
 
-  client-helper:
-    image: obada/client-helper-application:develop
-    container_name: client-helper
-    volumes:
-      - helper_data:/app/database/sqlite_data
-    restart: always
-    networks:
-      - backend
-
   app:
     image: obada/reference-design:develop
     container_name: reference-design

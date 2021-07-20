@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\ObadaClient;
+
 use App\Http\Requests\UsnRequest;
 use App\Models\Device;
 use App\Models\Documents;
@@ -12,10 +13,16 @@ use App\Models\StructuredData;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Obada\Api\HelperApi;
 use Obada\ClientHelper\ObitDid;
 
 class DeviceController extends Controller
 {
+    protected $helperApi;
+
+    public function __construct(HelperApi $helperApi) {
+        $this->helperApi = $helperApi;
+    }
 
     /**
      * Saves a Device based on input.  If device_id is provided, the device will be updated, else a new row is created.
@@ -27,7 +34,9 @@ class DeviceController extends Controller
         $input = $request->input();
 
         try {
-            $result = ObadaClient::generateObitDef($input['manufacturer'],$input['part_number'], $input['serial_number']);
+
+            $result = $this->helperApi->generateObitDef($input['manufacturer'], $input['part_number'], $input['serial_number']);
+
             $usn = $result['obit'];
 
         } catch (\Exception $e) {
@@ -36,8 +45,6 @@ class DeviceController extends Controller
                 'errorMessage'=>$e->getMessage()
             ], 400);
         }
-
-
 
         if($request->input('device_id') != 0) {
             $device = Device::with('metadata','documents','structured_data')->find($request->input('device_id'));
@@ -48,9 +55,10 @@ class DeviceController extends Controller
                 ], 400);
             }
         } else {
+            Log::info("USN2", ['usn' => $usn['usn']]);
 
             $existingDevice = Device::where([
-                'usn'=>$usn['usn']
+                'usn' => $usn['usn']
             ])->first();
 
             if($existingDevice) {
@@ -161,7 +169,11 @@ class DeviceController extends Controller
         }
 
         try {
-            $result = ObadaClient::generateRootHash($device->getLocalObit());
+            Log::info('payload', ['payload' => $device->getLocalObit()]);
+            $result = $this->helperApi->generateRootHash($device->getLocalObit());
+
+            Log::info('root hash', ['rh' => $result['rootHash']]);
+
             return response()->json([
                 'status' => 0,
                 'root_hash'=>$result['rootHash'],
@@ -220,7 +232,8 @@ class DeviceController extends Controller
             ], 404);
         }
         try {
-            $result = ObadaClient::generateRootHash($device->getLocalObit());
+            $result = $this->helperApi->generateRootHash($device->getLocalObit());
+
             return response()->json([
                 'status' => 0,
                 'device' => $device,
@@ -253,7 +266,7 @@ class DeviceController extends Controller
             ], 404);
         }
         try {
-            $result = ObadaClient::generateRootHash($device->getLocalObit());
+            $result = $this->helperApi->generateRootHash($device->getLocalObit());
             return response()->json([
                 'status' => 0,
                 'device' => $device,
@@ -276,11 +289,10 @@ class DeviceController extends Controller
      *
      * @return ClientObit | JsonResponse
      */
-    public function getObit(Request $request, $obit_did){
-
-
+    public function getObit(Request $request, $obit_did) {
         try {
-            $result = ObadaClient::getClientObit($obit_did);
+            $result = $this->helperApi->getClientObit($obit_did);
+
             return response()->json([
                 'status' => 0,
                 'obit'=>$result['obit']
@@ -318,7 +330,8 @@ class DeviceController extends Controller
         }
 
         try {
-            ObadaClient::saveClientObit($device->getLocalObit());
+            $this->helperApi->saveClientObit($device->getLocalObit());
+
             return response()->json([
                 'status' => 0
             ], 200);
@@ -342,10 +355,9 @@ class DeviceController extends Controller
      * @return JsonResponse
      */
     public function getBlockchainObit(Request $request, $obit_did){
-
-
         try {
-            $result = ObadaClient::fetchObitFromChain($obit_did);
+            $result = $this->helperApi->fetchObitFromChain($obit_did);
+
             return response()->json([
                 'status' => 0,
                 'obit'=>$result['blockchainObit']
@@ -354,7 +366,7 @@ class DeviceController extends Controller
         } catch(\Exception $e) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Error Getting Client Obit'
+                'errorMessage'=>'Error Getting Blockchain Obit'
             ], 400);
         }
     }
@@ -406,7 +418,8 @@ class DeviceController extends Controller
         }
 
         try {
-            $result = ObadaClient::downloadObitFromChain(new ObitDid(['obitDid'=>$request->input('obit_did')]));
+            $result = $this->helperApi->fetchObitFromChain($request->input('obit_did'));
+
             return response()->json([
                 'status' => 0,
                 'obit'=>$result['obit']
@@ -462,7 +475,7 @@ class DeviceController extends Controller
         }
 
         try {
-            $result = ObadaClient::getClientObit($request->input('obit_did'));
+            $result = $this->helperApi->getClientObit($request->input('obit_did'));
             $client_obit = $result['obit'];
         } catch(\Exception $e) {
             Log::info($e->getMessage());

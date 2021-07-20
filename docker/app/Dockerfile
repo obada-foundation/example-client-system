@@ -20,7 +20,7 @@ RUN set -e \
 	&& composer install --prefer-dist --no-scripts --no-progress --no-suggest --no-interaction $ARGS \
 	&& composer dump-autoload --classmap-authoritative
 
-FROM node as assets
+FROM node:14 as assets
 
 COPY src/ /assets
 
