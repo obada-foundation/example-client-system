@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-translate">
             <a class="navbar-brand" href="/">
-                <p class="bold">OBADA <small>Reference Design</small> </p>
+                <p class="bold"><img alt="OBADA" src="https://www.obada.io/assets/images/obada-logo.svg" width="112" height="35"> <small>Reference Design</small></p>
                 <span>An inventory manager application</span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
