@@ -15,13 +15,12 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->string('owner');
             $table->string('manufacturer');
             $table->string('part_number');
             $table->string('serial_number');
             $table->string('usn');
             $table->string('obit_did');
-            $table->enum('status',['FUNCTIONAL','NON_FUNCTIONAL','DISPOSED','STOLEN','DISABLED_BY_OWNER']);
+            $table->string('obit_checksum')->nullable();
             $table->timestamps();
         });
     }

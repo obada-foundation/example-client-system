@@ -4,16 +4,16 @@ PROJECT_IMAGE = $(PROJECT):$(COMMIT_BRANCH)
 PROJECT_RELEASE_IMAGE = $(PROJECT):master
 PROJECT_TAG_IMAGE = $(PROJECT):$(COMMIT_TAG)
 
-SHELL := /bin/bash
+SHELL := /bin/sh
 .DEFAULT_GOAL := help
 
 run-local:
 	docker-compose -f docker-compose.yml up -d --force-recreate
 
-deploy-production:
+deploy/production:
 	ansible-playbook deployment/playbook.yml --limit rd.obada.io
 
-deploy-staging:
+deploy/staging:
 	@echo "$$ANSIBLE_STAGING_VARS" >> $$(pwd)/hosts
 	@echo "$$STAGING_DEPLOY_KEY" >> $$(pwd)/id_rsa
 	docker run \
@@ -24,7 +24,7 @@ deploy-staging:
 		-v $$(pwd)/id_rsa:/home/ansible/.ssh/id_rsa \
 		securityrobot/ansible ansible-playbook deployment/playbook.yml --limit dev.rd.obada.io
 
-deploy-local:
+deploy/local:
 	ansible-playbook deployment/playbook.yml --limit rd.obada.local --connection=local -i deployment/hosts
 
 build-branch:

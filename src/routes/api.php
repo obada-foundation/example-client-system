@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('api')->group(function(){
-    Route::get('/data/devices', 'DataController@get_devices_data');
-    Route::get('/data/obits', 'DataController@get_obits_data');
+    Route::get('/data/devices', 'DataController@getDevicesData');
+    Route::get('/data/obits', 'DataController@getObitsData');
 
     Route::get('/internal/devices', 'ServiceController@getDevices');
     Route::get('/internal/device/id/{device_id}', 'DeviceController@getDeviceWithId');

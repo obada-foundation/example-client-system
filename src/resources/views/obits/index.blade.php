@@ -1,20 +1,24 @@
 @extends('layouts.app',['body_class'=>'landing-page'])
 
 @section('head')
-    <title>Generate USN</title>
-    <meta name="description" content="__description__">
-    <meta name="keywords" content="__keywords__">
+    <title>Local Obits</title>
+    <meta name="description" content="Local inventory of Obits">
+    <meta name="keywords" content="obits, list">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"/>
 
 @endsection
 
+@section('scripts')
+
+@endsection
+
 @section('content')
-    @include('common.nav',['fixed'=>false])
+    @include('common.nav',['fixed' => false])
     <div class="main">
         <div class="container">
-            <h1 class="text-center">Generate USN</h1>
+            <h1 class="text-center">Local OBITs</h1>
             <section class="py-5 my-5">
-                <usn-generator></usn-generator>
+                <obit-list load-all-obits-url="{{ route('obits.load-all') }}"></obit-list>
             </section>
         </div>
 

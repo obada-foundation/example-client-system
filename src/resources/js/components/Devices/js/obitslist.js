@@ -1,5 +1,5 @@
 export default {
-    props:['is_mobile','events'],
+    props:['is_mobile','events', 'loadAllObitsUrl'],
     data: function () {
         return {
             isLoading: true,
@@ -39,7 +39,7 @@ export default {
                 pageLength: 250,
                 ajax: {
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    url: '/api/data/obits',
+                    url: this.loadAllObitsUrl,
                     dataSrc: (data) => {
                         console.log(data);
                         this.isLoading = false;
@@ -61,14 +61,14 @@ export default {
 
                             var lastFour = full.usn.substr(full.usn.length - 4);
                             var firstFour = full.usn.substr(0,4);
-                            return type === 'display'?'<a href="/devices/usn/'+full.usn+'"><b>'+firstFour+'-'+lastFour+'</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.usn+'"><i class="fa fa-copy"></i></button>':full.usn;
+                            return type === 'display'?'<a href="/obits/'+full.usn+'"><b>'+firstFour+'-'+lastFour+'</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.usn+'"><i class="fa fa-copy"></i></button>':full.usn;
 
                         }
                     },
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
-                            var lastFour = full.serial_number_hash.substr(full.serial_number_hash.length - 8);
+                            var lastFour = full.serial_number.substr(full.serial_number.length - 8);
                             return type === 'display'?'...'+lastFour+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.serial_number_hash+'"><i class="fa fa-copy"></i></button>':full.serial_number_hash;
 
                         }
@@ -96,38 +96,25 @@ export default {
                         sortable: true,
                         "render": function (data, type, full, meta) {
 
-                            var displayString = full.local_hash.substr(full.local_hash.length - 8);
+                            var displayString = full.obit_checksum.substr(full.obit_checksum.length - 8);
 
-                            var displayString = '<span class="'+(full.root_hash != full.local_hash?'text-danger':'')+'">...'+displayString+'</span>'
-
-
-                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.local_hash+'"><i class="fa fa-copy"></i></button>':full.local_hash;
-
-                        }
-                    },
-                    {
-                        sortable: true,
-                        "render": function (data, type, full, meta) {
-
-                            var displayString = full.root_hash.substr(full.root_hash.length - 8);
-
-                            var displayString = '<span class="'+(full.root_hash != full.obada_hash?'text-danger':'')+'">...'+displayString+'</span>'
+                            var displayString = '<span class="'+(full.obit_checksum != full.obit_checksum?'text-danger':'')+'">...'+displayString+'</span>'
 
 
-                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.root_hash+'"><i class="fa fa-copy"></i></button>':full.root_hash;
+                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.obit_checksum+'"><i class="fa fa-copy"></i></button>':full.obit_checksum;
 
                         }
                     },
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
-                            if(full.obada_hash === '') {
+                            if(full.obit_checksum === '') {
                                 return '-';
                             }
-                            var displayString = full.obada_hash.substr(full.obada_hash.length - 8);
-                            var displayString = '<span class="'+(full.root_hash != full.obada_hash?'text-danger':'')+'">...'+displayString+'</span>'
+                            var displayString = full.obit_checksum.substr(full.obit_checksum.length - 8);
+                            var displayString = '<span class="'+(full.obit_checksum != full.obit_checksum?'text-danger':'')+'">...'+displayString+'</span>'
 
-                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.obada_hash+'"><i class="fa fa-copy"></i></button>':full.obada_hash;
+                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.obit_checksum+'"><i class="fa fa-copy"></i></button>':full.obit_checksum;
 
                         }
                     },

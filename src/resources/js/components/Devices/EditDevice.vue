@@ -6,21 +6,6 @@
             </div>
         </div>
         <form action="" onsubmit="return false;">
-            <h2>Owner Information</h2>
-            <div class="text-left py-5">
-                <div class="form-group">
-                    <label for="">Owner</label>
-                    <div class="input-group colored">
-                        <input type="text" class="form-control no-shadow is-normal"
-                               v-bind:class="{'is-normal':deviceForm.owner.isClean,'is-invalid':!deviceForm.owner.isClean && !deviceForm.owner.isValid,'is-valid':!deviceForm.owner.isClean && deviceForm.owner.isValid}"
-                               v-model="deviceForm.owner.value"
-                               @focus="handleFocus(deviceForm.owner)"
-                               @blur="handleBlur(deviceForm.owner)"
-                               placeholder="Owner">
-                    </div>
-                </div>
-
-            </div>
             <h2>Device Identification</h2>
             <div class="text-left py-5">
                 <div class="form-group">
@@ -56,70 +41,9 @@
                                placeholder="Part Number">
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="status-picker">Status</label>
-                    <div class="form-group select-colored">
-                        <select class="selectpicker" id="status-picker" data-style="select-with-transition" title="Status" v-model="deviceForm.status.value">
-                            <option selected value="FUNCTIONAL">FUNCTIONAL</option>
-                            <option value="NON_FUNCTIONAL">NON FUNCTIONAL</option>
-                            <option value="DISPOSED">DISPOSED</option>
-                            <option value="STOLEN">STOLEN</option>
-                            <option value="DISABLED_BY_OWNER">DISABLED BY OWNER</option>
-                        </select>
-                    </div>
-                </div>
-
             </div>
             <h2>Device Data & Information</h2>
             <div class="text-left py-5">
-                <div class="card">
-                    <div class="card-header">
-                        <label>Metadata</label>
-                    </div>
-                    <div class="card-body">
-                        <div v-for="(mdata,i) in metadata" class="row">
-                            <div class="col-4">
-                                <div class="form-group select-colored">
-                                    <select class="selectpicker" v-bind:id="'type-picker'+i" data-style="select-with-transition" title="Type" v-model="mdata.type_id.value">
-                                        <optgroup label="Device Properties">
-                                            <option v-for="type in schema_list.device" v-bind:value="type.name">{{type.name}}</option>
-                                        </optgroup>
-                                        <optgroup label="Events">
-                                            <option v-for="type in schema_list.events" v-bind:value="type.name">{{type.name}}</option>
-                                        </optgroup>
-                                        <optgroup label="Other">
-                                            <option v-for="type in schema_list.other" v-bind:value="type.name">{{type.name}}</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <div class="input-group colored">
-                                        <input type="text" class="form-control no-shadow is-normal"
-                                               v-bind:class="{'is-normal':mdata.value.isClean,'is-invalid':!mdata.value.isClean && !mdata.value.isValid,'is-valid':!mdata.value.isClean && mdata.value.isValid}"
-                                               v-model="mdata.value.value"
-                                               @focus="handleFocus(mdata.value)"
-                                               @blur="handleBlur(mdata.value)"
-                                               placeholder="Value">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-1">
-                                <button class="btn btn-danger btn-sm btn-fab btn-round" @click="removeMetadata(i)"><i class="fa fa-minus"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <button class="btn btn-white" @click="addMetadataRow()"><i class="fa fa-plus"></i> Metadata</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
                 <div class="card">
                     <div class="card-header">
                         <label>Documents</label>
@@ -129,33 +53,27 @@
 
                         <div v-for="(doc,i) in documents" class="row">
                             <div class="col-4">
-                                <div class="form-group select-colored">
-                                    <select class="selectpicker" v-bind:id="'doc-type-picker'+i" data-style="select-with-transition" title="Type" v-model="doc.type_id.value">
-                                        <optgroup label="Device Properties">
-                                            <option v-for="type in schema_list.device" v-bind:value="type.name">{{type.name}}</option>
-                                        </optgroup>
-                                        <optgroup label="Events">
-                                            <option v-for="type in schema_list.events" v-bind:value="type.name">{{type.name}}</option>
-                                        </optgroup>
-                                        <optgroup label="Other">
-                                            <option v-for="type in schema_list.other" v-bind:value="type.name">{{type.name}}</option>
-                                        </optgroup>
-                                    </select>
+                                <div class="input-group colored">
+                                    <input type="text" class="form-control no-shadow is-normal"
+                                            v-bind:class="{'is-normal':doc.name.isClean,'is-invalid':!doc.name.isClean && !doc.name.isValid,'is-valid':!doc.name.isClean && doc.name.isValid}"
+                                            v-model="doc.name.value"
+                                            @focus="handleFocus(doc.name)"
+                                            @blur="handleBlur(doc.name)"
+                                            placeholder="Document Name">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <div class="input-group colored">
                                         <input type="text" class="form-control no-shadow is-normal"
-                                               v-bind:class="{'is-normal':doc.value.isClean,'is-invalid':!doc.value.isClean && !doc.value.isValid,'is-valid':!doc.value.isClean && doc.value.isValid}"
-                                               v-model="doc.value.value"
-                                               @focus="handleFocus(doc.value)"
-                                               @blur="handleBlur(doc.value)"
+                                               v-bind:class="{'is-normal':doc.url.isClean,'is-invalid':!doc.url.isClean && !doc.url.isValid,'is-valid':!doc.url.isClean && doc.url.isValid}"
+                                               v-model="doc.url.value"
+                                               @focus="handleFocus(doc.url)"
+                                               @blur="handleBlur(doc.url)"
                                                placeholder="URL">
                                         <div class="input-group-append" @click="uploadDocument(i)">
                                             <span class="fa fa-upload"></span>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -171,48 +89,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <label>Structured Data</label>
-                    </div>
-                    <div class="card-body">
-                        <div v-for="(sdata,i) in structured_data" class="row justify-content-between">
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <div class="form-group select-colored">
-                                        <select class="selectpicker" v-bind:id="'schema-type-picker'+i" data-style="select-with-transition" title="Type" v-model="sdata.type_id.value">
-                                            <optgroup label="Device Properties">
-                                                <option v-for="type in schema_list.device" v-bind:value="type.name">{{type.name}}</option>
-                                            </optgroup>
-                                            <optgroup label="Events">
-                                                <option v-for="type in schema_list.events" v-bind:value="type.name">{{type.name}}</option>
-                                            </optgroup>
-                                            <optgroup label="Other">
-                                                <option v-for="type in schema_list.other" v-bind:value="type.name">{{type.name}}</option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-1">
-                                <button class="btn btn-danger btn-fab btn-sm btn-round" @click="removeStructuredData(i)"><i class="fa fa-minus"></i></button>
-                            </div>
-                            <div class="col-12">
-                                <codemirror v-model="sdata.value.value" :options="cmOptions"></codemirror>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <button class="btn btn-white" @click="addStructuredDataRow()"><i class="fa fa-plus"></i> Structured Data</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
 
                 <div class="text-right">
                     <button class="btn btn-primary btn-round" @click="saveDevice">SAVE</button>

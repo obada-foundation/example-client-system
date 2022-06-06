@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsnRequest extends FormRequest
+class ComputeUsnRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class UsnRequest extends FormRequest
     public function rules()
     {
         return [
-            'manufacturer'=>'required|string|max:255',
-            'part_number'=>'required|string|max:255',
-            'serial_number'=>'required|string|max:255'
+            'manufacturer'  => 'required|string|max:255',
+            'part_number'   => 'required|string|max:255',
+            'serial_number' => 'required|string|max:255'
         ];
     }
 }

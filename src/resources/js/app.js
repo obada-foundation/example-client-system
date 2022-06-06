@@ -19,6 +19,7 @@ Vue.component('device-obit-detail', require('./components/Devices/DeviceObitDeta
 Vue.component('obit-detail', require('./components/Devices/ObitDetail.vue').default);
 Vue.component('edit-device', require('./components/Devices/EditDevice.vue').default);
 Vue.component('usn-generator', require('./components/Utils/GenerateUsn.vue').default);
+Vue.component('checksum-generator', require('./components/Utils/GenerateChecksum.vue').default);
 Vue.component('device-row', require('./components/Devices/DeviceRow.vue').default);
 Vue.component('obit-mapper', require('./components/Devices/ObitMapper.vue').default);
 Vue.component('structured-data-row', require('./components/Devices/StructuredDataRow.vue').default);

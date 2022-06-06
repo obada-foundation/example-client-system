@@ -17,7 +17,7 @@ class CreateMetadataTable extends Migration
             $table->id();
             $table->integer('device_id');
             $table->string('metadata_type_id');
-            $table->float('data_fp',8,2)->nullable();
+            $table->float('data_fp', 8, 2)->nullable();
             $table->integer('data_int')->nullable();
             $table->text('data_txt')->nullable();
             $table->string('data_hash');

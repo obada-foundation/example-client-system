@@ -14,9 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('ObitManager', function($app){
-            return new ObitManager();
-        });
+       // $this->app->singleton('ObitManager', function ($app) {
+       //     return new ObitManager();
+       // });
     }
 
     /**
