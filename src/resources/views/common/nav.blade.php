@@ -19,10 +19,10 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="shopNav">
                         <li>
-                            <a href="/devices" class="dropdown-item">Device List</a>
+                            <a href="{{ route('devices.index') }}" class="dropdown-item">Device List</a>
                         </li>
                         <li>
-                            <a href="/devices/0/edit" class="dropdown-item">Add New Device</a>
+                            <a href="{{ route('devices.create') }}" class="dropdown-item">Add New Device</a>
                         </li>
                     </ul>
                 </li>

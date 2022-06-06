@@ -29,17 +29,16 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
      * @return void
-     *
      * @throws \Throwable
      */
     public function report(Throwable $exception)
     {
-        if (! in_array(config('app.env'), ['testing', 'local'])) {
-            if ($this->shouldReport($exception) && app()->bound('sentry')) {
-                app('sentry')->captureException($exception);
-            }
+        if (
+            ! in_array(config('app.env'), ['testing', 'local']) &&
+            ($this->shouldReport($exception) && app()->bound('sentry'))
+        ) {
+            app('sentry')->captureException($exception);
         }
 
         parent::report($exception);
@@ -49,9 +48,7 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
      * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @throws \Throwable
      */
     public function render($request, Throwable $exception)

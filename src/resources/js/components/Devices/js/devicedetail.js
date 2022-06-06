@@ -1,5 +1,5 @@
 export default {
-    props:['is_mobile','events','device_id'],
+    props:['is_mobile','events','device_id', 'loadDeviceUrl', 'storeObitUrl'],
     data: function () {
         return {
             device: null,
@@ -14,7 +14,7 @@ export default {
     },
     methods: {
         getDevice: function(){
-            axios.get('/api/internal/device/'+this.device_id, {}).then((response) => {
+            axios.get(this.loadDeviceUrl, {}).then((response) => {
                 this.isLoading = false;
                 console.log(response);
                 if(response.data.status == 0) {
@@ -48,10 +48,10 @@ export default {
         createObit: function(){
             if(this.isLoading) return;
             this.isLoading = true;
-            axios('/api/internal/device/obit', {
+            axios(this.storeObitUrl, {
                 method:'post',
                 data: {
-                    device_id: parseInt(this.device_id)
+                    device_id: this.device_id
                 },
                 responseType: 'json',
             })

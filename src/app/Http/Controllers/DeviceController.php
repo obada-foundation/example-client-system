@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Facades\ObadaClient;
-
 use App\Http\Requests\UsnRequest;
 use App\Models\Device;
 use App\Models\Documents;
@@ -18,10 +17,8 @@ use Obada\ClientHelper\ObitDid;
 
 class DeviceController extends Controller
 {
-    protected $helperApi;
-
-    public function __construct(HelperApi $helperApi) {
-        $this->helperApi = $helperApi;
+    public function __construct(protected HelperApi $helperApi)
+    {
     }
 
     /**
@@ -34,24 +31,26 @@ class DeviceController extends Controller
         $input = $request->input();
 
         try {
-
-            $result = $this->helperApi->generateObitDef($input['manufacturer'], $input['part_number'], $input['serial_number']);
+            $result = $this->helperApi->generateObitDef(
+                $input['manufacturer'],
+                $input['part_number'],
+                $input['serial_number']
+            );
 
             $usn = $result['obit'];
-
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>$e->getMessage()
+                'errorMessage' => $e->getMessage()
             ], 400);
         }
 
-        if($request->input('device_id') != 0) {
-            $device = Device::with('metadata','documents','structured_data')->find($request->input('device_id'));
-            if(!$device) {
+        if ($request->input('device_id') != 0) {
+            $device = Device::with('metadata', 'documents', 'structured_data')->find($request->input('device_id'));
+            if (!$device) {
                 return response()->json([
                     'status' => 1,
-                    'errorMessage'=>'Unable to find device'
+                    'errorMessage' => 'Unable to find device'
                 ], 400);
             }
         } else {
@@ -61,10 +60,10 @@ class DeviceController extends Controller
                 'usn' => $usn['usn']
             ])->first();
 
-            if($existingDevice) {
+            if ($existingDevice) {
                 return response()->json([
                     'status' => 1,
-                    'errorMessage'=>'Device With This USN Already Exists'
+                    'errorMessage' => 'Device With This USN Already Exists'
                 ], 400);
             }
 
@@ -80,11 +79,11 @@ class DeviceController extends Controller
         $device->usn = $usn['usn'];
         $device->obit_did = $usn['obitDid'];
         $device->save();
-        if(isset($input['metadata']) && $input['metadata']) {
-            foreach($input['metadata'] as $m) {
-                if(isset($m['id'])) {
+        if (isset($input['metadata']) && $input['metadata']) {
+            foreach ($input['metadata'] as $m) {
+                if (isset($m['id'])) {
                     $metadata = Metadata::find($m['id']);
-                    if(!$metadata) {
+                    if (!$metadata) {
                         $metadata = new Metadata();
                     }
                 } else {
@@ -92,24 +91,27 @@ class DeviceController extends Controller
                 }
                 $metadata->device_id = $device->id;
                 $metadata->metadata_type_id = $m['metadata_type_id'];
-                if(isset($m['data_fp']))
+                if (isset($m['data_fp'])) {
                     $metadata->data_fp = $m['data_fp'];
+                }
 
-                if(isset($m['data_txt']))
+                if (isset($m['data_txt'])) {
                     $metadata->data_txt = $m['data_txt'];
+                }
 
-                if(isset($m['data_int']))
+                if (isset($m['data_int'])) {
                     $metadata->data_int = $m['data_int'];
+                }
                 $metadata->data_hash = '';
                 $metadata->save();
             }
         }
 
-        if(isset($input['structured_data']) && $input['structured_data']) {
-            foreach($input['structured_data'] as $s) {
-                if(isset($s['id'])) {
+        if (isset($input['structured_data']) && $input['structured_data']) {
+            foreach ($input['structured_data'] as $s) {
+                if (isset($s['id'])) {
                     $structured_data = StructuredData::find($s['id']);
-                    if(!$structured_data) {
+                    if (!$structured_data) {
                         $structured_data = new StructuredData();
                     }
                 } else {
@@ -123,11 +125,11 @@ class DeviceController extends Controller
             }
         }
 
-        if(isset($input['documents']) && $input['documents']) {
-            foreach($input['documents'] as $d) {
-                if(isset($d['id'])) {
+        if (isset($input['documents']) && $input['documents']) {
+            foreach ($input['documents'] as $d) {
+                if (isset($d['id'])) {
                     $document = Documents::find($d['id']);
-                    if(!$document) {
+                    if (!$document) {
                         $document = new Documents();
                     }
                 } else {
@@ -141,28 +143,28 @@ class DeviceController extends Controller
             }
         }
 
-        if(isset($input['structured_data_to_remove']) && $input['structured_data_to_remove']) {
-            foreach($input['structured_data_to_remove'] as $s) {
+        if (isset($input['structured_data_to_remove']) && $input['structured_data_to_remove']) {
+            foreach ($input['structured_data_to_remove'] as $s) {
                 $structured_data = StructuredData::find($s);
-                if($structured_data){
+                if ($structured_data) {
                     $structured_data->delete();
                 }
             }
         }
 
-        if(isset($input['metadata_to_remove']) && $input['metadata_to_remove']) {
-            foreach($input['metadata_to_remove'] as $m) {
+        if (isset($input['metadata_to_remove']) && $input['metadata_to_remove']) {
+            foreach ($input['metadata_to_remove'] as $m) {
                 $metadata = Metadata::find($m);
-                if($metadata){
+                if ($metadata) {
                     $metadata->delete();
                 }
             }
         }
 
-        if(isset($input['documents_to_remove']) && $input['documents_to_remove']) {
-            foreach($input['documents_to_remove'] as $d) {
+        if (isset($input['documents_to_remove']) && $input['documents_to_remove']) {
+            foreach ($input['documents_to_remove'] as $d) {
                 $document = Documents::find($d);
-                if($document){
+                if ($document) {
                     $document->delete();
                 }
             }
@@ -176,19 +178,16 @@ class DeviceController extends Controller
 
             return response()->json([
                 'status' => 0,
-                'root_hash'=>$result['rootHash'],
+                'root_hash' => $result['rootHash'],
                 'device' => $device
             ], 200);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::info($e->getMessage());
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Error Generating Device Root Hash'
+                'errorMessage' => 'Error Generating Device Root Hash'
             ], 400);
         }
-
-
     }
 
 
@@ -197,38 +196,41 @@ class DeviceController extends Controller
      *
      * @return JsonResponse
      */
-    public function generateUsn(UsnRequest $request){
+    public function generateUsn(UsnRequest $request)
+    {
         $input = $request->input();
 
         try {
-            $result = ObadaClient::generateObitDef($input['manufacturer'],$input['part_number'], $input['serial_number']);
+            $result = ObadaClient::generateObitDef(
+                $input['manufacturer'],
+                $input['part_number'],
+                $input['serial_number']
+            );
+
             return response()->json([
                 'status' => 0,
-                'usn' => $result['obit']
+                'usn'    => $result['obit']
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>$e->getMessage()
+                'errorMessage' => $e->getMessage()
             ], 422);
         }
-
     }
 
     /**
      * Returns Device object based on device_id
-     *
-     * @return Device | JsonResponse
      */
-    public function getDevice($obit_did)
+    public function getDevice($obit_did): \App\Models\Device|\Illuminate\Http\JsonResponse
     {
-        $device = Device::with('metadata','metadata.schema','documents','structured_data')->where([
-            'obit_did'=>$obit_did
+        $device = Device::with('metadata', 'metadata.schema', 'documents', 'structured_data')->where([
+            'obit_did' => $obit_did
         ])->first();
-        if(!$device) {
+        if (!$device) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Unable to find device'
+                'errorMessage' => 'Unable to find device'
             ], 404);
         }
         try {
@@ -237,32 +239,27 @@ class DeviceController extends Controller
             return response()->json([
                 'status' => 0,
                 'device' => $device,
-                'root_hash'=>$result['rootHash']
+                'root_hash' => $result['rootHash']
             ], 200);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::info($e->getMessage());
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Error Generating Device Root Hash'
+                'errorMessage' => 'Error Generating Device Root Hash'
             ], 400);
         }
-
-
     }
 
     /**
      * Returns Device object based on device_id
-     *
-     * @return Device | JsonResponse
      */
-    public function getDeviceWithId($id)
+    public function getDeviceWithId($id): \App\Models\Device|\Illuminate\Http\JsonResponse
     {
-        $device = Device::with('metadata','metadata.schema','documents','structured_data')->find($id);
-        if(!$device) {
+        $device = Device::with('metadata', 'metadata.schema', 'documents', 'structured_data')->find($id);
+        if (!$device) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Unable to find device'
+                'errorMessage' => 'Unable to find device'
             ], 404);
         }
         try {
@@ -270,39 +267,34 @@ class DeviceController extends Controller
             return response()->json([
                 'status' => 0,
                 'device' => $device,
-                'root_hash'=>$result['rootHash']
+                'root_hash' => $result['rootHash']
             ], 200);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::info($e->getMessage());
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Error Generating Device Root Hash'
+                'errorMessage' => 'Error Generating Device Root Hash'
             ], 400);
         }
-
-
     }
 
     /**
      * Returns Obit object based on usn
-     *
-     * @return ClientObit | JsonResponse
      */
-    public function getObit(Request $request, $obit_did) {
+    public function getObit(Request $request, $obit_did): \ClientObit|\Illuminate\Http\JsonResponse
+    {
         try {
             $result = $this->helperApi->getClientObit($obit_did);
 
             return response()->json([
                 'status' => 0,
-                'obit'=>$result['obit']
+                'obit' => $result['obit']
             ], 200);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::info($e->getMessage());
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Error Getting Client Obit'
+                'errorMessage' => 'Error Getting Client Obit'
             ], 400);
         }
     }
@@ -314,18 +306,18 @@ class DeviceController extends Controller
      */
     public function createObit(Request $request)
     {
-        if(!$request->has('device_id')) {
+        if (!$request->has('device_id')) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Unable to find device'
+                'errorMessage' => 'Unable to find device'
             ], 404);
         }
 
         $device = Device::find($request->input('device_id'));
-        if(!$device) {
+        if (!$device) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Unable to find device'
+                'errorMessage' => 'Unable to find device'
             ], 404);
         }
 
@@ -335,18 +327,16 @@ class DeviceController extends Controller
             return response()->json([
                 'status' => 0
             ], 200);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::info($e->getMessage());
             Log::info($e->getTraceAsString());
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Error Saving Client Obit',
-                'device'=>$device,
-                'local'=>$device->getLocalObit()
+                'errorMessage' => 'Error Saving Client Obit',
+                'device' => $device,
+                'local' => $device->getLocalObit()
             ], 400);
         }
-
     }
 
     /**
@@ -354,19 +344,19 @@ class DeviceController extends Controller
      *
      * @return JsonResponse
      */
-    public function getBlockchainObit(Request $request, $obit_did){
+    public function getBlockchainObit(Request $request, $obit_did)
+    {
         try {
             $result = $this->helperApi->fetchObitFromChain($obit_did);
 
             return response()->json([
                 'status' => 0,
-                'obit'=>$result['blockchainObit']
+                'obit' => $result['blockchainObit']
             ], 200);
-
-        } catch(\Exception $e) {
+        } catch (\Exception) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Error Getting Blockchain Obit'
+                'errorMessage' => 'Error Getting Blockchain Obit'
             ], 400);
         }
     }
@@ -376,44 +366,45 @@ class DeviceController extends Controller
      *
      * @return JsonResponse
      */
-    public function uploadObit(Request $request){
+    public function uploadObit(Request $request)
+    {
         //Integrate API
 
-        if(!$request->has('obit_did')) {
+        if (!$request->has('obit_did')) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Unable to find device'
+                'errorMessage' => 'Unable to find device'
             ], 400);
         }
 
         try {
-            $result = ObadaClient::uploadObit(new ObitDid(['obitDid'=>$request->input('obit_did')]));
+            ObadaClient::uploadObit(new ObitDid(['obitDid' => $request->input('obit_did')]));
             return response()->json([
                 'status' => 0
             ], 200);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::info($e->getMessage());
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Error Uploading Client Obit'
+                'errorMessage' => 'Error Uploading Client Obit'
             ], 400);
         }
-
     }
 
     /**
+     * phpcs:ignore
      * Creates or Updates the Client Obit with the data retrieved from the Blockchain using the Obada PHP Client Library.
      * Takes the Obit_DID as input.
      *
      * @return JsonResponse
      */
-    public function downloadObit(Request $request){
+    public function downloadObit(Request $request)
+    {
 
-        if(!$request->has('obit_did')) {
+        if (!$request->has('obit_did')) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Unable to find device'
+                'errorMessage' => 'Unable to find device'
             ], 400);
         }
 
@@ -422,17 +413,15 @@ class DeviceController extends Controller
 
             return response()->json([
                 'status' => 0,
-                'obit'=>$result['obit']
+                'obit' => $result['obit']
             ], 200);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::info($e->getMessage());
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Error Uploading Client Obit'
+                'errorMessage' => 'Error Uploading Client Obit'
             ], 400);
         }
-
     }
 
 
@@ -455,9 +444,8 @@ class DeviceController extends Controller
 
         return response()->json([
             'status' => 0,
-            'url'=>$result['ObjectURL']
+            'url' => $result['ObjectURL']
         ], 200);
-
     }
 
     /**
@@ -465,31 +453,32 @@ class DeviceController extends Controller
      *
      * @return JsonResponse
      */
-    public function mapObitToDevice(Request $request){
+    public function mapObitToDevice(Request $request)
+    {
 
-        if(!$request->has('obit_did')) {
+        if (!$request->has('obit_did')) {
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Unable to find obit'
+                'errorMessage' => 'Unable to find obit'
             ], 400);
         }
 
         try {
             $result = $this->helperApi->getClientObit($request->input('obit_did'));
             $client_obit = $result['obit'];
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::info($e->getMessage());
             return response()->json([
                 'status' => 1,
-                'errorMessage'=>'Error Getting Client Obit'
+                'errorMessage' => 'Error Getting Client Obit'
             ], 400);
         }
 
         $device = Device::where([
-            'obit_did'=>$request->input('obit_did')
+            'obit_did' => $request->input('obit_did')
         ])->first();
 
-        if(!$device) {
+        if (!$device) {
             $device = new Device();
         }
         $device->usn = $client_obit['usn'];
@@ -501,31 +490,30 @@ class DeviceController extends Controller
 
         $device->save();
 
-        if($client_obit['metadata'] && is_array($client_obit['metadata'])) {
-            foreach($client_obit['metadata'] as $key=>$value) {
-
+        if ($client_obit['metadata'] && is_array($client_obit['metadata'])) {
+            foreach ($client_obit['metadata'] as $key => $value) {
                 $metadata = $device->metadata()->where([
-                    'metadata_type_id'=>$key
+                    'metadata_type_id' => $key
                 ])->first();
                 $schema = Schema::where([
-                    'name'=>$key
+                    'name' => $key
                 ])->first();
-                if(!$schema) {
-                    $schema = Schema::where(['name'=>'Other'])->first();
+                if (!$schema) {
+                    $schema = Schema::where(['name' => 'Other'])->first();
                 }
 
-                if(!$metadata) {
+                if (!$metadata) {
                     $metadata = new Metadata();
                     $metadata->device_id = $device->id;
                 }
 
                 $metadata->metadata_type_id = $key;
 
-                if($schema->data_type == 'float' && is_numeric($value)) {
+                if ($schema->data_type == 'float' && is_numeric($value)) {
                     $metadata->data_fp = $value;
                     $metadata->data_int = null;
                     $metadata->data_txt = null;
-                } else if($schema->data_type == 'int' && is_int($value)) {
+                } elseif ($schema->data_type == 'int' && is_int($value)) {
                     $metadata->data_fp = null;
                     $metadata->data_int = $value;
                     $metadata->data_txt = null;
@@ -540,20 +528,19 @@ class DeviceController extends Controller
             }
         }
 
-        if($client_obit['structuredData'] && is_array($client_obit['structuredData'])) {
-            foreach($client_obit['structuredData'] as $key => $value) {
-                $structured_data = $device->structured_data()->where([
-                    'structured_data_type_id'=>$key
-                ])->first();
+        if ($client_obit['structuredData'] && is_array($client_obit['structuredData'])) {
+            foreach ($client_obit['structuredData'] as $key => $value) {
+                $structured_data = $device->structuredData()
+                    ->where('structured_data_type_id', $key)
+                    ->first();
 
-                $schema = Schema::where([
-                    'name'=>$key
-                ])->first();
-                if(!$schema) {
-                    $schema = Schema::where(['name'=>'Other'])->first();
+                $schema = Schema::where('name', $key)->first();
+
+                if (!$schema) {
+                    $schema = Schema::where(['name' => 'Other'])->first();
                 }
 
-                if(!$structured_data) {
+                if (!$structured_data) {
                     $structured_data = new StructuredData();
                     $structured_data->device_id = $device->id;
                 }
@@ -565,21 +552,21 @@ class DeviceController extends Controller
             }
         }
 
-        if($client_obit['documents'] && is_array($client_obit['documents'])) {
-            foreach($client_obit['documents'] as $key => $value) {
+        if ($client_obit['documents'] && is_array($client_obit['documents'])) {
+            foreach ($client_obit['documents'] as $key => $value) {
                 $document = $device->documents()->where([
-                    'doc_type_id'=>$key
+                    'doc_type_id' => $key
                 ])->first();
 
                 $schema = Schema::where([
-                    'name'=>$key
+                    'name' => $key
                 ])->first();
 
-                if(!$schema) {
-                    $schema = Schema::where(['name'=>'Other'])->first();
+                if (!$schema) {
+                    $schema = Schema::where(['name' => 'Other'])->first();
                 }
 
-                if(!$document) {
+                if (!$document) {
                     $document = new Documents();
                     $document->device_id = $device->id;
                 }
@@ -593,11 +580,7 @@ class DeviceController extends Controller
 
         return response()->json([
             'status' => 0,
-            'device'=>$device
+            'device' => $device
         ], 200);
-
-
     }
-
-
 }
