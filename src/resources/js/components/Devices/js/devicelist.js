@@ -1,5 +1,5 @@
 export default {
-    props:['is_mobile','events'],
+    props:['is_mobile','events', 'devicesLoadUrl'],
     data: function () {
         return {
             deviceList: null,
@@ -39,7 +39,7 @@ export default {
                 pageLength: 250,
                 ajax: {
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    url: '/api/data/devices',
+                    url: this.devicesLoadUrl,
                     dataSrc: (data) => {
                         console.log(data);
                         this.isLoading = false;
@@ -62,7 +62,7 @@ export default {
                             var lastFour = full.serial_number.substr(full.serial_number.length - 8);
                             lastFour = '...'+lastFour;
 
-                            return type === 'display'?'<a href="/devices/'+full.obit_did+'"><b>'+lastFour+'</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.serial_number+'"><i class="fa fa-copy"></i></button>':full.serial_number;
+                            return type === 'display'?'<a href="/devices/'+full.usn+'"><b>'+lastFour+'</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.serial_number+'"><i class="fa fa-copy"></i></button>':full.serial_number;
                         }
                     },
                     {

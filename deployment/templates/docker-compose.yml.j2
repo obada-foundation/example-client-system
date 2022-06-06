@@ -37,11 +37,25 @@ services:
     image: obada/reference-design:develop
     container_name: reference-design
     volumes:
+{% if app_env == 'local' %}
+      - ./src:/app
+{% endif %}
       - ./etc/.env:/app/.env
     restart: always
     networks:
       - backend
       - frontend
+
+  client-helper:
+    image: obada/client-helper:develop
+    container_name: client-helper
+    restart: always
+    volumes:
+      - ./client-helper/data:/home/obada/data
+    environment:
+      - DB_PATH=/home/obada/data
+    networks:
+      - backend
 
   db:
     image: mysql:8
@@ -63,4 +77,3 @@ networks:
 
 volumes:
   db_data: {}
-  helper_data: {}

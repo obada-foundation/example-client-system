@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    @include('common.nav',['fixed'=>false])
+    @include('common.nav', ['fixed' => false])
     <div class="main">
         <div class="container">
             <section class="">
@@ -30,7 +30,7 @@
                             <li><b><a href="/devices">Local Inventory List<a/></b>
                             </li>
                             <li><b><a href="/obits">Local Obit List<a/></b></li>
-                            <li><b><a href="/devices/0/edit">Add New Device</a></b></li>
+                            <li><b><a href="{{ route('devices.create') }}">Add New Device</a></b></li>
                             <li><b><a href="/generate/hashing">Import From Blockchain</a></b></li>
                         </ul>
                     </div>
@@ -38,9 +38,9 @@
                         <h3 class="text-center">Blockchain Tools</h3>
                         <p class="text-center">Tools to help integrate and debug OBADA.</p>
                         <ul class="bullet-list">
-                            <li><b><a href="https://gateway.obada.io">Blockchain Explorer<a/></b></li>
-                            <li><b><a href="/generate/usn">Obit Generator Tool</a></b> - demonstrates creation of an obit and a USN.</li>
-                            <li><b><a href="/generate/hashing">Hashing Tools</a></b> - demonstrates how the document and root hash are generated.</li>
+                            <li><b><a href="http://explorer.alpha.obada.io" target="__blank">Blockchain Explorer<a/></b></li>
+                            <li><b><a href="{{ route('generate.usn.index') }}">Obit Generator Tool</a></b> - demonstrates creation of an obit and a USN.</li>
+                            <li><b><a href="{{ route('generate.checksum.index') }}">Obit Checksum Generator</a></b> - demonstrates how the obit checksum is generated.</li>
                         </ul>
                     </div>
 
@@ -52,17 +52,15 @@
                         </h2>
                         <ul class="bullet-list">
                             <li>
-                                <b><a href="https://www.obada.io">OBADA Foundation</a></b> - homepage of the OBADA governing body.
+                                <b><a href="https://www.obada.io" target="__blank">OBADA Foundation</a></b> - homepage of the OBADA governing body.
                             </li>
                             <li>
-                                <b><a href="https://github.com/obada-protocol">OBADA Github</a></b> - repository of OBADA Code.
+                                <b><a href="https://github.com/obada-protocol" target="__blank">OBADA Github</a></b> - repository of OBADA Code.
                             </li>
                             <li>
-                                <b><a href="https://github.com/obada-protocol/php-client-library">API Documentation</a></b> - documentation for the OBADA API
+                                <b><a href="https://github.com/obada-protocol/php-client-library" target="__blank">API Documentation</a></b> - documentation for the OBADA API
                             </li>
                         </ul>
-
-
                     </div>
                 </div>
 
