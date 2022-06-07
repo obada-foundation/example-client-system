@@ -103987,7 +103987,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/sr/projects/obada/example-client-system/src/resources/js/vendor.js */"./resources/js/vendor.js");
+module.exports = __webpack_require__(/*! /app/resources/js/vendor.js */"./resources/js/vendor.js");
 
 
 /***/ })

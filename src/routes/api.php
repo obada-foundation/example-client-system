@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('api')->group(function(){
-    Route::get('/data/devices', 'DataController@getDevicesData');
+   /* Route::get('/data/devices', 'DataController@getDevicesData');
     Route::get('/data/obits', 'DataController@getObitsData');
 
     Route::get('/internal/devices', 'ServiceController@getDevices');
@@ -39,5 +39,5 @@ Route::middleware('api')->group(function(){
     Route::delete('/internal/device/{device_id}', 'ServiceController@removeDevice');
     Route::delete('/internal/device/{device_id}/metadata/{metadata_id}', 'ServiceController@removeDeviceMetadata');
     Route::delete('/internal/device/{device_id}/document/{document_id}', 'ServiceController@removeDeviceDocument');
-    Route::delete('/internal/device/{device_id}/structured_data/{structured_data_id}', 'ServiceController@removeDeviceStructuredData');
+    Route::delete('/internal/device/{device_id}/structured_data/{structured_data_id}', 'ServiceController@removeDeviceStructuredData');**/
 });
