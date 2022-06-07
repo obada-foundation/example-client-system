@@ -13,35 +13,54 @@
         </div>
         <div class="collapse navbar-collapse show">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown navDropDown" id="inventoryDrop">
-                    <a class="nav-link dropdown-toggle" id="shopNav" aria-haspopup="true" aria-expanded="false">
-                        MY INVENTORY
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="shopNav">
-                        <li>
-                            <a href="{{ route('devices.index') }}" class="dropdown-item">Device List</a>
+                @if (Auth::check())
+                    <li class="nav-item dropdown navDropDown" id="inventoryDrop">
+                        <a class="nav-link dropdown-toggle" id="shopNav" aria-haspopup="true" aria-expanded="false">
+                            MY INVENTORY
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="shopNav">
+                            <li>
+                                <a href="{{ route('devices.index') }}" class="dropdown-item">Device List</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('devices.create') }}" class="dropdown-item">Add New Device</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown navDropDown" id="inventoryDrop">
+                        <a class="nav-link dropdown-toggle" id="shopNav" aria-haspopup="true" aria-expanded="false">
+                            LOCAL OBIT VIEWER
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="shopNav">
+                            <li>
+                                <a href="/obits" class="dropdown-item">Obit List</a>
+                            </li>
+                            <li>
+                                <a href="/retrieve/obit" class="dropdown-item">Import From Blockchain</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"  aria-haspopup="true" aria-expanded="false">
+                            Logout
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login.index') }}" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                    </li>
+                    @if (config('settings.enable_registration'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register.index') }}" aria-haspopup="true" aria-expanded="false">
+                                Register
+                            </a>
                         </li>
-                        <li>
-                            <a href="{{ route('devices.create') }}" class="dropdown-item">Add New Device</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown navDropDown" id="inventoryDrop">
-                    <a class="nav-link dropdown-toggle" id="shopNav" aria-haspopup="true" aria-expanded="false">
-                        LOCAL OBIT VIEWER
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="shopNav">
-                        <li>
-                            <a href="/obits" class="dropdown-item">Obit List</a>
-                        </li>
-                        <li>
-                            <a href="/retrieve/obit" class="dropdown-item">Import From Blockchain</a>
-                        </li>
-                    </ul>
-                </li>
+                    @endif
+                @endif
             </ul>
         </div>
-
     </div>
 </nav>
 

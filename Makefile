@@ -7,6 +7,26 @@ PROJECT_TAG_IMAGE = $(PROJECT):$(COMMIT_TAG)
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
 
+deps/php:
+	docker run \
+		--rm \
+		 -it \
+		 -v $$(pwd)/src:/app \
+		 -w /app \
+		 composer:2.2.12 \
+		sh -c "composer install"
+
+deps/node:
+	docker run \
+		--rm \
+		-it \
+		-v $$(pwd)/src:/app \
+		-w /app \
+		node:14 \
+		sh -c "npm install && npm run dev"
+
+deps: deps/php deps/node
+
 run-local:
 	docker-compose -f docker-compose.yml up -d --force-recreate
 
