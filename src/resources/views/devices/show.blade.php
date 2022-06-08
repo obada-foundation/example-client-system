@@ -1,4 +1,7 @@
-@extends('layouts.app',['body_class'=>'landing-page'])
+@extends('layouts.app-sidenav',[
+    'body_class'=>'landing-page',
+    'page_title' => 'Device Details'
+])
 
 @section('head')
     <title>Device Details</title>
@@ -12,21 +15,11 @@
 
 @endsection
 
-@section('content')
-    @include('common.nav',['fixed'=>false])
-    <div class="main">
-        <div class="container">
-            <h1 class="text-center">Device Details</h1>
-            <section class="py-5 my-5">
-                <device-detail :device_id="_device_id" 
-                    load-device-url="{{ route('devices.load', $device_id) }}"
-                    store-obit-url="{{ route('obits.store') }}">
-                </device-detail>
-            </section>
-        </div>
-
-    </div>
-    @include('common.footer')
+@section('page_content')
+    <device-detail :device_id="_device_id"
+        load-device-url="{{ route('devices.load', $device_id) }}"
+        store-obit-url="{{ route('obits.store') }}">
+    </device-detail>
 @endsection
 
 @section('scripts')

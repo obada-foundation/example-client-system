@@ -13,9 +13,12 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Cutive+Mono&family=Barlow:wght@300;400&family=Material+Icons&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Cutive+Mono&family=Barlow:wght@300;400&family=Material+Icons&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="{{ mix('/css/vendor.css') }}">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
@@ -35,11 +38,11 @@
     </script>
     <script>
         function S4() {
-            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
         }
 
         function guid() {
-            return (S4()+S4()+""+S4()+""+S4()+""+S4()+""+S4()+S4()+S4());
+            return (S4() + S4() + "" + S4() + "" + S4() + "" + S4() + "" + S4() + S4() + S4());
         }
 
     </script>
@@ -47,17 +50,19 @@
 
     @yield('head')
 </head>
+
 <body class="{{$body_class}}">
 
 <div id="app">
     <alerts :is_mobile="isMobile" :alerts="alerts" @dismissalert="dismissAlert"></alerts>
+
     @yield('content')
 </div>
+
 <script src="{{ mix('/js/vendor.js') }}"></script>
 <script src="{{ mix('/js/app.js') }}"></script>
 
-
-
 @yield('scripts')
+
 </body>
 </html>
