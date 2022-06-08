@@ -41,16 +41,6 @@ class SiteController extends Controller
         ]));
     }
 
-    public function editDevice(Request $request, $obit_id)
-    {
-        //Temporarily adding schema to page. This should be converted into a web-service eventually.
-        $schema = Schema::all();
-
-        return view('pages.edit_device', $this->getData([
-            'device_id' => $obit_id,
-            'schema' => $schema
-        ]));
-    }
     public function generateUsn(Request $request)
     {
         return view('pages.generate_usn', $this->getData([]));
