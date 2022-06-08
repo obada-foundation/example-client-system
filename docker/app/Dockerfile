@@ -1,8 +1,9 @@
 FROM php:8.1.5-fpm as base
 
 RUN apt update \
-	&& apt install nginx supervisor -y \
-	&& docker-php-ext-install mysqli pdo pdo_mysql \
+	&& apt install nginx supervisor zlib1g-dev libpng-dev libjpeg-dev -y \
+	&& docker-php-ext-configure gd --enable-gd --with-jpeg \
+	&& docker-php-ext-install mysqli pdo pdo_mysql gd \
 	&& rm -rf /var/www && mkdir /var/www
 
 WORKDIR /app
