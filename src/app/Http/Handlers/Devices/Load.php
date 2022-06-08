@@ -6,11 +6,12 @@ namespace App\Http\Handlers\Devices;
 
 use App\Http\Handlers\Handler;
 use App\Models\Device;
+use Illuminate\Support\Facades\Auth;
 
 class Load extends Handler {
     public function __invoke($usn)
     {
-        $device = Device::with('documents')
+        $device = Auth::user()->devices()->with('documents')
             ->byUsn($usn)
             ->first();
 

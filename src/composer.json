@@ -25,7 +25,8 @@
         "obada-foundation/client-api-library-php": "dev-main",
         "sentry/sentry-laravel": "^2.0",
         "tuupola/base58": "^2.1",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "league/flysystem-aws-s3-v3": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

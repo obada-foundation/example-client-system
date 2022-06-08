@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'SiteController@welcome');
 //Route::get('/devices/{obit_did}', 'SiteController@deviceObitDetail');
-Route::get('/devices/{device_id}/edit', 'SiteController@editDevice');
+//Route::get('/devices/{device_id}/edit', 'SiteController@editDevice');
 
 //Route::get('/obits', 'SiteController@obitsList');
 //Route::get('/obits/{obit_id}', 'SiteController@obitDetail');
@@ -38,19 +38,21 @@ Route::namespace('\App\Http\Handlers\Obits')
 Route::namespace('\App\Http\Handlers\Devices')
     ->name('devices.')
     ->prefix('devices')
+    ->middleware('auth')
     ->group(function () {
-        Route::get('/create', Create::class)->name('create');
-        Route::get('/load-all', LoadAll::class)->name('load-all');
-        Route::get('/{usn}', Show::class)->name('show');
-        Route::get('/{usn}/load', Load::class)->name('load');
-        Route::get('/', Index::class)->name('index');
-        Route::post('/', Save::class)->name('save');
+        Route::get('/create', \Create::class)->name('create');
+        Route::get('/load-all', \LoadAll::class)->name('load-all');
+        Route::get('/{usn}', \Show::class)->name('show');
+        Route::get('/{usn}/load', \Load::class)->name('load');
+        Route::get('/{usn}/edit', \Edit::class)->name('edit');
+        Route::get('/', \Index::class)->name('index');
+        Route::post('/', \Save::class)->name('save');
 
         Route::namespace('Documents')
             ->name('documents.')
             ->prefix('documents')
             ->group(function () {
-                Route::post('/', Store::class)->name('store');
+                Route::post('/', \Store::class)->name('store');
             });
     });
 

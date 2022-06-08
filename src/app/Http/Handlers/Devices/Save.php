@@ -8,14 +8,15 @@ use App\Http\Handlers\Handler;
 use App;
 use Obada\Api\UtilsApi;
 use Obada\ClientHelper\GenerateObitDIDRequest;
-use Illuminate\Http\Request;
 use Throwable;
 use App\Models\Device;
 use App\Models\Document;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\SaveDeviceRequest;
 use Log;
 
 class Save extends Handler {
-    public function __invoke(Request $request, UtilsApi $utilsApi)
+    public function __invoke(SaveDeviceRequest $request, UtilsApi $utilsApi)
     {
         try {
             $did = $utilsApi->generateDID(
@@ -29,20 +30,20 @@ class Save extends Handler {
 
             $existingDevice = Device::byUsn($did->getUsn())->first();
 
-            if ($existingDevice) {
-                return response()->json([
-                    'status'       => 1,
-                    'errorMessage' => 'Device With This USN Already Exists'
-                ], 400);
+            if (! $existingDevice) {
+                $device = Device::create([
+                    'user_id'       => Auth::user()->id,
+                    'serial_number' => $request->get('serial_number'),
+                    'manufacturer'  => $request->get('manufacturer'),
+                    'part_number'   => $request->get('part_number'),
+                    'usn'           => $did->getUsn(),
+                    'obit_did'      => $did->getDid(),
+                ]);
             }
 
-            $device = Device::create([
-                'serial_number' => $request->get('serial_number'),
-                'manufacturer'  => $request->get('manufacturer'),
-                'part_number'   => $request->get('part_number'),
-                'usn'           => $did->getUsn(),
-                'obit_did'      => $did->getDid(),
-            ]);
+            if (Auth::user()->id != $existingDevice->id) {
+                abort(404);
+            }
 
             foreach ($request->get('documents', []) as $document) {
                 Document::create([

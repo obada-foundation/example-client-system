@@ -271,8 +271,6 @@ export default {
                     documents_to_remove: this.documents_to_remove
                 };
 
-                console.log(data);
-                console.log(this.storeDeviceUrl);
                 axios(this.storeDeviceUrl, {
                     method:'post',
                     data: data,
