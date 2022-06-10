@@ -11,12 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.sass('resources/vendor/scss/material-kit.scss', 'resources/vendor/css/material-kit.css');
-
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
-mix.js('resources/js/vendor.js', 'public/js')
-    .sass('resources/sass/vendor.scss', 'public/css/vendor.css');
+mix.js('resources/js/vendor.js', 'public/js');
 
 mix.version();
