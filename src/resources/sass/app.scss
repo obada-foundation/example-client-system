@@ -1,79 +1,117 @@
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+//@import '~bootstrap-vue/src/index.scss';
+@import "../vendor/material-kit-pro/material-kit";
 
-h1 {
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-size: 3.25rem !important;
-    color: #3c4858;
-    font-weight: 800;
+@import "~bootstrap-sweetalert/dist/sweetalert.css";
+@import "../vendor/codemirror/lib/codemirror.css";
+@import "../vendor/codemirror/theme/base16-light.css";
+@import "../vendor/codemirror/addon/hint/show-hint.css";
+
+
+/*
+ * Default variables
+ */
+$font-family-heading: $font-family-base !default;
+$background-color: #ffffff !default;
+$text-color: #3C4858 !default;
+$link-color: #007bff !default;
+$header-background-color: $background-color !default;
+$header-text-color: $text-color !default;
+$footer-background-color: $background-color !default;
+$footer-text-color: $text-color !default;
+$text-size-base: 16px !default;
+
+
+/*
+ * Customized variables
+ */
+@import "config";
+$link-hover-color: darken($link-color, 10%);
+
+
+html {
+    font-size: $text-size-base;
 }
 
-h2 {
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-size: 2.25rem !important;
-    color: #3c4858;
-    font-weight: 800;
+body {
+    font-family: $font-family-base;
+    background-color: $background-color;
+    color: $text-color;
 }
 
-h3 {
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-size: 2.25rem !important;
-    color: #3c4858;
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-h4 {
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-size: 1.8rem !important;
-    color: #3c4858;
-}
-
+h1,
+h2,
+h3,
+h4,
 h5 {
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-size: 1.25rem !important;
-    color: #3c4858;
+    font-family: $font-family-heading;
+    color: $text-color;
+}
+
+p {
+    font-size: 1rem;
+    color: $text-color;
+}
+
+p.bold {
+    font-family: $font-family-heading;
+    font-weight: 800;
 }
 
 a, a * {
     cursor: pointer;
 }
 
-p {
-    font-family: 'Barlow', monospace;
-    font-size: 1.25rem !important;
-    color: #3c4858;
+a {
+    color: $link-color;
+
+    &:hover {
+        color: $link-hover-color;
+    }
 }
 
-p.bold {
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-size: 2.25rem !important;
-    color: #3c4858;
-    font-weight: 800;
-}
-
-.navbar-brand  {
+.navbar-brand {
     p.bold {
         line-height: 1em;
-        margin: 0px;
+        margin: 0;
         font-size: 2rem !important;
 
         small {
-            color: #3c4858;
+            color: $text-color;
         }
     }
+
     span {
-        font-family: 'Barlow', monospace;
+        font-family: $font-family-base;
         font-size: 1rem !important;
-        color: #3c4858;
+        color: $text-color;
         line-height: 1em;
         font-weight: normal;
         position: relative;
         top: -5px;
     }
 }
+
+.main {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    flex-grow: 1;
+}
+
 label {
-    font-family: 'Barlow', monospace;
+    font-family: $font-family-base;
     font-size: 1.25rem;
 }
+
 .btn {
-    font-family: 'Barlow', monospace;
+    font-family: $font-family-base;
     font-size: 1.25rem;
     padding: 0.25rem 1.25rem;
 }
@@ -118,7 +156,7 @@ label {
     font-size: 2.25rem !important;
 }
 
-#shopDrop:hover>.dropdown-menu {
+#shopDrop:hover > .dropdown-menu {
     display: block;
     opacity: 1;
     transform: scale(1);
@@ -145,15 +183,15 @@ label {
 
 
 .navbar {
-    .navbar-brand {
-        padding-top: 0.1rem;
-    }
+    background-color: $header-background-color !important;
+    color: $header-text-color;
 
     .navbar-nav {
         .nav-item {
             .nav-link {
+                text-transform: none;
+                font-family: $font-family-heading;
                 font-size: 1.25rem;
-                font-family: 'Barlow Condensed', sans-serif;
 
                 .fa {
                     font-size: 1rem;
@@ -180,6 +218,10 @@ label {
     border: none;
 }
 
+.main {
+    background-color: transparent;
+}
+
 .form-control.no-shadow {
     box-shadow: none;
 }
@@ -189,11 +231,11 @@ label {
 }
 
 .bmd-form-group .form-control, .bmd-form-group label, .bmd-form-group input::placeholder {
-    font-family: 'Barlow', monospace;
+    font-family: $font-family-base;
 }
 
 .bootstrap-select.btn-group .dropdown-toggle .filter-option {
-    font-family: 'Barlow', monospace;
+    font-family: $font-family-base;
     font-size: 1rem;
 }
 
@@ -204,7 +246,7 @@ label {
     text-transform: capitalize;
 }
 
-.btn.btn-sm.btn-fab> i, .btn-group-sm .btn.btn-fab>i {
+.btn.btn-sm.btn-fab > i, .btn-group-sm .btn.btn-fab > i {
     font-size: 0.8rem !important;
 }
 
@@ -222,7 +264,6 @@ label {
 }
 
 .alerts-container .alert {
-    border-radius: 5px;
     width: max-content;
     margin: auto;
     border-radius: 30px;
@@ -233,7 +274,7 @@ label {
     padding-right: 15px;
 }
 
-.alerts-container .alert .close{
+.alerts-container .alert .close {
     margin-top: -4px;
     margin-left: 10px;
 }
@@ -241,43 +282,25 @@ label {
 .alert p {
     color: #FFFFFF;
     line-height: 1em;
-    margin: 0px;
+    margin: 0;
 }
 
 .card-outline-primary {
-    border: 1px solid;
-    border-color: #ffc107;
+    border: 1px solid #ffc107;
 }
 
-.footer p {
-    font-family: 'Barlow', monospace;
-    font-size: 0.75rem !important;
-    color: #3c4858;
+footer {
+    background-color: $footer-background-color;
+    color: $footer-text-color;
 }
 
 .footer a {
-    font-family: 'Barlow', monospace;
-    color: #3c4858 !important;
+    font-family: $font-family-heading;
 }
 
-.footer h5 {
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-size: 0.75rem !important;
-    color: #3c4858;
-}
-
-.footer ul li a{
-    padding: 0px !important;
-    font-size: 18px;
-}
-
-.footer ul li {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.footer ul li:first-child {
-    padding-left: 0px;
+.footer ul li a {
+    text-transform: none;
+    font-size: 1.125rem;
 }
 
 /* Designer & Viewer */
@@ -313,7 +336,7 @@ label {
     background-image: none;
 }
 
-.input-group.colored  .form-control:focus {
+.input-group.colored .form-control:focus {
     background-color: transparent;
     background-size: 3% 100%, 100% 100%;
     background-position: right calc(0.375em + 0.1875rem) center;
@@ -341,10 +364,11 @@ label {
 
 @media (max-width: 991px) {
     .navbar-collapse {
-        box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     }
 
 }
+
 @media all and (max-width: 768px) {
 
     .desktop-only {
@@ -357,17 +381,20 @@ label {
     thead {
         tr {
             border-bottom: 2px solid #efefef;
+
             th {
-                font-family: 'Barlow Condensed', sans-serif !important;
+                font-family: $font-family-heading !important;
                 font-size: 1.5rem !important;
-                color: #3c4858;
+                color: $text-color;
                 font-weight: 800;
             }
         }
     }
+
     tbody {
         tr {
             border: none;
+
             td {
                 font-size: 1rem !important;
             }
@@ -377,9 +404,9 @@ label {
 
 .form-group {
     label {
-        font-family: 'Barlow Condensed', sans-serif !important;
+        font-family: $font-family-heading !important;
         font-size: 1.25rem !important;
-        color: #3c4858;
+        color: $text-color;
         font-weight: 800;
         line-height: 1.2rem;
         display: block;
@@ -387,35 +414,38 @@ label {
 
 
 }
+
 .is-focused [class^='bmd-label'],
 .is-focused [class*=' bmd-label'] {
-    color: #3c4858 !important;
+    color: $text-color !important;
 }
 
 .device-information-list {
     list-style: none;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 
     li.data-row {
-        border-bottom: 1px solid rgba(45,45,45,0.16);
+        border-bottom: 1px solid rgba(45, 45, 45, 0.16);
         width: 100%;
         padding: 0.5rem 0.25rem;
     }
+
     p.title {
-        font-family: 'Barlow Condensed', sans-serif !important;
+        font-family: $font-family-heading !important;
         font-size: 1.5rem !important;
-        color: #3c4858;
+        color: $text-color;
         font-weight: 800;
         margin-top: 10px;
         margin-bottom: 10px;
         min-height: 22px;
         text-transform: capitalize;
     }
+
     p.value {
-        font-family: 'Barlow', monospace;
+        font-family: $font-family-base;
         font-size: 1.25rem !important;
-        color: #3c4858;
+        color: $text-color;
         margin-top: 10px;
         margin-bottom: 10px;
         min-height: 22px;
@@ -426,12 +456,11 @@ label {
     }
 
 
-
     .sub-list {
         list-style: none;
-        padding: 0px;
+        padding: 0;
         padding-left: 0.25rem;
-        margin: 0px;
+        margin: 0;
 
         li {
             border: none !important;
@@ -452,16 +481,16 @@ label {
 
     .card-header {
         background: transparent;
-        border-radius: 0px;
-        padding: 0px !important;
-        margin: 0px;
+        border-radius: 0;
+        padding: 0 !important;
+        margin: 0;
         border-bottom: 1px solid #454545;
         box-shadow: none !important;
 
         label {
             font-family: "Barlow Condensed", sans-serif !important;
             font-size: 1.25rem !important;
-            color: #3c4858;
+            color: $text-color;
             font-weight: 800;
             line-height: 1.2rem;
             display: block;
@@ -472,27 +501,23 @@ label {
 
 .loader {
     position: fixed;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     z-index: 999999;
-    background: rgba(0,0,0,0.12);
+    background: rgba(0, 0, 0, 0.12);
 
     .loading-card {
         position: absolute;
         top: 50%;
         left: 50%;
-        -webkit-transform: translateX(-50%) translateY(-50%);
-        -moz-transform: translateX(-50%) translateY(-50%);
-        -ms-transform: translateX(-50%) translateY(-50%);
-        -o-transform: translateX(-50%) translateY(-50%);
         transform: translateX(-50%) translateY(-50%);
 
         width: 250px;
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0,0,0,0.16);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);
         background: #FFFFFF;
 
         i.fa {
@@ -526,7 +551,7 @@ label {
         width: 100%;
 
         input {
-            font-family: 'Barlow', monospace;
+            font-family: $font-family-base;
             width: 100%;
             background: no-repeat center bottom, center calc(100% - 1px);
             background-size: 0 100%, 100% 100%;
@@ -538,7 +563,7 @@ label {
             font-size: 18px;
 
             &::placeholder {
-                font-family: 'Barlow', monospace;
+                font-family: $font-family-base;
                 color: #888888;
             }
 
@@ -551,16 +576,17 @@ label {
     padding-left: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
+
     li {
-        font-family: 'Barlow', monospace;
+        font-family: $font-family-base;
         font-size: 1.25rem !important;
-        color: #3c4858;
+        color: $text-color;
         line-height: 1.2em;
         margin-bottom: 10px;
     }
 }
 
-.navDropDown:hover>.dropdown-menu{
+.navDropDown:hover > .dropdown-menu {
     display: block;
     opacity: 1;
     transform: scale(1);
@@ -574,6 +600,7 @@ label {
     position: relative;
     padding: 10px;
     padding-left: 30px;
+
     .title-bubble {
         color: #fff;
         background-color: #007bff;
@@ -586,19 +613,17 @@ label {
         top: -30px;
         left: 20px;
     }
+
     .btn-view {
         position: absolute;
         top: calc(50% - 5px);
-        -webkit-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        -o-transform: translateY(-50%);
         transform: translateY(-50%);
         right: 10px;
     }
+
     p {
         line-height: 1em;
-        margin: 0px;
+        margin: 0;
     }
 }
 

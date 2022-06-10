@@ -27,6 +27,8 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.5.0",
+        "bootstrap-sweetalert": "^1.0.1",
         "datatables.net": "^1.10.21",
         "datatables.net-dt": "^1.10.21",
         "js-beautify": "^1.13.0",

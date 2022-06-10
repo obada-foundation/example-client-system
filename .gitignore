@@ -1,5 +1,5 @@
 .idea
 etc
 docker-compose.yml
-vendor
+src/vendor
 client-helper/data

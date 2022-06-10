@@ -7,20 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Cutive+Mono&family=Barlow:wght@300;400&family=Material+Icons&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ mix('/css/vendor.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    {{--    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Cutive+Mono&family=Barlow:wght@300;400&family=Material+Icons&display=swap" rel="stylesheet">--}}
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
