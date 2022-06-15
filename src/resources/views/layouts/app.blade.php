@@ -13,8 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     {{--    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Cutive+Mono&family=Barlow:wght@300;400&family=Material+Icons&display=swap" rel="stylesheet">--}}
+
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script>
         window.Laravel = {!! json_encode([
@@ -51,7 +51,6 @@
     @yield('content')
 </div>
 
-<script src="{{ mix('/js/vendor.js') }}"></script>
 <script src="{{ mix('/js/app.js') }}"></script>
 
 @yield('scripts')

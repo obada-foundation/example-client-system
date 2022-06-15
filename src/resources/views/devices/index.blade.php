@@ -10,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"/>
 @endsection
 
-@section('scripts')
+@section('styles')
+    <link rel="stylesheet" href="{{ mix('/css/app-vue.css') }}">
 @endsection
 
 @section('page_content')
@@ -18,4 +19,5 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ mix('/js/app-vue.js') }}"></script>
 @endsection
