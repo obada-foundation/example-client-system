@@ -62,4 +62,4 @@
     </div>
 </template>
 
-<script src="./js/devicedetail.js"></script>
+<script src="./index.js"></script>

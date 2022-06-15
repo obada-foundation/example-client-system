@@ -29,4 +29,4 @@
     </div>
 </template>
 
-<script src="./js/obitslist.js"></script>
+<script src="./index.js"></script>

@@ -59,4 +59,4 @@
     </div>
 </template>
 
-<script src="./js/obitmapper.js"></script>
+<script src="./index.js"></script>

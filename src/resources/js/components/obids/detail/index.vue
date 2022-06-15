@@ -69,4 +69,4 @@
     </div>
 </template>
 
-<script src="./js/obitdetail.js"></script>
+<script src="./index.js"></script>

@@ -201,4 +201,4 @@
     </div>
 </template>
 
-<script src="./js/deviceobitdetail.js"></script>
+<script src="./index.js"></script>

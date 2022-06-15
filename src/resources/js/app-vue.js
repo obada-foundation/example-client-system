@@ -16,7 +16,7 @@ let token = document.head.querySelector('meta[name="csrf-token"]')
 
 import Vue from 'vue';
 import VueCodemirror from 'vue-codemirror';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import { BootstrapVue } from 'bootstrap-vue';
 
 Vue.use(BootstrapVue);
 Vue.use(VueCodemirror, /* {
@@ -27,17 +27,17 @@ Vue.use(VueCodemirror, /* {
 window.beautifyJS = require('js-beautify').js_beautify
 
 Vue.component('alerts', require('./components/alerts/Alerts.vue').default);
-Vue.component('device-list', require('./components/Devices/DeviceList.vue').default);
-Vue.component('obit-list', require('./components/Devices/ObitsList.vue').default);
-Vue.component('device-detail', require('./components/Devices/DeviceDetail.vue').default);
-Vue.component('device-obit-detail', require('./components/Devices/DeviceObitDetail.vue').default);
-Vue.component('obit-detail', require('./components/Devices/ObitDetail.vue').default);
-Vue.component('edit-device', require('./components/Devices/EditDevice.vue').default);
-Vue.component('usn-generator', require('./components/Utils/GenerateUsn.vue').default);
-Vue.component('checksum-generator', require('./components/Utils/GenerateChecksum.vue').default);
-Vue.component('device-row', require('./components/Devices/DeviceRow.vue').default);
-Vue.component('obit-mapper', require('./components/Devices/ObitMapper.vue').default);
-Vue.component('structured-data-row', require('./components/Devices/StructuredDataRow.vue').default);
+Vue.component('device-list', require('./components/devices/list/index.vue').default);
+Vue.component('device-detail', require('./components/devices/detail/index.vue').default);
+Vue.component('device-obit-detail', require('./components/devices/obid-detail/index.vue').default);
+Vue.component('device-row', require('./components/devices/row/index.vue').default);
+Vue.component('structured-data-row', require('./components/devices/structured-data-row/index.vue').default);
+Vue.component('edit-device', require('./components/devices/edit/index.vue').default);
+Vue.component('obit-list', require('./components/obids/list/index.vue').default);
+Vue.component('obit-detail', require('./components/obids/detail/index.vue').default);
+Vue.component('obit-mapper', require('./components/obids/mapper/index.vue').default);
+Vue.component('usn-generator', require('./utils/GenerateUsn.vue').default);
+Vue.component('checksum-generator', require('./utils/GenerateChecksum.vue').default);
 
 window.Events = new Vue({})
 

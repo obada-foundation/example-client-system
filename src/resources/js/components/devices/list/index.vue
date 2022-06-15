@@ -28,4 +28,4 @@
     </div>
 </template>
 
-<script src="./js/devicelist.js"></script>
+<script src="./index.js"></script>
