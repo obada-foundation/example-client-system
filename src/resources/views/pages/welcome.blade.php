@@ -56,7 +56,7 @@
                         <div class="col-6">
                             <h2 class="text-center">Blockchain Tools</h2>
                             <p class="text-center">Tools to help integrate and debug OBADA.</p>
-                            <ul class="bullet-list">
+                            <ul>
                                 <li><b><a href="{{ route('generate.usn.index') }}">Obit Generator Tool</a></b> - demonstrates creation of an obit and a USN.</li>
                                 <li><b><a href="{{ route('generate.checksum.index') }}">Obit Checksum Generator</a></b> - demonstrates how the obit checksum is generated.</li>
                             </ul>
@@ -64,7 +64,7 @@
 
                         <div class="col-6">
                             <h2 class="text-center">OBADA sites and tools</h2>
-                            <ul class="bullet-list">
+                            <ul>
                                 <li>
                                     <b><a href="https://www.obada.io" target="__blank">OBADA Foundation</a></b> - homepage of the OBADA governing body.
                                 </li>
