@@ -3,7 +3,8 @@
         <div class="navbar-translate">
             <a class="navbar-brand" href="/">
                 <div>
-                    <img src="https://public.tradeloopproto.com/img/tradeloop-logo.svg" alt="Tradeloop" height="30">
+                    <img src="https://public.tradeloopproto.com/img/tradeloop-logo.svg" alt="Tradeloop" height="20">
+                    <span class="d-block text-center" style="top: 0;">Blockchain Demo Site</span>
                 </div>
 {{--                <p class="bold"><img alt="OBADA" src="/images/obada-logo.svg" width="112" height="35"> <small>Reference Design</small></p>--}}
 {{--                <span>An inventory manager application</span>--}}
@@ -16,9 +17,8 @@
         </div>
         <div class="collapse navbar-collapse show">
             <ul class="navbar-nav ml-auto">
-                <!-- custom link -->
                 <li class="nav-item">
-                    <a class="nav-link" href="https://public.tradeloopproto.com/w/membership?uppath=crypto-wallet/link/bam">Become a Member</a>
+                    <span class="nav-link"><small>Demo site:</small></span>
                 </li>
 
                 @if (!Auth::check())
@@ -30,6 +30,10 @@
                             <a class="nav-link" href="{{ route('register.index') }}">Register</a>
                         </li>
                     @endif
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                    </li>
                 @endif
             </ul>
         </div>
