@@ -1,6 +1,6 @@
 @extends('layouts.app-sidenav',[
     'body_class'=>'landing-page',
-    'page_title' => 'My Inventory'
+    'page_title' => 'My pNFT Inventory'
 ])
 
 
