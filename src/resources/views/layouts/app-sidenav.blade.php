@@ -15,8 +15,7 @@
                                 <a class="nav-link" href="/">Home</a>
                                 <a class="nav-link" href="/devices">My Inventory</a>
                                 <a class="nav-link" href="{{ route('devices.create') }}">Add New Part</a>
-                                <a class="nav-link" href="#">Help</a>
-                                <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                                <a class="nav-link" href="#">Documentation</a>
                             </nav>
                         </div>
                     </div>
