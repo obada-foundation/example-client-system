@@ -233,5 +233,8 @@ export default {
                     }
                 });
         }
+    },
+    components: {
+        // StructuredDataRow: () => import('./structured-data-row/index')
     }
 }

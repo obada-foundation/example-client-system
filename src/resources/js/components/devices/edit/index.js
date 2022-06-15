@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default {
     props:['is_mobile','events','device_id', 'storeDocumentUrl', 'storeDeviceUrl'],
     data: function () {
@@ -66,10 +68,6 @@ export default {
                     validations: ['required']
                 }
             });
-            setTimeout(()=>{
-                var i = this.documents.length - 1;
-                $('#doc-type-picker'+i).selectpicker('render');
-            },1000);
         },
         removeDocument: function(i) {
             var doc = this.documents[i];
@@ -94,7 +92,6 @@ export default {
 
             if(file.size > 500*1024*1024) {
                 this.toast("error",'File Too Large',"The file you are uploading is too large");
-                $('#upload-background').val('');
                 return;
             }
             this.fileUploading = true;
@@ -148,7 +145,7 @@ export default {
         },
         uploadDocument: function(i){
             this.documentUploadIndex = i;
-            $('#upload-file').click();
+            document.getElementById('upload-file').dispatchEvent(new MouseEvent("click"));
         },
         is_valid: function(set) {
             var keys = Object.keys(set);

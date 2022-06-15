@@ -7,9 +7,8 @@
         </div>
         <form action="" onsubmit="return false;">
             <h2>Device Identification</h2>
-            <div class="text-left py-5">
+            <div class="text-left pt-3 pb-5">
                 <div class="form-group">
-                    <label for="">Manufacturer</label>
                     <div class="input-group colored">
                         <input v-bind:disabled="device_id != 0" type="text" class="form-control no-shadow is-normal"
                                v-bind:class="{'is-normal':deviceForm.manufacturer.isClean,'is-invalid':!deviceForm.manufacturer.isClean && !deviceForm.manufacturer.isValid,'is-valid':!deviceForm.manufacturer.isClean && deviceForm.manufacturer.isValid}"
@@ -20,7 +19,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="">Serial Number</label>
                     <div class="input-group colored">
                         <input v-bind:disabled="device_id != 0" type="text" class="form-control no-shadow is-normal"
                                v-bind:class="{'is-normal':deviceForm.serial_number.isClean,'is-invalid':!deviceForm.serial_number.isClean && !deviceForm.serial_number.isValid,'is-valid':!deviceForm.serial_number.isClean && deviceForm.serial_number.isValid}"
@@ -31,7 +29,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="">Part Number</label>
                     <div class="input-group colored">
                         <input v-bind:disabled="device_id != 0" type="text" class="form-control no-shadow is-normal"
                                v-bind:class="{'is-normal':deviceForm.part_number.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
@@ -43,7 +40,7 @@
                 </div>
             </div>
             <h2>Device Data & Information</h2>
-            <div class="text-left py-5">
+            <div class="text-left pt-3 pb-5">
                 <div class="card">
                     <div class="card-header">
                         <label>Documents</label>
@@ -90,8 +87,8 @@
                     </div>
                 </div>
 
-                <div class="text-right">
-                    <button class="btn btn-primary btn-round" @click="saveDevice">SAVE</button>
+                <div class="text-end">
+                    <button class="btn btn-primary" @click="saveDevice">SAVE</button>
                 </div>
 
             </div>

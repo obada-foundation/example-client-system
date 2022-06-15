@@ -1,37 +1,22 @@
-// require('../vendor/js/plugins/bootstrap-selectpicker.js');
 // require('../vendor/js/plugins/bootstrap-tagsinput.js');
 // require('../vendor/js/plugins/jasny-bootstrap.min.js');
 // require('../vendor/js/plugins/jquery.flexisel.js');
 // require('../vendor/js/plugins/bootstrap-datetimepicker.min.js');
 // require('../vendor/js/plugins/nouislider.min.js');
 require('bootstrap-sweetalert/dist/sweetalert');
-require('../vendor/codemirror/lib/codemirror.js');
-require('../vendor/codemirror/mode/javascript/javascript.js');
-require('../vendor/codemirror/mode/css/css.js');
-require('../vendor/codemirror/addon/hint/show-hint.js');
-require('../vendor/codemirror/addon/hint/css-hint.js');
-require('../vendor/codemirror/addon/hint/javascript-hint.js');
 
 let token = document.head.querySelector('meta[name="csrf-token"]')
 
 import Vue from 'vue';
-import VueCodemirror from 'vue-codemirror';
 import { BootstrapVue } from 'bootstrap-vue';
 
 Vue.use(BootstrapVue);
-Vue.use(VueCodemirror, /* {
-  options: { theme: 'base16-dark', ... },
-  events: ['scroll', ...]
-} */);
-
-window.beautifyJS = require('js-beautify').js_beautify
 
 Vue.component('alerts', require('./components/alerts/Alerts.vue').default);
 Vue.component('device-list', require('./components/devices/list/index.vue').default);
 Vue.component('device-detail', require('./components/devices/detail/index.vue').default);
 Vue.component('device-obit-detail', require('./components/devices/obid-detail/index.vue').default);
 Vue.component('device-row', require('./components/devices/row/index.vue').default);
-Vue.component('structured-data-row', require('./components/devices/structured-data-row/index.vue').default);
 Vue.component('edit-device', require('./components/devices/edit/index.vue').default);
 Vue.component('obit-list', require('./components/obids/list/index.vue').default);
 Vue.component('obit-detail', require('./components/obids/detail/index.vue').default);

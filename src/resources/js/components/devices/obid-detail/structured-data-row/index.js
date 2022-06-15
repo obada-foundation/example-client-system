@@ -1,3 +1,20 @@
+require('../../../../../vendor/codemirror/lib/codemirror.js');
+require('../../../../../vendor/codemirror/mode/javascript/javascript.js');
+require('../../../../../vendor/codemirror/mode/css/css.js');
+require('../../../../../vendor/codemirror/addon/hint/show-hint.js');
+require('../../../../../vendor/codemirror/addon/hint/css-hint.js');
+require('../../../../../vendor/codemirror/addon/hint/javascript-hint.js');
+
+import Vue from "vue";
+import VueCodemirror from 'vue-codemirror';
+
+Vue.use(VueCodemirror, /* {
+  options: { theme: 'base16-dark', ... },
+  events: ['scroll', ...]
+} */);
+
+window.beautifyJS = require('js-beautify').js_beautify
+
 export default {
     props: ['structured_data'],
     name: "StructuredDataRow",
