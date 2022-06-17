@@ -31,7 +31,7 @@ class Save extends Handler {
             $existingDevice = Device::byUsn($did->getUsn())->first();
 
             if (! $existingDevice) {
-                $device = Device::create([
+                $existingDevice = Device::create([
                     'user_id'       => Auth::user()->id,
                     'serial_number' => $request->get('serial_number'),
                     'manufacturer'  => $request->get('manufacturer'),
@@ -47,7 +47,7 @@ class Save extends Handler {
 
             foreach ($request->get('documents', []) as $document) {
                 Document::create([
-                    'device_id' => $device->id,
+                    'device_id' => $existingDevice->id,
                     'name'      => $document['doc_name'],
                     'path'      => $document['doc_path'],
                     'data_hash' => ''
@@ -57,7 +57,7 @@ class Save extends Handler {
             return response()->json([
                 'status'    => 0,
                 'root_hash' => '',
-                'device'    => $device
+                'device'    => $existingDevice
             ], 200);
         } catch (Throwable $t) {
             throw $t;
