@@ -2,4 +2,4 @@
 etc
 docker-compose.yml
 src/vendor
-client-helper/data
+client-helper
