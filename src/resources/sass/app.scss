@@ -71,12 +71,11 @@ $link-hover-color: darken($link-color, 10%);
 .input-group.colored {
     background: #ebf6fb;
     border-radius: 5px;
-    margin-top: 5px;
 
     .input-group-append {
         padding-left: 10px;
         padding-right: 10px;
-        padding-top: 10px;
+        padding-top: 4px;
         border-left: 1px solid #CACACA;
         background: #007bff;
         color: #FFFFFF;
@@ -89,23 +88,17 @@ $link-hover-color: darken($link-color, 10%);
 .table {
     thead {
         tr {
-            border-bottom: 2px solid #efefef;
-
             th {
-                font-family: $font-family-heading !important;
-                font-size: 1.5rem !important;
-                color: $text-color;
                 font-weight: 800;
+                font-size: 1rem;
             }
         }
     }
 
     tbody {
         tr {
-            border: none;
-
             td {
-                font-size: 1rem !important;
+                font-size: 1rem;
             }
         }
     }
@@ -120,6 +113,10 @@ $link-hover-color: darken($link-color, 10%);
         border-bottom: 1px solid rgba(45, 45, 45, 0.16);
         width: 100%;
         padding: 0.5rem 0.25rem;
+    }
+
+    p {
+        margin-bottom: 0;
     }
 
     p.title {
@@ -202,7 +199,7 @@ $link-hover-color: darken($link-color, 10%);
     font-size: 1.25rem !important;
 }
 
-.dataTables_filter {
+/*.dataTables_filter {
     width: 100%;
     float: none;
     text-align: center;
@@ -238,7 +235,7 @@ $link-hover-color: darken($link-color, 10%);
         }
     }
 
-}
+}*/
 
 .navDropDown:hover > .dropdown-menu {
     display: block;

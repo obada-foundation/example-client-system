@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default {
     props:['is_mobile','events','device_id', 'loadDeviceUrl', 'storeObitUrl'],
     data: function () {

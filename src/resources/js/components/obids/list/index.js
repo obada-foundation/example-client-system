@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default {
     props:['is_mobile','events', 'loadAllObitsUrl'],
     data: function () {
@@ -79,7 +81,6 @@ export default {
                             return full.part_number
                         }
                     },
-
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
@@ -89,7 +90,7 @@ export default {
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
-                            return full.owner_did
+                            return ''
                         }
                     },
                     {

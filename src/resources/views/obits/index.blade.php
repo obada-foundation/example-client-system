@@ -1,30 +1,32 @@
-@extends('layouts.app',['body_class'=>'landing-page'])
+@extends('layouts.app-sidenav',[
+    'body_class'=>'landing-page',
+    'page_title' => 'Local Obits'
+])
 
 @section('head')
     <title>Local Obits</title>
     <meta name="description" content="Local inventory of Obits">
     <meta name="keywords" content="obits, list">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"/>
+
+    <link rel="stylesheet" href="{{ mix('/css/app-vue.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"/>
 
 @endsection
 
-@section('scripts')
+@section('page_content')
 
-@endsection
-
-@section('content')
-    @include('common.nav',['fixed' => false])
-    <div class="main">
-        <div class="container">
-            <h1 class="text-center">Local OBITs</h1>
-            <section class="py-5 my-5">
-                <obit-list load-all-obits-url="{{ route('obits.load-all') }}"></obit-list>
-            </section>
+    <div class="card">
+        <div class="card-body">
+            <obit-list load-all-obits-url="{{ route('obits.load-all') }}"></obit-list>
         </div>
-
     </div>
-    @include('common.footer')
+
 @endsection
 
+
 @section('scripts')
+    <!-- todo: move to js file as dependencies -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="{{ mix('/js/app-vue.js') }}"></script>
 @endsection

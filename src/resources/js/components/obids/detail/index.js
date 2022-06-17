@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default {
     props:['is_mobile', 'events', 'usn','loadObitUrl', 'toChainObitUrl'],
     data: function () {

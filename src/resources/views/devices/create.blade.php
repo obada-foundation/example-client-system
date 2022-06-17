@@ -1,6 +1,6 @@
 @extends('layouts.app-sidenav', [
     'body_class' => 'landing-page',
-    'page_title' => 'Add New Part'
+    'page_title' => 'Create pNFT'
 ])
 
 
@@ -10,7 +10,6 @@
     <meta name="keywords" content="__keywords__">
 
     <link rel="stylesheet" href="{{ mix('/css/app-vue.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"/>
 @endsection
 
 

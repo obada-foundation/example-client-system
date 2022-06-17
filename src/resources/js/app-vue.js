@@ -13,7 +13,7 @@ import { BootstrapVue } from 'bootstrap-vue';
 Vue.use(BootstrapVue);
 
 Vue.component('alerts', require('./components/alerts/Alerts.vue').default);
-Vue.component('device-list', require('./components/devices/list/index.vue').default);
+// Vue.component('device-list', require('./components/devices/list/index.vue').default);
 Vue.component('device-detail', require('./components/devices/detail/index.vue').default);
 Vue.component('device-obit-detail', require('./components/devices/obid-detail/index.vue').default);
 Vue.component('device-row', require('./components/devices/row/index.vue').default);

@@ -19,7 +19,11 @@ class SiteController extends Controller
 
     public function welcome(Request $request)
     {
-        return view('pages.welcome', $this->getData([]));
+        if (Auth::check()) {
+            return redirect()->route('devices.index');
+        } else {
+            return view('pages.welcome', $this->getData([]));
+        }
     }
 
     public function obitsList(Request $request)
@@ -53,5 +57,10 @@ class SiteController extends Controller
     public function generateHashing(Request $request)
     {
         return view('pages.generate_hashing', $this->getData([]));
+    }
+
+    public function documentation(Request $request)
+    {
+        return view('pages.documentation', $this->getData([]));
     }
 }

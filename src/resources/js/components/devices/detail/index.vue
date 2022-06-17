@@ -1,23 +1,6 @@
 <template>
     <div>
-        <div v-if="isLoading" class="loader">
-            <div class="loading-card text-center">
-                <i class="fa fa-circle-notch fa-spin"></i>
-            </div>
-        </div>
-        <div v-if="device != null" class="text-center">
-            <a v-bind:href="'/devices/'+device_id+'/edit'" class="btn btn-primary btn-round">EDIT</a>
-        </div>
-        <h2>Device Identification</h2>
-        <ul v-if="device != null" class="device-information-list py-5">
-            <device-row :bold_title="true"  :title="'Serial Number'" :value="device.serial_number"></device-row>
-            <device-row :bold_title="true" :title="'Manufacturer'" :value="device.manufacturer"></device-row>
-            <device-row :bold_title="true"  :title="'Part Number'" :value="device.part_number"></device-row>
-        </ul>
-
-
-        <h2>Device Data & Information</h2>
-        <ul v-if="device != null" class="device-information-list py-5">
+        <ul v-if="device != null" class="device-information-list mt-4">
 
             <device-row :bold_title="true"  :title="'Documents'" :value="''"></device-row>
             <li class="data-row">
@@ -29,6 +12,7 @@
                </ul>
             </li>
         </ul>
+
         <table v-if="device != null" class="table table-bordered">
             <tbody>
                 <tr v-show="device.obit_checksum">

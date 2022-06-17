@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-    props:['is_mobile','events','device_id', 'storeDocumentUrl', 'storeDeviceUrl'],
+    props:['is_mobile','events','device_id', 'loadDeviceUrl', 'storeDocumentUrl', 'storeDeviceUrl'],
     data: function () {
         return {
             device: null,
@@ -213,7 +213,7 @@ export default {
             });
         },
         getDevice: function(){
-            axios.get('/api/internal/device/id/'+this.device_id, {}).then((response) => {
+            axios.get(this.loadDeviceUrl, {}).then((response) => {
                 this.isLoading = false;
                 if(response.data.status == 0) {
                     this.device = response.data.device;

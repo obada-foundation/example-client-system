@@ -59,6 +59,23 @@ export default {
                 columns: [
                     {
                         sortable: true,
+                        "render": function(data, type, full, meta) {
+                            console.log(full);
+                            return full.usn;
+                            /*var lastFour = full.serial_number.substr(full.serial_number.length - 8);
+                            lastFour = '...' + lastFour;
+
+                            return type === 'display' ? '<a href="/devices/' + full.usn + '"><b>' + lastFour + '</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="' + full.serial_number + '"><i class="fa fa-copy"></i></button>' : full.serial_number;*/
+                        }
+                    },
+                    {
+                        sortable: true,
+                        "render": function (data, type, full, meta) {
+                            return full.manufacturer;
+                        }
+                    },
+                    {
+                        sortable: true,
                         "render": function (data, type, full, meta) {
 
                             var lastFour = full.serial_number.substr(full.serial_number.length - 8);
@@ -76,58 +93,8 @@ export default {
                     {
                         sortable: true,
                         "render": function (data, type, full, meta) {
-                            return full.manufacturer;
-                        }
-                    },
-                    {
-                        sortable: true,
-                        "render": function (data, type, full, meta) {
-                            return full.owner
-                        }
-                    },
-                    {
-                        sortable: true,
-                        "render": function (data, type, full, meta) {
-                            if(full.local_hash === '' || full.local_hash === null) {
-                                return '-';
-                            }
-                            var localHash = full.local_hash;
-                            var displayString = localHash.substr(localHash.length - 8);
-
-                            var displayString = '<span class="'+(localHash != full.root_hash?'text-danger':'')+'">...'+displayString+'</span>'
-
-
-                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+localHash+'"><i class="fa fa-copy"></i></button>':localHash;
-
-                        }
-                    },
-                    {
-                        sortable: true,
-                        "render": function (data, type, full, meta) {
-                            if(full.root_hash === '' || full.root_hash === null) {
-                                return '-';
-                            }
-                            var rootHash = full.root_hash;
-                            var displayString = rootHash.substr(rootHash.length - 8);
-
-                            var displayString = '<span class="'+(rootHash != full.obada_hash?'text-danger':'')+'">...'+displayString+'</span>'
-
-
-                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+rootHash+'"><i class="fa fa-copy"></i></button>':rootHash;
-
-                        }
-                    },
-                    {
-                        sortable: true,
-                        "render": function (data, type, full, meta) {
-                            if(full.obada_hash === '' || full.obada_hash === null) {
-                                return '-';
-                            }
-                            var displayString = full.obada_hash.substr(full.obada_hash.length - 8);
-                            var displayString = '<span class="'+(full.root_hash != full.obada_hash?'text-danger':'')+'">...'+displayString+'</span>'
-
-                            return type === 'display'?displayString+' &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="'+full.obada_hash+'"><i class="fa fa-copy"></i></button>':full.obada_hash;
-
+                            console.log(full);
+                            return '';
                         }
                     },
                 ]

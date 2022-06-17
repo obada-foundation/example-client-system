@@ -17,4 +17,6 @@ mix.js('resources/js/app.js', 'public/js')
 mix.js('resources/js/app-vue.js', 'public/js')
     .sass('resources/sass/app-vue.scss', 'public/css');
 
+mix.js('resources/js/device-list.js', 'public/js');
+
 mix.version();
