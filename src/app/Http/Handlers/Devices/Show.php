@@ -15,6 +15,10 @@ class Show extends Handler
             ->byUsn($usn)
             ->first();
 
+        if (!$device) {
+            return redirect()->route('devices.index');
+        }
+
         return view('devices.show', [
             'device_id' => $usn,
             'device' => $device,

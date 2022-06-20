@@ -1,7 +1,8 @@
 {
-    "/js/app.js": "/js/app.js?id=a1bd8f9e54ccd356e9af",
-    "/css/app.css": "/css/app.css?id=289a799145491dc34b74",
-    "/css/app-vue.css": "/css/app-vue.css?id=f97737f98d6b760f4e79",
-    "/js/app-vue.js": "/js/app-vue.js?id=e86bbc2eb4c5219c7a10",
-    "/js/device-list.js": "/js/device-list.js?id=b3fde4896f844c8deb98"
+    "/js/app.js": "/js/app.js?id=55118898d64cac1f4e74",
+    "/css/app.css": "/css/app.css?id=d3435738dd893e5748bd",
+    "/css/app-vue.css": "/css/app-vue.css?id=cc954593a85e11410ab1",
+    "/js/app-vue.js": "/js/app-vue.js?id=1df24b2f31f42be936aa",
+    "/js/devices_detail.js": "/js/devices_detail.js?id=b4360562b0696d46669f",
+    "/js/devices_list.js": "/js/devices_list.js?id=b1e79bc4968f79995daa"
 }

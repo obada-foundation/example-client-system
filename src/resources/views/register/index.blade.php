@@ -17,40 +17,40 @@
                         <form method="POST" action="{{ route('register.user') }}">
                             @csrf
 
-                            <div class="form-outline mt-2 mb-4">
-                                <input type="text" id="name" class="form-control form-control-lg" name="name" value="{{ old('name') }}" required autofocus>
+                            <div class="mt-2 mb-3">
                                 <label for="name" class="form-label">Name</label>
+                                <input type="text" id="name" class="form-control @if ($errors->has('name')) is-invalid @endif" name="name" value="{{ old('name') }}" required autofocus>
                                 @if ($errors->has('name'))
-                                    <span class="form-helper text-danger">{{ $errors->first('name') }}</span>
+                                    <span class="invalid-feedback">{{ $errors->first('name') }}</span>
                                 @endif
                             </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="text" id="email" class="form-control form-control-lg" name="email" value="{{ old('email') }}" required>
+                            <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
+                                <input type="text" id="email" class="form-control @if ($errors->has('email')) is-invalid @endif" name="email" value="{{ old('email') }}" required>
                                 @if ($errors->has('email'))
-                                    <span class="form-helper text-danger">{{ $errors->first('email') }}</span>
+                                    <span class="invalid-feedback">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="password" id="password" class="form-control form-control-lg" name="password" required>
+                            <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" class="form-control @if ($errors->has('password')) is-invalid @endif" name="password" required>
                                 @if ($errors->has('password'))
-                                    <span class="form-helper text-danger">{{ $errors->first('password') }}</span>
+                                    <span class="invalid-feedback">{{ $errors->first('password') }}</span>
                                 @endif
                             </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="password" id="password_confirmation" class="form-control form-control-lg" name="password_confirmation" required>
+                            <div class="mb-3">
                                 <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                <input type="password" id="password_confirmation" class="form-control @if ($errors->has('password_confirmation')) is-invalid @endif" name="password_confirmation" required>
                                 @if ($errors->has('password_confirmation'))
-                                    <span class="form-helper text-danger">{{ $errors->first('password_confirmation') }}</span>
+                                    <span class="invalid-feedback">{{ $errors->first('password_confirmation') }}</span>
                                 @endif
                             </div>
 
                             <div class="mt-5 mb-3">
-                                <button type="submit" class="btn btn-dark btn-block">Sign Up</button>
+                                <button type="submit" class="btn btn-dark w-100">Sign Up</button>
                             </div>
                         </form>
                     </div>

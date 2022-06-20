@@ -47,7 +47,7 @@
 <body class="{{$body_class}}">
 
 <div id="app">
-    <alerts :is_mobile="isMobile" :alerts="alerts" @dismissalert="dismissAlert"></alerts>
+    <div id="alerts_container" class="alerts-container"></div>
 
     @yield('content')
 </div>

@@ -40,6 +40,7 @@ a, a * {
 }
 
 a {
+    text-decoration: none;
     color: $link-color;
 
     &:hover {

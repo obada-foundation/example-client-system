@@ -2,14 +2,6 @@
  * Alert
  */
 
-.alert {
-    p {
-        color: #FFFFFF;
-        line-height: 1em;
-        margin: 0;
-    }
-}
-
 .alerts-container {
     position: fixed;
     top: 75px;
@@ -21,17 +13,6 @@
     .alert {
         width: max-content;
         margin: auto;
-        border-radius: 30px;
-        padding: 15px 30px;
-
-        &.alert-dismissable {
-            padding-right: 15px;
-        }
-
-        .close {
-            margin-top: -4px;
-            margin-left: 10px;
-        }
     }
 }
 
@@ -174,6 +155,11 @@
     .form-helper {
         line-height: 1;
     }
+}
+
+.valid-feedback,
+.invalid-feedback {
+    line-height: 1.2;
 }
 
 

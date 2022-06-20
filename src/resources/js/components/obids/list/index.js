@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {copyToClipboard} from "../../../utils/copyToClipboard";
+import {showAlert} from "../../../utils/showAlert";
 
 export default {
     props:['is_mobile','events', 'loadAllObitsUrl'],
@@ -23,8 +25,8 @@ export default {
             $(document).on('click', '.btn-clipboard', (event)=>{
                 var $btn=$(event.currentTarget);
                 var sid = $btn.attr('data-value');
-                _app.copyToClipboard(sid);
-                _app.notify({
+                copyToClipboard(sid);
+                showAlert({
                     message: 'Copied',
                     type: 'message',
                     autoclose: true

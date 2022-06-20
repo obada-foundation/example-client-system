@@ -1,6 +1,7 @@
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid";
-@import "~mdb-ui-kit/src/scss/mdb.free";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-sweetalert/dist/sweetalert.css";
 
 
 /*
@@ -15,6 +16,7 @@ $header-text-color: $text-color !default;
 $footer-background-color: $background-color !default;
 $footer-text-color: $text-color !default;
 $text-size-base: 16px !default;
+$primary-color: $primary !default;
 
 
 /*
@@ -113,34 +115,14 @@ $link-hover-color: darken($link-color, 10%);
         border-bottom: 1px solid rgba(45, 45, 45, 0.16);
         width: 100%;
         padding: 0.5rem 0.25rem;
+
+        &:last-child {
+            border-bottom: none;
+        }
     }
 
     p {
         margin-bottom: 0;
-    }
-
-    p.title {
-        font-family: $font-family-heading !important;
-        font-size: 1.5rem !important;
-        color: $text-color;
-        font-weight: 800;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        min-height: 22px;
-        text-transform: capitalize;
-    }
-
-    p.value {
-        font-family: $font-family-base;
-        font-size: 1.25rem !important;
-        color: $text-color;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        min-height: 22px;
-
-        &.lower {
-            text-transform: lowercase;
-        }
     }
 
 

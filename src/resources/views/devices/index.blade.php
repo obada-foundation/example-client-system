@@ -5,13 +5,20 @@
 
 
 @section('head')
-    <title>Inventory List</title>
+    <title>My pNFT Inventory</title>
     <meta name="description" content="Obada Reference App Inventory List">
     <meta name="keywords" content="devices">
 
-    <link rel="stylesheet" href="{{ mix('/css/app-vue.css') }}">
-{{--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"/>--}}
+    <!-- TODO: move to css file ? -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"/>
+@endsection
+
+
+@section('scripts')
+    <script>
+        window.devicesLoadUrl = '{{ route('devices.load-all') }}';
+    </script>
+    <script src="{{ mix('/js/devices_list.js') }}"></script>
 @endsection
 
 
@@ -31,17 +38,4 @@
             </table>
         </div>
     </div>
-{{--    <device-list devices-load-url="{{ route('devices.load-all') }}"></device-list>--}}
-@endsection
-
-
-@section('scripts')
-    <script>
-        window.devicesLoadUrl = '{{ route('devices.load-all') }}';
-    </script>
-    <!-- todo: move to js file as dependencies -->
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script src="{{ mix('/js/app-vue.js') }}"></script>
-    <script src="{{ mix('/js/device-list.js') }}"></script>
 @endsection
