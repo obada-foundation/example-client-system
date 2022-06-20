@@ -27,13 +27,12 @@
                         <h2 class="text-center mt-5">About this Demo</h2>
                         <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eveniet impedit necessitatibus numquam, tempora veniam voluptatem. Facere inventore obcaecati quis quod ut! Commodi eius, eligendi inventore iste neque nihil sit?</p>
 
-                        <h2 class="text-center mt-5">Documentation</h2>
-                        @include('common.documentation-list')
+                        <h4 class="text-center"><a href="{{ route('login.index') }}">Login</a> or <a href="{{ route('register.index') }}">Register</a></h4>
                     </div>
 
                     <div class="col-xs-12 col-sm-6">
-                        <h2 class="text-center mt-5">Try it Out</h2>
-                        <h4 class="text-center"><a href="{{ route('login.index') }}">Login</a> or <a href="{{ route('register.index') }}">Register</a></h4>
+                        <h2 class="text-center mt-5">Documentation</h2>
+                        @include('common.documentation-list')
                     </div>
                 </div>
 
