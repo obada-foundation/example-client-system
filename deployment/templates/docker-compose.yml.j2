@@ -52,6 +52,7 @@ services:
     restart: always
     volumes:
       - ./client-helper/data:/home/obada/data
+      - ./client-helper/keys:/home/obada/keys
     environment:
       - DB_PATH=/home/obada/data
     networks:

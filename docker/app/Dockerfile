@@ -1,9 +1,9 @@
 FROM php:8.1.5-fpm as base
 
 RUN apt update \
-	&& apt install nginx supervisor zlib1g-dev libpng-dev libjpeg-dev -y \
+	&& apt install nginx supervisor zlib1g-dev libpng-dev libjpeg-dev libonig-dev libsodium-dev -y \
 	&& docker-php-ext-configure gd --enable-gd --with-jpeg \
-	&& docker-php-ext-install mysqli pdo pdo_mysql gd \
+	&& docker-php-ext-install mysqli pdo pdo_mysql gd sodium mbstring \
 	&& rm -rf /var/www && mkdir /var/www
 
 WORKDIR /app
@@ -45,6 +45,7 @@ COPY docker/app/etc/supervisord.conf /etc/supervisord.conf
 
 COPY --from=composer /var/www/ /app
 COPY --from=assets /assets/public /app/public
+COPY client-helper/test.pem /app/storage/certificates
 
 RUN chown -R www-data:www-data /app
 
