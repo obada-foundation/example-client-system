@@ -7,6 +7,8 @@
 @endsection
 
 @section('content')
+    @include('common.nav',['fixed'=>false])
+
     <div class="main">
         <div class="container">
             <div class="d-flex justify-content-center">
@@ -53,6 +55,8 @@
             </div>
         </div>
     </div>
+
+    @include('common.footer')
 @endsection
 
 @section('scripts')
