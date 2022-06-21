@@ -1,11 +1,12 @@
 import axios from 'axios';
 
 export default {
-    props:['is_mobile','events','device_id', 'loadDeviceUrl', 'storeDocumentUrl', 'storeDeviceUrl'],
+    props:['is_mobile','events','device_id', 'loadDeviceUrl', 'storeDocumentUrl', 'storeDeviceUrl', 'getUsnUrl'],
     data: function () {
         return {
             device: null,
             isLoading: true,
+            usn_data: null,
             cmOptions: {
                 // codemirror options
                 tabSize: 2,
@@ -46,11 +47,6 @@ export default {
         } else {
             this.isLoading = false;
         }
-        this.schema_list = {
-            device : [],
-            events: [],
-            other: []
-        };
     },
     methods: {
         addDocument: function() {
@@ -81,6 +77,10 @@ export default {
         },
         handleBlur: function(v) {
             this.validate(v)
+        },
+        handleBlurForUsnField: function(v) {
+            this.handleBlur(v);
+            this.updateUsn();
         },
         handleFileUpload: function(event) {
             if(event.target.files.length === 0) {
@@ -237,17 +237,17 @@ export default {
                 this.documents.forEach((s)=>{
                     if(this.is_valid(s)) {
                         var docs = {
-                            doc_name: s.name.value
+                            doc_name: s.name.value,
+                            doc_path: s.url.value
                         };
-
-                        docs.doc_path = s.url.value;
 
                         if (s.id) {
                             docs.id = s.id;
                         }
-                        documents.push(docs)
+
+                        documents.push(docs);
                     } else {
-                        isDocumentInvalid = false
+                        isDocumentInvalid = false;
                     }
                 });
 
@@ -321,6 +321,29 @@ export default {
                     });
                     this.triggerPickerChange('documents',this.documents.length - 1);
                 });
+            }
+        },
+        updateUsn: function() {
+            if (this.is_valid(this.deviceForm)) {
+                axios(this.getUsnUrl, {
+                    method: 'post',
+                    data: {
+                        manufacturer: this.deviceForm.manufacturer.value,
+                        part_number: this.deviceForm.part_number.value,
+                        serial_number: this.deviceForm.serial_number.value
+                    },
+                    responseType: 'json',
+                })
+                    .then((response) => {
+                        this.usn_data = response.data;
+                    })
+                    .catch((e) => {
+                        if (e.response.hasOwnProperty('errorMessage')) {
+                            swal("Error!", e.data.errorMessage, "error");
+                        } else {
+                            swal("Error!", "Unable to generate USN", "error");
+                        }
+                    });
             }
         },
     }

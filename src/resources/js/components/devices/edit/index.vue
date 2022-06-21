@@ -15,7 +15,7 @@
                                v-bind:class="{'is-normal':deviceForm.manufacturer.isClean,'is-invalid':!deviceForm.manufacturer.isClean && !deviceForm.manufacturer.isValid,'is-valid':!deviceForm.manufacturer.isClean && deviceForm.manufacturer.isValid}"
                                v-model="deviceForm.manufacturer.value"
                                @focus="handleFocus(deviceForm.manufacturer)"
-                               @blur="handleBlur(deviceForm.manufacturer)">
+                               @blur="handleBlurForUsnField(deviceForm.manufacturer)">
                     </div>
                     <div class="mb-4">
                         <label for="" class="form-label">Serial Number</label>
@@ -23,7 +23,7 @@
                                v-bind:class="{'is-normal':deviceForm.serial_number.isClean,'is-invalid':!deviceForm.serial_number.isClean && !deviceForm.serial_number.isValid,'is-valid':!deviceForm.serial_number.isClean && deviceForm.serial_number.isValid}"
                                v-model="deviceForm.serial_number.value"
                                @focus="handleFocus(deviceForm.serial_number)"
-                               @blur="handleBlur(deviceForm.serial_number)">
+                               @blur="handleBlurForUsnField(deviceForm.serial_number)">
                     </div>
                     <div class="mb-4">
                         <label for="">Part Number</label>
@@ -31,43 +31,43 @@
                                v-bind:class="{'is-normal':deviceForm.part_number.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
                                v-model="deviceForm.part_number.value"
                                @focus="handleFocus(deviceForm.part_number)"
-                               @blur="handleBlur(deviceForm.part_number)">
+                               @blur="handleBlurForUsnField(deviceForm.part_number)">
                     </div>
-                    <div class="form-group mb-4">
+                    <div v-if="usn_data != null" class="form-group mb-4">
                         <label for="" class="form-label">Obit ID</label>
-                        <input type="text" class="form-control" value="did:obada:2336339182fdb8936ac29bee4f26bd58b3a645564f7c905cd52ab0eb35ff1feb" disabled readonly>
+                        <input type="text" class="form-control" v-model="usn_data.did" disabled readonly>
                         <div class="form-text">Universal Identifier</div>
                     </div>
-                    <div class="form-group">
+                    <div v-if="usn_data != null" class="form-group">
                         <label for="" class="form-label">USN (Universal Serial Number)</label>
-                        <input type="text" class="form-control" value="21DJshuv" disabled readonly>
+                        <input type="text" class="form-control" v-model="usn_data.usn" disabled readonly>
                         <div class="form-text">Shorter version of obit ID</div>
                     </div>
 
-                    <p class="mt-3"><button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#calculations1" aria-expanded="false" aria-controls="calculations1">Show Calculations</button></p>
-                    <div id="calculations1" class="collapse">
+                    <p v-if="usn_data != null" class="mt-3"><button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#calculations1" aria-expanded="false" aria-controls="calculations1">Show Calculations</button></p>
+                    <div v-if="usn_data != null" id="calculations1" class="collapse">
                         <h4>HOW IS USN CALCULATED?</h4>
                         <table class="table" style="table-layout: fixed">
                             <tbody>
                             <tr>
                                 <td style="width: 50px;"><h3>1</h3></td>
                                 <td style="width: 40%;">serial_hash = sha256(serial_number)</td>
-                                <td>6e712b383180c2ee7fff19b8bb1222c39ca5673ef2547240bfd4021d4f544922</td>
+                                <td>{{ usn_data.serial_number_hash }}</td>
                             </tr>
                             <tr>
                                 <td><h3>2</h3></td>
                                 <td>obit = sha256(manufacturer + part_number + serial_hash)</td>
-                                <td>did:obada:2336339182fdb8936ac29bee4f26bd58b3a645564f7c905cd52ab0eb35ff1feb</td>
+                                <td>{{ usn_data.did }}</td>
                             </tr>
                             <tr>
                                 <td><h3>3</h3></td>
                                 <td>usn_base58 = base58(obit)</td>
-                                <td>21DJshuvoVj4dQ36NCkp6SyAmWAZyDXfZusVgCKdmqkZimqHRoPvm6PJwCaAA4F9Po4RGqpHNNJy7Y91oiQddcNu</td>
+                                <td>{{ usn_data.usn_base58 }}</td>
                             </tr>
                             <tr>
                                 <td><h3>4</h3></td>
                                 <td>usn = first_eight(usn_base58)</td>
-                                <td>21DJshuv</td>
+                                <td>{{ usn_data.usn }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -81,16 +81,17 @@
                     <input type="file" id="upload-file" style="position: absolute; top: -9999999px;" ref="sfile" v-on:change="handleFileUpload">
 
                     <div v-for="(doc,i) in documents" class="row mb-4">
-                        <div class="col-3">
+                        <div class="col-12 col-sm-6 col-md-3">
                             <label for="" class="form-label">Information Type</label>
-                            <select name="document_type" id="" class="form-select">
+                            <select class="form-select"
+                                    v-model="doc.name.type">
                                 <option value="1">Device Picture</option>
                                 <option value="2">Proof of Functionality</option>
                                 <option value="3">Proof of Data Destruction</option>
                                 <option value="4">Other</option>
                             </select>
                         </div>
-                        <div class="col-3">
+                        <div class="col-12 col-sm-6 col-md-3">
                             <label for="" class="form-label">Description</label>
                             <input type="text" class="form-control"
                                     v-bind:class="{'is-normal':doc.name.isClean,'is-invalid':!doc.name.isClean && !doc.name.isValid,'is-valid':!doc.name.isClean && doc.name.isValid}"
@@ -98,7 +99,7 @@
                                     @focus="handleFocus(doc.name)"
                                     @blur="handleBlur(doc.name)">
                         </div>
-                        <div class="col-5">
+                        <div class="col-10 col-sm-10 col-md-5">
                             <div class="form-group">
                                 <label for="" class="form-label">URL</label>
                                 <div class="input-group">
@@ -113,7 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-1">
+                        <div class="col-2 col-sm-2 col-md-1">
                             <button class="btn btn-danger btn-floating" @click="removeDocument(i)" style="margin-top: 2rem;"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
@@ -122,7 +123,8 @@
                         <button class="btn btn-outline-info btn-floating" @click="addDocument()"><i class="fa fa-plus"></i></button>
                     </div>
 
-                    <div v-if="documents.length > 0" class="form-group mt-3">
+                    <!-- TODO: calculate checksum -->
+<!--                    <div v-if="documents.length > 0" class="form-group mt-3">
                         <label for="" class="form-label">pNFT Checksum:</label>
                         <input type="text" class="form-control" value="A87AA0FDAE9DC37C8BFA0276495BCF72BAA4ADA36E3C67380208954B6108349C" disabled readonly>
                     </div>
@@ -155,7 +157,7 @@
                             </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div>-->
                 </div>
             </div>
 

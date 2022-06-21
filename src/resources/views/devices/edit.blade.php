@@ -21,12 +21,14 @@
 @section('page_content')
     @if($page->isEdit)
         <edit-device :device_id="'{{ $usn }}'"
+                     get-usn-url="{{ route('generate.usn.compute') }}"
                      load-device-url="{{ route('devices.load', $usn) }}"
                      store-device-url="{{ route('devices.save') }}"
                      store-document-url="{{ route('devices.documents.store') }}">
         </edit-device>
     @else
         <edit-device :device_id="0"
+                     get-usn-url="{{ route('generate.usn.compute') }}"
                      store-device-url="{{ route('devices.save') }}"
                      store-document-url="{{ route('devices.documents.store') }}">
         </edit-device>
