@@ -5,7 +5,7 @@ export default {
     data: function () {
         return {
             localObit: null,
-            blockchainObit: {},
+            blockchainObit: null,
             isLoading: true
         };
     },

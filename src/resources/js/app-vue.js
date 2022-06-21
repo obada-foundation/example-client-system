@@ -7,9 +7,9 @@
 let token = document.head.querySelector('meta[name="csrf-token"]')
 
 import Vue from 'vue';
-import { BootstrapVue } from 'bootstrap-vue';
+// import { BootstrapVue } from 'bootstrap-vue';
 
-Vue.use(BootstrapVue);
+// Vue.use(BootstrapVue);
 
 Vue.component('edit-device', require('./components/devices/edit/index.vue').default);
 Vue.component('device-obit-detail', require('./components/devices/obid-detail/index.vue').default);

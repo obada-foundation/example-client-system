@@ -1,11 +1,11 @@
 <template>
-    <li class="data-row">
+    <li class="list-group-item">
         <div class="row">
             <div class="col-md-4">
-                <p v-bind:class="{'title':bold_title,'value':!bold_title}">{{title}}</p>
+                <strong>{{ title }}</strong>
             </div>
             <div class="col-md-8">
-                <p class="value" v-bind:class="classes">{{ value }}</p>
+                {{ value }}
             </div>
         </div>
     </li>
