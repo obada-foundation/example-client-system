@@ -11,9 +11,9 @@ import { BootstrapVue } from 'bootstrap-vue';
 
 Vue.use(BootstrapVue);
 
+Vue.component('edit-device', require('./components/devices/edit/index.vue').default);
 Vue.component('device-obit-detail', require('./components/devices/obid-detail/index.vue').default);
 Vue.component('device-row', require('./components/devices/row/index.vue').default);
-Vue.component('edit-device', require('./components/devices/edit/index.vue').default);
 Vue.component('obit-list', require('./components/obids/list/index.vue').default);
 Vue.component('obit-detail', require('./components/obids/detail/index.vue').default);
 Vue.component('obit-mapper', require('./components/obids/mapper/index.vue').default);

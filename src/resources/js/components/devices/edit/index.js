@@ -80,7 +80,6 @@ export default {
             v.isClean = false;
         },
         handleBlur: function(v) {
-            console.log("Blur")
             this.validate(v)
         },
         handleFileUpload: function(event) {
@@ -131,7 +130,6 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then((response) => {
-                console.log(response);
                 this.isLoading = false;
                 var url = response.data.url;
                 this.documents[this.documentUploadIndex].url.value = url;
@@ -276,15 +274,14 @@ export default {
                     .then((response) => {
                         this.isLoading = false;
                         this.clearForm(this.deviceForm);
-                        console.log(response.data.device)
-                        window.location = '/devices/'+response.data.device.usn;
+                        // todo: add message on the page 'pNFT successfully created'
+                        window.location = '/devices/' + response.data.device.usn;
                     })
                     .catch((e) => {
                         this.isLoading = false;
                         if(e.response.data.hasOwnProperty('errorMessage')) {
                             swal("Error!", e.response.data.errorMessage, "error");
                         } else {
-                            console.log(e)
                             swal("Error!", "Something went wrong trying to save the device", "error");
                         }
                     });
@@ -293,12 +290,10 @@ export default {
 
             } else
             {
-                console.log(this.deviceForm);
                 swal("Error!", "Something went wrong trying to save the device", "error");
             }
         },
         parseDevice: function(){
-            console.log(this.device);
             var keys = Object.keys(this.device);
             keys.forEach((k)=>{
                 if(this.deviceForm.hasOwnProperty(k) && typeof this.device[k] !== 'object' &&  typeof this.device[k] !== 'array') {

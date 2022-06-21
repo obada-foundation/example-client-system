@@ -92,6 +92,7 @@
 
 </template>
 <script>
+import axios from "axios";
 export default {
     props:['is_mobile', 'events', 'submitUrl'],
     data: function () {

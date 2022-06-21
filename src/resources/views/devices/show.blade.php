@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-md-8">
                             <p><button class="btn btn-outline-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Show</button></p>
-                            <p id="collapseOne" class="collapse" aria-labelledby="headingOne"><span class="d-inline-block pt-2 pb-2">dfHGFHFDGhfdghDFGSEREGVREertyvret</span></p>
+                            <p id="collapseOne" class="collapse"><span class="d-inline-block pt-2 pb-2">dfHGFHFDGhfdghDFGSEREGVREertyvret</span></p>
                         </div>
                     </div>
                 </li>
@@ -119,11 +119,6 @@
                     <button id="create_obit_btn" class="btn btn-primary">Create Obit</button>
                 @endif
             </div>
-
-<!--            <device-detail :device_id="_device_id"
-                load-device-url="{{ route('devices.load', $device->usn) }}"
-                store-obit-url="">
-            </device-detail>-->
         </div>
     </div>
 @endsection

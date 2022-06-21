@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -41,9 +41,9 @@ class Save extends Handler {
                 ]);
             }
 
-            if (Auth::user()->id != $existingDevice->id) {
+            /*if (Auth::user()->id != $existingDevice->id) {
                 abort(404);
-            }
+            }*/
 
             foreach ($request->get('documents', []) as $document) {
                 Document::create([
