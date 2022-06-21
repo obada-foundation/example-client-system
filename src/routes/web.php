@@ -33,6 +33,14 @@ Route::namespace('\App\Http\Handlers\Obits')
         Route::get('/{key}/from-chain', \FromChain::class)->name('from-chain');
     });
 
+Route::namespace('\App\Http\Handlers\Accounts')
+    ->name('accounts.')
+    ->prefix('accounts')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/balance', \Balance::class)->name('balance');
+    });
+
 Route::namespace('\App\Http\Handlers\Devices')
     ->name('devices.')
     ->prefix('devices')
