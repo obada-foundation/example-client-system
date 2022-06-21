@@ -102,5 +102,11 @@ if (config('settings.enable_registration')) {
 }
 
 
+Route::namespace('\App\Http\Handlers\Transfer')
+    ->name('transfer.')
+    ->prefix('transfer')
+    ->group(function () {
+        Route::get('/', \Index::class)->name('index');
+    });
 
 

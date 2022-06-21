@@ -24,6 +24,9 @@
                                     <li class="navbar-item">
                                         <span class="nav-link disabled">Export to CSV file</span>
                                     </li>
+                                    <li class="navbar-item">
+                                        <a class="nav-link" href="{{ route('transfer.index') }}">Transfer</a>
+                                    </li>
                                     <li class="navbar-item mt-3">
                                         <span class="nav-link disabled"><strong>Manage pNFT Inventory</strong></span>
                                         <ul class="">
@@ -36,7 +39,6 @@
                                         <span class="nav-link disabled"><strong>OBD Wallet</strong></span>
                                         <ul class="">
                                             <li class="navbar-item"><a class="nav-link" href="#">Wallet Balance (350 OBD)</a></li>
-                                            <li class="navbar-item"><a class="nav-link" href="#">Transfer Funds</a></li>
                                         </ul>
 
                                     </li>
