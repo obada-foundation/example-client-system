@@ -1,5 +1,5 @@
-<nav class="navbar <?php echo $fixed?'navbar-color-on-scroll navbar-transparent fixed-top':'no-shadow' ?>  navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-    <div class="container-fluid">
+<nav class="navbar <?php echo $fixed?'navbar-color-on-scroll navbar-transparent fixed-top':'' ?>  navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
         <a class="navbar-brand" href="/">
             <div>
                 <img src="https://public.tradeloopproto.com/img/tradeloop-logo.svg" alt="Tradeloop" height="20">
@@ -8,7 +8,7 @@
 {{--                <p class="bold"><img alt="OBADA" src="/images/obada-logo.svg" width="112" height="35"> <small>Reference Design</small></p>--}}
 {{--                <span>An inventory manager application</span>--}}
         </a>
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
         <div id="navbarNav" class="collapse navbar-collapse">

@@ -164,7 +164,7 @@
             <h2 class="mt-5">Step 3: Prove Ownership of the Device</h2>
             <div class="card">
                 <div class="card-body">
-                    <p>Tradeloop will attach an anonymous credential to the pNFT that can be used to identify you for legal compliance if necessary.</p>
+                    <p>An anonymous credential that can be used to identify you for legal compliance if necessary will be attached to the pNFT.</p>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" value="1" id="legal_agreement">
                         <label for="legal_agreement" class="form-check-label">Legal agreement. <br> I attest that I legally own this asset and I agree that this pNFT represents the ownership of this asset.</label>

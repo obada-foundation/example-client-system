@@ -1,5 +1,6 @@
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-sweetalert/dist/sweetalert.css";
 
@@ -73,18 +74,6 @@ $link-hover-color: darken($link-color, 10%);
 .input-group.colored {
     background: #ebf6fb;
     border-radius: 5px;
-
-    .input-group-append {
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 4px;
-        border-left: 1px solid #CACACA;
-        background: #007bff;
-        color: #FFFFFF;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        cursor: pointer;
-    }
 }
 
 .table {
@@ -181,43 +170,36 @@ $link-hover-color: darken($link-color, 10%);
     font-size: 1.25rem !important;
 }
 
-/*.dataTables_filter {
+.dataTables_wrapper {
+    & > .row:first-child {
+        & > .col-sm-12:first-child {
+            width: 0;
+            padding-right: 0;
+            font-size: 0;
+        }
+
+        & > .col-sm-12:nth-child(2) {
+            padding-left: 0;
+        }
+    }
+}
+
+.dataTables_filter {
     width: 100%;
-    float: none;
-    text-align: center;
     padding-bottom: 20px;
 
     label {
-        background: #ebf6fb;
-        border-radius: 25px;
-        margin-top: 5px;
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: stretch;
         width: 100%;
 
         input {
-            font-family: $font-family-base;
-            width: 100%;
-            background: no-repeat center bottom, center calc(100% - 1px);
-            background-size: 0 100%, 100% 100%;
-            border: 0;
-            height: 50px;
-            transition: background 0s ease-out;
-            padding: 10px;
-            border-radius: 0;
-            font-size: 18px;
-
-            &::placeholder {
-                font-family: $font-family-base;
-                color: #888888;
-            }
-
+            width: 100% !important;
+            margin-left: 0 !important;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
         }
     }
 
-}*/
+}
 
 .navDropDown:hover > .dropdown-menu {
     display: block;

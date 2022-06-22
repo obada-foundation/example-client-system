@@ -25,17 +25,21 @@
 @section('page_content')
     <div class="card">
         <div class="card-body">
-            <table class="table table-striped" id="deviceList">
-                <thead>
-                <tr>
-                    <th>USN</th>
-                    <th>Manufacturer</th>
-                    <th>Serial #</th>
-                    <th>Part #</th>
-                    <th>Checksum</th>
-                </tr>
-                </thead>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-striped" id="deviceList">
+                    <thead>
+                    <tr>
+                        <th>Sync</th>
+                        <th>USN</th>
+                        <th>Manufacturer</th>
+                        <th>Serial&nbsp;#</th>
+                        <th>Part&nbsp;#</th>
+                        <th>Checksum</th>
+                        <th>#&nbsp;of&nbsp;documents</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

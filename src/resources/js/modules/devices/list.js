@@ -52,10 +52,16 @@ $(document).ready(() => {
         },
         columns: [
             {
+                sortable: false,
+                render: function(data, type, full, meta) {
+                    return '<i class="fas fa-sync text-success" title="Synchronized with blockchain"></i>';
+                }
+            },
+            {
                 sortable: true,
                 "render": function(data, type, full, meta) {
                     return type === 'display'
-                        ? '<i class="fas fa-sync text-success" title="Synchronized with blockchain" style="margin-left: -1rem; margin-right: 0.5rem;"></i> <a href="/devices/' + full.usn + '"><strong>' + full.usn + '</strong></a>'
+                        ? '<a href="/devices/' + full.usn + '"><strong>' + full.usn + '</strong></a>'
                         : full.usn;
                 }
             },
@@ -91,8 +97,14 @@ $(document).ready(() => {
 
                     const displayString = full.obit_checksum.substr(0, 4) + '...' + full.obit_checksum.substr(-4);
 
-                    return type === 'display' ? displayString + ' &nbsp; <button class="btn btn-outline-primary btn-sm btn-clipboard" data-value="' + full.obit_checksum + '"><i class="fa fa-copy"></i></button>' : displayString;
+                    return type === 'display' ? displayString + '&nbsp;<button class="btn btn-link btn-sm btn-clipboard" data-value="' + full.obit_checksum + '"><i class="fa fa-copy"></i></button>' : displayString;
 
+                }
+            },
+            {
+                sortable: false,
+                "render": function (data, type, full, meta) {
+                    return full.documents_count === 0 ? '-' : full.documents_count;
                 }
             },
         ]

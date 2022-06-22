@@ -36,6 +36,16 @@
     }
 }
 
+.btn-outline-primary {
+    color: $primary-color;
+    border-color: $primary-color;
+
+    &:hover {
+        background-color: $primary-color;
+        border-color: $primary-color;
+    }
+}
+
 .btn.btn-sm,
 .btn-group-sm .btn {
      padding: 0.15rem 0.75rem;
@@ -52,6 +62,10 @@
 .btn .material-icons,
 .btn:not(.btn-just-icon):not(.btn-fab) .fa {
     top: -2px;
+}
+
+.btn-link {
+    color: $link-color;
 }
 
 
