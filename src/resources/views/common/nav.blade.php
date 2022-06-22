@@ -1,5 +1,5 @@
 <nav class="navbar <?php echo $fixed?'navbar-color-on-scroll navbar-transparent fixed-top':'' ?>  navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-    <div class="container-md">
+    <div class="container-lg">
         <a class="navbar-brand" href="/">
             <div>
                 <img src="https://public.tradeloopproto.com/img/tradeloop-logo.svg" alt="Tradeloop" height="20">

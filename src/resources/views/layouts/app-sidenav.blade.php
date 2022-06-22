@@ -4,7 +4,7 @@
     @include('common.nav',['fixed'=>false])
 
     <div class="border-top border-bottom">
-        <div class="container-md">
+        <div class="container-lg">
             <ul class="nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">My Inventory</a>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="main">
-        <div class="container-md">
+        <div class="container-lg">
             <h1 class="mb-5">{{ $page_title }}</h1>
 
             <main>

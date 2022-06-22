@@ -15,7 +15,7 @@
 @section('content')
     @include('common.nav',['fixed'=>false])
     <div class="main">
-        <div class="container-md">
+        <div class="container-lg">
             <h1 class="text-center">Local OBITs</h1>
             <section class="py-5 my-5">
                 <obit-list></obit-list>

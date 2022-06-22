@@ -17,7 +17,7 @@
 
     <div class="main">
 
-        <div class="container-md">
+        <div class="container-lg">
             <section class="">
                 <h1 class="text-center">pNFT Inventory Manager</h1>
                 <h4 class="text-center">An <a href="https://www.obada.io/">OBADA</a> Blockchain Reference Design</h4>

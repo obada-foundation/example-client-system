@@ -93,9 +93,14 @@
  */
 
 .container,
-.container-md {
+.container-md,
+.container-lg {
+    @media (min-width: 1200px) {
+        max-width: 960px;
+    }
+
     @media (min-width: 1400px) {
-        max-width: 1140px;
+        max-width: 960px;
     }
 }
 

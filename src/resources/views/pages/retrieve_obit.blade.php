@@ -11,7 +11,7 @@
 @section('content')
     @include('common.nav',['fixed'=>false])
     <div class="main">
-        <div class="container-md">
+        <div class="container-lg">
             <h1 class="text-center">Retrieve Obit From Blockchain</h1>
             <section class="py-5 my-5">
                 <obit-mapper></obit-mapper>

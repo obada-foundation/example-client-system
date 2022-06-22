@@ -17,7 +17,7 @@
 @section('content')
     @include('common.nav', ['fixed' => false])
     <div class="main">
-        <div class="container-md">
+        <div class="container-lg">
             <h1 class="text-center">Generate USN</h1>
             <section class="py-5 my-5">
                 <usn-generator submit-url="{{ route('generate.usn.compute') }}"></usn-generator>
