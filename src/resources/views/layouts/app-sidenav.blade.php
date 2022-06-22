@@ -4,7 +4,7 @@
     @include('common.nav',['fixed'=>false])
 
     <div class="main">
-        <div class="container">
+        <div class="container-md">
             <h1>{{ $page_title }}</h1>
 
             <nav aria-label="Breadcrumb" class="breadcrumb">

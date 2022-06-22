@@ -15,7 +15,7 @@
 @section('content')
     @include('common.nav',['fixed'=>false])
     <div class="main">
-        <div class="container">
+        <div class="container-md">
 
             <section class="py-5 my-5">
                 <device-obit-detail :obit_did="_obit_did"></device-obit-detail>

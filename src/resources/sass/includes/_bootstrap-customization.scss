@@ -89,6 +89,18 @@
 
 
 /**
+ * Container
+ */
+
+.container,
+.container-md {
+    @media (min-width: 1400px) {
+        max-width: 1140px;
+    }
+}
+
+
+/**
  * Dropdown
  */
 

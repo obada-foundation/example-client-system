@@ -10,7 +10,7 @@
     @include('common.nav',['fixed'=>false])
 
     <div class="main">
-        <div class="container">
+        <div class="container-md">
             <div class="d-flex justify-content-center">
                 <div class="card" style="max-width: 100%; width: 350px;">
                     <h3 class="card-header text-center">Blockchain Testnet Register</h3>
