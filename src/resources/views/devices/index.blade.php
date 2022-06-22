@@ -23,23 +23,22 @@
 
 
 @section('page_content')
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
+{{--    <div class="card">--}}
+{{--        <div class="card-body">--}}
+{{--            <div class="table-responsive">--}}
                 <table class="table table-striped" id="deviceList">
                     <thead>
                     <tr>
-                        <th>Sync</th>
+                        <th style="width: 30px;">Sync</th>
                         <th>USN</th>
                         <th>Manufacturer</th>
-                        <th>Serial&nbsp;#</th>
                         <th>Part&nbsp;#</th>
-                        <th>Checksum</th>
+                        <th>Serial&nbsp;#</th>
                         <th>#&nbsp;of&nbsp;documents</th>
                     </tr>
                     </thead>
                 </table>
-            </div>
-        </div>
-    </div>
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 @endsection

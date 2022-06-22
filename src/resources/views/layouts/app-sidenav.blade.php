@@ -23,7 +23,7 @@
 
     <div class="main">
         <div class="container-md">
-            <h1>{{ $page_title }}</h1>
+            <h1 class="mb-4">{{ $page_title }}</h1>
 
             <main>
                 @yield('page_content')

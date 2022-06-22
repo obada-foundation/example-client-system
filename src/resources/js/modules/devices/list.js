@@ -31,7 +31,7 @@ $(document).ready(() => {
         "language": {
             emptyTable: "There are no devices to show at the moment",
             search: '',
-            searchPlaceholder: 'Search Serial #, Part #, Manufacturer or Owner',
+            searchPlaceholder: 'Search Manufacturer, Part # or Serial #',
             lengthMenu: ''
         },
         pageLength: 250,
@@ -54,7 +54,11 @@ $(document).ready(() => {
             {
                 sortable: false,
                 render: function(data, type, full, meta) {
-                    return '<i class="fas fa-sync text-success" title="Synchronized with blockchain"></i>';
+                    if (full.obit_checksum) {
+                        return '<i class="fas fa-sync text-success" title="Synchronized with blockchain"></i>';
+                    } else {
+                        return '<i class="fas fa-sync text-warning" title="Not synchronized with blockchain"></i>';
+                    }
                 }
             },
             {
@@ -74,35 +78,17 @@ $(document).ready(() => {
             {
                 sortable: true,
                 "render": function(data, type, full, meta) {
-                    return full.serial_number;
-                    // var lastFour = full.serial_number;
-                    // var lastFour = full.serial_number.substr(-4);
-                    // lastFour = '...' + lastFour;
-
-                    // return type === 'display' ? '<a href="/devices/' + full.usn + '"><b>' + lastFour + '</b></a> &nbsp; <button class="btn btn-outline-primary btn-fab btn-round btn-sm btn-clipboard" data-value="' + full.serial_number + '"><i class="fa fa-copy"></i></button>' : full.serial_number;
-                }
-            },
-            {
-                sortable: true,
-                "render": function(data, type, full, meta) {
                     return full.part_number;
                 }
             },
             {
                 sortable: true,
-                "render": function (data, type, full, meta) {
-                    if (full.obit_checksum === '' || full.obit_checksum === null) {
-                        return '-';
-                    }
-
-                    const displayString = full.obit_checksum.substr(0, 4) + '...' + full.obit_checksum.substr(-4);
-
-                    return type === 'display' ? displayString + '&nbsp;<button class="btn btn-link btn-sm btn-clipboard" data-value="' + full.obit_checksum + '"><i class="fa fa-copy"></i></button>' : displayString;
-
+                "render": function(data, type, full, meta) {
+                    return full.serial_number;
                 }
             },
             {
-                sortable: false,
+                sortable: true,
                 "render": function (data, type, full, meta) {
                     return full.documents_count === 0 ? '-' : full.documents_count;
                 }
