@@ -12,12 +12,16 @@
     <div class="main">
         <div class="container">
             <div class="d-flex justify-content-center">
-                <div class="card" style="max-width: 100%; width: 300px;">
-                    <h3 class="card-header text-center">Register User</h3>
+                <div class="card" style="max-width: 100%; width: 350px;">
+                    <h3 class="card-header text-center">Blockchain Testnet Register</h3>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('register.user') }}">
                             @csrf
+
+                            <p class="text-danger text-center mb-4" style="line-height: 1.2;">
+                                This registration is for the self-contained blockchain demo site, only. All test data entered here may be deleted at any time during the blockchain Testnet development phase.
+                            </p>
 
                             <div class="mt-2 mb-3">
                                 <label for="name" class="form-label">Name</label>

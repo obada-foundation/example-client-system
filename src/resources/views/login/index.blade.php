@@ -12,12 +12,16 @@
     <div class="main">
         <div class="container">
             <div class="d-flex justify-content-center">
-                <div class="card" style="max-width: 100%; width: 300px;">
-                    <h3 class="card-header text-center">Login</h3>
+                <div class="card" style="max-width: 100%; width: 350px;">
+                    <h3 class="card-header text-center">Blockchain Testnet Login</h3>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login.auth') }}">
                             @csrf
+
+                            <p class="text-danger text-center mb-4" style="line-height: 1.2;">
+                                You are logging in to the blockchain demo site, for testing purposes only. Your login information does not work anywhere else. All test data entered here may be deleted at any time during the OBADA blockchain Testnet development phase.
+                            </p>
 
                             <div class="mt-2 mb-4">
                                 <label for="email" class="form-label">Email</label>
