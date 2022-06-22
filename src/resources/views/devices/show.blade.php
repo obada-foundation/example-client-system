@@ -112,10 +112,7 @@
 
             <div id="calculations1" class="collapse">
                 @include('common.calculations-table', [
-                    'serial_number_hash' => $obit['serial_number_hash'],
-                    'did' => $obit['did'],
-                    'usn_base58' => $obit['usn_base58'],
-                    'usn' => $device->usn
+                    'usn_data' => $usn_data
                 ])
             </div>
         </div>

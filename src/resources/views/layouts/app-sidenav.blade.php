@@ -12,7 +12,7 @@
                 <span aria-current="page" class="breadcrumb-item active">{{ $page_title }}</span>
             </nav>
 
-            <div class="card mb-4 bg-transparent">
+            <div class="card bg-transparent mb-5">
                 <ul class="nav">
                     <li class="nav-item"><a class="nav-link" href="{{ route('devices.index') }}">My Inventory
                             <span class="badge bg-danger rounded-pill position-relative" style="top: -2px;">10</span></a></li>
