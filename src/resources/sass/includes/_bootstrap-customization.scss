@@ -190,6 +190,15 @@
 
 
 /**
+ * List group
+ */
+
+.list-group-item {
+    color: $text-color;
+}
+
+
+/**
  * Navbar
  */
 
@@ -253,4 +262,13 @@
     &:focus {
         color: $link-hover-color;
     }
+}
+
+
+/**
+ * Table
+ */
+
+.table {
+    color: $text-color;
 }
