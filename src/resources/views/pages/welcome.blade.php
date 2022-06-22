@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <h2 class="text-center mt-5">About this Demo</h2>
-                        <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eveniet impedit necessitatibus numquam, tempora veniam voluptatem. Facere inventore obcaecati quis quod ut! Commodi eius, eligendi inventore iste neque nihil sit?</p>
+                        <p class="text-center text-danger">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eveniet impedit necessitatibus numquam, tempora veniam voluptatem. Facere inventore obcaecati quis quod ut! Commodi eius, eligendi inventore iste neque nihil sit?</p>
 
                         <h4 class="text-center"><a href="{{ route('login.index') }}">Login</a> or <a href="{{ route('register.index') }}">Register</a></h4>
                     </div>
