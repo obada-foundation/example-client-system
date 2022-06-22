@@ -37,21 +37,28 @@
                 <li class="data-row">
                     <div class="row">
                         <div class="col-md-4">
-                            <p><strong>USN (Universal Serial Number)</strong></p>
+                            <p>
+                                <strong>USN (Universal Serial Number)</strong>
+                                <br>
+                                <a href="#" data-bs-toggle="collapse" data-bs-target="#calculations1" aria-expanded="false" aria-controls="calculations1">Show Calculations</a></p>
                         </div>
                         <div class="col-md-8">
-                            <p><strong>{{ $device->usn }}</strong><button class="btn btn-link btn-sm" data-copy-text="{{ $device->usn }}"><i class="far fa-copy"></i></button></p>
+                            <p><strong>{{ $device->usn }}</strong>
+                                <button class="btn btn-link btn-sm" data-copy-text="{{ $device->usn }}"><i class="far fa-copy"></i></button></p>
                         </div>
                     </div>
                 </li>
                 <li class="data-row">
                     <div class="row">
                         <div class="col-md-4">
-                            <p><strong>Obit DID</strong></p>
+                            <p><strong>Obit DID</strong>
+                                <br>
+                                <a href="#" data-bs-toggle="collapse" data-bs-target="#calculations1" aria-expanded="false" aria-controls="calculations1">Show Calculations</a></p>
                         </div>
                         <div class="col-md-8">
                             @isset($obit['did'])
-                                <p>{{ $obit['did'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['did'] }}"><i class="far fa-copy"></i></button></p>
+                                <p>{{ $obit['did'] }}
+                                    <button class="btn btn-link btn-sm" data-copy-text="{{ $obit['did'] }}"><i class="far fa-copy"></i></button></p>
                             @endisset
                         </div>
                     </div>
@@ -64,7 +71,7 @@
                         <div class="col-md-8">
                             @isset($obit['checksum'])
                                 <p>{{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button></p>
-                                <p class="text-danger">Sync Error: local checksum does not match! <br> bbbbb9ff0afd632fd7f11bfa8bbac041827e663ff7048de0fcdecbab5a0c8bb5 </p>
+{{--                                <p class="text-danger">Sync Error: local checksum does not match! <br> bbbbb9ff0afd632fd7f11bfa8bbac041827e663ff7048de0fcdecbab5a0c8bb5 </p>--}}
                             @endisset
                         </div>
                     </div>
@@ -102,6 +109,15 @@
                     </div>
                 </li>
             </ul>
+
+            <div id="calculations1" class="collapse">
+                @include('common.calculations-table', [
+                    'serial_number_hash' => $obit['serial_number_hash'],
+                    'did' => $obit['did'],
+                    'usn_base58' => $obit['usn_base58'],
+                    'usn' => $device->usn
+                ])
+            </div>
         </div>
     </div>
 
