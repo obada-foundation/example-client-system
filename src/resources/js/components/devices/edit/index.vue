@@ -75,7 +75,7 @@
                 </div>
             </div>
 
-            <h2 class="mt-5">Step 2: Attach Device Information</h2>
+            <h2 id="documents" class="mt-5">Step 2: Attach Device Information</h2>
             <div class="card">
                 <div class="card-body">
                     <input type="file" id="upload-file" style="position: absolute; top: -9999999px;" ref="sfile" v-on:change="handleFileUpload">

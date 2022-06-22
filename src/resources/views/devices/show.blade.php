@@ -190,7 +190,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <h4>Documents</h4>
-                <a href="/devices/{{ $device->usn }}/edit" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit</a>
+                <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit</a>
             </div>
             <ul class="list-group list-group-flush mt-2">
                 @if($device->documents->isEmpty())
@@ -201,10 +201,14 @@
                     @foreach($device->documents as $document)
                         <li class="list-group-item">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <p><strong>Other</strong></p>
+{{--                                    <p>{{ $document->type }}</p>--}}
+                                </div>
+                                <div class="col-md-3">
                                     <p>{{ $document->name }}</p>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-6">
                                     <p>{{ $document->path }}</p>
                                 </div>
                             </div>

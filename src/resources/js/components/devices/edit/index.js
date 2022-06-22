@@ -307,19 +307,18 @@ export default {
                     this.documents.push({
                         id: s.id,
                         name: {
-                            value: s.doc_name,
+                            value: s.name,
                             isValid: true,
                             isClean: true,
                             validations: ['required']
                         },
-                        value: {
-                            value: s.doc_path,
+                        url: {
+                            value: s.path,
                             isValid: true,
                             isClean: true,
                             validations: ['required']
                         }
                     });
-                    this.triggerPickerChange('documents',this.documents.length - 1);
                 });
             }
         },
