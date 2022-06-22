@@ -199,7 +199,7 @@
 
     <div class="d-flex justify-content-between mb-2">
         <h2 class="mb-0">Proofs</h2>
-        <a href="{{ route('transfer.index') }}#documents" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
+        <a href="{{ route('devices.transfer', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
     </div>
     <div class="card mb-5">
         <div class="card-body">

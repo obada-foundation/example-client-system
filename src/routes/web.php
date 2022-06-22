@@ -44,6 +44,7 @@ Route::namespace('\App\Http\Handlers\Devices')
         Route::get('/{usn}', \Show::class)->name('show');
         Route::get('/{usn}/load', \Load::class)->name('load');
         Route::get('/{usn}/edit', \Edit::class)->name('edit');
+        Route::get('/{usn}/transfer', \Transfer::class)->name('transfer');
         Route::get('/', \Index::class)->name('index');
         Route::post('/', \Save::class)->name('save');
 
@@ -100,13 +101,3 @@ if (config('settings.enable_registration')) {
             Route::post('/', \RegisterUser::class)->name('user');
         });
 }
-
-
-Route::namespace('\App\Http\Handlers\Transfer')
-    ->name('transfer.')
-    ->prefix('transfer')
-    ->group(function () {
-        Route::get('/', \Index::class)->name('index');
-    });
-
-
