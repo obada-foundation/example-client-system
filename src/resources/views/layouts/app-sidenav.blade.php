@@ -10,7 +10,7 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">My Inventory</a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item"><a href="{{ route('devices.index') }}">View</a></li>
-                        <li class="dropdown-item"><a href="{{ route('devices.create') }}">Create pNFT</a></li>
+                        <li class="dropdown-item"><a href="{{ route('devices.create') }}">Add New Device</a></li>
                         <li class="dropdown-item disabled"><span>Export to CSV file</span></li>
                         <li class="dropdown-item disabled"><span>Import from CSV file</span></li>
                     </ul>

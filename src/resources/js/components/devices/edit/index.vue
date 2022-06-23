@@ -178,6 +178,11 @@
 
             <div class="mt-5 text-center">
                 <button class="btn btn-primary btn-lg" @click="saveDevice">Mint pNFT</button>
+                <p class="mt-3">
+                    Minting registers your USN <strong>{{ usn_data.usn }}</strong>. <br>
+                    The blockchain address for this pNFT is: <br>
+                    <strong>{{ usn_data.did }}</strong>
+                </p>
             </div>
         </form>
     </div>
