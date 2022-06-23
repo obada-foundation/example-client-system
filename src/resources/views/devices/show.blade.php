@@ -181,7 +181,7 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-4">
-                            <p><strong>Checksum</strong></p>
+                            <p><strong>pNFT Checksum</strong></p>
                         </div>
                         <div class="col-md-8">
                             @isset($obit['checksum'])
@@ -198,22 +198,17 @@
 
 
     <div class="d-flex justify-content-between mb-2">
-        <h2 class="mb-0">Proofs</h2>
+        <h2 class="mb-0">Proof of Ownership</h2>
         <a href="{{ route('devices.transfer', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
     </div>
     <div class="card mb-5">
         <div class="card-body">
             <ul class="list-group list-group-flush mt-3 mb-2">
                 <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <strong>Proof of Ownership</strong>
-                        </div>
-                        <div class="col-md-8">
-                                <a href="#">JSON Web Token 1</a> (Trust Anchor 1) <br>
-                                <a href="#">JSON Web Token 2</a> (Trust Anchor 2)
-                        </div>
-                    </div>
+                    View <a href="#">JSON Web Token</a> verification of identity signed by [Trust Anchor 1]
+                </li>
+                <li class="list-group-item">
+                    View <a href="#">JSON Web Token</a> verification of identity signed by [Trust Anchor 2]
                 </li>
             </ul>
         </div>

@@ -15,7 +15,7 @@
                         <li class="dropdown-item disabled"><span>Import from CSV file</span></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link">OBD Wallet (350 OBD)</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">OBD Wallet</a></li>
                 <li class="nav-item"><a href="{{ route('documentation') }}" class="nav-link">Documentation</a></li>
             </ul>
         </div>

@@ -7,7 +7,7 @@
         </div>
         <form action="" onsubmit="return false;">
             <h2>Step 1: Generate USN (Universal Serial Number)</h2>
-            <p>Use information from firmware. If not available, use information from device markings. If not available, use information from packaging.</p>
+            <p>Use information from firmware. If not available, use information from device markings.</p>
             <div class="card">
                 <div class="card-body">
                     <div class="mb-4">
@@ -50,27 +50,23 @@
 
                     <div id="calculations1" class="collapse">
                         <h4>HOW IS USN CALCULATED?</h4>
-                        <table class="table" style="table-layout: fixed">
+                        <table class="table" style="table-layout: fixed; vertical-align: middle;">
                             <tbody>
                             <tr>
-                                <td style="width: 50px;"><h3>1</h3></td>
-                                <td style="width: 40%;">serial_hash = sha256(serial_number)</td>
-                                <td>{{ usn_data.serial_number_hash }}</td>
+                                <td style="width: 50px;"><h3 class="mb-0">1</h3></td>
+                                <td><strong>SHA-256 hash of serial number</strong><br>{{ usn_data.serial_number_hash }}</td>
                             </tr>
                             <tr>
-                                <td><h3>2</h3></td>
-                                <td>obit = sha256(manufacturer + part_number + serial_hash)</td>
-                                <td>{{ usn_data.did }}</td>
+                                <td><h3 class="mb-0">2</h3></td>
+                                <td><strong>obit DID = SHA-256(manufacturer + part number + hash from above)</strong><br>{{ usn_data.did }}</td>
                             </tr>
                             <tr>
-                                <td><h3>3</h3></td>
-                                <td>usn_base58 = base58(obit)</td>
-                                <td>{{ usn_data.usn_base58 }}</td>
+                                <td><h3 class="mb-0">3</h3></td>
+                                <td><strong>base58 of obit DID</strong><br>{{ usn_data.usn_base58 }}</td>
                             </tr>
                             <tr>
-                                <td><h3>4</h3></td>
-                                <td>usn = first_eight(usn_base58)</td>
-                                <td>{{ usn_data.usn }}</td>
+                                <td><h3 class="mb-0">4</h3></td>
+                                <td><strong>USN = first eight characters of base58 above</strong><br>{{ usn_data.usn }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -143,20 +139,22 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-0 col-md-6"></div>
+                        <div class="col-0 col-md-6 d-flex align-items-center">
+                            <p>System fees, such as gas, storage and the Recycling Incentive, are set by the DAO and distributed equally to the operating DAO nodes. Third-party applications and off-chain services charge their fees separately.</p>
+                        </div>
                         <div class="col-12 col-md-6">
                             <table class="table" style="vertical-align: middle;">
                                 <tbody>
                                 <tr>
-                                    <td><strong>Gas Fee</strong> <br> <small>Node fee set by the DAO.</small></td>
+                                    <td><strong>Gas Fee</strong> <br> <small>Validator node fee.</small></td>
                                     <td class="text-end">0.001 OBD</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>IPFS Storage Charge</strong><br><small>File storage fee set by the DAO.</small></td>
+                                    <td><strong>Storage Charge</strong><br><small>File storage costs.</small></td>
                                     <td class="text-end">0.001 OBD</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Service Fee</strong><br><small>Gateway fee.</small></td>
+                                    <td><strong>Application Fee</strong><br><small>Gateway usage fee.</small></td>
                                     <td class="text-end">0.001 OBD</td>
                                 </tr>
                                 <tr>
