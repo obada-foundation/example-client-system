@@ -10,7 +10,7 @@ class Create extends Handler {
     public function __invoke()
     {
         $page = (object) [
-            'title' => 'Create pNFT',
+            'title' => 'Add New Device',
             'description' => '__description__',
             'keywords' => '__keywords__',
             'isEdit' => false

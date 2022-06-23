@@ -6,7 +6,12 @@ export default {
         return {
             device: null,
             isLoading: true,
-            usn_data: null,
+            usn_data: {
+                usn: '',
+                serial_number_hash: '',
+                did: '',
+                usn_base58: ''
+            },
             cmOptions: {
                 // codemirror options
                 tabSize: 2,
@@ -78,8 +83,7 @@ export default {
         handleBlur: function(v) {
             this.validate(v)
         },
-        handleBlurForUsnField: function(v) {
-            this.handleBlur(v);
+        handleKeyPress: function(v) {
             this.updateUsn();
         },
         handleFileUpload: function(event) {
@@ -323,7 +327,18 @@ export default {
             }
         },
         updateUsn: function() {
-            if (this.is_valid(this.deviceForm)) {
+            const keys = Object.keys(this.deviceForm);
+            let isValid = true;
+            keys.forEach((k)=> {
+                if(typeof(this.deviceForm[k]) === 'object') {
+                    this.validate(this.deviceForm[k]);
+                    if(!this.deviceForm[k].isValid) {
+                        isValid = false;
+                    }
+                }
+            });
+
+            if (isValid) {
                 axios(this.getUsnUrl, {
                     method: 'post',
                     data: {

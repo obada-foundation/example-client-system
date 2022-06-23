@@ -276,4 +276,21 @@
 
 .table {
     color: $text-color;
+
+    thead {
+        tr {
+            th {
+                font-weight: 800;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            td {
+                font-size: 1rem;
+            }
+        }
+    }
 }

@@ -6,7 +6,8 @@
             </div>
         </div>
         <form action="" onsubmit="return false;">
-            <h2>Step 1: Generate Universal Identifiers</h2>
+            <h2>Step 1: Generate USN (Universal Serial Number)</h2>
+            <p>Use information from firmware. If not available, use information from device markings. If not available, use information from packaging.</p>
             <div class="card">
                 <div class="card-body">
                     <div class="mb-4">
@@ -14,38 +15,40 @@
                         <input v-bind:disabled="device_id != 0" type="text" class="form-control"
                                v-bind:class="{'is-normal':deviceForm.manufacturer.isClean,'is-invalid':!deviceForm.manufacturer.isClean && !deviceForm.manufacturer.isValid,'is-valid':!deviceForm.manufacturer.isClean && deviceForm.manufacturer.isValid}"
                                v-model="deviceForm.manufacturer.value"
+                               @keyup="handleKeyPress(deviceForm.manufacturer)"
                                @focus="handleFocus(deviceForm.manufacturer)"
-                               @blur="handleBlurForUsnField(deviceForm.manufacturer)">
-                    </div>
-                    <div class="mb-4">
-                        <label for="" class="form-label">Serial Number</label>
-                        <input v-bind:disabled="device_id != 0" type="text" class="form-control"
-                               v-bind:class="{'is-normal':deviceForm.serial_number.isClean,'is-invalid':!deviceForm.serial_number.isClean && !deviceForm.serial_number.isValid,'is-valid':!deviceForm.serial_number.isClean && deviceForm.serial_number.isValid}"
-                               v-model="deviceForm.serial_number.value"
-                               @focus="handleFocus(deviceForm.serial_number)"
-                               @blur="handleBlurForUsnField(deviceForm.serial_number)">
+                               @blur="handleBlur(deviceForm.manufacturer)">
                     </div>
                     <div class="mb-4">
                         <label for="">Part Number</label>
                         <input v-bind:disabled="device_id != 0" type="text" class="form-control"
                                v-bind:class="{'is-normal':deviceForm.part_number.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
                                v-model="deviceForm.part_number.value"
+                               @keyup="handleKeyPress(deviceForm.part_number)"
                                @focus="handleFocus(deviceForm.part_number)"
-                               @blur="handleBlurForUsnField(deviceForm.part_number)">
+                               @blur="handleBlur(deviceForm.part_number)">
+                        <div class="form-text">Use model if no part number is available</div>
                     </div>
-                    <div v-if="usn_data != null" class="form-group mb-4">
-                        <label for="" class="form-label">Obit ID</label>
-                        <input type="text" class="form-control" v-model="usn_data.did" disabled readonly>
-                        <div class="form-text">Universal Identifier</div>
+                    <div class="mb-4">
+                        <label for="" class="form-label">Serial Number</label>
+                        <input v-bind:disabled="device_id != 0" type="text" class="form-control"
+                               v-bind:class="{'is-normal':deviceForm.serial_number.isClean,'is-invalid':!deviceForm.serial_number.isClean && !deviceForm.serial_number.isValid,'is-valid':!deviceForm.serial_number.isClean && deviceForm.serial_number.isValid}"
+                               v-model="deviceForm.serial_number.value"
+                               @keyup="handleKeyPress(deviceForm.serial_number)"
+                               @focus="handleFocus(deviceForm.serial_number)"
+                               @blur="handleBlur(deviceForm.serial_number)">
                     </div>
-                    <div v-if="usn_data != null" class="form-group">
-                        <label for="" class="form-label">USN (Universal Serial Number)</label>
-                        <input type="text" class="form-control" v-model="usn_data.usn" disabled readonly>
-                        <div class="form-text">Shorter version of obit ID</div>
+                    <div class="usn-group">
+                        <label for="" class="form-label fs-4">USN: </label>
+                        <input type="text" class="form-control-plaintext fs-4 fw-bold" v-model="usn_data.usn" disabled readonly>
                     </div>
 
-                    <p v-if="usn_data != null" class="mt-3"><button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#calculations1" aria-expanded="false" aria-controls="calculations1">Show Calculations</button></p>
-                    <div v-if="usn_data != null" id="calculations1" class="collapse">
+                    <p class="mt-3"><button class="btn btn-link" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#calculations1"
+                                            aria-expanded="false" aria-controls="calculations1"
+                                            style="margin-left: -0.75rem;">Show Calculations</button></p>
+
+                    <div id="calculations1" class="collapse">
                         <h4>HOW IS USN CALCULATED?</h4>
                         <table class="table" style="table-layout: fixed">
                             <tbody>
@@ -75,7 +78,7 @@
                 </div>
             </div>
 
-            <h2 id="documents" class="mt-5">Step 2: Attach Device Information</h2>
+            <h2 id="documents" class="mt-5">Step 2: Attach Device Data & Information</h2>
             <div class="card">
                 <div class="card-body">
                     <input type="file" id="upload-file" style="position: absolute; top: -9999999px;" ref="sfile" v-on:change="handleFileUpload">
@@ -122,42 +125,6 @@
                     <div class="text-center">
                         <button class="btn btn-outline-info btn-floating" @click="addDocument()"><i class="fa fa-plus"></i></button>
                     </div>
-
-                    <!-- TODO: calculate checksum -->
-<!--                    <div v-if="documents.length > 0" class="form-group mt-3">
-                        <label for="" class="form-label">pNFT Checksum:</label>
-                        <input type="text" class="form-control" value="A87AA0FDAE9DC37C8BFA0276495BCF72BAA4ADA36E3C67380208954B6108349C" disabled readonly>
-                    </div>
-
-                    <p v-if="documents.length > 0" class="mt-3"><button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#calculations2" aria-expanded="false" aria-controls="calculations2">Show Calculations</button></p>
-                    <div v-if="documents.length > 0" id="calculations2" class="collapse">
-                        <h4>HOW IS USN CALCULATED?</h4>
-                        <table class="table" style="table-layout: fixed">
-                            <tbody>
-                            <tr>
-                                <td style="width: 50px;"><h3>1</h3></td>
-                                <td style="width: 40%;">serial_hash = sha256(serial_number)</td>
-                                <td>6e712b383180c2ee7fff19b8bb1222c39ca5673ef2547240bfd4021d4f544922</td>
-                            </tr>
-                            <tr>
-                                <td><h3>2</h3></td>
-                                <td>obit = sha256(manufacturer + part_number + serial_hash)</td>
-                                <td>did:obada:2336339182fdb8936ac29bee4f26bd58b3a645564f7c905cd52ab0eb35ff1feb</td>
-                            </tr>
-                            <tr>
-                                <td><h3>3</h3></td>
-                                <td>usn_base58 = base58(obit)</td>
-                                <td>21DJshuvoVj4dQ36NCkp6SyAmWAZyDXfZusVgCKdmqkZimqHRoPvm6PJwCaAA4F9Po4RGqpHNNJy7Y91oiQddcNu
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><h3>4</h3></td>
-                                <td>usn = first_eight(usn_base58)</td>
-                                <td>21DJshuv</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>-->
                 </div>
             </div>
 
@@ -175,27 +142,37 @@
             <h2 class="mt-5">Step 4: Accept Fees</h2>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mt-2">Transaction fee:</h4>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                        <tr>
-                            <td>Gas Fee (node fee set by the DAO)</td>
-                            <td class="text-end">0.001 OBD</td>
-                        </tr>
-                        <tr>
-                            <td>IPFS Storage Charge (file storage fee set by the DAO)</td>
-                            <td class="text-end">0.001 OBD</td>
-                        </tr>
-                        <tr>
-                            <td>Service Fee (gateway fee)</td>
-                            <td class="text-end">0.001 OBD</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Total</strong></td>
-                            <td class="text-end"><strong>0.003 OBD</strong></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="row">
+                        <div class="col-0 col-md-6"></div>
+                        <div class="col-12 col-md-6">
+                            <table class="table" style="vertical-align: middle;">
+                                <tbody>
+                                <tr>
+                                    <td><strong>Gas Fee</strong> <br> <small>Node fee set by the DAO.</small></td>
+                                    <td class="text-end">0.001 OBD</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>IPFS Storage Charge</strong><br><small>File storage fee set by the DAO.</small></td>
+                                    <td class="text-end">0.001 OBD</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Service Fee</strong><br><small>Gateway fee.</small></td>
+                                    <td class="text-end">0.001 OBD</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Recycling Incentive</strong> <em>(optional)</em><br><small>Will be returned when the device is recycled.</small></td>
+                                    <td class="text-end">1 OBD</td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td class="border-0"><strong class="fs-5">Total</strong></td>
+                                    <td class="border-0 text-end"><strong class="fs-5">0.003 OBD</strong></td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 

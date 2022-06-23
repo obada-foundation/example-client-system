@@ -49,11 +49,6 @@ $link-hover-color: darken($link-color, 10%);
     border-color: transparent !important;
 }
 
-
-.input-group-text .fa-pin {
-    width: 19px;
-}
-
 .bootstrap-select.btn-group .dropdown-toggle .filter-option {
     font-family: $font-family-base;
     font-size: 1rem;
@@ -74,25 +69,6 @@ $link-hover-color: darken($link-color, 10%);
 .input-group.colored {
     background: #ebf6fb;
     border-radius: 5px;
-}
-
-.table {
-    thead {
-        tr {
-            th {
-                font-weight: 800;
-                font-size: 1rem;
-            }
-        }
-    }
-
-    tbody {
-        tr {
-            td {
-                font-size: 1rem;
-            }
-        }
-    }
 }
 
 .device-information-list {
@@ -267,5 +243,11 @@ $link-hover-color: darken($link-color, 10%);
         padding: 10px;
         padding-top: 30px;
     }
+}
 
+.usn-group {
+.form-control-plaintext {
+    display: inline-block;
+    width: auto;
+}
 }
