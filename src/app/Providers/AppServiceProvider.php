@@ -4,7 +4,10 @@ namespace App\Providers;
 
 use App\ObitManager\ObitManager;
 use Illuminate\Support\Facades\URL;
+use App\ClientHelper\Token;
 use Illuminate\Support\ServiceProvider;
+use Obada\Api\AccountsApi;
+use Obada\Configuration;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,9 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       // $this->app->singleton('ObitManager', function ($app) {
-       //     return new ObitManager();
-       // });
+
     }
 
     /**
