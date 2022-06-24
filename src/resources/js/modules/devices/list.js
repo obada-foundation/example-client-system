@@ -19,6 +19,7 @@ $(document).ready(() => {
     });
 
     $('#deviceList').DataTable({
+        order: [[1, 'asc']],
         "language": {
             emptyTable: "There are no devices to show at the moment",
             search: '',

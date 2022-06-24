@@ -29,7 +29,7 @@
                 <table class="table table-striped" id="deviceList">
                     <thead>
                     <tr>
-                        <th style="width: 30px;">Sync</th>
+                        <th style="width: 20px;"></th>
                         <th>USN</th>
                         <th>Manufacturer</th>
                         <th>Part&nbsp;#</th>
