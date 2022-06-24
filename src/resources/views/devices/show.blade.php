@@ -64,7 +64,7 @@
                             <strong>USN</strong><br><small>Universal Serial Number</small>
                         </div>
                         <div class="col-md-8">
-                            <strong>{{ $device->usn }}</strong>
+                            <strong class="text-success">{{ $device->usn }}</strong>
                                 <button class="btn btn-link btn-sm" data-copy-text="{{ $device->usn }}"><i class="far fa-copy"></i></button>
                         </div>
                     </div>

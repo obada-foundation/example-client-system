@@ -109,6 +109,15 @@
  * Dropdown
  */
 
+.dropdown-item {
+    &.active,
+    &:active {
+        a {
+            color: $white;
+        }
+    }
+}
+
 .dropdown-submenu {
     position: relative;
 

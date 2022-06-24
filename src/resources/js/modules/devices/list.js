@@ -1,20 +1,11 @@
 import $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs5';
-import axios from 'axios';
+// import axios from 'axios';
 import {copyToClipboard} from "../../utils/copyToClipboard";
 import {showAlert} from "../../utils/showAlert";
 
 $(document).ready(() => {
-
-    $(document).on('click', '.btn-delete', (event) => {
-        var $btn = $(event.currentTarget);
-        var sid = $btn.attr('data-id');
-        var $tr = $('.dev-' + sid);
-        var dataTableRow = this.deviceList.row($tr[0]); // get the DT row so we can use the API on it
-        var rowData = dataTableRow.data();
-        removeDevice(rowData);
-    });
 
     $(document).on('click', '.btn-clipboard', (event) => {
         var $btn = $(event.currentTarget);
@@ -96,7 +87,16 @@ $(document).ready(() => {
         ]
     });
 
-    function removeDevice(device) {
+    /*$(document).on('click', '.btn-delete', (event) => {
+        var $btn = $(event.currentTarget);
+        var sid = $btn.attr('data-id');
+        var $tr = $('.dev-' + sid);
+        var dataTableRow = this.deviceList.row($tr[0]); // get the DT row so we can use the API on it
+        var rowData = dataTableRow.data();
+        removeDevice(rowData);
+    });*/
+
+    /*function removeDevice(device) {
         swal({
                 title: "Are you sure?",
                 text: "This device will be removed completely.",
@@ -130,5 +130,5 @@ $(document).ready(() => {
 
                 }
             });
-    }
+    }*/
 });

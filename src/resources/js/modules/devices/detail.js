@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-document.addEventListener('DOMContentLoaded', function() {
-    /*document.getElementById('create_obit_btn').addEventListener('click', (event) => {
+/*document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('create_obit_btn').addEventListener('click', (event) => {
         event.target.disabled = true;
         axios(window.storeObitUrl, {
             method:'post',
@@ -20,5 +20,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 swal("Error!", "We could not create the obit.", "error");
             }
         });
-    });*/
-});
+    });
+});*/

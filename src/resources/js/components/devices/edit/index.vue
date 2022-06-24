@@ -38,17 +38,18 @@
                                @focus="handleFocus(deviceForm.serial_number)"
                                @blur="handleBlur(deviceForm.serial_number)">
                     </div>
-                    <div class="usn-group">
+                    <div class="mb-3">
                         <label for="" class="form-label fs-4">USN: </label>
-                        <input type="text" class="form-control-plaintext fs-4 fw-bold" v-model="usn_data.usn" disabled readonly>
+                        <input type="text" class="form-control-plaintext fs-4 fw-bold text-success d-inline-block w-auto" v-model="usn_data.usn" disabled readonly>
                     </div>
 
-                    <p class="mt-3"><button class="btn btn-link" type="button"
+                    <p><button class="btn btn-link" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#calculations1"
                                             aria-expanded="false" aria-controls="calculations1"
                                             style="margin-left: -0.75rem;">Show Calculations</button></p>
 
                     <div id="calculations1" class="collapse">
+                        <!-- TODO: copied from calculations-table.blade.php -->
                         <h4>HOW IS USN CALCULATED?</h4>
                         <table class="table" style="table-layout: fixed; vertical-align: middle;">
                             <tbody>

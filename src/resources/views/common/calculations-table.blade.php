@@ -15,7 +15,7 @@
     </tr>
     <tr>
         <td><h3 class="mb-0">4</h3></td>
-        <td><strong>USN = first eight characters of base58 above</strong><br>@isset($usn_data) {{ $usn_data->usn }} @endisset</td>
+        <td><strong>USN = first eight characters of base58 above</strong><br>@isset($usn_data) <strong class="text-success">{{ $usn_data->usn }}</strong> @endisset</td>
     </tr>
     </tbody>
 </table>
