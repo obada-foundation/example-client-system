@@ -15,7 +15,7 @@
 @section('page_content')
     <div class="card">
         <div class="card-body">
-            <form class="mt-3 mb-3" action="">
+            <div class="mt-3 mb-3" action="">
                 <input type="hidden" name="usn" value="{{ $usn }}">
 
                 <div class="mb-5">
@@ -62,10 +62,32 @@
 {{--                <h2 class="mb-5 text-center">2FA</h2>--}}
 
                 <div class="text-center mt-5">
-                    <button class="btn btn-primary btn-lg">Preview</button>
+                    <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">Preview</button>
                     <p class="mt-3">Authorization code will be send to your phone for verification.</p>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
+
+    <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel">Verification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="my-4">
+                        <label for="" class="form-label">Enter authorization code</label>
+                        <input type="text" class="form-control">
+                        <div class="form-text">Check your phone for authorization code.</div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary btn-lg">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
