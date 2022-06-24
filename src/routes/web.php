@@ -16,16 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'SiteController@welcome');
 Route::get('/documentation', 'SiteController@documentation')->name('documentation');
-
-//Route::get('/obits', 'SiteController@obitsList');
-//Route::get('/obits/{obit_id}', 'SiteController@obitDetail');
 Route::get('/retrieve/obit', 'SiteController@retrieveObit');
 
 Route::namespace('\App\Http\Handlers\Obits')
     ->name('obits.')
     ->prefix('obits')
     ->group(function () {
-        Route::get('/', \Index::class)->name('index');
+        Route::get('/', function(Request $request) {
+            return Redirect::to(route('devices.index'));
+        });
         Route::get('/load-all', \LoadAll::class)->name('load-all');
         Route::post('/', \Store::class)->name('store');
         Route::get('/{key}', \Show::class)->name('show');
