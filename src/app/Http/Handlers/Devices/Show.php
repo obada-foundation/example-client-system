@@ -16,22 +16,24 @@ class Show extends Handler
 {
     public function __invoke(ObitApi $obitApi, UtilsApi $utilsApi, $usn)
     {
+        $obit = [];
+        $usn_data = null;
+
         $device = Auth::user()->devices()->with('documents')
             ->byUsn($usn)
             ->first();
 
         if (!$device) {
+            // TODO: return with message
             return redirect()->route('devices.index');
         }
 
         try {
             $obit = $obitApi->get($usn);
         } catch (Throwable $t) {
-            $obit = [];
             Log::info($t->getMessage());
         }
 
-        $usn_data = null;
         try {
             $resp = $utilsApi->generateDID(
                 (new GenerateObitDIDRequest())
@@ -54,7 +56,9 @@ class Show extends Handler
         }
 
         return view('devices.show', [
-            'device_id' => $usn,
+            'page_title' => 'Device Details — USN ' . $device->usn,
+            'is_obit_page' => false,
+            'usn' => $usn,
             'device' => $device,
             'obit' => $obit,
             'usn_data' => $usn_data

@@ -1,23 +1,23 @@
 @extends('layouts.app-sidenav',[
     'body_class'=>'landing-page',
-    'page_title' => 'Device Details — USN ' . $device->usn
+    'page_title' => $page_title
 ])
 
 
 @section('head')
-    <title>Device Details — USN {{ $device->usn }}</title>
+    <title>{{ $page_title }}</title>
     <meta name="description" content="Device Details">
     <meta name="keywords" content="device details">
 @endsection
 
 
 @section('scripts')
-
-    <script>
-        window._device_id = '{{ $device->usn }}';
-        window.storeObitUrl = '{{ route('obits.store') }}';
-    </script>
-    <script src="{{ mix('/js/devices_detail.js') }}"></script>
+    @if(!$is_obit_page)
+        <script>
+            window.storeObitUrl = '{{ route('obits.store') }}';
+        </script>
+        <script src="{{ mix('/js/devices_detail.js') }}"></script>
+    @endif
 @endsection
 
 
@@ -125,7 +125,10 @@
                             <strong>Synchronized</strong>
                         </div>
                         <div class="col-md-8">
-                            June 21, 2022 7:10 UTC<button class="btn btn-link btn-sm" title="Sync Now"><i class="fas fa-sync"></i></button>
+                            June 21, 2022 7:10 UTC
+                            @if(!$is_obit_page)
+                                <button class="btn btn-link btn-sm" title="Sync Now"><i class="fas fa-sync"></i></button>
+                            @endif
                         </div>
                     </div>
                 </li>
@@ -137,7 +140,9 @@
 
     <div class="d-flex justify-content-between mb-2">
         <h2 class="mb-0">Device Data & Information</h2>
-        <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit</a>
+        @if(!$is_obit_page)
+            <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit</a>
+        @endif
     </div>
     <div class="card mb-5">
         <div class="card-body">
@@ -192,14 +197,17 @@
                 </li>
             </ul>
 
-            <p class="mb-2"><a href="javascript:void(0);" class="btn btn-link">Show Calculations</a></p>
+            <!-- TODO: add checksum compute log -->
+<!--            <p class="mb-2"><a href="javascript:void(0);" class="btn btn-link">Show Calculations</a></p>-->
         </div>
     </div>
 
 
     <div class="d-flex justify-content-between mb-2">
         <h2 class="mb-0">Proof of Ownership</h2>
-        <a href="{{ route('devices.transfer', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
+        @if(!$is_obit_page)
+            <a href="{{ route('devices.transfer', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
+        @endif
     </div>
     <div class="card mb-5">
         <div class="card-body">

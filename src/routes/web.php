@@ -29,7 +29,6 @@ Route::namespace('\App\Http\Handlers\Obits')
         Route::get('/load-all', \LoadAll::class)->name('load-all');
         Route::post('/', \Store::class)->name('store');
         Route::get('/{key}', \Show::class)->name('show');
-        Route::get('/{key}/load', \Load::class)->name('load');
         Route::get('/{key}/to-chain', \ToChain::class)->name('to-chain');
         Route::get('/{key}/from-chain', \FromChain::class)->name('from-chain');
     });
