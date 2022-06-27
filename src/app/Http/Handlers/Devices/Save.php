@@ -13,7 +13,7 @@ use App\Models\Device;
 use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SaveDeviceRequest;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class Save extends Handler {
     public function __invoke(SaveDeviceRequest $request, UtilsApi $utilsApi)
@@ -41,7 +41,7 @@ class Save extends Handler {
                 ]);
             }
 
-            if (Auth::user()->id != $existingDevice->id) {
+            if (Auth::user()->id != $existingDevice->user_id) {
                 abort(404);
             }
 

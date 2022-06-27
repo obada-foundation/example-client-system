@@ -104653,7 +104653,7 @@ var better_browser = '<div class="container"><div class="better-browser row"><di
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /app/resources/js/vendor.js */"./resources/js/vendor.js");
+module.exports = __webpack_require__(/*! /Users/sr/projects/obada/example-client-system/src/resources/js/vendor.js */"./resources/js/vendor.js");
 
 
 /***/ })
