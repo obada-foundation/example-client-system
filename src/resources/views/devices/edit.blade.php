@@ -8,13 +8,11 @@
     <title>{{ $page->title }}</title>
     <meta name="description" content="__description__">
     <meta name="keywords" content="__keywords__">
-
-    <link rel="stylesheet" href="{{ mix('/css/app-vue.css') }}">
 @endsection
 
 
 @section('scripts')
-    <script src="{{ mix('/js/app-vue.js') }}"></script>
+    <script src="{{ mix('/js/devices_edit.js') }}"></script>
 @endsection
 
 

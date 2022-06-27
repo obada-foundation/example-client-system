@@ -1,3 +1,4 @@
+import axios from "axios";
 export default {
     props:['is_mobile','events'],
     data: function () {

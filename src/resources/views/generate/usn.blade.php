@@ -5,12 +5,12 @@
     <meta name="description" content="__description__">
     <meta name="keywords" content="__keywords__">
 
-    <link rel="stylesheet" href="{{ mix('/css/app-vue.css') }}">
+    <link rel="stylesheet" href="{{ mix('/css/base-vue.css') }}">
 @endsection
 
 
 @section('scripts')
-    <script src="{{ mix('/js/app-vue.js') }}"></script>
+    <script src="{{ mix('/js/base-vue.js') }}"></script>
 @endsection
 
 

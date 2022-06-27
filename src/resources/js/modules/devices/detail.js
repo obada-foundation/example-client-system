@@ -1,3 +1,5 @@
+import '../../base';
+
 import axios from 'axios';
 
 /*document.addEventListener('DOMContentLoaded', function() {

@@ -69,4 +69,5 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ mix('/js/base.js') }}"></script>
 @endsection

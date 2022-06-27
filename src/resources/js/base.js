@@ -1,6 +1,5 @@
 import * as bootstrap from 'bootstrap';
 import {copyToClipboard} from "./utils/copyToClipboard";
-import {showAlert} from "./utils/showAlert";
 require('bootstrap-sweetalert/dist/sweetalert');
 
 const token = document.head.querySelector('meta[name="csrf-token"]');

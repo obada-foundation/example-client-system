@@ -63,11 +63,7 @@ client-helper/token/verify:
 	docker exec \
 		-it \
 		reference-design \
-<<<<<<< HEAD
 		bash -c "curl -X POST -d '{\"id\":\"1234567\", \"email\":\"joe.doe@supermail.com\"}' -H 'content-type: application/json' -H 'authorization: bearer '$(TOKEN) http://client-helper:9090/api/v1/accounts"
-=======
-		bash -c "curl -X POST -d '{}' -H 'authorization: bearer '$(TOKEN) http://client-helper:9090/api/v1/accounts"
->>>>>>> ab8d8eb9196c21901561019e903f9a89e3437480
 
 client-helper/token/create:
 	docker exec -it reference-design sh -c "php artisan jwt:create"

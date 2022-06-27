@@ -1,24 +1,13 @@
+import '../../base';
+
 import $ from 'jquery';
 import "@popperjs/core";
 import 'datatables.net';
 import 'datatables.net-bs5';
 // import axios from 'axios';
-import {copyToClipboard} from "../../utils/copyToClipboard";
-import {showAlert} from "../../utils/showAlert";
 import * as bootstrap from "bootstrap";
 
 $(document).ready(() => {
-
-    $(document).on('click', '.btn-clipboard', (event) => {
-        var $btn = $(event.currentTarget);
-        var sid = $btn.attr('data-value');
-        copyToClipboard(sid);
-        showAlert({
-            message: 'Copied',
-            type: 'success',
-            autoclose: true
-        });
-    });
 
     $('#deviceList').DataTable({
         order: [[1, 'asc']],
