@@ -1,26 +1,30 @@
 export default {
-    props:['is_mobile', 'events', 'usn','loadObitUrl', 'toChainObitUrl'],
+    props:['is_mobile', 'events', 'usn','loadObitUrl', 'toChainObitUrl', 'blockchainUrl'],
     data: function () {
         return {
             localObit: null,
-            blockchainObit: {},
+            blockchainObit: {
+                id: "",
+                data: {
+                    checksum: ""
+                }
+            },
             isLoading: true
         };
     },
     mounted: function () {
-        this.getObit();
-        this.getBlockchainNFT();
+        this.getObit(this.getBlockchainNFT);
     },
     watch: {
 
     },
     methods: {
         getBlockchainNFT: function() {
-            axios.get(this.loadObitUrl, {}).then((response) => {
+            axios.get(this.blockchainUrl, {
+            }).then((response) => {
                 if(response.data.status == 0) {
                     this.isLoading = false;
-                    this.blockchainObit = response.data.obit;
-                    this.blockchainObit.documents = [];//JSON.parse(this.obit.documents);
+                    this.blockchainObit = response.data.nft;
                 }
             }).catch((e) => {
                 this.isLoading = false;
@@ -31,12 +35,13 @@ export default {
                 }
             });
         },
-        getObit: function(){
+        getObit: function(callback){
             axios.get(this.loadObitUrl, {}).then((response) => {
                 if(response.data.status == 0) {
                     this.isLoading = false;
                     this.localObit = response.data.obit;
-                    this.localObit.documents = [];//JSON.parse(this.obit.documents);
+
+                    callback()
                 }
             }).catch((e) => {
                 this.isLoading = false;

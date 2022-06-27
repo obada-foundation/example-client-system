@@ -21,7 +21,8 @@
                 <obit-detail 
                     :key="_usn" 
                     load-obit-url="{{ route('obits.load', $usn) }}" 
-                    to-chain-obit-url="{{ route('obits.to-chain', $usn) }}">
+                    to-chain-obit-url="{{ route('obits.to-chain', $usn) }}"
+                    blockchain-url="{{ route('obits.from-chain', $usn) }}">
                 </obit-detail>
             </section>
         </div>
