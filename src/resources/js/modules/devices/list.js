@@ -1,9 +1,11 @@
 import $ from 'jquery';
+import "@popperjs/core";
 import 'datatables.net';
 import 'datatables.net-bs5';
 // import axios from 'axios';
 import {copyToClipboard} from "../../utils/copyToClipboard";
 import {showAlert} from "../../utils/showAlert";
+import * as bootstrap from "bootstrap";
 
 $(document).ready(() => {
 
@@ -42,15 +44,23 @@ $(document).ready(() => {
         rowCallback: function(row, data) {
             $(row).addClass('dev-' + data.id);
         },
+        drawCallback: function(settings) {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('#deviceList [data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        },
         columns: [
             {
                 sortable: false,
                 render: function(data, type, full, meta) {
+                    // todo: check if blockchain is newer or local is newer or equal
                     if (full.obit_checksum) {
-                        return '<i class="fas fa-sync text-success" title="Synchronized with blockchain"></i>';
+                        return '<span class="bt btn-sm btn-icon"><i class="fas fa-check text-success" data-bs-toggle="tooltip" title="Synchronized with blockchain"></i></span>';
                     } else {
-                        return '<i class="fas fa-sync text-warning" title="Not synchronized with blockchain"></i>';
+                        return '<button class="btn btn-sm btn-icon" data-bs-toggle="modal" data-bs-target="#networkFeesModal"><i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local version is newer. Click to synchronize."></i></button>';
                     }
+                    return '<button class="btn btn-sm btn-icon" data-bs-toggle="modal" data-bs-target="#networkFeesModal"><i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain version is newer. Click to synchronize."></i></button>';
                 }
             },
             {

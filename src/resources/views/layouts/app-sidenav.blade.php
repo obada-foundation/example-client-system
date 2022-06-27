@@ -7,9 +7,9 @@
         <div class="container-lg">
             <ul class="nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">My Inventory</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">My Inventory</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="{{ route('devices.index') }}">View</a></li>
+                        <li class="dropdown-item"><a href="{{ route('devices.index') }}">View Inventory List</a></li>
                         <li class="dropdown-item"><a href="{{ route('devices.create') }}">Add New Device</a></li>
                         <li class="dropdown-item disabled"><span>Export to CSV file</span></li>
                         <li class="dropdown-item disabled"><span>Import from CSV file</span></li>

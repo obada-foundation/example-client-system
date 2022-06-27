@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as bootstrap from "bootstrap";
 
 export default {
     props:['is_mobile','events','device_id', 'loadDeviceUrl', 'storeDocumentUrl', 'storeDeviceUrl', 'getUsnUrl'],
@@ -6,6 +7,7 @@ export default {
         return {
             device: null,
             isLoading: true,
+            isEdit: false,
             usn_data: {
                 usn: '',
                 serial_number_hash: '',
@@ -44,11 +46,18 @@ export default {
             },
             documents: [],
             documents_to_remove: [],
+            legal_agreement: {
+                value: false,
+                validations: ['required']
+            }
         };
     },
     mounted: function () {
-        if(this.device_id != 0) {
+        this.isEdit = this.device_id !== 0;
+
+        if (this.isEdit) {
             this.getDevice();
+            this.legal_agreement.value = true;
         } else {
             this.isLoading = false;
         }
@@ -219,7 +228,8 @@ export default {
                 this.isLoading = false;
                 if(response.data.status == 0) {
                     this.device = response.data.device;
-                    this.parseDevice()
+                    this.parseDevice();
+                    this.usn_data.usn = this.device.usn;
                 }
             }).catch((e) => {
                 this.isLoading = false;
@@ -360,5 +370,14 @@ export default {
                     });
             }
         },
+        mintpNFT: function() {
+            const modalEl = document.getElementById('networkFeesModal');
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
+
+            document.getElementById('networkFeesModalSubmit').addEventListener('click', event => {
+                this.saveDevice();
+            });
+        }
     }
 }

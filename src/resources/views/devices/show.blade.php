@@ -127,7 +127,9 @@
                         <div class="col-md-8">
                             June 21, 2022 7:10 UTC
                             @if(!$is_obit_page)
-                                <button class="btn btn-link btn-sm" title="Sync Now"><i class="fas fa-sync"></i></button>
+                                <button class="btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#networkFeesModal">
+                                    <i class="fas fa-sync" data-bs-toggle="tooltip" title="Sync Now"></i>
+                                </button>
                             @endif
                         </div>
                     </div>
@@ -213,10 +215,10 @@
         <div class="card-body">
             <ul class="list-group list-group-flush mt-3 mb-2">
                 <li class="list-group-item">
-                    View <a href="#">JSON Web Token</a> verification of identity signed by [Trust Anchor 1]
+                    View <a href="#">JSON Web Token</a> verification of identity signed by Tradeloop
                 </li>
                 <li class="list-group-item">
-                    View <a href="#">JSON Web Token</a> verification of identity signed by [Trust Anchor 2]
+                    View <a href="#">JSON Web Token</a> verification of identity signed by Tradeloop
                 </li>
             </ul>
         </div>
@@ -248,4 +250,9 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('page_bottom')
+    @include('common.network-fees-modal')
 @endsection

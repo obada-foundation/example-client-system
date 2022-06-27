@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <div class="mb-4">
                         <label for="" class="form-label">Manufacturer</label>
-                        <input v-bind:disabled="device_id != 0" type="text" class="form-control"
+                        <input v-bind:disabled="isEdit" type="text" class="form-control"
                                v-bind:class="{'is-normal':deviceForm.manufacturer.isClean,'is-invalid':!deviceForm.manufacturer.isClean && !deviceForm.manufacturer.isValid,'is-valid':!deviceForm.manufacturer.isClean && deviceForm.manufacturer.isValid}"
                                v-model="deviceForm.manufacturer.value"
                                @keyup="handleKeyPress(deviceForm.manufacturer)"
@@ -21,7 +21,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="">Part Number</label>
-                        <input v-bind:disabled="device_id != 0" type="text" class="form-control"
+                        <input v-bind:disabled="isEdit" type="text" class="form-control"
                                v-bind:class="{'is-normal':deviceForm.part_number.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
                                v-model="deviceForm.part_number.value"
                                @keyup="handleKeyPress(deviceForm.part_number)"
@@ -31,7 +31,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="" class="form-label">Serial Number</label>
-                        <input v-bind:disabled="device_id != 0" type="text" class="form-control"
+                        <input v-bind:disabled="isEdit" type="text" class="form-control"
                                v-bind:class="{'is-normal':deviceForm.serial_number.isClean,'is-invalid':!deviceForm.serial_number.isClean && !deviceForm.serial_number.isValid,'is-valid':!deviceForm.serial_number.isClean && deviceForm.serial_number.isValid}"
                                v-model="deviceForm.serial_number.value"
                                @keyup="handleKeyPress(deviceForm.serial_number)"
@@ -43,34 +43,36 @@
                         <input type="text" class="form-control-plaintext fs-4 fw-bold text-success d-inline-block w-auto" v-model="usn_data.usn" disabled readonly>
                     </div>
 
-                    <p><button class="btn btn-link" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#calculations1"
-                                            aria-expanded="false" aria-controls="calculations1"
-                                            style="margin-left: -0.75rem;">Show Calculations</button></p>
+                    <div v-if="!isEdit">
+                        <p><button class="btn btn-link" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#calculations1"
+                                                aria-expanded="false" aria-controls="calculations1"
+                                                style="margin-left: -0.75rem;">Show Calculations</button></p>
 
-                    <div id="calculations1" class="collapse">
-                        <!-- TODO: copied from calculations-table.blade.php -->
-                        <h4>HOW IS USN CALCULATED?</h4>
-                        <table class="table" style="table-layout: fixed; vertical-align: middle;">
-                            <tbody>
-                            <tr>
-                                <td style="width: 50px;"><h3 class="mb-0">1</h3></td>
-                                <td><strong>SHA-256 hash of serial number</strong><br>{{ usn_data.serial_number_hash }}</td>
-                            </tr>
-                            <tr>
-                                <td><h3 class="mb-0">2</h3></td>
-                                <td><strong>obit DID = SHA-256(manufacturer + part number + hash from above)</strong><br>{{ usn_data.did }}</td>
-                            </tr>
-                            <tr>
-                                <td><h3 class="mb-0">3</h3></td>
-                                <td><strong>base58 of obit DID</strong><br>{{ usn_data.usn_base58 }}</td>
-                            </tr>
-                            <tr>
-                                <td><h3 class="mb-0">4</h3></td>
-                                <td><strong>USN = first eight characters of base58 above</strong><br>{{ usn_data.usn }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div id="calculations1" class="collapse">
+                            <!-- TODO: copied from calculations-table.blade.php -->
+                            <h4>HOW IS USN CALCULATED?</h4>
+                            <table class="table" style="table-layout: fixed; vertical-align: middle;">
+                                <tbody>
+                                <tr>
+                                    <td style="width: 50px;"><h3 class="mb-0">1</h3></td>
+                                    <td><strong>SHA-256 hash of serial number</strong><br>{{ usn_data.serial_number_hash }}</td>
+                                </tr>
+                                <tr>
+                                    <td><h3 class="mb-0">2</h3></td>
+                                    <td><strong>obit DID = SHA-256(manufacturer + part number + hash from above)</strong><br>{{ usn_data.did }}</td>
+                                </tr>
+                                <tr>
+                                    <td><h3 class="mb-0">3</h3></td>
+                                    <td><strong>base58 of obit DID</strong><br>{{ usn_data.usn_base58 }}</td>
+                                </tr>
+                                <tr>
+                                    <td><h3 class="mb-0">4</h3></td>
+                                    <td><strong>USN = first eight characters of base58 above</strong><br>{{ usn_data.usn }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,54 +132,17 @@
                 <div class="card-body">
                     <p>An anonymous credential that can be used to identify you for legal compliance if necessary will be attached to the pNFT.</p>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" value="1" id="legal_agreement">
-                        <label for="legal_agreement" class="form-check-label">Legal agreement. <br> I attest that I legally own this asset and I agree that this pNFT represents the ownership of this asset.</label>
-                    </div>
-                </div>
-            </div>
-
-            <h2 class="mt-5">Step 4: Accept Fees</h2>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-0 col-md-6 d-flex align-items-center">
-                            <p>System fees, such as gas, storage and the Recycling Incentive, are set by the DAO and distributed equally to the operating DAO nodes. Third-party applications and off-chain services charge their fees separately.</p>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <table class="table" style="vertical-align: middle;">
-                                <tbody>
-                                <tr>
-                                    <td><strong>Gas Fee</strong> <br> <small>Validator node fee.</small></td>
-                                    <td class="text-end">0.001 OBD</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Storage Charge</strong><br><small>File storage costs.</small></td>
-                                    <td class="text-end">0.001 OBD</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Application Fee</strong><br><small>Gateway usage fee.</small></td>
-                                    <td class="text-end">0.001 OBD</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Recycling Incentive</strong> <em>(optional)</em><br><small>Will be returned when the device is recycled.</small></td>
-                                    <td class="text-end">1 OBD</td>
-                                </tr>
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td class="border-0"><strong class="fs-5">Total</strong></td>
-                                    <td class="border-0 text-end"><strong class="fs-5">0.003 OBD</strong></td>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                        <input type="checkbox" class="form-check-input" v-model="legal_agreement.value">
+                        <label for="" class="form-check-label">Legal agreement. <br> I attest that I legally own this asset and I agree that this pNFT represents the ownership of this asset.</label>
                     </div>
                 </div>
             </div>
 
             <div class="mt-5 text-center">
-                <button class="btn btn-primary btn-lg" @click="saveDevice">Mint pNFT</button>
-                <p class="mt-3">
+                <button class="btn btn-outline-primary btn-lg" @click="saveDevice">Save Changes</button>
+                <button class="btn btn-primary btn-lg" @click="mintpNFT">Mint pNFT</button>
+
+                <p v-if="!isEdit && usn_data.usn !== ''" class="mt-3">
                     Minting registers your USN <strong>{{ usn_data.usn }}</strong>. <br>
                     The blockchain address for this pNFT is: <br>
                     <strong>{{ usn_data.did }}</strong>

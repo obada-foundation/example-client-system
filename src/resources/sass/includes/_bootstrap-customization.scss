@@ -54,6 +54,14 @@
      text-transform: capitalize;
  }
 
+.btn.btn-icon {
+    padding: 0.15rem 0.3rem;
+
+    &:hover {
+        background-color: rgba(0,0,0,0.05);
+    }
+}
+
 .btn.btn-sm.btn-fab > i,
 .btn-group-sm .btn.btn-fab > i {
     font-size: 0.8rem !important;

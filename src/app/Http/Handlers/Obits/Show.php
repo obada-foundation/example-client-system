@@ -53,7 +53,7 @@ class Show extends Handler {
         }
 
         return view('devices.show', [
-            'page_title' => 'OBIT Details — USN ' . $device->usn,
+            'page_title' => 'Device Details — USN ' . $device->usn,
             'is_obit_page' => true,
             'usn' => $key,
             'device' => $device,

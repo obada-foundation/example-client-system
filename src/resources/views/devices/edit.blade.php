@@ -34,3 +34,8 @@
         </edit-device>
     @endif
 @endsection
+
+
+@section('page_bottom')
+    @include('common.network-fees-modal')
+@endsection

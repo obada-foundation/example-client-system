@@ -244,3 +244,9 @@ $link-hover-color: darken($link-color, 10%);
         padding-top: 30px;
     }
 }
+
+.h-lg-0 {
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+        height: 0;
+    }
+}
