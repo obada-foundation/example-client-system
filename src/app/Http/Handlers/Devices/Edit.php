@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -16,7 +16,14 @@ class Edit extends Handler {
         if (! $device) {
             return abort(404);
         }
-        
-        return view('devices.edit', compact('usn'));
+
+        $page = (object) [
+            'title' => 'Edit pNFT',
+            'description' => '__description__',
+            'keywords' => '__keywords__',
+            'isEdit' => true
+        ];
+
+        return view('devices.edit', compact('usn', 'page'));
     }
 }

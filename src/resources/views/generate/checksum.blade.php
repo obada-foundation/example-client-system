@@ -4,9 +4,15 @@
     <title>Generate Checksum</title>
     <meta name="description" content="__description__">
     <meta name="keywords" content="__keywords__">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"/>
 
+    <link rel="stylesheet" href="{{ mix('/css/base-vue.css') }}">
 @endsection
+
+
+@section('scripts')
+    <script src="{{ mix('/js/base-vue.js') }}"></script>
+@endsection
+
 
 @section('content')
     @include('common.nav',['fixed'=>false])
@@ -20,7 +26,4 @@
 
     </div>
     @include('common.footer')
-@endsection
-
-@section('scripts')
 @endsection

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -39,6 +39,9 @@ class LoadAll extends Handler {
                 } catch (\Exception) {
                     return '';
                 }
+            })
+            ->addColumn('documents_count', function (Device $device) {
+                return $device->documents->count();
             })
             ->make(true);
     }

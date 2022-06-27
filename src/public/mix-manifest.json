@@ -1,5 +1,9 @@
 {
-    "/js/app.js": "/js/app.js?id=22a1eb5d2a9a9c178d00",
-    "/css/app.css": "/css/app.css?id=b84ac38ec97fa542e9b3",
-    "/js/vendor.js": "/js/vendor.js?id=1eaa0b9a2e59eb3904b9"
+    "/js/base.js": "/js/base.js?id=72ae2483b321a842edc6",
+    "/css/base.css": "/css/base.css?id=c8f2b5d747e6d5508f10",
+    "/css/base-vue.css": "/css/base-vue.css?id=cc954593a85e11410ab1",
+    "/js/base-vue.js": "/js/base-vue.js?id=ed006fe358a09a3cb7bb",
+    "/js/devices_detail.js": "/js/devices_detail.js?id=e854038d2c19fe45334b",
+    "/js/devices_edit.js": "/js/devices_edit.js?id=54226e7cde3c1b84ed0b",
+    "/js/devices_list.js": "/js/devices_list.js?id=c812f54cf09b9a7a0fce"
 }

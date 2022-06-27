@@ -15,20 +15,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'SiteController@welcome');
-
-//Route::get('/obits', 'SiteController@obitsList');
-//Route::get('/obits/{obit_id}', 'SiteController@obitDetail');
+Route::get('/documentation', 'SiteController@documentation')->name('documentation');
 Route::get('/retrieve/obit', 'SiteController@retrieveObit');
 
 Route::namespace('\App\Http\Handlers\Obits')
     ->name('obits.')
     ->prefix('obits')
     ->group(function () {
-        Route::get('/', \Index::class)->name('index');
+        Route::get('/', function(Request $request) {
+            return Redirect::to(route('devices.index'));
+        });
         Route::get('/load-all', \LoadAll::class)->name('load-all');
         Route::post('/', \Store::class)->name('store');
         Route::get('/{key}', \Show::class)->name('show');
-        Route::get('/{key}/load', \Load::class)->name('load');
         Route::get('/{key}/to-chain', \ToChain::class)->name('to-chain');
         Route::get('/{key}/from-chain', \FromChain::class)->name('from-chain');
     });
@@ -51,6 +50,7 @@ Route::namespace('\App\Http\Handlers\Devices')
         Route::get('/{usn}', \Show::class)->name('show');
         Route::get('/{usn}/load', \Load::class)->name('load');
         Route::get('/{usn}/edit', \Edit::class)->name('edit');
+        Route::get('/{usn}/transfer', \Transfer::class)->name('transfer');
         Route::get('/', \Index::class)->name('index');
         Route::post('/', \Save::class)->name('save');
 
@@ -107,7 +107,3 @@ if (config('settings.enable_registration')) {
             Route::post('/', \RegisterUser::class)->name('user');
         });
 }
-
-
-
-

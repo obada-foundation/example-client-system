@@ -3,29 +3,31 @@
 @section('content')
     @include('common.nav',['fixed'=>false])
 
-    <div class="main">
-        <div class="container">
-            <h1>{{ $page_title }}</h1>
+    <div class="border-top border-bottom">
+        <div class="container-lg">
+            <ul class="nav">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">My Inventory</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="{{ route('devices.index') }}">View Inventory List</a></li>
+                        <li class="dropdown-item"><a href="{{ route('devices.create') }}">Add New Device</a></li>
+                        <li class="dropdown-item disabled"><span>Export to CSV file</span></li>
+                        <li class="dropdown-item disabled"><span>Import from CSV file</span></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link">OBD Wallet</a></li>
+                <li class="nav-item"><a href="{{ route('documentation') }}" class="nav-link">Documentation</a></li>
+            </ul>
+        </div>
+    </div>
 
-            <div class="row">
-                <div class="col-xs-12 col-md-3">
-                    <div class="card mt-0">
-                        <div class="card-body">
-                            <nav class="nav flex-column">
-                                <a class="nav-link" href="/">Home</a>
-                                <a class="nav-link" href="/devices">My Inventory</a>
-                                <a class="nav-link" href="{{ route('devices.create') }}">Add New Part</a>
-                                <a class="nav-link" href="#">Documentation</a>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-9">
-                    <main>
-                        @yield('page_content')
-                    </main>
-                </div>
-            </div>
+    <div class="main">
+        <div class="container-lg">
+            <h1 class="mb-5">{{ $page_title }}</h1>
+
+            <main>
+                @yield('page_content')
+            </main>
         </div>
     </div>
 
