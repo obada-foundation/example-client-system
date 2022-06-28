@@ -1,5 +1,4 @@
-@extends('layouts.app-sidenav', [
-    'body_class' => 'landing-page',
+@extends('layouts.app-with-nav', [
     'page_title' => 'Transfer pNFT — USN ' . $usn
 ])
 

@@ -1,5 +1,4 @@
-@extends('layouts.app-sidenav',[
-    'body_class'=>'landing-page',
+@extends('layouts.app-with-nav',[
     'page_title' => 'My pNFT Inventory'
 ])
 
@@ -9,8 +8,7 @@
     <meta name="description" content="Obada Reference App Inventory List">
     <meta name="keywords" content="devices">
 
-    <!-- TODO: move to css file ? -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ mix('/css/devices_list.css') }}"/>
 @endsection
 
 

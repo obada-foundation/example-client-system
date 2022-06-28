@@ -3,7 +3,7 @@
         <div class="text-left">
             <div class="form-group">
                 <label for="">Serial Number</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            v-bind:class="{'is-normal':deviceForm.serial_number.isClean,'is-invalid':!deviceForm.serial_number.isClean && !deviceForm.serial_number.isValid,'is-valid':!deviceForm.serial_number.isClean && deviceForm.serial_number.isValid}"
                            v-model="deviceForm.serial_number.value"
@@ -15,7 +15,7 @@
 
             <div class="form-group">
                 <label for="">Manufacturer</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            v-bind:class="{'is-normal':deviceForm.manufacturer.isClean,'is-invalid':!deviceForm.manufacturer.isClean && !deviceForm.manufacturer.isValid,'is-valid':!deviceForm.manufacturer.isClean && deviceForm.manufacturer.isValid}"
                            v-model="deviceForm.manufacturer.value"
@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label for="">Part Number</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            v-bind:class="{'is-normal':deviceForm.part_number.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
                            v-model="deviceForm.part_number.value"
@@ -39,7 +39,7 @@
 
             <div class="form-group">
                 <label for="">Metadata URI</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            v-bind:class="{'is-normal':deviceForm.metadata_uri.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
                            v-model="deviceForm.metadata_uri.value"
@@ -51,7 +51,7 @@
 
             <div class="form-group">
                 <label>Metadata URI Hash</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            v-bind:class="{'is-normal':deviceForm.metadata_uri_hash.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
                            v-model="deviceForm.metadata_uri_hash.value"
@@ -63,7 +63,7 @@
 
             <div class="form-group">
                 <label>Physical Asset Owner ID</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            v-bind:class="{'is-normal':deviceForm.trust_anchor_token.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
                            v-model="deviceForm.trust_anchor_token.value"

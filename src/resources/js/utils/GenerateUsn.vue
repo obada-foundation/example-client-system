@@ -3,7 +3,7 @@
         <div class="text-left">
             <div class="form-group">
                 <label for="">Manufacturer</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            v-bind:class="{'is-normal':deviceForm.manufacturer.isClean,'is-invalid':!deviceForm.manufacturer.isClean && !deviceForm.manufacturer.isValid,'is-valid':!deviceForm.manufacturer.isClean && deviceForm.manufacturer.isValid}"
                            v-model="deviceForm.manufacturer.value"
@@ -14,7 +14,7 @@
             </div>
             <div class="form-group">
                 <label for="">Serial Number</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            v-bind:class="{'is-normal':deviceForm.serial_number.isClean,'is-invalid':!deviceForm.serial_number.isClean && !deviceForm.serial_number.isValid,'is-valid':!deviceForm.serial_number.isClean && deviceForm.serial_number.isValid}"
                            v-model="deviceForm.serial_number.value"
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label for="">Part Number</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            v-bind:class="{'is-normal':deviceForm.part_number.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
                            v-model="deviceForm.part_number.value"
@@ -37,7 +37,7 @@
 
             <div v-if="usn_data != null" class="form-group">
                 <label for="">Obit</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            disabled
                            v-model="usn_data.did"
@@ -46,7 +46,7 @@
             </div>
             <div v-if="usn_data != null" class="form-group">
                 <label for="">Universal Serial Number</label>
-                <div class="input-group colored">
+                <div class="input-group">
                     <input type="text" class="form-control no-shadow is-normal"
                            disabled
                            v-model="usn_data.usn"

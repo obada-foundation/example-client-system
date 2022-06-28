@@ -12,10 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    {{--    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Cutive+Mono&family=Barlow:wght@300;400&family=Material+Icons&display=swap" rel="stylesheet">--}}
 
     <link rel="stylesheet" href="{{ mix('/css/base.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script>
         window.Laravel = {!! json_encode([
@@ -37,24 +35,23 @@
         function guid() {
             return (S4() + S4() + "" + S4() + "" + S4() + "" + S4() + "" + S4() + S4() + S4());
         }
-
     </script>
 
 
     @yield('head')
 </head>
 
-<body class="{{$body_class}}">
+<body>
 
-<div id="app">
-    <div id="alerts_container" class="alerts-container"></div>
+    <div id="app">
+        <div id="alerts_container" class="alerts-container"></div>
 
-    @yield('content')
-</div>
+        @yield('content')
+    </div>
 
-@yield('page_bottom')
+    @yield('page_bottom')
 
-@yield('scripts')
+    @yield('scripts')
 
 </body>
 </html>

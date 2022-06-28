@@ -1,10 +1,9 @@
-@extends('layouts.app',['body_class' => 'landing-page'])
+@extends('layouts.app')
 
 @section('head')
     <title>OBIT Detail</title>
     <meta name="description" content="__description__">
     <meta name="keywords" content="__keywords__">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"/>
 
     <script>
         var _usn = '<?php echo $usn; ?>';
@@ -18,9 +17,9 @@
         <div class="container">
             <h1 class="text-center">Client Helper (Wallet) > Obit Detail</h1>
             <section class="py-5 my-5">
-                <obit-detail 
-                    :key="_usn" 
-                    load-obit-url="{{ route('obits.load', $usn) }}" 
+                <obit-detail
+                    :key="_usn"
+                    load-obit-url="{{ route('obits.load', $usn) }}"
                     to-chain-obit-url="{{ route('obits.to-chain', $usn) }}"
                     blockchain-url="{{ route('obits.from-chain', $usn) }}">
                 </obit-detail>
