@@ -1,4 +1,4 @@
-@extends('layouts.app', ['body_class' => 'landing-page'])
+@extends('layouts.app')
 
 @section('head')
     <title>Register User</title>

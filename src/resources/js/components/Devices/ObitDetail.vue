@@ -1,10 +1,15 @@
 <template>
     <div>
-        <div v-if="isLoading" class="loader">
-            <div class="loading-card text-center">
-                <i class="fa fa-circle-notch fa-spin"></i>
+        <div v-if="isLoading" class="loader d-flex justify-content-center align-items-center">
+            <div class="card text-center">
+                <div class="card-body p-4">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
             </div>
         </div>
+
         <h2>Owner Information</h2>
         <ul v-if="localObit != null" class="device-information-list py-5">
             <device-row :bold_title="true"  :title="'Owner'" :value="localObit.owner"></device-row>

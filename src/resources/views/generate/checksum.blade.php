@@ -1,11 +1,9 @@
-@extends('layouts.app',['body_class'=>'landing-page'])
+@extends('layouts.app')
 
 @section('head')
     <title>Generate Checksum</title>
     <meta name="description" content="__description__">
     <meta name="keywords" content="__keywords__">
-
-    <link rel="stylesheet" href="{{ mix('/css/base-vue.css') }}">
 @endsection
 
 

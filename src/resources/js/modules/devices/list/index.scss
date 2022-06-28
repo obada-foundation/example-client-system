@@ -1,0 +1,51 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~@fortawesome/fontawesome-free/scss/variables";
+@import "~datatables.net-bs5/css/dataTables.bootstrap5.css";
+
+.dataTables_wrapper {
+    & > .row:first-child {
+        & > .col-sm-12:first-child {
+            width: 0;
+            padding-right: 0;
+            font-size: 0;
+        }
+
+        & > .col-sm-12:nth-child(2) {
+            padding-left: 0;
+        }
+    }
+}
+
+.dataTables_filter {
+    position: relative;
+    width: 100%;
+    padding-bottom: 20px;
+
+    label {
+        width: 100%;
+
+        input {
+            width: 100% !important;
+            margin-left: 0 !important;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+        }
+    }
+
+    &::after {
+        content: fa-content($fa-var-search);
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: $fa-font-size-base;
+    }
+}
+
+#deviceList.dataTable {
+    border-radius: $border-radius;
+    border: $border-width solid $border-color;
+    background-color: $white;
+}

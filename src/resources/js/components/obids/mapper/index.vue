@@ -1,15 +1,20 @@
 <template>
     <div>
-        <div v-if="isLoading" class="loader">
-            <div class="loading-card text-center">
-                <i class="fa fa-circle-notch fa-spin"></i>
+        <div v-if="isLoading" class="loader d-flex justify-content-center align-items-center">
+            <div class="card text-center">
+                <div class="card-body p-4">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
             </div>
         </div>
+
         <form action="" onsubmit="return false;">
             <div class="text-left">
                 <div class="form-group">
                     <label for="">Obit DID</label>
-                    <div class="input-group colored">
+                    <div class="input-group">
                         <input type="text" v-bind:disabled="isLoading" class="form-control no-shadow is-normal"
                                v-bind:class="{'is-normal':obitForm.obit_did.isClean,'is-invalid':!obitForm.obit_did.isClean && !obitForm.obit_did.isValid,'is-valid':!obitForm.obit_did.isClean && obitForm.obit_did.isValid}"
                                v-model="obitForm.obit_did.value"
