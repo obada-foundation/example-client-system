@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Handlers\Devices;
 
+use App\ClientHelper\Token;
 use App\Http\Handlers\Handler;
 use Illuminate\Support\Facades\Auth;
 use Obada\Api\ObitApi;
@@ -18,8 +19,10 @@ class Show extends Handler
     {
         $obit = [];
         $usn_data = null;
+        $user = Auth::user();
 
-        $device = Auth::user()->devices()->with('documents')
+        $device = $user->devices()
+            ->with('documents')
             ->byUsn($usn)
             ->first();
 
@@ -28,11 +31,11 @@ class Show extends Handler
             return redirect()->route('devices.index');
         }
 
-        try {
-            $obit = $obitApi->get($usn);
-        } catch (Throwable $t) {
-            Log::info($t->getMessage());
-        }
+        $tokenCreator = app(Token::class);
+            
+        $obitApi->getConfig()->setAccessToken($tokenCreator->create($user));
+
+        $obit = $obitApi->get($usn);
 
         try {
             $resp = $utilsApi->generateDID(
@@ -58,10 +61,10 @@ class Show extends Handler
         return view('devices.show', [
             'page_title' => 'Device Details — USN ' . $device->usn,
             'is_obit_page' => false,
-            'usn' => $usn,
-            'device' => $device,
-            'obit' => $obit,
-            'usn_data' => $usn_data
+            'usn'          => $usn,
+            'device'       => $device,
+            'obit'         => $obit,
+            'usn_data'     => $usn_data
         ]);
     }
 }
