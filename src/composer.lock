@@ -114,16 +114,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.229.0",
+            "version": "3.229.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5e01f0809682060dc5018bf5f267f40c32f4944d"
+                "reference": "142a872fd7172bf5d067f4e30e4f89593296fc8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5e01f0809682060dc5018bf5f267f40c32f4944d",
-                "reference": "5e01f0809682060dc5018bf5f267f40c32f4944d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/142a872fd7172bf5d067f4e30e4f89593296fc8f",
+                "reference": "142a872fd7172bf5d067f4e30e4f89593296fc8f",
                 "shasum": ""
             },
             "require": {
@@ -199,9 +199,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.229.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.229.2"
             },
-            "time": "2022-06-29T18:15:30+00:00"
+            "time": "2022-07-01T18:16:42+00:00"
         },
         {
             "name": "aws/aws-sdk-php-laravel",
@@ -2876,12 +2876,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/obada-foundation/client-api-library-php.git",
-                "reference": "a1fac485e9250f60651bb0c2e098885743c03bb6"
+                "reference": "aa991b987d4152940669b9d4b2f42e710515dc14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/obada-foundation/client-api-library-php/zipball/a1fac485e9250f60651bb0c2e098885743c03bb6",
-                "reference": "a1fac485e9250f60651bb0c2e098885743c03bb6",
+                "url": "https://api.github.com/repos/obada-foundation/client-api-library-php/zipball/aa991b987d4152940669b9d4b2f42e710515dc14",
+                "reference": "aa991b987d4152940669b9d4b2f42e710515dc14",
                 "shasum": ""
             },
             "require": {
@@ -2932,7 +2932,7 @@
                 "source": "https://github.com/obada-foundation/client-api-library-php/tree/main",
                 "issues": "https://github.com/obada-foundation/client-api-library-php/issues"
             },
-            "time": "2022-06-28T21:24:18+00:00"
+            "time": "2022-07-01T20:33:48+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",

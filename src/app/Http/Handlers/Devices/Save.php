@@ -31,7 +31,7 @@ class Save extends Handler {
 
             $existingDevice = Device::byUsn($did->getUsn())->first();
 
-            DB::transaction(function () use ($existingDevice, $request, $did, $user) {
+            DB::transaction(function () use (&$existingDevice, $request, $did, $user) {
                 if (! $existingDevice) {
                     $existingDevice = Device::create([
                         'user_id'       => $user->id,

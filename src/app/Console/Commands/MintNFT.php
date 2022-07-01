@@ -8,21 +8,20 @@ use App\Models\User;
 use Obada\Api\NFTApi;
 use Obada\ClientHelper\SendNFTRequest;
 
-class SendNFT extends Command
+class MintNFT extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'client-helper:nft:send {userId} {usn} {receiver}';
+    protected $signature = 'client-helper:nft:mint {userId} {usn}';
 
-    protected $description = 'Send NFT to the new OBADA blockchain address';
+    protected $description = 'Minting the NFT';
 
     public function handle()
     {
-        $userId = $this->argument('userId');
-        $user = User::findOrFail($userId);
+        $user = User::findOrFail($this->argument('userId'));
 
         $tokenCreator = app(Token::class);
         $token = $tokenCreator->create($user);
@@ -31,9 +30,6 @@ class SendNFT extends Command
         $api->getConfig()
             ->setAccessToken($token);
 
-        $req = (new SendNFTRequest)
-            ->setReceiver($this->argument('receiver'));
-
-        $this->info($api->send($this->argument('usn'), $req));
+        $this->info($api->mint($this->argument('usn')));
     }
 }
