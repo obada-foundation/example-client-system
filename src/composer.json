@@ -24,7 +24,7 @@
         "laravel/tinker": "^2.7",
         "lcobucci/jwt": "^4.1",
         "league/flysystem-aws-s3-v3": "^3.0",
-        "obada-foundation/client-api-library-php": "dev-api-upgrade",
+        "obada-foundation/client-api-library-php": "dev-main",
         "phpseclib/phpseclib": "~3.0",
         "sentry/sentry-laravel": "^2.0",
         "tuupola/base58": "^2.1",

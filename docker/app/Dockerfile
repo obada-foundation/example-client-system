@@ -45,7 +45,6 @@ COPY docker/app/etc/supervisord.conf /etc/supervisord.conf
 
 COPY --from=composer /var/www/ /app
 COPY --from=assets /assets/public /app/public
-COPY client-helper/test.pem /app/storage/certificates
 
 RUN chown -R www-data:www-data /app
 
