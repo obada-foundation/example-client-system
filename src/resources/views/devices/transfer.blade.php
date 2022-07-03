@@ -39,7 +39,7 @@
     </div>
 
     <div class="text-center mt-5">
-        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">Preview</button>
+        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">Transfer</button>
         <p class="mt-3">Authorization code will be send to your phone for verification.</p>
     </div>
 

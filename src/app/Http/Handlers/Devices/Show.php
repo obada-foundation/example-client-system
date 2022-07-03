@@ -32,7 +32,7 @@ class Show extends Handler
         }
 
         $tokenCreator = app(Token::class);
-            
+
         $obitApi->getConfig()->setAccessToken($tokenCreator->create($user));
 
         $obit = $obitApi->get($usn);
@@ -47,7 +47,7 @@ class Show extends Handler
 
             $usn_data = (object) [
                 'did'                => $resp->getDid(),
-                'usn'                => $resp->getUsn(),
+                'usn'                => $this->formatUsn($resp->getUsn()),
                 'usn_base58'         => $resp->getUsnBase58(),
                 'serial_number_hash' => $resp->getSerialNumberHash()
             ];
@@ -59,12 +59,23 @@ class Show extends Handler
         }
 
         return view('devices.show', [
-            'page_title' => 'Device Details — USN ' . $device->usn,
-            'is_obit_page' => false,
-            'usn'          => $usn,
-            'device'       => $device,
-            'obit'         => $obit,
-            'usn_data'     => $usn_data
+            'page_title'    => 'Device Details — USN ' . $device->usn,
+            'is_obit_page'  => false,
+            'usn'           => $usn,
+            'formatted_usn' => $this->formatUsn($usn),
+            'device'        => $device,
+            'obit'          => $obit,
+            'usn_data'      => $usn_data
         ]);
+    }
+
+    function formatUsn(string $usn): string
+    {
+        $result = [];
+
+        for ($i = 0; $i < strlen($usn); $i+=4) {
+            $result[] = substr($usn, $i, 4);
+        }
+        return implode('-', $result);
     }
 }

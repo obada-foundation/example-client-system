@@ -18,7 +18,7 @@ class Edit extends Handler {
         }
 
         $page = (object) [
-            'title' => 'Edit pNFT',
+            'title' => 'Edit Device',
             'description' => '__description__',
             'keywords' => '__keywords__',
             'isEdit' => true
