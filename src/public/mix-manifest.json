@@ -1,9 +1,9 @@
 {
-    "/js/base.js": "/js/base.js?id=9a1a63ea7496ff04a953",
-    "/css/base.css": "/css/base.css?id=10e942d2cdd7d92aef9b",
-    "/css/devices_list.css": "/css/devices_list.css?id=09ad59e37c41a053e426",
-    "/js/base-vue.js": "/js/base-vue.js?id=b77c13805a6fc1e4979b",
-    "/js/devices_detail.js": "/js/devices_detail.js?id=e854038d2c19fe45334b",
-    "/js/devices_edit.js": "/js/devices_edit.js?id=0bf745ca0c72ee2299c7",
-    "/js/devices_list.js": "/js/devices_list.js?id=84fb157ad155cd8a0d41"
+    "/js/base.js": "/js/base.js?id=77670e2a3c30593b44f0",
+    "/css/base.css": "/css/base.css?id=e2ef93d14b8e669ab7ba",
+    "/css/devices_list.css": "/css/devices_list.css?id=6b5a682a1cb1cc824391",
+    "/js/base-vue.js": "/js/base-vue.js?id=7574f2846593548a7581",
+    "/js/devices_detail.js": "/js/devices_detail.js?id=8e7ef3ce8df229bd3cf9",
+    "/js/devices_edit.js": "/js/devices_edit.js?id=9061da309306d964bf20",
+    "/js/devices_list.js": "/js/devices_list.js?id=24ff7327dacbf19aa24e"
 }

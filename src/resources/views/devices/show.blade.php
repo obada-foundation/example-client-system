@@ -11,12 +11,10 @@
 
 
 @section('scripts')
-    @if(!$is_obit_page)
-        <script>
-            window.storeObitUrl = '{{ route('obits.store') }}';
-        </script>
-        <script src="{{ mix('/js/devices_detail.js') }}"></script>
-    @endif
+    <script>
+        window.storeObitUrl = '{{ route('obits.store') }}';
+    </script>
+    <script src="{{ mix('/js/devices_detail.js') }}"></script>
 @endsection
 
 
@@ -28,10 +26,10 @@
             <ul class="list-group list-group-flush mt-3 mb-3">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <strong>Manufacturer</strong>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             {{ $device->manufacturer }}
                         </div>
                     </div>
@@ -39,32 +37,32 @@
 
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <strong>Part Number</strong>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             {{ $device->part_number }}
                         </div>
                     </div>
                 </li>
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <strong>Serial Number</strong>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             {{ $device->serial_number }}
                         </div>
                     </div>
                 </li>
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <strong>USN</strong><br><small>Universal Serial Number</small>
                         </div>
-                        <div class="col-md-8">
-                            <strong class="text-success">{{ $device->usn }}</strong>
-                                <button class="btn btn-link btn-sm" data-copy-text="{{ $device->usn }}"><i class="far fa-copy"></i></button>
+                        <div class="col-md-9">
+                            <strong class="text-success">{{ $formatted_usn }}</strong><button
+                                class="btn btn-link btn-sm" data-copy-text="{{ $device->usn }}"><i class="far fa-copy"></i></button>
                         </div>
                     </div>
                 </li>
@@ -88,10 +86,10 @@
             <ul class="list-group list-group-flush mt-4 mb-2">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <strong>Blockchain Address</strong><br><small>Obit DID</small>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             @isset($obit['did'])
                                 <strong>{{ $obit['did'] }}</strong><a href="https://gateway.obada.io/obits/{{ $obit['did'] }}" class="ms-2"><i class="fas fa-external-link-alt"></i></a>
                             @endisset
@@ -100,33 +98,33 @@
                 </li>
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <strong>Blockchain Registry</strong><br><small>DID Registry</small>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <a href="https://forum.obada.io/">OBADA DAO</a> ITAD Registry<br><small>Based on Cosmos SDK</small>
                         </div>
                     </div>
                 </li>
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <strong>pNFT Created</strong>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             June 21, 2022 7:05 UTC
                         </div>
                     </div>
                 </li>
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <strong>Synchronized</strong>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             June 21, 2022 7:10 UTC
                             @if(!$is_obit_page)
-                                <button class="btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#networkFeesModal">
+                                <button class="btn btn-icon btn-sm text-warning" data-bs-toggle="modal" data-bs-target="#networkFeesModal">
                                     <i class="fas fa-sync" data-bs-toggle="tooltip" title="Sync Now"></i>
                                 </button>
                             @endif
@@ -161,7 +159,7 @@
                             <tr>
                                 <th>Information Type</th>
                                 <th>Description</th>
-                                <th style="width: 50%;">URL</th>
+                                <th style="width: 50%;">Link to File</th>
                                 <th>Signed by</th>
                                 <th>Date</th>
                             </tr>
@@ -186,10 +184,10 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <p><strong>pNFT Checksum</strong></p>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             @isset($obit['checksum'])
                                 <p>{{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button></p>
                             @endisset
@@ -212,14 +210,15 @@
     </div>
     <div class="card mb-5">
         <div class="card-body">
-            <ul class="list-group list-group-flush mt-3 mb-2">
+            <em>Coming Soon.</em>
+<!--            <ul class="list-group list-group-flush mt-3 mb-2">
                 <li class="list-group-item">
                     View <a href="#">JSON Web Token</a> verification of identity signed by Tradeloop
                 </li>
                 <li class="list-group-item">
                     View <a href="#">JSON Web Token</a> verification of identity signed by Tradeloop
                 </li>
-            </ul>
+            </ul>-->
         </div>
     </div>
 
@@ -227,7 +226,8 @@
     <h2>pNFT Version History</h2>
     <div class="card mb-5">
         <div class="card-body">
-            <div class="table-responsive p-2">
+            <em>Coming Soon.</em>
+<!--            <div class="table-responsive p-2">
                 <table class="table table-striped" style="vertical-align: middle;">
                     <thead>
                     <tr>
@@ -246,7 +246,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div>-->
         </div>
     </div>
 @endsection

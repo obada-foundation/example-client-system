@@ -25,7 +25,7 @@
                                @blur="handleBlur(deviceForm.manufacturer)">
                     </div>
                     <div class="mb-4">
-                        <label for="">Part Number</label>
+                        <label for="" class="form-label">Part Number</label>
                         <input v-bind:disabled="isEdit" type="text" class="form-control"
                                v-bind:class="{'is-normal':deviceForm.part_number.isClean,'is-invalid':!deviceForm.part_number.isClean && !deviceForm.part_number.isValid,'is-valid':!deviceForm.part_number.isClean && deviceForm.part_number.isValid}"
                                v-model="deviceForm.part_number.value"
@@ -48,13 +48,13 @@
                         <input type="text" class="form-control-plaintext fs-4 fw-bold text-success d-inline-block w-auto" v-model="usn_data.usn" disabled readonly>
                     </div>
 
-                    <div v-if="!isEdit">
+                    <div v-if="!isEdit && usn_data.usn !== ''">
                         <p><button class="btn btn-link" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#calculations1"
-                                                aria-expanded="false" aria-controls="calculations1"
-                                                style="margin-left: -0.75rem;">Show Calculations</button></p>
+                                                aria-expanded="true" aria-controls="calculations1"
+                                                style="margin-left: -0.75rem;">Hide Calculations</button></p>
 
-                        <div id="calculations1" class="collapse">
+                        <div id="calculations1" class="collapse show">
                             <!-- TODO: copied from calculations-table.blade.php -->
                             <h4>HOW IS USN CALCULATED?</h4>
                             <table class="table" style="table-layout: fixed; vertical-align: middle;">
@@ -73,7 +73,7 @@
                                 </tr>
                                 <tr>
                                     <td><h3 class="mb-0">4</h3></td>
-                                    <td><strong>USN = first eight characters of base58 above</strong><br>{{ usn_data.usn }}</td>
+                                    <td><strong>USN = first eight characters of base58 above</strong><br><strong class="text-success">{{ usn_data.usn }}</strong></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -87,43 +87,53 @@
                 <div class="card-body">
                     <input type="file" id="upload-file" style="position: absolute; top: -9999999px;" ref="sfile" v-on:change="handleFileUpload">
 
-                    <div v-for="(doc,i) in documents" class="row mb-4">
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <label for="" class="form-label">Information Type</label>
-                            <select class="form-select"
-                                    v-model="doc.name.type">
-                                <option value="1">Device Picture</option>
-                                <option value="2">Proof of Functionality</option>
-                                <option value="3">Proof of Data Destruction</option>
-                                <option value="4">Other</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <label for="" class="form-label">Description</label>
-                            <input type="text" class="form-control"
-                                    v-bind:class="{'is-normal':doc.name.isClean,'is-invalid':!doc.name.isClean && !doc.name.isValid,'is-valid':!doc.name.isClean && doc.name.isValid}"
-                                    v-model="doc.name.value"
-                                    @focus="handleFocus(doc.name)"
-                                    @blur="handleBlur(doc.name)">
-                        </div>
-                        <div class="col-10 col-sm-10 col-md-5">
-                            <div class="form-group">
-                                <label for="" class="form-label">URL</label>
-                                <div class="input-group">
+                    <div v-if="documents.length > 0" class="table-responsive p-2">
+                        <table class="table table-striped" style="vertical-align: middle;">
+                            <thead>
+                            <tr>
+                                <th>Attach</th>
+                                <th>Information Type</th>
+                                <th>Description</th>
+                                <th style="width: 50%;">Link to File</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(doc,i) in documents">
+                                <td>
+                                    <button class="btn btn-secondary w-100" @click="uploadDocument(i)">
+                                        <span class="fas fa-paperclip"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <select class="form-select"
+                                            v-model="doc.name.type">
+                                        <option value="1">Device Picture</option>
+                                        <option value="2">Proof of Functionality</option>
+                                        <option value="3">Proof of Data Destruction</option>
+                                        <option value="4">Other</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control"
+                                           v-bind:class="{'is-normal':doc.name.isClean,'is-invalid':!doc.name.isClean && !doc.name.isValid,'is-valid':!doc.name.isClean && doc.name.isValid}"
+                                           v-model="doc.name.value"
+                                           @focus="handleFocus(doc.name)"
+                                           @blur="handleBlur(doc.name)">
+                                </td>
+                                <td>
                                     <input type="text" class="form-control"
                                            v-bind:class="{'is-normal':doc.url.isClean,'is-invalid':!doc.url.isClean && !doc.url.isValid,'is-valid':!doc.url.isClean && doc.url.isValid}"
                                            v-model="doc.url.value"
                                            @focus="handleFocus(doc.url)"
                                            @blur="handleBlur(doc.url)">
-                                    <button class="btn btn-secondary" @click="uploadDocument(i)">
-                                        <span class="fas fa-upload"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-2 col-sm-2 col-md-1">
-                            <button class="btn btn-danger btn-floating" @click="removeDocument(i)" style="margin-top: 2rem;"><i class="fas fa-trash"></i></button>
-                        </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-floating" @click="removeDocument(i)"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="text-center">
@@ -138,14 +148,36 @@
                     <p>An anonymous credential that can be used to identify you for legal compliance if necessary will be attached to the pNFT.</p>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" v-model="legal_agreement.value">
-                        <label for="" class="form-check-label">Legal agreement. <br> I attest that I legally own this asset and I agree that this pNFT represents the ownership of this asset.</label>
+                        <label for="" class="form-check-label"><strong>Legal agreement.</strong> <br> I attest that I legally own this asset and I agree that this pNFT represents the ownership of this asset.</label>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="mt-5">Step 4: Prepay for ITAD Services <small><em class="text-muted">(next)</em></small></h2>
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-check mt-2 mb-4">
+                        <input type="checkbox" class="form-check-input" id="proof_of_data_destruction" disabled>
+                        <label for="proof_of_data_destruction" class="form-check-label"><strong>Proof of Data Destruction</strong></label>
+                        <p class="opacity-50">Attach  <input type="text" class="form-control d-inline-block text-end" style="width: 50px;" value="1" disabled>  OBD to the pNFT which can only be released with Proof of Data Destruction.</p>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="proof_of_recycling" disabled>
+                        <label for="proof_of_recycling" class="form-check-label"><strong>Proof of Recycling</strong></label>
+                        <p class="opacity-50">Attach  <input type="text" class="form-control d-inline-block text-end" style="width: 50px;" value="1" disabled>  OBD to the pNFT which can only be released with Proof of Recycling.</p>
+                    </div>
+
+                    <div class="mt-4 opacity-50">
+                        <label for="prepay_total" class="form-label"><strong>Total Service Fees:</strong></label>
+                        <input disabled readonly type="text" class="form-control-plaintext d-inline-block w-auto" id="prepay_total" value="0 OBD">
                     </div>
                 </div>
             </div>
 
             <div class="mt-5 text-center">
                 <button class="btn btn-outline-primary btn-lg" @click="saveDevice">Save Changes</button>
-                <button class="btn btn-primary btn-lg" @click="mintpNFT">Mint pNFT</button>
+                <button class="btn btn-primary btn-lg" @click="mintpNFT" v-bind:class="{'disabled':!isAllowedMinting}" v-bind:disabled="!isAllowedMinting">Mint pNFT</button>
 
                 <p v-if="!isEdit && usn_data.usn !== ''" class="mt-3">
                     Minting registers your USN <strong>{{ usn_data.usn }}</strong>. <br>

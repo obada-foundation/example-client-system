@@ -80,8 +80,12 @@ $link-hover-color: darken($link-color, 10%);
     background: rgba(0, 0, 0, 0.12);
 }
 
-.h-lg-0 {
-    @media (min-width: map-get($grid-breakpoints, lg)) {
+.text-black-40 {
+    color: rgba(0,0,0,0.4);
+}
+
+.h-md-0 {
+    @media (min-width: map-get($grid-breakpoints, md)) {
         height: 0;
     }
 }

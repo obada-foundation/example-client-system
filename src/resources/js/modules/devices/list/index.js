@@ -6,11 +6,15 @@ import 'datatables.net';
 import 'datatables.net-bs5';
 // import axios from 'axios';
 import * as bootstrap from "bootstrap";
+import {showAlert} from "../../../utils/showAlert";
+import moment from 'moment';
+import {formatUSN} from "../../../utils/formatUSN";
 
 $(document).ready(() => {
+    document.dispatchEvent(new CustomEvent('deviceReceived', {}));
 
     $('#deviceList').DataTable({
-        order: [[1, 'asc']],
+        order: [[6, 'desc']],
         "language": {
             emptyTable: "There are no devices to show at the moment",
             search: '',
@@ -19,7 +23,9 @@ $(document).ready(() => {
         },
         pageLength: 250,
         ajax: {
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             url: window.devicesLoadUrl,
             dataSrc: (data) => {
                 if (data.status === 1) {
@@ -37,26 +43,30 @@ $(document).ready(() => {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('#deviceList [data-bs-toggle="tooltip"]'));
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
+            });
         },
         columns: [
             {
                 sortable: false,
                 render: function(data, type, full, meta) {
+                    // if (full.created_at === full.updated_at) {
+                    //     return '<small class="text-success fw-bold">new</small>';
+                    // }
+
                     // todo: check if blockchain is newer or local is newer or equal
                     if (full.obit_checksum) {
                         return '<span class="bt btn-sm btn-icon"><i class="fas fa-check text-success" data-bs-toggle="tooltip" title="Synchronized with blockchain"></i></span>';
                     } else {
-                        return '<button class="btn btn-sm btn-icon" data-bs-toggle="modal" data-bs-target="#networkFeesModal"><i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local version is newer. Click to synchronize."></i></button>';
+                        return '<button class="btn btn-sm btn-icon" data-bs-toggle="modal" data-bs-target="#networkFeesModal"><i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local version updated. Click to synchronize."></i></button>';
                     }
-                    return '<button class="btn btn-sm btn-icon" data-bs-toggle="modal" data-bs-target="#networkFeesModal"><i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain version is newer. Click to synchronize."></i></button>';
+                    return '<button class="btn btn-sm btn-icon" data-bs-toggle="modal" data-bs-target="#networkFeesModal"><i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain version updated. Click to synchronize."></i></button>';
                 }
             },
             {
                 sortable: true,
                 "render": function(data, type, full, meta) {
                     return type === 'display'
-                        ? '<a href="/devices/' + full.usn + '"><strong>' + full.usn + '</strong></a>'
+                        ? '<a href="/devices/' + full.usn + '"><strong>' + formatUSN(full.usn) + '</strong></a>'
                         : full.usn;
                 }
             },
@@ -82,6 +92,17 @@ $(document).ready(() => {
                 sortable: true,
                 "render": function (data, type, full, meta) {
                     return full.documents_count === 0 ? '-' : full.documents_count;
+                }
+            },
+            {
+                sortable: true,
+                "render": {
+                    _: function (data, type, full, meta) {
+                        return '<span data-bs-toggle="tooltip" title="' + moment(full.created_at).format('MMM D YYYY, LT') + '">' + moment(full.created_at).fromNow() + '</span>';
+                    },
+                    sort: function(data, type, full, meta) {
+                        return full.created_at
+                    },
                 }
             },
         ]

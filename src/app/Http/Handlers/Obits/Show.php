@@ -13,6 +13,7 @@ use Throwable;
 use Log;
 
 class Show extends Handler {
+
     public function __invoke(ObitApi $obitApi, UtilsApi $utilsApi, $key)
     {
         $obit = [];
@@ -41,7 +42,7 @@ class Show extends Handler {
 
             $usn_data = (object) [
                 'did'                => $resp->getDid(),
-                'usn'                => $resp->getUsn(),
+                'usn'                => $this->formatUsn($resp->getUsn()),
                 'usn_base58'         => $resp->getUsnBase58(),
                 'serial_number_hash' => $resp->getSerialNumberHash()
             ];
@@ -56,9 +57,20 @@ class Show extends Handler {
             'page_title' => 'Device Details — USN ' . $device->usn,
             'is_obit_page' => true,
             'usn' => $key,
+            'formatted_usn' => $this->formatUsn($key),
             'device' => $device,
             'obit' => $obit,
             'usn_data' => $usn_data
         ]);
+    }
+
+    function formatUsn(string $usn): string
+    {
+        $result = [];
+
+        for ($i = 0; $i < strlen($usn); $i+=4) {
+            $result[] = substr($usn, $i, 4);
+        }
+        return implode('-', $result);
     }
 }

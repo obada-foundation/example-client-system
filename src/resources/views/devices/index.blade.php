@@ -1,10 +1,10 @@
 @extends('layouts.app-with-nav',[
-    'page_title' => 'My pNFT Inventory'
+    'page_title' => 'My Device Inventory'
 ])
 
 
 @section('head')
-    <title>My pNFT Inventory</title>
+    <title>My Device Inventory</title>
     <meta name="description" content="Obada Reference App Inventory List">
     <meta name="keywords" content="devices">
 
@@ -22,10 +22,8 @@
 
 @section('page_content')
 
-    <div class="text-center text-lg-end h-lg-0 mb-4 mb-lg-0">
+    <div class="text-start text-md-end h-md-0 mb-4 mb-md-0">
         <a href="{{ route('devices.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Add Device</a>
-        <a href="#" class="btn btn-primary disabled" aria-disabled="true"><i class="fas fa-file-export"></i>&nbsp;Export to CSV</a>
-        <a href="#" class="btn btn-primary disabled" aria-disabled="true"><i class="fas fa-file-import"></i>&nbsp;Import from CSV</a>
     </div>
 
 {{--    <div class="table-responsive">--}}
@@ -33,11 +31,12 @@
             <thead>
             <tr>
                 <th style="width: 20px;"></th>
-                <th>USN</th>
+                <th style="width: 70px;">USN</th>
                 <th>Manufacturer</th>
                 <th>Part&nbsp;#</th>
                 <th>Serial&nbsp;#</th>
                 <th>#&nbsp;of&nbsp;documents</th>
+                <th style="width: 75px;">Created</th>
             </tr>
             </thead>
         </table>
@@ -48,8 +47,8 @@
     <div class="mt-4">
         <ul class="list-unstyled mb-0 d-lg-flex justify-content-lg-between">
             <li><i class="fas fa-check text-success"></i> - Synchronized with blockchain</li>
-            <li><i class="fas fa-sync text-danger"></i> - Blockchain version is newer</li>
-            <li><i class="fas fa-sync text-warning"></i> - Local version is newer</li>
+            <li><i class="fas fa-sync text-danger"></i> - Blockchain version updated</li>
+            <li><i class="fas fa-sync text-warning"></i> - Local version updated</li>
         </ul>
     </div>
 

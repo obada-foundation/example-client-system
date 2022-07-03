@@ -1,5 +1,7 @@
 import axios from 'axios';
 import * as bootstrap from "bootstrap";
+import {showAlert} from "../../../utils/showAlert";
+import {formatUSN} from "../../../utils/formatUSN";
 
 export default {
     props:['is_mobile','events','device_id', 'loadDeviceUrl', 'storeDocumentUrl', 'storeDeviceUrl', 'getUsnUrl'],
@@ -8,6 +10,7 @@ export default {
             device: null,
             isLoading: true,
             isEdit: false,
+            isAllowedMinting: false,
             usn_data: {
                 usn: '',
                 serial_number_hash: '',
@@ -229,7 +232,7 @@ export default {
                 if(response.data.status == 0) {
                     this.device = response.data.device;
                     this.parseDevice();
-                    this.usn_data.usn = this.device.usn;
+                    this.usn_data.usn = formatUSN(this.device.usn);
                 }
             }).catch((e) => {
                 this.isLoading = false;
@@ -287,9 +290,14 @@ export default {
                 })
                     .then((response) => {
                         this.isLoading = false;
-                        this.clearForm(this.deviceForm);
+                        this.isAllowedMinting = true;
+                        showAlert({
+                            message: 'Device successfully saved!',
+                            type: 'success',
+                            autoclose: true
+                        });
                         // todo: add message on the page 'pNFT successfully created'
-                        window.location = '/devices/' + response.data.device.usn;
+                        // window.location = '/devices/' + response.data.device.usn;
                     })
                     .catch((e) => {
                         this.isLoading = false;
@@ -360,6 +368,7 @@ export default {
                 })
                     .then((response) => {
                         this.usn_data = response.data;
+                        this.usn_data.usn = formatUSN(response.data.usn);
                     })
                     .catch((e) => {
                         if (e.response.hasOwnProperty('errorMessage')) {
@@ -376,7 +385,12 @@ export default {
             modal.show();
 
             document.getElementById('networkFeesModalSubmit').addEventListener('click', event => {
-                this.saveDevice();
+                modal.hide();
+                showAlert({
+                    message: 'pNFT successfully minted!',
+                    type: 'success',
+                    autoclose: true
+                });
             });
         }
     }

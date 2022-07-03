@@ -3,12 +3,12 @@
  */
 
 .alerts-container {
-    position: fixed;
-    top: 75px;
+    position: absolute;
+    top: 115px;
     left: 10%;
     width: 80%;
     height: auto;
-    z-index: 99999;
+    z-index: 1;
 
     .alert {
         width: max-content;

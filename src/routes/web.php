@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'SiteController@welcome');
 Route::get('/documentation', 'SiteController@documentation')->name('documentation');
+Route::get('/wallet', 'SiteController@wallet')->name('wallet');
 Route::get('/retrieve/obit', 'SiteController@retrieveObit');
 
 Route::namespace('\App\Http\Handlers\Obits')
