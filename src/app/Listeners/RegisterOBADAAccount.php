@@ -9,19 +9,12 @@ use Obada\ClientHelper\NewAccountRequest;
 
 class RegisterOBADAAccount
 {
-    protected AccountsApi $api;
-
-    protected Token $tokenCreator;
-
-    public function __construct(AccountsApi $api, Token $tokenCreator) 
+    public function __construct(protected AccountsApi $api, protected Token $tokenCreator)
     {
-        $this->api = $api;
-        $this->tokenCreator = $tokenCreator;
     }
     /**
      * Handle the event.
      *
-     * @param  \Illuminate\Auth\Events\Registered  $event
      * @return void
      */
     public function handle(Registered $event)

@@ -14,7 +14,7 @@ deps/php:
 		 -v $$(pwd)/src:/app \
 		 -w /app \
 		 composer:2.2.12 \
-		sh -c "composer install"
+		sh -c "composer install --ignore-platform-req=ext-bcmath"
 
 deps/node:
 	docker run \

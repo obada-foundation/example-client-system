@@ -19,13 +19,20 @@ Route::get('/documentation', 'SiteController@documentation')->name('documentatio
 Route::get('/wallet', 'SiteController@wallet')->name('wallet');
 Route::get('/retrieve/obit', 'SiteController@retrieveObit');
 
+Route::namespace('\App\Http\Handlers\NFT\Transfer')
+    ->name('nft.transfer.')
+    ->prefix('nft')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/{usn}/transfer', \Index::class)->name('index');
+        Route::post('/{usn}/transfer', \Send::class)->name('send');
+    });
+
 Route::namespace('\App\Http\Handlers\Obits')
     ->name('obits.')
     ->prefix('obits')
     ->group(function () {
-        Route::get('/', function(Request $request) {
-            return Redirect::to(route('devices.index'));
-        });
+        Route::get('/', fn(Request $request) => Redirect::to(route('devices.index')));
         Route::get('/load-all', \LoadAll::class)->name('load-all');
         Route::post('/', \Store::class)->name('store');
         Route::get('/{key}', \Show::class)->name('show');
@@ -51,7 +58,6 @@ Route::namespace('\App\Http\Handlers\Devices')
         Route::get('/{usn}', \Show::class)->name('show');
         Route::get('/{usn}/load', \Load::class)->name('load');
         Route::get('/{usn}/edit', \Edit::class)->name('edit');
-        Route::get('/{usn}/transfer', \Transfer::class)->name('transfer');
         Route::get('/', \Index::class)->name('index');
         Route::post('/', \Save::class)->name('save');
 

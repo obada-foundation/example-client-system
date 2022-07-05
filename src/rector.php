@@ -10,7 +10,6 @@ use Rector\Php56\Rector\FuncCall\PowToExpRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\PostRector\Rector\NameImportingPostRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Rector\DeadCode\Rector\FunctionLike\RemoveCodeAfterReturnRector;
 use Rector\CodeQuality\Rector\If_\SimplifyIfReturnBoolRector;
 use Rector\CodeQuality\Rector\If_\CombineIfRector;
 use Rector\CodingStyle\Rector\FuncCall\ConsistentImplodeRector;
@@ -51,7 +50,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(TernaryToElvisRector::class);
     $services->set(PowToExpRector::class);
     $services->set(NameImportingPostRector::class);
-    $services->set(RemoveCodeAfterReturnRector::class);
     $services->set(SimplifyIfReturnBoolRector::class);
     $services->set(CombineIfRector::class);
     $services->set(ConsistentImplodeRector::class);

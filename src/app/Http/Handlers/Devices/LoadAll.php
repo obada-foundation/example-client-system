@@ -40,9 +40,7 @@ class LoadAll extends Handler {
                     return '';
                 }
             })
-            ->addColumn('documents_count', function (Device $device) {
-                return $device->documents->count();
-            })
+            ->addColumn('documents_count', fn(Device $device) => $device->documents->count())
             ->make(true);
     }
 }

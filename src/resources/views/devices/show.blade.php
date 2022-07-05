@@ -205,7 +205,7 @@
     <div class="d-flex justify-content-between mb-2">
         <h2 class="mb-0">Proof of Ownership</h2>
         @if(!$is_obit_page)
-            <a href="{{ route('devices.transfer', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
+            <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
         @endif
     </div>
     <div class="card mb-5">
