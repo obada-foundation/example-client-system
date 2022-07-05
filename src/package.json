@@ -26,6 +26,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@cosmjs/encoding": "^0.28.10",
         "@fortawesome/fontawesome-free": "^5.5.0",
         "@popperjs/core": "^2.11.5",
         "bootstrap-sweetalert": "^1.0.1",

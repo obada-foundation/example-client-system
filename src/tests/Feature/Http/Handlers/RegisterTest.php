@@ -48,8 +48,6 @@ class RegisterTest extends TestCase
         $this->assertEquals('John Doe', $user->name);
         $this->assertEquals('john@gmail.com', $user->email);
         $this->assertTrue(Hash::check('password', $user->password));
-        Event::assertDispatched(Registered::class, function ($e) use ($user) {
-            return $e->user->id === $user->id;
-        });
+        Event::assertDispatched(Registered::class, fn($e) => $e->user->id === $user->id);
     }
 }

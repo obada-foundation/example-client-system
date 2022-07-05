@@ -14,11 +14,9 @@ use phpseclib3\Crypt\EC;
 
 class Token 
 {
-    private string $kid;
+    private readonly Configuration $configuration;
 
-    private Configuration $configuration;
-
-    public function __construct(string $kid, string $privateKeyPath)
+    public function __construct(private readonly string $kid, string $privateKeyPath)
     {
         if (! File::exists($privateKeyPath)) {
             throw new Exception("Cannot find a key with path: {$privateKeyPath}");
@@ -37,8 +35,6 @@ class Token
             $privateKey,
             $privateKey,
         );
-
-        $this->kid = $kid;
     }
 
     public function create(User $user): string {

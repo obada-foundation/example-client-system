@@ -20,5 +20,6 @@ mix.js('resources/js/modules/devices/list/index.js', 'public/js/devices_list.js'
     .sass('resources/js/modules/devices/list/index.scss', 'public/css/devices_list.css');
 mix.js('resources/js/modules/devices/detail.js', 'public/js/devices_detail.js');
 mix.js('resources/js/modules/devices/edit.js', 'public/js/devices_edit.js');
+mix.js('resources/js/modules/nft/transfer.js', 'public/js/nft_transfer.js');
 
 mix.version();

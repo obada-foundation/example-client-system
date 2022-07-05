@@ -23,15 +23,8 @@ class JwtCreate extends Command
      */
     protected $description = 'Command description';
 
-    protected Token $token;
-
-    protected Faker $faker;
-
-    public function __construct(Token $token, Faker $faker) {
+    public function __construct(protected Token $token, protected Faker $faker) {
         parent::__construct();
-
-        $this->token = $token;
-        $this->faker = $faker;
     }
 
     /**

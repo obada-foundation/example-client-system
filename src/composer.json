@@ -28,7 +28,8 @@
         "phpseclib/phpseclib": "~3.0",
         "sentry/sentry-laravel": "^2.0",
         "tuupola/base58": "^2.1",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "kielabokkie/bitcoin-address-validator": "v2.1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
