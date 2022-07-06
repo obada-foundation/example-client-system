@@ -21,13 +21,17 @@
                      get-usn-url="{{ route('generate.usn.compute') }}"
                      load-device-url="{{ route('devices.load', $usn) }}"
                      store-device-url="{{ route('devices.save') }}"
-                     store-document-url="{{ route('devices.documents.store') }}">
+                     store-document-url="{{ route('devices.documents.store') }}"
+                     mint-nft-url="{{ route('nft.mint', $usn) }}"
+                     device-url="{{ route('devices.show', $usn) }}">
         </edit-device>
     @else
         <edit-device :device_id="0"
                      get-usn-url="{{ route('generate.usn.compute') }}"
                      store-device-url="{{ route('devices.save') }}"
-                     store-document-url="{{ route('devices.documents.store') }}">
+                     store-document-url="{{ route('devices.documents.store') }}"
+                     mint-nft-url="{{ route('nft.mint', $usn) }}"
+                     device-url="{{ route('devices.show', $usn) }}">
         </edit-device>
     @endif
 @endsection

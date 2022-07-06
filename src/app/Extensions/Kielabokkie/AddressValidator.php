@@ -23,6 +23,7 @@ class AddressValidator extends BaseAddressValidator {
 
         if (preg_match($expr, $address, $match) === 1) {
             try {
+                return true;
                 $bech32 = new Bech32;
                 $bech32->decodeSegwit($match[2], $match[0], Bech32::BECH32);
 

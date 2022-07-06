@@ -9,13 +9,15 @@ use App\Http\Handlers\Handler;
 use Illuminate\Support\Facades\Auth;
 use Obada\Api\ObitApi;
 use Obada\Api\UtilsApi;
+use Obada\Api\NFTApi;
 use Obada\ClientHelper\GenerateObitDIDRequest;
+use Obada\ApiException;
 use Throwable;
 use Log;
 
 class Show extends Handler
 {
-    public function __invoke(ObitApi $obitApi, UtilsApi $utilsApi, $usn)
+    public function __invoke(ObitApi $obitApi, UtilsApi $utilsApi, NFTApi $nftApi, $usn)
     {
         $obit = [];
         $usn_data = null;
@@ -31,11 +33,18 @@ class Show extends Handler
             return redirect()->route('devices.index');
         }
 
-        $tokenCreator = app(Token::class);
-
-        $obitApi->getConfig()->setAccessToken($tokenCreator->create($user));
-
+        $token = app(Token::class)->create($user);
+        $obitApi->getConfig()->setAccessToken($token);
+        $nftApi->getConfig()->setAccessToken($token);
         $obit = $obitApi->get($usn);
+
+        $hasNFT = true;
+
+        try {
+            $nftApi->nft($usn);
+        } catch (ApiException $t) {
+            $hasNFT = false;
+        }
 
         try {
             $resp = $utilsApi->generateDID(
@@ -60,12 +69,12 @@ class Show extends Handler
 
         return view('devices.show', [
             'page_title'    => 'Device Details — USN ' . $device->usn,
-            'is_obit_page'  => false,
             'usn'           => $usn,
             'formatted_usn' => $this->formatUsn($usn),
             'device'        => $device,
             'obit'          => $obit,
-            'usn_data'      => $usn_data
+            'usn_data'      => $usn_data,
+            'hasNFT'        => $hasNFT
         ]);
     }
 

@@ -18,7 +18,7 @@ WORKDIR /var/www
 
 RUN set -e \
 	&& if [ "$APP_ENV" == "prod" ]; then export ARGS="--no-dev"; fi \
-	&& composer install --prefer-dist --no-scripts --no-progress --no-suggest --no-interaction $ARGS \
+	&& composer install --ignore-platform-req=ext-bcmath --prefer-dist --no-scripts --no-progress --no-suggest --no-interaction $ARGS \
 	&& composer dump-autoload --classmap-authoritative
 
 FROM node:14 as assets
