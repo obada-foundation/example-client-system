@@ -23,7 +23,14 @@
 
     <div class="main">
         <div class="container-lg">
-            <h1 class="mb-5">{{ $page_title }}</h1>
+            @if(isset($has_title_action) && $has_title_action)
+                <div class="d-md-flex justify-content-between align-items-center mb-5">
+                    <h1 class="mb-4 mb-md-0">{{ $page_title }}</h1>
+                    @yield('title_action')
+                </div>
+            @else
+                <h1 class="mb-5">{{ $page_title }}</h1>
+            @endif
 
             <main class="position-relative">
                 @yield('page_content')

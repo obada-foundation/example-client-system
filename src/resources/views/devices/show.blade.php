@@ -1,5 +1,6 @@
 @extends('layouts.app-with-nav',[
-    'page_title' => $page_title
+    'page_title' => $page_title,
+    'has_title_action' => true
 ])
 
 
@@ -18,7 +19,25 @@
 @endsection
 
 
+@section('title_action')
+    @if ($hasNFT)
+        <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
+    @else
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="Mint pNFT first">
+            <button class="btn btn-outline-primary" disabled><i class="fas fa-exchange-alt"></i> Transfer pNFT</button>
+        </span>
+    @endif
+@endsection
+
+
 @section('page_content')
+
+    @if (!$hasNFT)
+        <div class="alert alert-warning mb-5" role="alert">
+            This pNFT has not been minted yet. <a href="#" class="alert-link">Mint now</a>.
+        </div>
+    @endif
+
     <h2>Physical Asset</h2>
     <div class="card mb-5">
         <div class="card-body">
@@ -200,9 +219,6 @@
 
     <div class="d-flex justify-content-between mb-2">
         <h2 class="mb-0">Proof of Ownership</h2>
-        @if ($hasNFT)
-            <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
-        @endif
     </div>
     <div class="card mb-5">
         <div class="card-body">

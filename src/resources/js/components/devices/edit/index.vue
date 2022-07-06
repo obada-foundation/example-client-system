@@ -153,7 +153,7 @@
                 </div>
             </div>
 
-            <h2 class="mt-5">Step 4: Prepay for ITAD Services <small><em class="text-muted">(next)</em></small></h2>
+            <h2 class="mt-5">Step 4: Prepay for ITAD Services <small><em class="text-muted">(coming soon)</em></small></h2>
             <div class="card">
                 <div class="card-body">
                     <div class="form-check mt-2 mb-4">

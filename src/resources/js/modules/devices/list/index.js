@@ -40,6 +40,7 @@ $(document).ready(() => {
             $(row).addClass('dev-' + data.id);
         },
         drawCallback: function(settings) {
+            document.getElementById('addButtonContainer').style.display = 'block';
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('#deviceList [data-bs-toggle="tooltip"]'));
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)

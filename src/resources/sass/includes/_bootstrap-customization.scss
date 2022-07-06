@@ -76,6 +76,11 @@
     color: $link-color;
 }
 
+.btn-outline-primary:disabled,
+.btn-outline-primary.disabled {
+    color: $primary-color;
+}
+
 
 /**
  * Card

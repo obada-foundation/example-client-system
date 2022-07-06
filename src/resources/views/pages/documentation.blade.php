@@ -19,4 +19,7 @@
 
     @include('common.documentation-list')
 
+    <h2 class="mt-5 mb-5 fs-1">Tools</h2>
+    @include('common.tools-list')
+
 @endsection
