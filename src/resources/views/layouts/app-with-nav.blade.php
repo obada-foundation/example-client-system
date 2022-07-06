@@ -15,7 +15,7 @@
                         <li class="dropdown-item disabled"><span>Import from CSV file <em>(coming soon)</em></span></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="{{ route('wallet') }}" class="nav-link">Wallet</a></li>
+                <li class="nav-item"><a href="{{ route('wallet.index') }}" class="nav-link">Wallet</a></li>
                 <li class="nav-item"><a href="{{ route('documentation') }}" class="nav-link">Documentation</a></li>
             </ul>
         </div>

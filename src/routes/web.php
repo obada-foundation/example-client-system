@@ -16,8 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'SiteController@welcome');
 Route::get('/documentation', 'SiteController@documentation')->name('documentation');
-Route::get('/wallet', 'SiteController@wallet')->name('wallet');
 Route::get('/retrieve/obit', 'SiteController@retrieveObit');
+
+Route::namespace('\App\Http\Handlers\Wallet')
+    ->name('wallet.')
+    ->prefix('wallet')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', \Index::class)->name('index');
+    });
 
 Route::namespace('\App\Http\Handlers\NFT\Transfer')
     ->name('nft.transfer.')
@@ -26,6 +33,14 @@ Route::namespace('\App\Http\Handlers\NFT\Transfer')
     ->group(function () {
         Route::get('/{usn}/transfer', \Index::class)->name('index');
         Route::post('/{usn}/transfer', \Send::class)->name('send');
+    });
+
+Route::namespace('\App\Http\Handlers\NFT')
+    ->name('nft.')
+    ->prefix('nft')
+    ->middleware('auth')
+    ->group(function () {
+        Route::post('/{usn}/mint', \Mint::class)->name('mint');
     });
 
 Route::namespace('\App\Http\Handlers\Obits')

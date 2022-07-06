@@ -42,9 +42,4 @@ class SiteController extends Controller
     {
         return view('pages.documentation', $this->getData([]));
     }
-
-    public function wallet(Request $request)
-    {
-        return view('pages.wallet', $this->getData([]));
-    }
 }

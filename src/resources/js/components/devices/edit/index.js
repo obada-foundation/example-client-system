@@ -4,7 +4,17 @@ import {showAlert} from "../../../utils/showAlert";
 import {formatUSN} from "../../../utils/formatUSN";
 
 export default {
-    props:['is_mobile','events','device_id', 'loadDeviceUrl', 'storeDocumentUrl', 'storeDeviceUrl', 'getUsnUrl'],
+    props:[
+        'is_mobile',
+        'events',
+        'device_id',
+        'loadDeviceUrl',
+        'storeDocumentUrl',
+        'deviceUrl',
+        'storeDeviceUrl',
+        'getUsnUrl',
+        'mintNftUrl'
+    ],
     data: function () {
         return {
             device: null,
@@ -366,17 +376,17 @@ export default {
                     },
                     responseType: 'json',
                 })
-                    .then((response) => {
-                        this.usn_data = response.data;
-                        this.usn_data.usn = formatUSN(response.data.usn);
-                    })
-                    .catch((e) => {
-                        if (e.response.hasOwnProperty('errorMessage')) {
-                            swal("Error!", e.data.errorMessage, "error");
-                        } else {
-                            swal("Error!", "Unable to generate USN", "error");
-                        }
-                    });
+                .then((response) => {
+                    this.usn_data = response.data;
+                    this.usn_data.usn = formatUSN(response.data.usn);
+                })
+                .catch((e) => {
+                    if (e.response.hasOwnProperty('errorMessage')) {
+                        swal("Error!", e.data.errorMessage, "error");
+                    } else {
+                        swal("Error!", "Unable to generate USN", "error");
+                    }
+                });
             }
         },
         mintpNFT: function() {
@@ -385,11 +395,22 @@ export default {
             modal.show();
 
             document.getElementById('networkFeesModalSubmit').addEventListener('click', event => {
-                modal.hide();
-                showAlert({
-                    message: 'pNFT successfully minted!',
-                    type: 'success',
-                    autoclose: true
+                axios(this.mintNftUrl, {
+                    method: 'post',
+                    responseType: 'json',
+                })
+                .then((response) => {
+                    modal.hide();
+                    swal("Success!", "NFT was minted", "success");
+                    window.location.href = this.deviceUrl
+                })
+                .catch((e) => {
+                    modal.hide();
+                    if (e.response.hasOwnProperty('errorMessage')) {
+                        swal("Error!", e.data.errorMessage, "error");
+                    } else {
+                        swal("Error!", "Unable to generate USN", "error");
+                    }
                 });
             });
         }

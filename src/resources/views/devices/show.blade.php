@@ -123,11 +123,9 @@
                         </div>
                         <div class="col-md-9">
                             June 21, 2022 7:10 UTC
-                            @if(!$is_obit_page)
-                                <button class="btn btn-icon btn-sm text-warning" data-bs-toggle="modal" data-bs-target="#networkFeesModal">
-                                    <i class="fas fa-sync" data-bs-toggle="tooltip" title="Sync Now"></i>
-                                </button>
-                            @endif
+                            <button class="btn btn-icon btn-sm text-warning" data-bs-toggle="modal" data-bs-target="#networkFeesModal">
+                                <i class="fas fa-sync" data-bs-toggle="tooltip" title="Sync Now"></i>
+                            </button>
                         </div>
                     </div>
                 </li>
@@ -139,9 +137,7 @@
 
     <div class="d-flex justify-content-between mb-2">
         <h2 class="mb-0">Device Data & Information</h2>
-        @if(!$is_obit_page)
             <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit</a>
-        @endif
     </div>
     <div class="card mb-5">
         <div class="card-body">
@@ -204,7 +200,7 @@
 
     <div class="d-flex justify-content-between mb-2">
         <h2 class="mb-0">Proof of Ownership</h2>
-        @if(!$is_obit_page)
+        @if ($hasNFT)
             <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
         @endif
     </div>
