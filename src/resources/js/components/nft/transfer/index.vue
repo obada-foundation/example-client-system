@@ -5,10 +5,10 @@
             <div class="card-body">
                 <div class="mt-3 mb-3">
                     <label for="" class="form-label">Transfer to</label>
-                    <input 
-                        type="text" 
-                        placeholder="OBADA Address" 
-                        v-model="recepientAddress" 
+                    <input
+                        type="text"
+                        placeholder="OBADA Address"
+                        v-model="recepientAddress"
                         class="form-control"
                     >
                     <div v-show="!isValid" class="form-helper text-danger">Please enter valid bech32 formatted OBADA address. Example: obada1dve4yjtvsudrdn98cxz4gtchrfnfz97jv6zgnx.</div>
@@ -30,10 +30,10 @@
         </div>
 
         <div class="text-center mt-5">
-            <button 
-                :disabled="!canPreview" 
-                class="btn btn-primary btn-lg" 
-                data-bs-toggle="modal" 
+            <button
+                :disabled="!canPreview"
+                class="btn btn-primary btn-lg"
+                data-bs-toggle="modal"
                 data-bs-target="#networkFeesModal">
                 Preview
             </button>
@@ -52,7 +52,7 @@
                             <p><strong>A code has been sent to your phone to authorize your identity.</strong></p>
                             <label for="" class="form-label">Enter authorization code</label>
                             <input type="text" class="form-control" value="111111">
-                            <div class="form-text">This is just a demo. No code is needed. Just click Continue.</div>
+                            <div class="form-text">This is just a demo. No code is needed. Just click Confirm Transfer.</div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
@@ -77,7 +77,7 @@
                             <tbody>
                             <tr>
                                 <td><strong>Gas Fee</strong> <br> <small>Validator node fee.</small></td>
-                                <td class="text-end" style="width: 150px;">0.001 OBD</td>
+                                <td class="text-end" style="width: 150px;">~0.001 OBD</td>
                             </tr>
                             <tr>
                                 <td><strong>Storage Charge</strong><br><small>File storage costs.</small></td>
@@ -107,13 +107,13 @@
                             <tr>
                                 <td class="border-0"><strong class="fs-5">Total</strong></td>
                                 <td class="border-0 text-end">
-                                    <strong id="networkFeesModalTotal" class="fs-5">1.003 OBD</strong>
+                                    <strong id="networkFeesModalTotal" class="fs-5">~1.003 OBD</strong>
                                 </td>
                             </tr>
                             </tfoot>
                         </table>
                     </div>
-        
+
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#twoFaModal">Continue</button>
                     </div>

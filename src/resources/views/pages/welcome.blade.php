@@ -34,6 +34,9 @@
                     <div class="col-xs-12 col-sm-6">
                         <h2 class="text-center mt-5">Documentation</h2>
                         @include('common.documentation-list')
+
+                        <h2 class="text-center mt-4">Tools</h2>
+                        @include('common.tools-list')
                     </div>
                 </div>
 

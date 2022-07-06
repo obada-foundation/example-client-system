@@ -22,7 +22,7 @@
 
 @section('page_content')
 
-    <div class="text-start text-md-end h-md-0 mb-4 mb-md-0">
+    <div id="addButtonContainer" class="text-start text-md-end h-md-0 mb-4 mb-md-0" style="display: none;">
         <a href="{{ route('devices.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Add Device</a>
     </div>
 
