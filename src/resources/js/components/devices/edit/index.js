@@ -18,9 +18,9 @@ export default {
     data: function () {
         return {
             device: null,
+            isMinting: false,
             isLoading: true,
             isEdit: false,
-            isAllowedMinting: false,
             usn_data: {
                 usn: '',
                 serial_number_hash: '',
@@ -300,14 +300,8 @@ export default {
                 })
                     .then((response) => {
                         this.isLoading = false;
-                        this.isAllowedMinting = true;
-                        showAlert({
-                            message: 'Device successfully saved!',
-                            type: 'success',
-                            autoclose: true
-                        });
-                        // todo: add message on the page 'pNFT successfully created'
-                        // window.location = '/devices/' + response.data.device.usn;
+                        swal("Success!", "Device successfully saved!", "success");
+                        window.location.href = '/devices/' + response.data.device.usn;
                     })
                     .catch((e) => {
                         this.isLoading = false;

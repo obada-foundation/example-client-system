@@ -15,7 +15,7 @@
     <script>
         window.storeObitUrl = '{{ route('obits.store') }}';
     </script>
-    <script src="{{ mix('/js/devices_detail.js') }}"></script>
+    <script src="{{ mix('/js/devices_show.js') }}"></script>
 @endsection
 
 
@@ -33,9 +33,10 @@
 @section('page_content')
 
     @if (!$hasNFT)
-        <div class="alert alert-warning mb-5" role="alert">
-            This pNFT has not been minted yet. <a href="#" class="alert-link">Mint now</a>.
-        </div>
+        <mint-device 
+            device-url="{{ route('devices.show', $device->usn) }}" 
+            mint-nft-url="{{ route('nft.mint', $device->usn) }}" 
+            usn="{{ $device->usn }}"></mint-device>
     @endif
 
     <h2>Physical Asset</h2>
@@ -101,7 +102,6 @@
     <h2>pNFT Address</h2>
     <div class="card mb-5">
         <div class="card-body">
-
             <ul class="list-group list-group-flush mt-4 mb-2">
                 <li class="list-group-item">
                     <div class="row">

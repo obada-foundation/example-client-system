@@ -50,12 +50,8 @@ $(document).ready(() => {
             {
                 sortable: false,
                 render: function(data, type, full, meta) {
-                    // if (full.created_at === full.updated_at) {
-                    //     return '<small class="text-success fw-bold">new</small>';
-                    // }
-
                     // todo: check if blockchain is newer or local is newer or equal
-                    if (full.obit_checksum) {
+                    if (full.obit_checksum === full.blockchain_checksum) {
                         return '<span class="bt btn-sm btn-icon"><i class="fas fa-check text-success" data-bs-toggle="tooltip" title="Synchronized with blockchain"></i></span>';
                     } else {
                         return '<button class="btn btn-sm btn-icon" data-bs-toggle="modal" data-bs-target="#networkFeesModal"><i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local version updated. Click to synchronize."></i></button>';
