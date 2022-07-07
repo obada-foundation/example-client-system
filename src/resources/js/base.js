@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('deviceReceived', function() {
     showAlert({
-        message: 'New items found. <a href="">Refresh</a>.',
+        message: 'New items found. <a href="" class="alert-link">Refresh</a>.',
         type: 'info'
     });
 });
