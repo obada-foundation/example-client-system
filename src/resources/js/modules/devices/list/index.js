@@ -11,7 +11,7 @@ import moment from 'moment';
 import {formatUSN} from "../../../utils/formatUSN";
 
 $(document).ready(() => {
-    document.dispatchEvent(new CustomEvent('deviceReceived', {}));
+    // document.dispatchEvent(new CustomEvent('deviceReceived', {}));
 
     $('#deviceList').DataTable({
         order: [[6, 'desc']],
