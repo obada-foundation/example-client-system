@@ -10,10 +10,10 @@ class Create extends Handler {
     public function __invoke()
     {
         $page = (object) [
-            'title' => 'Add New Device',
+            'title'       => 'Add New Device',
             'description' => '__description__',
-            'keywords' => '__keywords__',
-            'isEdit' => false
+            'keywords'    => '__keywords__',
+            'isEdit'      => false
         ];
 
         return view('devices.edit', compact('page'));
