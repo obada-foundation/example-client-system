@@ -23,9 +23,12 @@
     @if ($hasNFT)
         <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
     @else
-        <span class="d-inline-block" data-bs-toggle="tooltip" title="Mint pNFT first">
-            <button class="btn btn-outline-primary" disabled><i class="fas fa-exchange-alt"></i> Transfer pNFT</button>
-        </span>
+        <div>
+            <span class="d-inline-block" data-bs-toggle="tooltip" title="Mint pNFT first">
+                <button class="btn btn-outline-primary" disabled><i class="fas fa-exchange-alt"></i> Transfer pNFT</button>
+            </span>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#networkFeesModal" >Mint pNFT</button>
+        </div>
     @endif
 @endsection
 
@@ -33,9 +36,9 @@
 @section('page_content')
 
     @if (!$hasNFT)
-        <mint-device 
-            device-url="{{ route('devices.show', $device->usn) }}" 
-            mint-nft-url="{{ route('nft.mint', $device->usn) }}" 
+        <mint-device
+            device-url="{{ route('devices.show', $device->usn) }}"
+            mint-nft-url="{{ route('nft.mint', $device->usn) }}"
             usn="{{ $device->usn }}"></mint-device>
     @endif
 
@@ -106,7 +109,7 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-3">
-                            <strong>Blockchain Address</strong><br><small>Obit DID</small>
+                            <strong>Obit DID</strong><br><small>Blockchain Address</small>
                         </div>
                         <div class="col-md-9">
                             @isset($obit['did'])
@@ -118,7 +121,7 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-3">
-                            <strong>Blockchain Registry</strong><br><small>DID Registry</small>
+                            <strong>DID Registry</strong><br><small>Blockchain Registry</small>
                         </div>
                         <div class="col-md-9">
                             <a href="https://forum.obada.io/">OBADA DAO</a> ITAD Registry<br><small>Based on Cosmos SDK</small>
@@ -142,9 +145,7 @@
                         </div>
                         <div class="col-md-9">
                             June 21, 2022 7:10 UTC
-                            <button class="btn btn-icon btn-sm text-warning" data-bs-toggle="modal" data-bs-target="#networkFeesModal">
-                                <i class="fas fa-sync" data-bs-toggle="tooltip" title="Sync Now"></i>
-                            </button>
+                            <i class="fas fa-sync text-warning ms-1" data-bs-toggle="tooltip" title="Local version updated"></i>
                         </div>
                     </div>
                 </li>
@@ -185,8 +186,8 @@
                                     <td>Other {{-- {{ $document->type }} --}}</td>
                                     <td>{{ $document->name }}</td>
                                     <td><a href="{{ $document->path }}">{{ $document->path }}</a></td>
-                                    <td>JSON Web Token</td>
-                                    <td>06/21/22</td>
+                                    <td><a href="#">Device Owner</a><br>[JWT token]</td>
+                                    <td><span style="white-space: nowrap">June 21, 2022</span></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -212,7 +213,11 @@
             </ul>
 
             <!-- TODO: add checksum compute log -->
-<!--            <p class="mb-2"><a href="javascript:void(0);" class="btn btn-link">Show Calculations</a></p>-->
+            <p class="mt-2 mb-2"><a href="#" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#calculations2" aria-expanded="false" aria-controls="calculations2">Show Calculations</a></p>
+
+            <div id="calculations2" class="collapse">
+                Checksum calculation log
+            </div>
         </div>
     </div>
 
@@ -261,9 +266,4 @@
             </div>-->
         </div>
     </div>
-@endsection
-
-
-@section('page_bottom')
-    @include('common.network-fees-modal')
 @endsection

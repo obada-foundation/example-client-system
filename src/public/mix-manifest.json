@@ -1,10 +1,10 @@
 {
-    "/js/base.js": "/js/base.js?id=77670e2a3c30593b44f0",
-    "/css/base.css": "/css/base.css?id=5546a22d1a5f04af528e",
+    "/js/base.js": "/js/base.js?id=48b78c9ba56e7191d33e",
+    "/css/base.css": "/css/base.css?id=b67202d0003839cf5f70",
     "/css/devices_list.css": "/css/devices_list.css?id=6b5a682a1cb1cc824391",
-    "/js/base-vue.js": "/js/base-vue.js?id=7574f2846593548a7581",
-    "/js/devices_detail.js": "/js/devices_detail.js?id=8e7ef3ce8df229bd3cf9",
-    "/js/devices_edit.js": "/js/devices_edit.js?id=ec702d51dac047709450",
-    "/js/devices_list.js": "/js/devices_list.js?id=99a1fa5cac54dd5966b2",
-    "/js/nft_transfer.js": "/js/nft_transfer.js?id=51fb1200bc7135281d86"
+    "/js/base-vue.js": "/js/base-vue.js?id=65e400896f73c614ae87",
+    "/js/devices_edit.js": "/js/devices_edit.js?id=b9d18ad307e54c8bf053",
+    "/js/devices_list.js": "/js/devices_list.js?id=b84881edfb14fd9d7814",
+    "/js/devices_show.js": "/js/devices_show.js?id=028fb766100c44dd9d26",
+    "/js/nft_transfer.js": "/js/nft_transfer.js?id=bfac6c10c905d1d31c82"
 }

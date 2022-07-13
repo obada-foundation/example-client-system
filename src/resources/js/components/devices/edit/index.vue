@@ -177,18 +177,18 @@
 
             <div class="mt-5 text-center">
                 <button :disabled="isLoading || !legal_agreement.value" class="btn btn-primary btn-lg" v-on:click="saveDevice">
-                    <span 
-                        v-show="isLoading" 
-                        class="spinner-border spinner-border-sm" 
-                        role="status" 
+                    <span
+                        v-show="isLoading"
+                        class="spinner-border spinner-border-sm"
+                        role="status"
                         aria-hidden="true"></span>
                     Save Changes
                 </button>
 
                 <p v-if="!isEdit && usn_data.usn !== ''" class="mt-3">
-                    Minting registers your USN <strong>{{ usn_data.usn }}</strong>. <br>
-                    The blockchain address for this pNFT is: <br>
-                    <strong>{{ usn_data.did }}</strong>
+                    Minting registers your pNFT.<br>
+                    USN: <strong>{{ usn_data.usn }}</strong><br>
+                    Obit DID: <strong>{{ usn_data.did }}</strong>
                 </p>
             </div>
         </form>

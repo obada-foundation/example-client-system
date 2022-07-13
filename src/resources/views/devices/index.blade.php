@@ -53,8 +53,3 @@
     </div>
 
 @endsection
-
-
-@section('page_bottom')
-    @include('common.network-fees-modal')
-@endsection
