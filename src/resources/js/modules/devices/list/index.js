@@ -4,9 +4,7 @@ import $ from 'jquery';
 import "@popperjs/core";
 import 'datatables.net';
 import 'datatables.net-bs5';
-// import axios from 'axios';
 import * as bootstrap from "bootstrap";
-import {showAlert} from "../../../utils/showAlert";
 import moment from 'moment';
 import {formatUSN} from "../../../utils/formatUSN";
 
@@ -52,11 +50,11 @@ $(document).ready(() => {
                 render: function(data, type, full, meta) {
                     // todo: check if blockchain is newer or local is newer or equal
                     if (full.obit_checksum === full.blockchain_checksum) {
-                        return '<span class="bt btn-sm btn-icon"><i class="fas fa-check text-success" data-bs-toggle="tooltip" title="Synchronized with blockchain"></i></span>';
+                        return '<i class="fas fa-check text-success" data-bs-toggle="tooltip" title="Synchronized with blockchain"></i>';
                     } else {
-                        return '<button class="btn btn-sm btn-icon" data-bs-toggle="modal" data-bs-target="#networkFeesModal"><i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local version updated. Click to synchronize."></i></button>';
+                        return '<i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local version updated"></i>';
                     }
-                    return '<button class="btn btn-sm btn-icon" data-bs-toggle="modal" data-bs-target="#networkFeesModal"><i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain version updated. Click to synchronize."></i></button>';
+                    return '<i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain version updated"></i>';
                 }
             },
             {
@@ -82,7 +80,7 @@ $(document).ready(() => {
             {
                 sortable: true,
                 "render": function(data, type, full, meta) {
-                    return full.serial_number;
+                    return '<span style="white-space: nowrap">' + full.serial_number + '</span>';
                 }
             },
             {

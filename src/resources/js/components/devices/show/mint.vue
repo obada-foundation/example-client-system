@@ -2,11 +2,7 @@
 <template>
     <div>
         <div class="alert alert-warning mb-5" role="alert">
-            This pNFT has not been minted yet. 
-            <a href="#" 
-                data-bs-toggle="modal" 
-                data-bs-target="#networkFeesModal" 
-                class="alert-link">Mint now</a>.
+            This pNFT has not been minted yet.
         </div>
 
         <div class="modal" id="twoFaModal" tabindex="-1" aria-labelledby="twoFaModalLabel" aria-hidden="true">
