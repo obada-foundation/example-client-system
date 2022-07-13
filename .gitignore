@@ -3,3 +3,5 @@ etc
 docker-compose.yml
 src/vendor
 client-helper
+.vscode
+src/public/js

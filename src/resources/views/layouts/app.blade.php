@@ -19,11 +19,11 @@
         window.Laravel = {!! json_encode([
             'user' => [
                 'authenticated' => auth()->check(),
-                'is_admin'=>auth()->check() ? auth()->user()->is_admin : null,
-                'id' => auth()->check() ? auth()->user()->id : null,
-                'firstname' => auth()->check() ? auth()->user()->firstname : null,
-                'lastname' => auth()->check() ? auth()->user()->lastname : null,
-                'email' => auth()->check() ? auth()->user()->email : null
+                'is_admin'      =>auth()->check() ? auth()->user()->is_admin : null,
+                'id'            => auth()->check() ? auth()->user()->id : null,
+                'firstname'     => auth()->check() ? auth()->user()->firstname : null,
+                'lastname'      => auth()->check() ? auth()->user()->lastname : null,
+                'email'         => auth()->check() ? auth()->user()->email : null
             ]
         ]) !!}
     </script>

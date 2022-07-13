@@ -2,11 +2,9 @@
     <div class="container-lg">
         <a class="navbar-brand" href="/">
             <div>
-                <img src="https://public.tradeloopproto.com/img/tradeloop-logo.svg" alt="Tradeloop" height="20">
-                <span class="d-block" style="top: 0; padding-left: 5px;">Blockchain Demo Site</span>
+                <img src="{{ config('frontend.logo_path') }}" alt="Tradeloop" height="20">
+                <span class="d-block" style="top: 0; padding-left: 5px;">{{ config('frontend.logo_text') }}</span>
             </div>
-{{--                <p class="bold"><img alt="OBADA" src="/images/obada-logo.svg" width="112" height="35"> <small>Reference Design</small></p>--}}
-{{--                <span>An inventory manager application</span>--}}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
