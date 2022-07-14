@@ -97,15 +97,6 @@ Route::namespace('\App\Http\Handlers\Generate')
                 Route::get('/', Index::class)->name('index');
                 Route::post('/', Compute::class)->name('compute');
             });
-
-        // Checksum generation tool routes
-        Route::namespace('Checksum')
-            ->name('checksum.')
-            ->prefix('checksum')
-            ->group(function () {
-                Route::get('/', Index::class)->name('index');
-                Route::post('/', Compute::class)->name('compute');
-            });
     });
 
 Route::namespace('\App\Http\Handlers\Login')

@@ -7,13 +7,14 @@ namespace App\Http\Handlers\Devices;
 use App\ClientHelper\Token;
 use App\Http\Handlers\Handler;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Obada\Api\ObitApi;
 use Obada\Api\UtilsApi;
 use Obada\Api\NFTApi;
 use Obada\ClientHelper\GenerateObitDIDRequest;
+use Obada\ClientHelper\GenerateObitChecksumRequest;
 use Obada\ApiException;
 use Throwable;
-use Log;
 
 class Show extends Handler
 {
@@ -47,6 +48,13 @@ class Show extends Handler
         }
 
         try {
+            $respChecksum = $utilsApi->generateChecksum(
+                (new GenerateObitChecksumRequest())
+                    ->setSerialNumber($device->serial_number)
+                    ->setManufacturer($device->manufacturer)
+                    ->setPartNumber($device->part_number)
+            );
+
             $resp = $utilsApi->generateDID(
                 (new GenerateObitDIDRequest())
                     ->setSerialNumber($device->serial_number)
@@ -58,8 +66,9 @@ class Show extends Handler
                 'did'                => $resp->getDid(),
                 'usn'                => $this->formatUsn($resp->getUsn()),
                 'usn_base58'         => $resp->getUsnBase58(),
-                'serial_number_hash' => $resp->getSerialNumberHash()
+                'serial_number_hash' => $resp->getSerialNumberHash(),
             ];
+
         } catch (Throwable $t) {
             Log::error("Cannot generate obit", [
                 'error'   => $t->getMessage(),
@@ -74,7 +83,8 @@ class Show extends Handler
             'device'        => $device,
             'obit'          => $obit,
             'usn_data'      => $usn_data,
-            'hasNFT'        => $hasNFT
+            'hasNFT'        => $hasNFT,
+            'compute_log'   => $respChecksum->getComputeLog()
         ]);
     }
 

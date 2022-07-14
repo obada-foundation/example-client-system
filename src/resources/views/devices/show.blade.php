@@ -216,7 +216,9 @@
             <p class="mt-2 mb-2"><a href="#" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#calculations2" aria-expanded="false" aria-controls="calculations2">Show Calculations</a></p>
 
             <div id="calculations2" class="collapse">
-                Checksum calculation log
+                Checksum calculation log<br>
+
+                <code v-pre>{{ $compute_log }}</code>
             </div>
         </div>
     </div>
