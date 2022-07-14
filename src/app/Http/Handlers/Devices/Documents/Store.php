@@ -14,11 +14,11 @@ class Store extends Handler {
     {
         $file     = $request->file('file');
         $ext      = $file->getClientOriginalExtension();
-        $filename = $file->storeAs('documents/' . Auth::user()->id, uniqid() . ".$ext",'s3');
+        $filename = $file->storeAs('documents/' . Auth::user()->id, uniqid() . ".$ext");
 
         return response()->json([
             'status' => 0,
-            'url'    => Storage::disk('s3')->url($filename)
+            'url'    => Storage::url($filename)
         ], 200);
     }
 }

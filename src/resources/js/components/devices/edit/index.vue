@@ -122,7 +122,7 @@
                                            @blur="handleBlur(doc.name)">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control"
+                                    <input type="text" disabled class="form-control"
                                            v-bind:class="{'is-normal':doc.url.isClean,'is-invalid':!doc.url.isClean && !doc.url.isValid,'is-valid':!doc.url.isClean && doc.url.isValid}"
                                            v-model="doc.url.value"
                                            @focus="handleFocus(doc.url)"
