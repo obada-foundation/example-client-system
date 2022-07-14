@@ -42,12 +42,14 @@ COPY docker/app/etc/php7/php.ini /usr/local/etc/php
 COPY docker/app/etc/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY docker/app/etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 COPY docker/app/etc/supervisord.conf /etc/supervisord.conf
+COPY docker/app/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 COPY --from=composer /var/www/ /app
 COPY --from=assets /assets/public /app/public
 
-RUN chown -R www-data:www-data /app
+RUN mkdir -p /app/storage/app/documents && chown -R www-data:www-data /app
 
 STOPSIGNAL SIGQUIT
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/entrypoint.sh"]
