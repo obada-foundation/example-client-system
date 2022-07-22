@@ -41,6 +41,7 @@ Route::namespace('\App\Http\Handlers\NFT')
     ->middleware('auth')
     ->group(function () {
         Route::post('/{usn}/mint', \Mint::class)->name('mint');
+        Route::post('/{usn}/metadata', \UpdateMetadata::class)->name('update-metadata');
     });
 
 Route::namespace('\App\Http\Handlers\Obits')

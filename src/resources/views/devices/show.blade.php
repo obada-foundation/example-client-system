@@ -21,7 +21,10 @@
 
 @section('title_action')
     @if ($hasNFT)
-        <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
+        <div>
+            <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#networkFeesModal" >Update pNFT metadata</button>
+        </div>
     @else
         <div>
             <span class="d-inline-block" data-bs-toggle="tooltip" title="Mint pNFT first">
@@ -40,6 +43,11 @@
             device-url="{{ route('devices.show', $device->usn) }}"
             mint-nft-url="{{ route('nft.mint', $device->usn) }}"
             usn="{{ $device->usn }}"></mint-device>
+    @else
+        <update-metadata
+            device-url="{{ route('devices.show', $device->usn) }}"
+            update-metadata-url="{{ route('nft.update-metadata', $device->usn) }}"
+            usn="{{ $device->usn }}"></update-metadata>
     @endif
 
     <h2>Physical Asset</h2>
