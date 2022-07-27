@@ -72,7 +72,7 @@
                             <tr>
                                 <td class="border-0"><strong class="fs-5">Total</strong></td>
                                 <td class="border-0 text-end">
-                                    <strong id="networkFeesModalTotal" class="fs-5">~0.001 OBD</strong>
+                                    <strong id="networkFeesModalTotal" class="fs-5">0.001 OBD</strong>
                                 </td>
                             </tr>
                             </tfoot>
