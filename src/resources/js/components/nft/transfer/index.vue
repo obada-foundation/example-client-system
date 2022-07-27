@@ -77,7 +77,7 @@
                             <tbody>
                             <tr>
                                 <td><strong>Gas Fee</strong> <br> <small>Pays the validator nodes.</small></td>
-                                <td class="text-end" style="width: 150px;">~0.001 OBD</td>
+                                <td class="text-end" style="width: 150px;">0.001 OBD</td>
                             </tr>
                             <tr class="text-black-40">
                                 <td><strong>Storage Charge</strong> <em>(coming soon)</em><br><small>Pays for IPFS document storage.</small></td>
@@ -107,7 +107,7 @@
                             <tr>
                                 <td class="border-0"><strong class="fs-5">Total</strong></td>
                                 <td class="border-0 text-end">
-                                    <strong id="networkFeesModalTotal" class="fs-5">~0.001 OBD</strong>
+                                    <strong id="networkFeesModalTotal" class="fs-5">0.001 OBD</strong>
                                 </td>
                             </tr>
                             </tfoot>
