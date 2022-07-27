@@ -44,29 +44,29 @@
                                 <td><strong>Gas Fee</strong> <br> <small>Validator node fee.</small></td>
                                 <td class="text-end" style="width: 150px;">~0.001 OBD</td>
                             </tr>
-                            <tr>
+                            <tr class="text-black-40">
                                 <td><strong>Storage Charge</strong><br><small>File storage costs.</small></td>
                                 <td class="text-end">0.001 OBD</td>
                             </tr>
-                            <tr>
+                            <tr class="text-black-40">
                                 <td><strong>Application Fee</strong><br><small>Gateway usage fee.</small></td>
                                 <td class="text-end">0.001 OBD</td>
                             </tr>
-                            <tr id="recyclingIncentiveRow">
+                            <tr id="recyclingIncentiveRow" class="text-black-40">
                                 <td>
                                     <strong>Recycling Incentive (pNFT Stake)</strong> <em>(optional)</em><br>
                                     <small>An optional deposit to "stake" the asset, which is returned along with a newly minted token at final disposition.</small>
                                 </td>
                                 <td class="text-end">1 OBD</td>
                             </tr>
-                            <tr>
+                            <!--<tr>
                                 <td>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="pay_recycling" checked>
                                         <label for="pay_recycling" class="form-check-label"><small>I want to pay Recycling Incentive</small></label>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr>-->
                             </tbody>
                             <tfoot>
                             <tr>
