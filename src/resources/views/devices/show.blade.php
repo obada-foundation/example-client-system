@@ -226,7 +226,7 @@
             <div id="calculations2" class="collapse">
                 Checksum calculation log<br>
 
-                <code v-pre>{{ $compute_log }}</code>
+                <code v-pre>{!! $compute_log !!}</code>
             </div>
         </div>
     </div>

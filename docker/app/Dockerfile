@@ -1,7 +1,7 @@
 FROM php:8.1.5-fpm as base
 
 RUN apt update \
-	&& apt install nginx supervisor zlib1g-dev libpng-dev libjpeg-dev libonig-dev libsodium-dev -y \
+	&& apt install cron nginx supervisor zlib1g-dev libpng-dev libjpeg-dev libonig-dev libsodium-dev -y \
 	&& docker-php-ext-configure gd --enable-gd --with-jpeg \
 	&& docker-php-ext-install mysqli pdo pdo_mysql gd sodium mbstring bcmath \
 	&& rm -rf /var/www && mkdir /var/www
@@ -51,5 +51,7 @@ COPY --from=assets /assets/public /app/public
 RUN mkdir -p /app/storage/app/documents && chown -R www-data:www-data /app
 
 STOPSIGNAL SIGQUIT
+
+RUN crontab -l | { cat; echo "* * * * * php /app/artisan schedule:run >> /dev/null 2>&1"; } | crontab -
 
 CMD ["/entrypoint.sh"]
