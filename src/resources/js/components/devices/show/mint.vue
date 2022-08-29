@@ -29,61 +29,7 @@
             </div>
         </div>
 
-        <div class="modal" id="networkFeesModal" tabindex="-1" aria-labelledby="networkFeesModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title text-center" id="networkFeesModalLabel">Accept Network Fees</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table" style="vertical-align: middle;">
-                            <tbody>
-                            <tr>
-                                <td><strong>Gas Fee</strong> <br> <small>Validator node fee.</small></td>
-                                <td class="text-end" style="width: 150px;">~0.001 OBD</td>
-                            </tr>
-                            <tr class="text-black-40">
-                                <td><strong>Storage Charge</strong><br><small>File storage costs.</small></td>
-                                <td class="text-end">0.001 OBD</td>
-                            </tr>
-                            <tr class="text-black-40">
-                                <td><strong>Application Fee</strong><br><small>Gateway usage fee.</small></td>
-                                <td class="text-end">0.001 OBD</td>
-                            </tr>
-                            <tr id="recyclingIncentiveRow" class="text-black-40">
-                                <td>
-                                    <strong>Recycling Incentive (pNFT Stake)</strong> <em>(optional)</em><br>
-                                    <small>An optional deposit to "stake" the asset, which is returned along with a newly minted token at final disposition.</small>
-                                </td>
-                                <td class="text-end">1 OBD</td>
-                            </tr>
-                            <!--                            <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input" id="pay_recycling" checked>
-                                                                    <label for="pay_recycling" class="form-check-label"><small>I want to pay Recycling Incentive</small></label>
-                                                                </div>
-                                                            </td>
-                                                        </tr>-->
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td class="border-0"><strong class="fs-5">Total</strong></td>
-                                <td class="border-0 text-end">
-                                    <strong id="networkFeesModalTotal" class="fs-5">~1.003 OBD</strong>
-                                </td>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#twoFaModal">Continue</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <network-fees-modal></network-fees-modal>
     </div>
 </template>
 

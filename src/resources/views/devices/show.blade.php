@@ -113,7 +113,7 @@
                         </div>
                         <div class="col-md-9">
                             @isset($obit['did'])
-                                <strong>{{ $obit['did'] }}</strong><a href="https://gateway.obada.io/obits/{{ $obit['did'] }}" class="ms-2"><i class="fas fa-external-link-alt"></i></a>
+                                <strong>{{ $obit['did'] }}</strong><button class="btn btn-link btn-sm" data-copy-text="{{ $obit['did'] }}"><i class="far fa-copy"></i></button>
                             @endisset
                         </div>
                     </div>
@@ -157,7 +157,13 @@
 
     <div class="d-flex justify-content-between mb-2">
         <h2 class="mb-0">Device Data & Information</h2>
-            <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit</a>
+            <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary">
+                @if($device->documents->isEmpty())
+                    <i class="fas fa-plus"></i>&nbsp;Add Device
+                @else
+                    <i class="fas fa-edit"></i>&nbsp;Edit
+                @endif
+            </a>
     </div>
     <div class="card mb-5">
         <div class="card-body">
@@ -174,6 +180,7 @@
                         <thead>
                             <tr>
                                 <th>Information Type</th>
+                                <th>Encrypted</th>
                                 <th>Description</th>
                                 <th style="width: 50%;">Link to File</th>
                                 <th>Signed by</th>
@@ -184,6 +191,9 @@
                             @foreach($device->documents as $document)
                                 <tr>
                                     <td>Other {{-- {{ $document->type }} --}}</td>
+                                    <td class="text-center">
+                                        <input type="checkbox" checked readonly disabled>{{-- {{ $document->is_encrypted }} --}}
+                                    </td>
                                     <td>{{ $document->name }}</td>
                                     <td><a href="{{ $document->path }}">{{ $document->path }}</a></td>
                                     <td><a href="#">Device Owner</a><br>[JWT token]</td>

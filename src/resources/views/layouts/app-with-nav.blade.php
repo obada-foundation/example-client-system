@@ -3,7 +3,7 @@
 @section('content')
     @include('common.nav',['fixed'=>false])
 
-    <div class="border-top border-bottom">
+<!--    <div class="border-top border-bottom">
         <div class="container-lg">
             <ul class="nav">
                 <li class="nav-item dropdown">
@@ -19,7 +19,7 @@
                 <li class="nav-item"><a href="{{ route('documentation') }}" class="nav-link">Documentation</a></li>
             </ul>
         </div>
-    </div>
+    </div>-->
 
     <div class="main">
         <div class="container-lg">

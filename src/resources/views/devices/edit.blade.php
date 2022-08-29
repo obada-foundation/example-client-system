@@ -14,6 +14,7 @@
     <script src="{{ mix('/js/devices_edit.js') }}"></script>
 @endsection
 
+
 @section('page_content')
     @if($page->isEdit)
         <edit-device :device_id="'{{ $usn }}'"
@@ -30,9 +31,4 @@
                      store-document-url="{{ route('devices.documents.store') }}">
         </edit-device>
     @endif
-@endsection
-
-
-@section('page_bottom')
-    @include('common.network-fees-modal')
 @endsection
