@@ -92,6 +92,7 @@
                             <thead>
                             <tr>
                                 <th>Attach</th>
+                                <th>Encrypt</th>
                                 <th>Information Type</th>
                                 <th>Description</th>
                                 <th style="width: 50%;">Link to File</th>
@@ -105,9 +106,12 @@
                                         <span class="fas fa-paperclip"></span>
                                     </button>
                                 </td>
+                                <td class="text-center">
+                                    <input type="checkbox">
+                                </td>
                                 <td>
                                     <select class="form-select"
-                                            v-model="doc.name.type">
+                                            v-model="doc.type.value">
                                         <option value="1">Device Picture</option>
                                         <option value="2">Proof of Functionality</option>
                                         <option value="3">Proof of Data Destruction</option>
@@ -136,8 +140,12 @@
                         </table>
                     </div>
 
-                    <div class="text-center">
+                    <div v-if="documents.length > 0" class="text-center">
                         <button class="btn btn-outline-info btn-floating" @click="addDocument()"><i class="fa fa-plus"></i></button>
+                    </div>
+
+                    <div v-if="documents.length === 0" class="text-center">
+                        <button class="btn btn-outline-info btn-floating" @click="addDocument()"><i class="fa fa-plus"></i> Add Document</button>
                     </div>
                 </div>
             </div>

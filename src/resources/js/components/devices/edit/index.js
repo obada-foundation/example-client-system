@@ -78,11 +78,15 @@ export default {
     methods: {
         addDocument: function() {
             this.documents.push({
+                type: {
+                    value: '',
+                    isValid: true,
+                    isClean: true
+                },
                 name: {
                     value: '',
                     isValid: true,
-                    isClean: true,
-                    validations: ['required']
+                    isClean: true
                 },
                 url: {
                     value: '',
@@ -261,9 +265,15 @@ export default {
 
                 var isDocumentInvalid = true;
                 var documents = [];
+
+                // check if we only have 1 or more empty documents
+                // if so - remove them
+
                 this.documents.forEach((s)=>{
+
                     if(this.is_valid(s)) {
                         var docs = {
+                            doc_type: s.type.value,
                             doc_name: s.name.value,
                             doc_path: s.url.value
                         };

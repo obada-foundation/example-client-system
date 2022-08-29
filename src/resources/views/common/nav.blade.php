@@ -11,10 +11,6 @@
         </button>
         <div id="navbarNav" class="collapse navbar-collapse">
             <ul class="navbar-nav">
-                <!-- custom link -->
-                <li class="nav-item">
-                    <span class="nav-link"><small>Demo site:</small></span>
-                </li>
 
                 @if (!Auth::check())
                     <li class="nav-item">
@@ -27,9 +23,13 @@
                     @endif
                 @else
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('documentation') }}">Documentation</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                     </li>
                 @endif
+
             </ul>
         </div>
     </div>
