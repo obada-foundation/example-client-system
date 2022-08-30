@@ -15,6 +15,7 @@ use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SaveDeviceRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Save extends Handler {
     public function __invoke(SaveDeviceRequest $request, UtilsApi $utilsApi)
@@ -50,11 +51,12 @@ class Save extends Handler {
                 $existingDevice->documents()->delete();
 
                 foreach ($request->get('documents', []) as $document) {
+                    $filePath = substr($document['doc_path'], strpos($document['doc_path'], 'documents'));
                     Document::create([
                         'device_id' => $existingDevice->id,
                         'name'      => $document['doc_name'],
                         'path'      => $document['doc_path'],
-                        'data_hash' => ''
+                        'data_hash' => hash('sha256', Storage::get($filePath))
                     ]);
                 }
 

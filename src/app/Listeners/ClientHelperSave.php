@@ -30,8 +30,7 @@ class ClientHelperSave
             ->get()
             ->map(function (Document $document) {                    
                 $filePath = substr($document->path, strpos($document->path, 'documents'));
-                
-                $base64File = base64_encode(Storage::disk('s3')->get($filePath));
+                $base64File = base64_encode(Storage::get($filePath));
 
                 return (new DeviceDocument)
                     ->setName($document->name)

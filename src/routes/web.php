@@ -41,6 +41,7 @@ Route::namespace('\App\Http\Handlers\NFT')
     ->middleware('auth')
     ->group(function () {
         Route::post('/{usn}/mint', \Mint::class)->name('mint');
+        Route::post('/{usn}/metadata', \UpdateMetadata::class)->name('update-metadata');
     });
 
 Route::namespace('\App\Http\Handlers\Obits')
@@ -93,15 +94,6 @@ Route::namespace('\App\Http\Handlers\Generate')
         Route::namespace('Usn')
             ->name('usn.')
             ->prefix('usn')
-            ->group(function () {
-                Route::get('/', Index::class)->name('index');
-                Route::post('/', Compute::class)->name('compute');
-            });
-
-        // Checksum generation tool routes
-        Route::namespace('Checksum')
-            ->name('checksum.')
-            ->prefix('checksum')
             ->group(function () {
                 Route::get('/', Index::class)->name('index');
                 Route::post('/', Compute::class)->name('compute');
