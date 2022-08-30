@@ -23,7 +23,7 @@
     @if ($hasNFT)
         <div>
             <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#networkFeesModal" >Update pNFT metadata</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#networkFeesModal">Update pNFT metadata</button>
         </div>
     @else
         <div>
