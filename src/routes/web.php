@@ -20,7 +20,7 @@ Route::get('/retrieve/obit', 'SiteController@retrieveObit');
 
 Route::namespace('\App\Http\Handlers\Wallet')
     ->name('wallet.')
-    ->prefix('wallet')
+    ->prefix('obd')
     ->middleware('auth')
     ->group(function () {
         Route::get('/', \Index::class)->name('index');

@@ -1,5 +1,5 @@
 @extends('layouts.app-with-nav',[
-    'page_title'=>'Wallet'
+    'page_title'=>'Details'
 ])
 
 
@@ -17,51 +17,46 @@
 
 @section('page_content')
 
-    <div class="card mb-5">
-        <div class="card-body">
-            <ul class="list-group list-group-flush mt-3 mb-3">
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <strong>My Address</strong>
-                        </div>
-                        <div class="col-md-9">
-                            {{ $address }}<button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
-                        </div>
+    <div class="mb-5">
+        <h3>Address:</h3>
+        <p>{{ $address }}<button class="btn btn-link btn-sm"
+                                 data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button></p>
+    </div>
+
+    <div class="mb-5">
+        <h3>OBD amount:</h3>
+        <p>{{ $balance }}.00</p>
+    </div>
+
+    <div class="mb-5">
+        <h3>To Send OBD:</h3>
+        <div class="row">
+            <div class="col-12 col-sm-9 col-md-6">
+                <form action="" class="row">
+                    <div class="col-9">
+                        <input type="text" id="address" class="form-control" name="address"
+                               placeholder="Enter Receiver Address" required>
+                        @if ($errors->has('address'))
+                            <span class="form-helper text-danger">{{ $errors->first('address') }}</span>
+                        @endif
                     </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <strong>Wallet Balance</strong>
-                        </div>
-                        <div class="col-md-9">
-                            {{ $balance }} OBD
-                        </div>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-primary w-100">Send</button>
                     </div>
-                </li>
-            </ul>
+                </form>
+            </div>
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-body">
-            <form action="">
-                <div class="mt-2 mb-4">
-                    <div class="row">
-                        <div class="col-12 col-md-10">
-                            <label for="address" class="form-label text-black-40">Send OBD to address <em>(coming soon)</em></label>
-                            <input id="address" name="address" type="text" class="form-control" placeholder="Enter recipient address" disabled>
-                        </div>
-                        <div class="col-12 col-md-2">
-                            <button class="btn btn-primary w-100" style="margin-top: 2rem;" disabled>Send</button>
-                        </div>
-                    </div>
-                </div>
+    <div class="mb-5">
+        <h3>To Receive OBD:</h3>
+        <p>Tell the sender to send to <strong>{{ $address }}</strong><button class="btn btn-link btn-sm"
+                                                                             data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button></p>
+    </div>
 
-                <p><a target="_blank" href="{{ config('faucet.url') }}">Get OBD for testing at the OBADA OBD Faucet</a></p>
-            </form>
-        </div>
+    <div class="mb-5">
+        <h3>OBADA Faucet:</h3>
+        <p><a target="_blank" href="{{ config('faucet.url') }}">Get a small amount for testing</a></p>
     </div>
 
 @endsection
