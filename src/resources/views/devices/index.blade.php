@@ -27,7 +27,7 @@
         <select name="" id="" class="form-select mt-2 mb-3 mt-sm-0 mb-sm-0 ms-sm-3 me-sm-3">
             <option value="">{{ $address }}</option>
         </select>
-        <a href="#" class="text-nowrap">Manage Addresses</a>
+        <a href="{{ route('addresses.index') }}" class="text-nowrap">Manage Addresses</a>
     </div>
 
     <div class="card mb-5">
