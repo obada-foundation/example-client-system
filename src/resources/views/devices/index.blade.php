@@ -22,11 +22,12 @@
 
 @section('page_content')
 
-    <div class="mb-5" style="margin-top: -2.25rem;">
-        <span class="me-2">Address:</span>
-        <select name="" id="" class="form-select d-inline-block" style="width: 300px; max-width: 100%;">
-            <option value="">obid:45v4563g46357g54575g757</option>
+    <div class="d-sm-flex align-items-center justify-content-between mb-5">
+        <span class="d-block text-nowrap">Address to Display:</span>
+        <select name="" id="" class="form-select mt-2 mb-3 mt-sm-0 mb-sm-0 ms-sm-3 me-sm-3">
+            <option value="">{{ $address }}</option>
         </select>
+        <a href="#" class="text-nowrap">Manage Addresses</a>
     </div>
 
     <div class="card mb-5">
@@ -35,13 +36,11 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-3">
-                            <strong class="d-inline-block mt-1">My Address</strong>
+                            <strong class="d-inline-block mt-1">Address</strong>
                         </div>
                         <div class="col-md-9">
-                            obid:45v4563g46357g54575g757
-                            <button class="btn btn-link btn-sm" data-copy-text="dfgsdsgsdfgdfgdfg"><i class="far fa-copy"></i></button>
-                            <button type="button" class="btn btn-outline-primary ms-1">Create New Address</button>
-                            <button type="button" class="btn btn-outline-primary ms-1">Enter Existing Address</button>
+                            {{ $address }}
+                            <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
                         </div>
                     </div>
                 </li>
@@ -49,13 +48,11 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-3">
-                            <strong class="d-inline-block mt-1">My Balance</strong>
+                            <strong class="d-inline-block mt-1">OBD Balance</strong>
                         </div>
                         <div class="col-md-9">
-                            <span class="me-1">900&nbsp;OBD</span>
-                            (<a target="_blank" href="{{ config('faucet.url') }}">OBADA Faucet</a>)
-                            <button type="button" class="btn btn-outline-dark ms-2">Send</button>
-                            <button type="button" class="btn btn-outline-dark ms-1">Receive</button>
+                            <span class="me-1">{{ $balance }}&nbsp;OBD</span>
+                            <a href="{{ route('wallet.index') }}" class="d-inline-block ms-3">Send / Receive</a>
                         </div>
                     </div>
                 </li>
@@ -63,20 +60,19 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-3">
-                            <strong class="d-inline-block mt-1">Number of pNFTs</strong>
+                            <strong class="d-inline-block mt-1">pNFTs</strong>
                         </div>
-                        <div class="col-md-9">
-                            <span class="d-inline-block mt-1">25 (synced &mdash; 10)</span>
+                        <div class="col-md-9 d-sm-flex justify-content-between align-items-center">
+                            <div>
+                            <span class="d-inline-block mt-1">{{ $devices_count }}</span>
+                            <a href="{{ route('devices.create') }}" class="d-inline-block ms-3">Add Device</a>
+                            </div>
+                            <a href="#" class="d-inline-block mt-4 mt-sm-0">Check Blockchain for Updates</a>
                         </div>
                     </div>
                 </li>
             </ul>
         </div>
-    </div>
-
-
-    <div id="addButtonContainer" class="text-start text-md-end h-md-0 mb-4 mb-md-0" style="display: none;">
-        <a href="{{ route('devices.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Add Device</a>
     </div>
 
 {{--    <div class="table-responsive">--}}
