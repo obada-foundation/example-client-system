@@ -30,49 +30,47 @@
         <a href="{{ route('addresses.index') }}" class="text-nowrap">Manage Addresses</a>
     </div>
 
-    <div class="card mb-5">
-        <div class="card-body">
-            <ul class="list-group list-group-flush mt-3 mb-3">
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <strong class="d-inline-block mt-1">Address</strong>
-                        </div>
-                        <div class="col-md-9">
-                            {{ $address }}
-                            <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
-                        </div>
+    <div class="border mb-5" style="border-radius: 0.25rem;">
+        <ul class="list-group list-group-flush mt-1 mb-1">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong class="d-inline-block mt-1">Address</strong>
                     </div>
-                </li>
+                    <div class="col-md-9">
+                        {{ $address }}
+                        <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+            </li>
 
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <strong class="d-inline-block mt-1">OBD Balance</strong>
-                        </div>
-                        <div class="col-md-9">
-                            <span class="me-1">{{ $balance }}&nbsp;OBD</span>
-                            <a href="{{ route('wallet.index') }}" class="d-inline-block ms-3">Send / Receive</a>
-                        </div>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong class="d-inline-block mt-1">OBD Balance</strong>
                     </div>
-                </li>
+                    <div class="col-md-9">
+                        <span class="me-1">{{ $balance }}&nbsp;OBD</span>
+                        <a href="{{ route('wallet.index') }}" class="d-inline-block ms-3">Send / Receive</a>
+                    </div>
+                </div>
+            </li>
 
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <strong class="d-inline-block mt-1">pNFTs</strong>
-                        </div>
-                        <div class="col-md-9 d-sm-flex justify-content-between align-items-center">
-                            <div>
-                            <span class="d-inline-block mt-1">{{ $devices_count }}</span>
-                            <a href="{{ route('devices.create') }}" class="d-inline-block ms-3">Add Device</a>
-                            </div>
-                            <a href="#" class="d-inline-block mt-4 mt-sm-0">Check Blockchain for Updates</a>
-                        </div>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong class="d-inline-block mt-1">pNFTs</strong>
                     </div>
-                </li>
-            </ul>
-        </div>
+                    <div class="col-md-9 d-sm-flex justify-content-between align-items-center">
+                        <div>
+                        <span class="d-inline-block mt-1">{{ $devices_count }}</span>
+                        <a href="{{ route('devices.create') }}" class="d-inline-block ms-3">Add Device</a>
+                        </div>
+                        <a href="#" class="d-inline-block mt-4 mt-sm-0">Check Blockchain for Updates</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 
 {{--    <div class="table-responsive">--}}
