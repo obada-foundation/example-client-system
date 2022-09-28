@@ -1,5 +1,6 @@
 @extends('layouts.app-with-nav',[
-    'page_title' => 'My pNFT Wallet'
+    'page_title' => 'My pNFT Wallet',
+    'hide_breadcrumbs' => true
 ])
 
 

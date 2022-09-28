@@ -1,5 +1,5 @@
 @extends('layouts.app-with-nav',[
-    'page_title'=>'Details'
+    'page_title'=>'Wallet Details'
 ])
 
 
