@@ -14,6 +14,10 @@
     <script src="{{ mix('/js/base.js') }}"></script>
 @endsection
 
+@section('extra_breadcrumbs')
+    <li class="breadcrumb-item"><a href="{{ route('addresses.index') }}">Manage Addresses</a></li>
+@endsection
+
 
 @section('page_content')
 
