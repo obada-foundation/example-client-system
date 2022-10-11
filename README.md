@@ -1,3 +1,13 @@
+# Installation
+
+```
+git clone git@github.com:obada-foundation/example-client-system reference-design
+cd reference-design
+make deps
+make deploy/local
+```
+
+# Containers
 Four docker containers
 * reference-design - Application written in PHP / Laravel.
 * db - A relational database (MySQL)
