@@ -5,3 +5,5 @@ src/vendor
 client-helper
 .vscode
 src/public/js
+src/supervisord.pid
+ipfs

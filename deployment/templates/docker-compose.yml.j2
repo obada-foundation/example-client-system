@@ -14,9 +14,11 @@ services:
     volumes:
         - ./etc/ssl:/etc/nginx/ssl
         - ./etc/nginx/service.conf:/etc/nginx/service.conf
+    depends_on:
+      - app
     ports:
 {% if app_env == 'local' %}
-      - "8080:8080"
+      - "8090:8080"
 {% else %}
       - "80:80"
       - "443:443"
@@ -42,19 +44,40 @@ services:
 {% endif %}
       - ./etc/.env:/app/.env
     restart: always
+    depends_on:
+      - db
     networks:
       - backend
       - frontend
+
+  ipfs:
+    image: ipfs/go-ipfs:latest
+    container_name: ipfs
+    restart: always
+    volumes:
+      - ./ipfs/export:/export
+      - ./ipfs/data:/data/ipfs
+    ports:
+      - "4001:4001"
+      - "4002:4001/udp" 
+      - "8080:8080"
+      - "127.0.0.1:5001:5001"
+    networks:
+      - frontend
+      - backend
 
   client-helper:
     image: obada/client-helper:develop
     container_name: client-helper
     restart: always
+    user: ${UID}:${GID}
     volumes:
       - ./client-helper/data:/home/obada/data
       - ./client-helper/keys:/home/obada/keys
     environment:
       - DB_PATH=/home/obada/data
+      - IPFS_RPC_URL=ipfs:5001
+      - NODE_RPC_URL=tcp://node.alpha.obada.io:26657
     networks:
       - backend
 
