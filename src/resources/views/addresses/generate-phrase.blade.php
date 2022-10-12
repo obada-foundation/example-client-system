@@ -15,7 +15,7 @@
 @endsection
 
 @section('extra_breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('addresses.index') }}">Manage Addresses</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('addresses.index') }}">Addresses</a></li>
 @endsection
 
 
@@ -25,67 +25,54 @@
 
         <div class="mb-5">
             <h3>New Seed Phrase:</h3>
-            <div class="alert alert-warning d-inline-block">
-                <small><i class="fas fa-exclamation-triangle me-1"></i></small> Save this phrase somewhere safe
-            </div>
             <p>
                 <strong>{{ $seed_phrase }}</strong>
                 <button class="btn btn-link btn-sm" data-copy-text="{{ $seed_phrase }}"><i class="far fa-copy"></i></button>
             </p>
+            <div class="alert alert-warning" style="max-width: 550px;">
+                <small><i class="fas fa-exclamation-triangle me-1"></i></small> <strong>Save this phrase somewhere
+                    safe</strong>
+                <br>
+                Anyone who knows your seed phrase can control all of your assets.
+                <br>
+                If you lose the seed phrase, you will lose access, and it can't be recovered.
+            </div>
+            <p><a href="{{ route('addresses.generate-phrase') }}?step=2" class="btn btn-primary">I saved the seed phrase</a></p>
         </div>
 
+    @elseif($step == 2)
+
         <div class="mb-5">
-            <h3>Enter two random words from new phrase to confirm:</h3>
+            <h3>Enter two words from the new phrase to confirm:</h3>
             <div class="row">
-                <div class="col-12 col-sm-9 col-md-8">
+                <div class="col-12 col-md-8 col-lg-6">
                     <form method="POST" action="{{ route('addresses.save-phrase') }}" class="row">
                         @csrf
 
-                        <div class="col-9">
-                            <input type="text" id="phrase_words" class="form-control" name="phrase_words" placeholder="Enter words here" required>
-                            @if ($errors->has('phrase_words'))
-                                <span class="form-helper text-danger">{{ $errors->first('phrase_words') }}</span>
-                            @endif
+                        <div class="col-12 col-sm-4">
+                            <div class="mb-2">
+                                <input type="text" id="word2" class="form-control" name="word2" placeholder="Enter 2nd word" required>
+                                @if ($errors->has('word2'))
+                                    <span class="form-helper text-danger">{{ $errors->first('word2') }}</span>
+                                @endif
+                            </div>
                         </div>
-                        <div class="col-3">
+
+                        <div class="col-12 col-sm-4">
+                            <div class="mb-3">
+                                <input type="text" id="word7" class="form-control" name="word7" placeholder="Enter 7th word" required>
+                                @if ($errors->has('word7'))
+                                    <span class="form-helper text-danger">{{ $errors->first('word7') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4">
                             <button type="submit" class="btn btn-primary">Confirm</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-
-    @elseif($step == 2)
-
-        <div class="alert alert-success d-inline-block mb-5">
-            <small><i class="fas fa-check me-1"></i></small> Seed phrase successfully saved
-        </div>
-
-        <div class="mb-5">
-            <h3>Seed Phrase:</h3>
-
-            <p>
-                <strong>{{ $seed_phrase_short }}</strong>
-                <a href="#phraseFull" class="ms-2" data-bs-toggle="collapse">Display</a>
-            </p>
-
-            <p id="phraseFull" class="collapse">
-                {{ $seed_phrase }}
-                <button class="btn btn-link btn-sm" data-copy-text="{{ $seed_phrase }}"><i class="far fa-copy"></i></button>
-            </p>
-
-            <p><a href="#newAddress" class="btn btn-primary" data-bs-toggle="collapse">Generate New Address</a></p>
-        </div>
-
-        <div id="newAddress" class="mb-5 collapse">
-            <h3>New Address:</h3>
-
-            <p class="mb-5">
-                {{ $address }}
-                <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
-            </p>
-
-            <p><a href="{{ route('addresses.index') }}?show_data=1">Go back to Manage Addresses</a></p>
         </div>
 
     @endif
