@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-9">
                         <span class="me-1">{{ $balance }}&nbsp;OBD</span>
-                        <a href="{{ route('wallet.index') }}" class="d-inline-block ms-3">Send / Receive</a>
+                        <a href="{{ route('wallet.index') }}" class="d-inline-block ms-3">Send or Receive</a>
                     </div>
                 </div>
             </li>
@@ -64,10 +64,10 @@
                     </div>
                     <div class="col-md-9 d-sm-flex justify-content-between align-items-center">
                         <div>
-                        <span class="d-inline-block mt-1">{{ $devices_count }}</span>
-                        <a href="{{ route('devices.create') }}" class="d-inline-block ms-3">Add Device</a>
+                            <span class="d-inline-block mt-1">{{ $devices_count }}</span>
+                            <a href="{{ route('devices.create') }}" class="d-inline-block ms-3">Add Device</a>
                         </div>
-                        <a href="#" class="d-inline-block mt-4 mt-sm-0">Check Blockchain for Updates</a>
+                        <button class="btn btn-primary mt-2 mt-sm-0">Check Blockchain for Updates</button>
                     </div>
                 </div>
             </li>
@@ -83,7 +83,7 @@
                 <th>Manufacturer</th>
                 <th>Part&nbsp;#</th>
                 <th>Serial&nbsp;#</th>
-                <th>#&nbsp;of&nbsp;documents</th>
+                <th>#&nbsp;of&nbsp;Documents</th>
                 <th style="width: 75px;">Created</th>
             </tr>
             </thead>

@@ -2,6 +2,7 @@
 @import "~bootstrap/scss/variables";
 @import "~@fortawesome/fontawesome-free/scss/variables";
 @import "~datatables.net-bs5/css/dataTables.bootstrap5.css";
+@import "../../../../sass/includes/datatables-customization";
 
 .dataTables_wrapper {
     & > .row:first-child {
@@ -44,10 +45,4 @@
         font-weight: 900;
         font-size: $fa-font-size-base;
     }
-}
-
-#deviceList.dataTable {
-    border-radius: $border-radius;
-    border: $border-width solid $border-color;
-    background-color: $white;
 }

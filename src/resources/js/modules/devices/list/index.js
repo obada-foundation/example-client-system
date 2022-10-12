@@ -92,7 +92,7 @@ $(document).ready(() => {
                 sortable: true,
                 "render": {
                     _: function (data, type, full, meta) {
-                        return '<span data-bs-toggle="tooltip" title="' + moment(full.created_at).format('MMM D YYYY, LT') + '" style="white-space: nowrap">' + moment(full.created_at).fromNow() + '</span>';
+                        return '<span style="white-space: nowrap">' + moment(full.created_at).format('YYYY-MM-DD, LT') + '</span>';
                     },
                     sort: function(data, type, full, meta) {
                         return full.created_at
