@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="/">
             <div>
                 <img src="{{ config('frontend.logo_path') }}" alt="Tradeloop" height="20">
-                <span class="d-block" style="top: 0; padding-left: 5px;">{{ config('frontend.logo_text') }}</span>
+                <span class="d-block" style="top: 0;">{{ config('frontend.logo_text') }}</span>
             </div>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">

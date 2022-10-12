@@ -4,29 +4,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-sweetalert/dist/sweetalert.css";
 
-
-/*
- * Default variables
- */
-$font-family-heading: $font-family-base !default;
-$background-color: #ffffff !default;
-$text-color: #3C4858 !default;
-$link-color: #007bff !default;
-$header-background-color: $background-color !default;
-$header-text-color: $text-color !default;
-$footer-background-color: $background-color !default;
-$footer-text-color: $text-color !default;
-$text-size-base: 16px !default;
-$primary-color: $primary !default;
-
-
-/*
- * Customized variables
- */
-@import "config";
-$link-hover-color: darken($link-color, 10%);
-
-
+@import "includes/variables";
 @import "includes/general";
 @import "includes/bootstrap-customization";
 

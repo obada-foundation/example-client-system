@@ -1,0 +1,18 @@
+@import "../includes/variables";
+
+table.dataTable {
+    border-radius: $border-radius;
+    border: $border-width solid $border-color;
+    background-color: $white;
+}
+
+.page-link {
+    color: $link-color;
+
+    .page-item.active & {
+        background-color: var(----bs-table-striped-bg);
+        border-color: #dee2e6;
+        font-weight: bold;
+        color: $text-color;
+    }
+}

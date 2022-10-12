@@ -26,7 +26,7 @@ class Index extends Handler {
 
         return view('devices.index', [
             'address' => $balance->getAddress(),
-            'balance' => $balance->getBalance(),
+            'balance' => number_format($balance->getBalance(), 16),
             'devices_count' => $devices_count
         ]);
     }
