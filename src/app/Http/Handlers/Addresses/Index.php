@@ -30,7 +30,10 @@ class Index extends Handler {
             'seed_phrase' => 'suggest quit betray lunar direct agent trial royal range feel spare awake',
             'seed_phrase_short' => 'suggest ... awake',
             'balance' => $balance->getBalance(),
-            'show_data' => $request->has('show_data')
+            'show_data' => $request->has('show_data'),
+            'add_new_address' => $request->has('add_new_address'),
+            'has_addresses' => $request->has('has_addresses'),
+            'has_other_addresses' => $request->has('has_other_addresses')
         ]);
     }
 }

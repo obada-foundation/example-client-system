@@ -1,3 +1,9 @@
+:root {
+    --bs-primary-rgb: #{red($primary), green($primary), blue($primary)};
+    --bs-body-bg-rgb: #{red($background-color), green($background-color), blue($background-color)};
+}
+
+
 /**
  * Alert
  */
@@ -31,18 +37,18 @@
     &:hover,
     &:focus,
     &.focus {
-        background-color: $primary-color;
-        border-color: $primary-color;
+        background-color: $primary;
+        border-color: $primary;
     }
 }
 
 .btn-outline-primary {
-    color: $primary-color;
-    border-color: $primary-color;
+    color: $primary;
+    border-color: $primary;
 
     &:hover {
-        background-color: $primary-color;
-        border-color: $primary-color;
+        background-color: $primary;
+        border-color: $primary;
     }
 }
 
@@ -78,7 +84,7 @@
 
 .btn-outline-primary:disabled,
 .btn-outline-primary.disabled {
-    color: $primary-color;
+    color: $primary;
 }
 
 

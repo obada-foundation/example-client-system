@@ -11,6 +11,6 @@ use Illuminate\Support\Facades\Redirect;
 class SavePhrase extends Handler {
     public function __invoke(Request $request)
     {
-        return Redirect::route('addresses.generate-phrase', ['step' => 2]);
+        return Redirect::route('addresses.index', ['show_data' => 1, 'has_addresses' => 1]);
     }
 }
