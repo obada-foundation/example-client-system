@@ -19,6 +19,11 @@
 @endsection
 
 
+@section('extra_breadcrumbs')
+    <li class="breadcrumb-item"><a href="{{ route('devices.index') }}">Wallet</a></li>
+@endsection
+
+
 @section('title_action')
     @if ($hasNFT)
         <div>

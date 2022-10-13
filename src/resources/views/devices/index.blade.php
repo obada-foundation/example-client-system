@@ -1,6 +1,5 @@
 @extends('layouts.app-with-nav',[
-    'page_title' => 'My pNFT Wallet',
-    'hide_breadcrumbs' => true
+    'page_title' => 'My pNFT Wallet'
 ])
 
 
@@ -21,15 +20,12 @@
 @endsection
 
 
-@section('page_content')
+@section('extra_breadcrumbs')
+    <li class="breadcrumb-item"><a href="{{ route('addresses.index') }}">Addresses</a></li>
+@endsection
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-5">
-        <span class="d-block text-nowrap">Address to Display:</span>
-        <select name="" id="" class="form-select mt-2 mb-3 mt-sm-0 mb-sm-0 ms-sm-3 me-sm-3">
-            <option value="">{{ $address }}</option>
-        </select>
-        <a href="{{ route('addresses.index') }}" class="text-nowrap">Manage Addresses</a>
-    </div>
+
+@section('page_content')
 
     <div class="border mb-5" style="border-radius: 0.25rem;">
         <ul class="list-group list-group-flush mt-1 mb-1">
@@ -41,6 +37,8 @@
                     <div class="col-md-9">
                         {{ $address }}
                         <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
+                        <span class="me-2 text-muted">|</span>
+                        <a href="{{ route('addresses.index') }}" class="text-nowrap">Change Address</a>
                     </div>
                 </div>
             </li>
@@ -51,8 +49,9 @@
                         <strong class="d-inline-block mt-1">OBD Balance</strong>
                     </div>
                     <div class="col-md-9">
-                        <span class="me-1">{{ $balance }}&nbsp;OBD</span>
-                        <a href="{{ route('wallet.index') }}" class="d-inline-block ms-3">Send or Receive</a>
+                        <span>{{ $balance }}&nbsp;OBD</span>
+                        <span class="ms-2 me-2 text-muted">|</span>
+                        <a href="{{ route('wallet.index') }}" class="d-inline-block">Send or Receive</a>
                     </div>
                 </div>
             </li>
@@ -65,7 +64,8 @@
                     <div class="col-md-9 d-sm-flex justify-content-between align-items-center">
                         <div>
                             <span class="d-inline-block mt-1">{{ $devices_count }}</span>
-                            <a href="{{ route('devices.create') }}" class="d-inline-block ms-3">Add Device</a>
+                            <span class="ms-2 me-2 text-muted">|</span>
+                            <a href="{{ route('devices.create') }}" class="d-inline-block">Add Device</a>
                         </div>
                         <button class="btn btn-primary mt-2 mt-sm-0">Check Blockchain for Updates</button>
                     </div>

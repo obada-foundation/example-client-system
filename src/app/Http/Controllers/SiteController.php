@@ -18,7 +18,7 @@ class SiteController extends Controller
     public function welcome(Request $request)
     {
         if (Auth::check()) {
-            return redirect()->route('devices.index');
+            return redirect()->route('addresses.index');
         } else {
             return view('pages.welcome', $this->getData([]));
         }
