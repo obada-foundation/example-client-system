@@ -1,5 +1,6 @@
 @extends('layouts.app-with-nav',[
-    'page_title'=>'Manage Addresses'
+    'page_title'=>'Manage Addresses',
+    'hide_breadcrumbs' => true
 ])
 
 
@@ -258,7 +259,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <span data-bs-toggle="tooltip" title="{{ $address }}">{{ $address_short }}</span>
+                                <a href="{{ route('devices.index') }}">{{ $address_short }}</a>
                                 <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
                             </td>
                             <td>1,345.090989809343</td>
@@ -269,8 +270,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <span data-bs-toggle="tooltip" title="obada1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1">obada1a1a1...a1a1</span>
-                                <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
+                                <a href="{{ route('devices.index') }}">obada1a1a1...a1a1</a>
+                                <button class="btn btn-link btn-sm" data-copy-text="obada1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"><i class="far fa-copy"></i></button>
                             </td>
                             <td>34.09098912</td>
                             <td>30</td>
@@ -281,8 +282,8 @@
                         @if($add_new_address)
                             <tr>
                                 <td>
-                                    <span data-bs-toggle="tooltip" title="obada1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2">obada1a2a2...a2a2</span>
-                                    <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
+                                    <a href="{{ route('devices.index') }}">obada1a2a2...a2a2</a>
+                                    <button class="btn btn-link btn-sm" data-copy-text="obada1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2"><i class="far fa-copy"></i></button>
                                 </td>
                                 <td>0.00000000</td>
                                 <td>0</td>
@@ -329,7 +330,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <span data-bs-toggle="tooltip" title="{{ $address }}">{{ $address_short }}</span>
+                                <a href="{{ route('devices.index') }}">{{ $address_short }}</a>
                                 <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
                             </td>
                             <td>1,345.090989809343</td>
@@ -340,8 +341,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <span data-bs-toggle="tooltip" title="{{ $address }}">{{ $address_short }}</span>
-                                <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
+                                <a href="{{ route('devices.index') }}">obada1a1a1...a1a1</a>
+                                <button class="btn btn-link btn-sm" data-copy-text="obada1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"><i class="far fa-copy"></i></button>
                             </td>
                             <td>34.09098912</td>
                             <td>30</td>
@@ -352,8 +353,8 @@
                         @if($add_new_address)
                             <tr>
                                 <td>
-                                    <span data-bs-toggle="tooltip" title="obada1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2">obada1a2a2...a2a2</span>
-                                    <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
+                                    <a href="{{ route('devices.index') }}">obada1a2a2...a2a2</a>
+                                    <button class="btn btn-link btn-sm" data-copy-text="obada1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2"><i class="far fa-copy"></i></button>
                                 </td>
                                 <td>0.00000000</td>
                                 <td>0</td>

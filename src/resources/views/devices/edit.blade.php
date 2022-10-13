@@ -15,6 +15,11 @@
 @endsection
 
 
+@section('extra_breadcrumbs')
+    <li class="breadcrumb-item"><a href="{{ route('devices.index') }}">Wallet</a></li>
+@endsection
+
+
 @section('page_content')
     @if($page->isEdit)
         <edit-device :device_id="'{{ $usn }}'"
