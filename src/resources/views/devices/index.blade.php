@@ -66,12 +66,20 @@
                             <span class="d-inline-block mt-1">{{ $devices_count }}</span>
                             <span class="ms-2 me-2 text-muted">|</span>
                             <a href="{{ route('devices.create') }}" class="d-inline-block">Add Device</a>
+                            <span class="ms-2 me-2 text-muted">|</span>
+                            <a href="{{ route('devices.import') }}" class="d-inline-block">Import CSV</a>
                         </div>
                         <button class="btn btn-primary mt-2 mt-sm-0">Check Blockchain for Updates</button>
                     </div>
                 </div>
             </li>
         </ul>
+    </div>
+
+
+    <div id="addButtonContainer" class="text-start text-md-end h-md-0 mb-4 mb-md-0">
+        <a href="{{ route('devices.create') }}" class="btn btn-secondary disabled"><small><i
+                    class="fas fa-upload me-2"></i></small>Mint All Changes</a>
     </div>
 
 {{--    <div class="table-responsive">--}}
