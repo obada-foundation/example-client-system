@@ -81,6 +81,7 @@ Route::namespace('\App\Http\Handlers\Devices')
     ->group(function () {
         Route::get('/create', \Create::class)->name('create');
         Route::get('/load-all', \LoadAll::class)->name('load-all');
+        Route::get('/import', \Import::class)->name('import');
         Route::get('/{usn}', \Show::class)->name('show');
         Route::get('/{usn}/load', \Load::class)->name('load');
         Route::get('/{usn}/edit', \Edit::class)->name('edit');
