@@ -49,7 +49,7 @@ deploy/local:
 		-it \
 		--rm \
 		-w /home/ansible/src \
-		-v $$(pwd):/home/ansible/src:z \
+		-v $$(pwd):/home/ansible/src:Z \
 		obada/ansible \
 		ansible-playbook deployment/playbook.yml --connection=local --limit rd.obada.local -i deployment/hosts
 
