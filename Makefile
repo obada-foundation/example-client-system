@@ -48,9 +48,8 @@ deploy/local:
 	docker run \
 		-it \
 		--rm \
-		--user $$(id -u):$$(id -g) \
 		-w /home/ansible/src \
-		-v $$(pwd):/home/ansible/src \
+		-v $$(pwd):/home/ansible/src:z \
 		obada/ansible \
 		ansible-playbook deployment/playbook.yml --connection=local --limit rd.obada.local -i deployment/hosts
 
