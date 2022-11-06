@@ -5,5 +5,7 @@ src/vendor
 client-helper
 .vscode
 src/public/js
+src/public/css
+src/public/mix-manifest.json
 src/supervisord.pid
 ipfs

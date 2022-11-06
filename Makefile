@@ -7,6 +7,8 @@ PROJECT_TAG_IMAGE = $(PROJECT):$(COMMIT_TAG)
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
 
+test:
+
 deps/php:
 	docker run \
 		--rm \
