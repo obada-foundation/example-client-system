@@ -38,7 +38,6 @@ services:
   app:
     image: obada/reference-design:develop
     container_name: reference-design
-    user: ${UID}:${GID}
     volumes:
 {% if app_env == 'local' %}
       - ./src:/app

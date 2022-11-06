@@ -48,6 +48,7 @@ deploy/local:
 	docker run \
 		-it \
 		--rm \
+		--user $$(id -u):$$(id -g) \
 		-w /home/ansible/src \
 		-v $$(pwd):/home/ansible/src \
 		obada/ansible \
