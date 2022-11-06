@@ -48,10 +48,10 @@ deploy/local:
 	docker run \
 		-it \
 		--rm \
-		-w /home/ansible/deployment \
-		-v $$(pwd)/deployment:/home/ansible/deployment \
+		-w /home/ansible/src \
+		-v $$(pwd):/home/ansible/src \
 		obada/ansible \
-		ansible-playbook playbook.yml --connection=local --limit rd.obada.local -i hosts
+		ansible-playbook deployment/playbook.yml --connection=local --limit rd.obada.local -i deployment/hosts
 
 build-branch:
 	docker build -t $(PROJECT_IMAGE) -f docker/app/Dockerfile . --build-arg APP_ENV=dev
