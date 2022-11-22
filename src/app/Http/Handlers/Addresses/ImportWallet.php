@@ -14,28 +14,18 @@ use Obada\ClientHelper\MnemonicRequest;
 use App\ClientHelper\Token;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
+use Obada\ClientHelper\WalletExistsError;
+use Obada\ApiException;
 
-class SavePhrase extends Handler {
+class ImportWallet extends Handler {
     public function __invoke(Request $request)
     {
-        $words = explode(' ', session()->get('mnemonic'));
+        $mnemonic = request()->get('seed_phrase', '');
+
+        $words = explode(' ', $mnemonic);
 
         if (count($words) == 0) {
             throw new Exception('Mnemonic must exists in session');
-        }
-
-        if ($words[2-1] !== request()->get('word2')){
-            return redirect()
-                ->back()
-                ->withInput()
-                ->withErrors(['word2' => 'Mnemonic seed validation failed.']);
-        } 
-        
-        if ($words[7-1] !== request()->get('word7')) {
-            return redirect()
-                >back()
-                ->withInput()
-                ->withErrors(['word7' => 'Mnemonic seed validation failed.']);
         }
 
         $token = app(Token::class)->create(Auth::user());
@@ -45,9 +35,17 @@ class SavePhrase extends Handler {
             ->setAccessToken($token);
 
         $req = (new MnemonicRequest)
-            ->setMnemonic(session()->get('mnemonic'));
+            ->setMnemonic($mnemonic);
 
-        $api->newWallet($req);
+        try {
+            $api->importWallet($req);
+        } catch (ApiException $t) {
+            if ($t->getResponseObject() instanceof WalletExistsError) {
+                return redirect()->back()->withErrors(['seed_phrase' => ucfirst($t->getResponseObject()->getError())]);
+            }
+            
+            throw $t;
+        }
 
         return Redirect::route('addresses.index', ['show_data' => 1, 'has_addresses' => 1]);
     }

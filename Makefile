@@ -1,13 +1,12 @@
 PROJECT = obada/reference-design
 COMMIT_BRANCH ?= develop
+BASE_IMAGE = $(PROJECT):base
 PROJECT_IMAGE = $(PROJECT):$(COMMIT_BRANCH)
 PROJECT_RELEASE_IMAGE = $(PROJECT):master
 PROJECT_TAG_IMAGE = $(PROJECT):$(COMMIT_TAG)
 
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
-
-test:
 
 deps/php:
 	docker run \
@@ -17,6 +16,15 @@ deps/php:
 		 -w /app \
 		 composer:2.2.12 \
 		sh -c "composer install --ignore-platform-req=ext-bcmath"
+
+deps/php/update:
+	docker run \
+		--rm \
+		 -it \
+		 -v $$(pwd)/src:/app \
+		 -w /app \
+		 composer:2.2.12 \
+		sh -c "composer update obada-foundation/client-api-library-php --ignore-platform-req=ext-bcmath"
 
 deps/node:
 	docker run \
@@ -49,11 +57,16 @@ deploy/staging:
 deploy/local:
 	ansible-playbook deployment/playbook.yml --limit rd.obada.local --connection=local -i deployment/hosts
 
+bbpb: build-branch publish-branch-image
+
 build-branch:
 	docker build -t $(PROJECT_IMAGE) -f docker/app/Dockerfile . --build-arg APP_ENV=dev
 
 publish-branch-image:
 	docker push $(PROJECT_IMAGE)
+
+build-base:
+	docker build -t $(BASE_IMAGE) -f docker/base/Dockerfile .
 
 build-release:
 	docker build -t $(PROJECT_RELEASE_IMAGE) -f docker/app/Dockerfile . --build-arg APP_ENV=prod

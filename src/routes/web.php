@@ -72,6 +72,8 @@ Route::namespace('\App\Http\Handlers\Addresses')
         Route::get('/', \Index::class)->name('index');
         Route::get('/generate-phrase', \GeneratePhrase::class)->name('generate-phrase');
         Route::post('/save-phrase', \SavePhrase::class)->name('save-phrase');
+        Route::post('/import-wallet', \ImportWallet::class)->name('import-wallet');
+        Route::post('/new-account', \StorePrivateKey::class)->name('new-account');
     });
 
 Route::namespace('\App\Http\Handlers\Devices')

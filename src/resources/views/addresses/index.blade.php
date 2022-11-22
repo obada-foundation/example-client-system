@@ -147,11 +147,11 @@
         </div>
 
         <section class="mb-5">
-            <h3>Open Existing Seed Phrase:</h3>
+            <h3>Import Seed Phrase:</h3>
 
             <div class="row">
                 <div class="col-12 col-sm-9 col-md-8">
-                    <form method="POST" action="{{ route('addresses.save-phrase') }}" class="row">
+                    <form method="POST" action="{{ route('addresses.import-wallet') }}" class="row">
                         @csrf
 
                         <div class="col-12 col-sm-9">
@@ -180,7 +180,7 @@
         </div>
 
         <section class="mb-5">
-            <h3>Open Existing Address:</h3>
+            <h3>Import existing key:</h3>
 
             <div class="row">
                 <div class="col-12 col-sm-9 col-md-8">
@@ -189,7 +189,7 @@
                             <div class="mb-2">
                                 <select id="key_type" class="form-select" name="key_type" required>
                                     <option value="0">Choose key type</option>
-                                    <option value="1">Master Key</option>
+                                    <option value="1">Private Key</option>
                                     <option value="2">Valet Key</option>
                                     <option value="3">Read-Only Key</option>
                                 </select>
@@ -243,7 +243,7 @@
                         <th>OBD Balance</th>
                         <th># pNFTs</th>
                         <th class="text-center">
-                            Master Key <small><a href="#" data-bs-toggle="tooltip"
+                            Private Key <small><a href="#" data-bs-toggle="tooltip"
                                                  title='The Master Key (a.k.a. "Owners Key") provides complete control over all attached pNFTs and OBD.  Do not share or lose the Master Key.'><i
                                         class="fas fa-question-circle"></i></a></small></th>
                         <th class="text-center">
@@ -257,45 +257,28 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <a href="{{ route('devices.index') }}">{{ $address_short }}</a>
-                                <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
-                            </td>
-                            <td>1,345.090989809343</td>
-                            <td>25,030</td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="{{ route('devices.index') }}">obada1a1a1...a1a1</a>
-                                <button class="btn btn-link btn-sm" data-copy-text="obada1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"><i class="far fa-copy"></i></button>
-                            </td>
-                            <td>34.09098912</td>
-                            <td>30</td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                        </tr>
-                        @if($add_new_address)
+                        @foreach($accounts as $account)
                             <tr>
                                 <td>
-                                    <a href="{{ route('devices.index') }}">obada1a2a2...a2a2</a>
-                                    <button class="btn btn-link btn-sm" data-copy-text="obada1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2"><i class="far fa-copy"></i></button>
+                                    <a href="{{ route('devices.index') }}">{{ $account['short_address'] }}</a>
+                                    <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
                                 </td>
-                                <td>0.00000000</td>
-                                <td>0</td>
+                                <td>{{ $account['balance'] }} (format 1,345.090989809343)</td>
+                                <td>{{ $account['nft_count'] }} (format 25,030)</td>
                                 <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
                                 <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
                                 <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
                             </tr>
-                        @endif
+                        @endforeach
                     </tbody>
                 </table>
 
-                <p><a href="{{ route('addresses.index', ['show_data' => 1, 'has_addresses' => 1, 'add_new_address' => 1]) }}" class="btn btn-primary">+ Generate New Address</a></p>
+                <form action="{{ route('addresses.new-account') }}" method="POST">
+                    @csrf
+                    <p>
+                        <button class="btn btn-primary">+ Generate New Address</button>
+                    </p>
+                </form>
             </section>
         @endif
 
@@ -314,8 +297,8 @@
                         <th>OBD Balance</th>
                         <th># pNFTs</th>
                         <th class="text-center">
-                            Master Key <small><a href="#" data-bs-toggle="tooltip"
-                                                 title='The Master Key (a.k.a. "Owners Key") provides complete control over all attached pNFTs and OBD.  Do not share or lose the Master Key.'><i
+                            Private Key <small><a href="#" data-bs-toggle="tooltip"
+                                                 title='The Private Key (a.k.a. "Owners Key") provides complete control over all attached pNFTs and OBD.  Do not share or lose the Private Key.'><i
                                         class="fas fa-question-circle"></i></a></small></th>
                         <th class="text-center">
                             Valet Key <small><a href="#" data-bs-toggle="tooltip"

@@ -21,7 +21,6 @@ class Index extends Handler {
 
         $balance = $api->balance();
 
-
         $devices_count = $user->devices()->count();
 
         return view('devices.index', [
