@@ -184,14 +184,16 @@
 
             <div class="row">
                 <div class="col-12 col-sm-9 col-md-8">
-                    <form action="" class="row">
+                    <form action="{{ route('addresses.import-account') }}" method="POST" enctype="multipart/form-data" class="row">
+                        @csrf
+
                         <div class="col-12 col-sm-3">
                             <div class="mb-2">
                                 <select id="key_type" class="form-select" name="key_type" required>
-                                    <option value="0">Choose key type</option>
+                                    <option value="">Choose key type</option>
                                     <option value="1">Private Key</option>
-                                    <option value="2">Valet Key</option>
-                                    <option value="3">Read-Only Key</option>
+                                    <option value="2" disabled>Valet Key</option>
+                                    <option value="3" disabled>Read-Only Key</option>
                                 </select>
                                 @if ($errors->has('key_type'))
                                     <span class="form-helper text-danger">{{ $errors->first('key_type') }}</span>
@@ -201,15 +203,14 @@
 
                         <div class="col-12 col-sm-6">
                             <div class="mb-3">
-                                <input type="text" id="key_value" class="form-control" name="key_value" placeholder="Enter Key" required>
+                                <input type="file" id="key_value" class="form-control" name="key_value" placeholder="Enter Key" required>
                                 @if ($errors->has('key_value'))
                                     <span class="form-helper text-danger">{{ $errors->first('key_value') }}</span>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-sm-3">
-{{--                            <button type="submit" class="btn btn-primary">Proceed</button>--}}
-                            <a href="{{ route('addresses.index') }}?show_data=1&has_other_addresses=1" class="btn btn-primary">Proceed</a>
+                            <button type="submit" class="btn btn-primary">Proceed</button>
                         </div>
                     </form>
                 </div>
