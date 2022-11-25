@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Handlers\Register;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Handlers\Handler;
 
 class Index extends Handler {

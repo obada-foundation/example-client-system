@@ -21,7 +21,7 @@
 
 
 @section('extra_breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('addresses.index') }}">Addresses</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('addresses.index', ['show_data' => 1, 'has_addresses' => 1]) }}">Addresses</a></li>
 @endsection
 
 
@@ -38,7 +38,7 @@
                         {{ $address }}
                         <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
                         <span class="me-2 text-muted">|</span>
-                        <a href="{{ route('addresses.index') }}" class="text-nowrap">Change Address</a>
+                        <a href="{{ route('addresses.index', ['show_data' => 1, 'has_addresses' => 1]) }}" class="text-nowrap">Change Address</a>
                     </div>
                 </div>
             </li>
@@ -65,7 +65,7 @@
                         <div>
                             <span class="d-inline-block mt-1">{{ $devices_count }}</span>
                             <span class="ms-2 me-2 text-muted">|</span>
-                            <a href="{{ route('devices.create') }}" class="d-inline-block">Add Device</a>
+                            <a href="{{ route('devices.create', $address) }}" class="d-inline-block">Add Device</a>
                             <span class="ms-2 me-2 text-muted">|</span>
                             <a href="{{ route('devices.import') }}" class="d-inline-block">Import CSV</a>
                         </div>
@@ -78,7 +78,7 @@
 
 
     <div id="addButtonContainer" class="text-start text-md-end h-md-0 mb-4 mb-md-0">
-        <a href="{{ route('devices.create') }}" class="btn btn-secondary disabled"><small><i
+        <a href="{{ route('devices.create', $address) }}" class="btn btn-secondary disabled"><small><i
                     class="fas fa-upload me-2"></i></small>Mint All Changes</a>
     </div>
 

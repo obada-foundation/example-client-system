@@ -36,6 +36,6 @@ class ImportAccount extends Handler {
             return redirect()->back()->withErrors(['key_value' => 'Invalid private key file']);
         }
 
-        return Redirect::route('addresses.index', ['show_data' => 1, 'has_addresses' => 1]);
+        return redirect()->route('addresses.index', ['show_data' => 1, 'has_addresses' => 1]);
     }
 }

@@ -35,6 +35,15 @@ deps/node:
 		node:14 \
 		sh -c "npm install && npm run dev"
 
+node/watch:
+	docker run \
+		--rm \
+		-it \
+		-v $$(pwd)/src:/app \
+		-w /app \
+		node:14 \
+		sh -c "npm run watch"
+
 deps: deps/php deps/node
 
 run-local:

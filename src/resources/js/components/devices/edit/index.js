@@ -8,6 +8,7 @@ export default {
         'is_mobile',
         'events',
         'device_id',
+        'address',
         'loadDeviceUrl',
         'storeDocumentUrl',
         'deviceUrl',
@@ -300,7 +301,8 @@ export default {
                     serial_number: this.deviceForm.serial_number.value,
                     part_number: this.deviceForm.part_number.value,
                     documents: documents,
-                    documents_to_remove: this.documents_to_remove
+                    documents_to_remove: this.documents_to_remove,
+                    address: this.address,
                 };
 
                 axios(this.storeDeviceUrl, {

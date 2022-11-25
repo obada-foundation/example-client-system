@@ -16,7 +16,7 @@
 
 
 @section('extra_breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('devices.index') }}">Wallet</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('devices.index', $address) }}">Wallet</a></li>
 @endsection
 
 
@@ -31,6 +31,7 @@
         </edit-device>
     @else
         <edit-device :device_id="0"
+                     address="'{{ $address }}'"
                      get-usn-url="{{ route('generate.usn.compute') }}"
                      store-device-url="{{ route('devices.save') }}"
                      store-document-url="{{ route('devices.documents.store') }}">

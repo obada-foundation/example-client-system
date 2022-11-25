@@ -261,7 +261,7 @@
                         @foreach($accounts as $account)
                             <tr>
                                 <td>
-                                    <a href="{{ route('devices.index') }}">{{ $account['short_address'] }}</a>
+                                    <a href="{{ route('devices.index', $account['address']) }}">{{ $account['short_address'] }}</a>
                                     <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
                                 </td>
                                 <td>{{ $account['balance'] }} (format 1,345.090989809343)</td>
@@ -282,78 +282,6 @@
                 </form>
             </section>
         @endif
-
-        @if($has_other_addresses && $has_addresses)
-            <hr class="mt-5 mb-5">
-        @endif
-
-        @if($has_other_addresses)
-            <section class="mb-5">
-                <h3>Other Addresses (no seed phrase)</h3>
-
-                <table class="table mt-4">
-                    <thead>
-                    <tr>
-                        <th>Address</th>
-                        <th>OBD Balance</th>
-                        <th># pNFTs</th>
-                        <th class="text-center">
-                            Private Key <small><a href="#" data-bs-toggle="tooltip"
-                                                 title='The Private Key (a.k.a. "Owners Key") provides complete control over all attached pNFTs and OBD.  Do not share or lose the Private Key.'><i
-                                        class="fas fa-question-circle"></i></a></small></th>
-                        <th class="text-center">
-                            Valet Key <small><a href="#" data-bs-toggle="tooltip"
-                                                title='The Valet Key (a.k.a "Management Key") allows the pNFT data to be edited, but does not allow the transfer of the pNFT, nor to any access any OBD attached. Software that manages or updates a pNFT will need to use a Valet Key in order to update the information.'><i
-                                        class="fas fa-question-circle"></i></a></small></th>
-                        <th class="text-center">
-                            Read-Only Key <small><a href="#" data-bs-toggle="tooltip"
-                                                    title='The Read-Only Key (or "View Key") decrypts the pNFT data, allowing a third-party to view the pNFT information.'><i
-                                        class="fas fa-question-circle"></i></a></small></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <a href="{{ route('devices.index') }}">{{ $address_short }}</a>
-                                <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
-                            </td>
-                            <td>1,345.090989809343</td>
-                            <td>25,030</td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="{{ route('devices.index') }}">obada1a1a1...a1a1</a>
-                                <button class="btn btn-link btn-sm" data-copy-text="obada1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"><i class="far fa-copy"></i></button>
-                            </td>
-                            <td>34.09098912</td>
-                            <td>30</td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                        </tr>
-                        @if($add_new_address)
-                            <tr>
-                                <td>
-                                    <a href="{{ route('devices.index') }}">obada1a2a2...a2a2</a>
-                                    <button class="btn btn-link btn-sm" data-copy-text="obada1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2"><i class="far fa-copy"></i></button>
-                                </td>
-                                <td>0.00000000</td>
-                                <td>0</td>
-                                <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                                <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                                <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                            </tr>
-                        @endif
-                    </tbody>
-                </table>
-
-                <p><a href="{{ route('addresses.index', ['show_data' => 1, 'has_other_addresses' => 1, 'add_new_address' => 1]) }}" class="btn btn-primary">+ Enter Existing Address</a></p>
-            </section>
-        @endif
-
     @endif
 
 @endsection

@@ -82,13 +82,13 @@ Route::namespace('\App\Http\Handlers\Devices')
     ->prefix('devices')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/create', \Create::class)->name('create');
+        Route::get('/{address}/create', \Create::class)->name('create');
         Route::get('/load-all', \LoadAll::class)->name('load-all');
         Route::get('/import', \Import::class)->name('import');
-        Route::get('/{usn}', \Show::class)->name('show');
+        Route::get('/{usn}/show', \Show::class)->name('show');
         Route::get('/{usn}/load', \Load::class)->name('load');
         Route::get('/{usn}/edit', \Edit::class)->name('edit');
-        Route::get('/', \Index::class)->name('index');
+        Route::get('/{address}', \Index::class)->name('index');
         Route::post('/', \Save::class)->name('save');
 
         Route::namespace('Documents')
