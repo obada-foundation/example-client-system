@@ -43,6 +43,7 @@ class ClientHelperSave
                 ->setSerialNumber($event->device->serial_number)
                 ->setManufacturer($event->device->manufacturer)
                 ->setPartNumber($event->device->part_number)
+                ->setAddress($event->device->address)
                 ->setDocuments($documents)
         );
 

@@ -23,7 +23,7 @@ Route::namespace('\App\Http\Handlers\Wallet')
     ->prefix('obd')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/', \Index::class)->name('index');
+        Route::get('/{address}', \Index::class)->name('index');
     });
 
 Route::namespace('\App\Http\Handlers\NFT\Transfer')
@@ -84,12 +84,18 @@ Route::namespace('\App\Http\Handlers\Devices')
     ->group(function () {
         Route::get('/{address}/create', \Create::class)->name('create');
         Route::get('/load-all', \LoadAll::class)->name('load-all');
-        Route::get('/import', \Import::class)->name('import');
         Route::get('/{usn}/show', \Show::class)->name('show');
         Route::get('/{usn}/load', \Load::class)->name('load');
         Route::get('/{usn}/edit', \Edit::class)->name('edit');
         Route::get('/{address}', \Index::class)->name('index');
         Route::post('/', \Save::class)->name('save');
+
+        Route::namespace('Import')
+            ->name('import.')
+            ->group(function () {
+                Route::get('/{address}/import', Index::class)->name('index');
+                Route::post('/{address}/import', HandleImport::class)->name('store');
+            });
 
         Route::namespace('Documents')
             ->name('documents.')

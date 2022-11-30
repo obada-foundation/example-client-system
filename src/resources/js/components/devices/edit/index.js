@@ -313,7 +313,7 @@ export default {
                     .then((response) => {
                         this.isLoading = false;
                         swal("Success!", "Device successfully saved!", "success");
-                        window.location.href = '/devices/' + response.data.device.usn;
+                        window.location.href = '/devices/' + response.data.device.usn + '/show';
                     })
                     .catch((e) => {
                         this.isLoading = false;
@@ -355,6 +355,11 @@ export default {
                             isValid: true,
                             isClean: true,
                             validations: ['required']
+                        },
+                        type: {
+                            value: "1",
+                            isValid: true,
+                            isClean: true,
                         }
                     });
                 });

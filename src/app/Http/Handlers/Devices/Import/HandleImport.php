@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Handlers\Devices;
+namespace App\Http\Handlers\Devices\Import;
 
 use App\Http\Handlers\Handler;
 
-class Import extends Handler {
-    public function __invoke()
+class HandleImport extends Handler {
+    public function __invoke(string $address)
     {
         $page = (object) [
             'title'       => 'Import CSV',
@@ -15,6 +15,6 @@ class Import extends Handler {
             'keywords'    => '__keywords__'
         ];
 
-        return view('devices.import', compact('page'));
+        return view('devices.import', compact('page', 'address'));
     }
 }

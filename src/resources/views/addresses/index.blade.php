@@ -244,9 +244,9 @@
                         <th>OBD Balance</th>
                         <th># pNFTs</th>
                         <th class="text-center">
-                            Private Key <small><a href="#" data-bs-toggle="tooltip"
+                            Public Key <!--<small><a href="#" data-bs-toggle="tooltip"
                                                  title='The Master Key (a.k.a. "Owners Key") provides complete control over all attached pNFTs and OBD.  Do not share or lose the Master Key.'><i
-                                        class="fas fa-question-circle"></i></a></small></th>
+                                        class="fas fa-question-circle"></i></a></small>--></th>
                         <th class="text-center">
                             Valet Key <small><a href="#" data-bs-toggle="tooltip"
                                                 title='The Valet Key (a.k.a "Management Key") allows the pNFT data to be edited, but does not allow the transfer of the pNFT, nor to any access any OBD attached. Software that manages or updates a pNFT will need to use a Valet Key in order to update the information.'><i
@@ -264,7 +264,7 @@
                                     <a href="{{ route('devices.index', $account['address']) }}">{{ $account['short_address'] }}</a>
                                     <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
                                 </td>
-                                <td>{{ $account['balance'] }} (format 1,345.090989809343)</td>
+                                <td>{{ number_format($account['balance'], 16) }}</td>
                                 <td>{{ $account['nft_count'] }} (format 25,030)</td>
                                 <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
                                 <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>

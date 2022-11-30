@@ -18,7 +18,11 @@ class LoadAll extends Handler {
         $token = app(Token::class)->create($user);
         $api->getConfig()->setAccessToken($token);
 
-        return $datatables->eloquent($user->devices()->orderBy('id', 'asc'))
+        $devices = $user->devices()
+            ->where('address', request()->query('address'))
+            ->orderBy('id', 'asc');
+
+        return $datatables->eloquent($devices)
             ->rawColumns(['id', 'manufacturer','part_number','serial_number', 'obit_checksum'])
             ->addColumn('blockchain_checksum', function (Device $device) use ($api) {
                 //Get Client Obit

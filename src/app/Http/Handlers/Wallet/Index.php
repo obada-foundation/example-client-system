@@ -11,7 +11,7 @@ use App\ClientHelper\Token;
 use Obada\Api\AccountsApi;
 
 class Index extends Handler {
-    public function __invoke()
+    public function __invoke($address)
     {
         $token = app(Token::class)->create(Auth::user());
 
@@ -19,11 +19,11 @@ class Index extends Handler {
         $api->getConfig()
             ->setAccessToken($token);
 
-        $balance = $api->balance();
+        $account = $api->account($address);
 
         return view('wallet.index', [
-            'address' => $balance->getAddress(),
-            'balance' => $balance->getBalance()
+            'address' => $account->getAddress(),
+            'balance' => $account->getBalance()
         ]);
     }
 }

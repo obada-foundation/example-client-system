@@ -14,7 +14,7 @@
 
 @section('scripts')
     <script>
-        window.devicesLoadUrl = '{{ route('devices.load-all') }}';
+        window.devicesLoadUrl = '{{ route('devices.load-all', ['address' => $address]) }}';
     </script>
     <script src="{{ mix('/js/devices_list.js') }}"></script>
 @endsection
@@ -51,7 +51,7 @@
                     <div class="col-md-9">
                         <span>{{ $balance }}&nbsp;OBD</span>
                         <span class="ms-2 me-2 text-muted">|</span>
-                        <a href="{{ route('wallet.index') }}" class="d-inline-block">Send or Receive</a>
+                        <a href="{{ route('wallet.index', $address) }}" class="d-inline-block">Send or Receive</a>
                     </div>
                 </div>
             </li>
@@ -67,7 +67,7 @@
                             <span class="ms-2 me-2 text-muted">|</span>
                             <a href="{{ route('devices.create', $address) }}" class="d-inline-block">Add Device</a>
                             <span class="ms-2 me-2 text-muted">|</span>
-                            <a href="{{ route('devices.import') }}" class="d-inline-block">Import CSV</a>
+                            <a href="{{ route('devices.import.index', $address) }}" class="d-inline-block">Import CSV</a>
                         </div>
                         <button class="btn btn-primary mt-2 mt-sm-0">Check Blockchain for Updates</button>
                     </div>
@@ -82,22 +82,19 @@
                     class="fas fa-upload me-2"></i></small>Mint All Changes</a>
     </div>
 
-{{--    <div class="table-responsive">--}}
-        <table class="table table-striped" id="deviceList">
-            <thead>
-            <tr>
-                <th style="width: 20px;"></th>
-                <th style="width: 70px;">USN</th>
-                <th>Manufacturer</th>
-                <th>Part&nbsp;#</th>
-                <th>Serial&nbsp;#</th>
-                <th>#&nbsp;of&nbsp;Documents</th>
-                <th style="width: 75px;">Created</th>
-            </tr>
-            </thead>
-        </table>
-{{--    </div>--}}
-
+    <table class="table table-striped" id="deviceList">
+        <thead>
+        <tr>
+            <th style="width: 20px;"></th>
+            <th style="width: 70px;">USN</th>
+            <th>Manufacturer</th>
+            <th>Part&nbsp;#</th>
+            <th>Serial&nbsp;#</th>
+            <th>#&nbsp;of&nbsp;Documents</th>
+            <th style="width: 75px;">Created</th>
+        </tr>
+        </thead>
+    </table>
     <hr>
 
     <div class="mt-4">

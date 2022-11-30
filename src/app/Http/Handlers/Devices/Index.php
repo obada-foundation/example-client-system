@@ -19,17 +19,12 @@ class Index extends Handler {
         $api->getConfig()
             ->setAccessToken($token);
 
-        //$balance = $api->balance();
-
-        $devices_count = $user
-            ->devices()
-            ->byAddress($address)
-            ->count();
+        $account = $api->account($address);
 
         return view('devices.index', [
             'address'       => $address,
-            'balance'       => 0, //number_format($balance->getBalance(), 16),
-            'devices_count' => $devices_count
+            'balance'       => number_format($account->getBalance(), 16),
+            'devices_count' => $account->getNftCount(),
         ]);
     }
 }
