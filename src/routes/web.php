@@ -24,6 +24,7 @@ Route::namespace('\App\Http\Handlers\Wallet')
     ->middleware('auth')
     ->group(function () {
         Route::get('/{address}', \Index::class)->name('index');
+        Route::post('/{address}', \Send::class)->name('send');
     });
 
 Route::namespace('\App\Http\Handlers\NFT\Transfer')
@@ -40,6 +41,7 @@ Route::namespace('\App\Http\Handlers\NFT')
     ->prefix('nft')
     ->middleware('auth')
     ->group(function () {
+        Route::get('/{address}/mint-all', \MintAll::class)->name('mint-all');
         Route::post('/{usn}/mint', \Mint::class)->name('mint');
         Route::post('/{usn}/metadata', \UpdateMetadata::class)->name('update-metadata');
     });
@@ -94,7 +96,7 @@ Route::namespace('\App\Http\Handlers\Devices')
             ->name('import.')
             ->group(function () {
                 Route::get('/{address}/import', Index::class)->name('index');
-                Route::post('/{address}/import', HandleImport::class)->name('store');
+                Route::post('/{address}/import', HandleImport::class)->name('handle');
             });
 
         Route::namespace('Documents')

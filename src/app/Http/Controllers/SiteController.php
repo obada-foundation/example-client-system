@@ -29,7 +29,7 @@ class SiteController extends Controller
 
             $accounts = $accountsApi->accounts();
 
-            if (count($accounts->getData()) == 0) {
+            if (!$accounts->getData() || count($accounts->getData()) == 0) {
                 return redirect()->route('addresses.index');
             } 
 

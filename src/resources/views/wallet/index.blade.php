@@ -28,21 +28,23 @@
                                  data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button></p>
     </div>
 
-    <div class="mb-5">
-        <h3>OBD amount:</h3>
-        <p>{{ $balance }}.00</p>
-    </div>
 
     <div class="mb-5">
         <h3>To Send OBD:</h3>
         <div class="row">
             <div class="col-12 col-sm-9 col-md-6">
-                <form action="" class="row">
+                <form action="{{ route('wallet.send', $address) }}" method="POST" class="row">
+                    @csrf
+                    
                     <div class="col-9">
-                        <input type="text" id="address" class="form-control" name="address"
+                        <input type="text" class="form-control" name="amount" placeholder="OBD amount" required>
+                    </div>
+
+                    <div class="col-9">
+                        <input type="text" id="address" class="form-control" name="recepient_address"
                                placeholder="Enter Receiver Address" required>
-                        @if ($errors->has('address'))
-                            <span class="form-helper text-danger">{{ $errors->first('address') }}</span>
+                        @if ($errors->has('recepient_address'))
+                            <span class="form-helper text-danger">{{ $errors->first('recepient_address') }}</span>
                         @endif
                     </div>
                     <div class="col-3">
