@@ -39,6 +39,7 @@ class Save extends Handler {
                         'serial_number' => $request->get('serial_number'),
                         'manufacturer'  => $request->get('manufacturer'),
                         'part_number'   => $request->get('part_number'),
+                        'address'       => $request->get('address'),
                         'usn'           => $did->getUsn(),
                         'obit_did'      => $did->getDid(),
                     ]);

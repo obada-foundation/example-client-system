@@ -5,13 +5,14 @@ namespace App\Listeners;
 use Illuminate\Auth\Events\Registered;
 use Obada\Api\AccountsApi;
 use App\ClientHelper\Token;
-use Obada\ClientHelper\NewAccountRequest;
+use Obada\ClientHelper\RegisterRequest;
 
 class RegisterOBADAAccount
 {
     public function __construct(protected AccountsApi $api, protected Token $tokenCreator)
     {
     }
+
     /**
      * Handle the event.
      *
@@ -23,9 +24,10 @@ class RegisterOBADAAccount
 
         $this->api->getConfig()->setAccessToken($token);
 
-        $newAccount = (new NewAccountRequest)
+        $request = (new RegisterRequest)
             ->setEmail($event->user->email);
 
-        $this->api->createAccount($newAccount);
+        // Excecute client-helper profile registation
+        $this->api->register($request);
     }
 }

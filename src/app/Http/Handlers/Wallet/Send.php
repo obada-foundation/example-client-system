@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Handlers\Wallet;
 
 use App\Http\Handlers\Handler;
-use function view;
 use Illuminate\Support\Facades\Auth;
 use App\ClientHelper\Token;
 use Obada\Api\AccountsApi;
+use Obada\ClientHelper\SendCoinsRequest;
 
-class Index extends Handler {
+class Send extends Handler {
     public function __invoke($address)
     {
         $token = app(Token::class)->create(Auth::user());
@@ -19,11 +19,13 @@ class Index extends Handler {
         $api->getConfig()
             ->setAccessToken($token);
 
-        $account = $api->account($address);
+        $req = (new SendCoinsRequest)
+            ->setDenom('obd')
+            ->setAmount(request()->get('amount'))
+            ->setRecepientAddress(request()->get('recepient_address'));
 
-        return view('wallet.index', [
-            'address' => $account->getAddress(),
-            'balance' => $account->getBalance()
-        ]);
+        $api->sendCoins($address, $req);
+
+        return redirect()->back();
     }
 }

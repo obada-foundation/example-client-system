@@ -147,11 +147,11 @@
         </div>
 
         <section class="mb-5">
-            <h3>Open Existing Seed Phrase:</h3>
+            <h3>Import Seed Phrase:</h3>
 
             <div class="row">
                 <div class="col-12 col-sm-9 col-md-8">
-                    <form method="POST" action="{{ route('addresses.save-phrase') }}" class="row">
+                    <form method="POST" action="{{ route('addresses.import-wallet') }}" class="row">
                         @csrf
 
                         <div class="col-12 col-sm-9">
@@ -180,18 +180,20 @@
         </div>
 
         <section class="mb-5">
-            <h3>Open Existing Address:</h3>
+            <h3>Import existing key:</h3>
 
             <div class="row">
                 <div class="col-12 col-sm-9 col-md-8">
-                    <form action="" class="row">
+                    <form action="{{ route('addresses.import-account') }}" method="POST" enctype="multipart/form-data" class="row">
+                        @csrf
+
                         <div class="col-12 col-sm-3">
                             <div class="mb-2">
                                 <select id="key_type" class="form-select" name="key_type" required>
-                                    <option value="0">Choose key type</option>
-                                    <option value="1">Master Key</option>
-                                    <option value="2">Valet Key</option>
-                                    <option value="3">Read-Only Key</option>
+                                    <option value="">Choose key type</option>
+                                    <option value="1">Private Key</option>
+                                    <option value="2" disabled>Valet Key</option>
+                                    <option value="3" disabled>Read-Only Key</option>
                                 </select>
                                 @if ($errors->has('key_type'))
                                     <span class="form-helper text-danger">{{ $errors->first('key_type') }}</span>
@@ -201,15 +203,14 @@
 
                         <div class="col-12 col-sm-6">
                             <div class="mb-3">
-                                <input type="text" id="key_value" class="form-control" name="key_value" placeholder="Enter Key" required>
+                                <input type="file" id="key_value" class="form-control" name="key_value" placeholder="Enter Key" required>
                                 @if ($errors->has('key_value'))
                                     <span class="form-helper text-danger">{{ $errors->first('key_value') }}</span>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-sm-3">
-{{--                            <button type="submit" class="btn btn-primary">Proceed</button>--}}
-                            <a href="{{ route('addresses.index') }}?show_data=1&has_other_addresses=1" class="btn btn-primary">Proceed</a>
+                            <button type="submit" class="btn btn-primary">Proceed</button>
                         </div>
                     </form>
                 </div>
@@ -243,9 +244,9 @@
                         <th>OBD Balance</th>
                         <th># pNFTs</th>
                         <th class="text-center">
-                            Master Key <small><a href="#" data-bs-toggle="tooltip"
+                            Public Key <!--<small><a href="#" data-bs-toggle="tooltip"
                                                  title='The Master Key (a.k.a. "Owners Key") provides complete control over all attached pNFTs and OBD.  Do not share or lose the Master Key.'><i
-                                        class="fas fa-question-circle"></i></a></small></th>
+                                        class="fas fa-question-circle"></i></a></small>--></th>
                         <th class="text-center">
                             Valet Key <small><a href="#" data-bs-toggle="tooltip"
                                                 title='The Valet Key (a.k.a "Management Key") allows the pNFT data to be edited, but does not allow the transfer of the pNFT, nor to any access any OBD attached. Software that manages or updates a pNFT will need to use a Valet Key in order to update the information.'><i
@@ -257,119 +258,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <a href="{{ route('devices.index') }}">{{ $address_short }}</a>
-                                <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
-                            </td>
-                            <td>1,345.090989809343</td>
-                            <td>25,030</td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="{{ route('devices.index') }}">obada1a1a1...a1a1</a>
-                                <button class="btn btn-link btn-sm" data-copy-text="obada1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"><i class="far fa-copy"></i></button>
-                            </td>
-                            <td>34.09098912</td>
-                            <td>30</td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                        </tr>
-                        @if($add_new_address)
+                        @foreach($accounts as $account)
                             <tr>
                                 <td>
-                                    <a href="{{ route('devices.index') }}">obada1a2a2...a2a2</a>
-                                    <button class="btn btn-link btn-sm" data-copy-text="obada1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2"><i class="far fa-copy"></i></button>
+                                    <a href="{{ route('devices.index', $account['address']) }}">{{ $account['short_address'] }}</a>
+                                    <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
                                 </td>
-                                <td>0.00000000</td>
-                                <td>0</td>
+                                <td>{{ number_format($account['balance'], 16) }}</td>
+                                <td>{{ $account['nft_count'] }} (format 25,030)</td>
                                 <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
                                 <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
                                 <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
                             </tr>
-                        @endif
+                        @endforeach
                     </tbody>
                 </table>
 
-                <p><a href="{{ route('addresses.index', ['show_data' => 1, 'has_addresses' => 1, 'add_new_address' => 1]) }}" class="btn btn-primary">+ Generate New Address</a></p>
+                <form action="{{ route('addresses.new-account') }}" method="POST">
+                    @csrf
+                    <p>
+                        <button class="btn btn-primary">+ Generate New Address</button>
+                    </p>
+                </form>
             </section>
         @endif
-
-        @if($has_other_addresses && $has_addresses)
-            <hr class="mt-5 mb-5">
-        @endif
-
-        @if($has_other_addresses)
-            <section class="mb-5">
-                <h3>Other Addresses (no seed phrase)</h3>
-
-                <table class="table mt-4">
-                    <thead>
-                    <tr>
-                        <th>Address</th>
-                        <th>OBD Balance</th>
-                        <th># pNFTs</th>
-                        <th class="text-center">
-                            Master Key <small><a href="#" data-bs-toggle="tooltip"
-                                                 title='The Master Key (a.k.a. "Owners Key") provides complete control over all attached pNFTs and OBD.  Do not share or lose the Master Key.'><i
-                                        class="fas fa-question-circle"></i></a></small></th>
-                        <th class="text-center">
-                            Valet Key <small><a href="#" data-bs-toggle="tooltip"
-                                                title='The Valet Key (a.k.a "Management Key") allows the pNFT data to be edited, but does not allow the transfer of the pNFT, nor to any access any OBD attached. Software that manages or updates a pNFT will need to use a Valet Key in order to update the information.'><i
-                                        class="fas fa-question-circle"></i></a></small></th>
-                        <th class="text-center">
-                            Read-Only Key <small><a href="#" data-bs-toggle="tooltip"
-                                                    title='The Read-Only Key (or "View Key") decrypts the pNFT data, allowing a third-party to view the pNFT information.'><i
-                                        class="fas fa-question-circle"></i></a></small></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <a href="{{ route('devices.index') }}">{{ $address_short }}</a>
-                                <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
-                            </td>
-                            <td>1,345.090989809343</td>
-                            <td>25,030</td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="{{ route('devices.index') }}">obada1a1a1...a1a1</a>
-                                <button class="btn btn-link btn-sm" data-copy-text="obada1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"><i class="far fa-copy"></i></button>
-                            </td>
-                            <td>34.09098912</td>
-                            <td>30</td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                            <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                        </tr>
-                        @if($add_new_address)
-                            <tr>
-                                <td>
-                                    <a href="{{ route('devices.index') }}">obada1a2a2...a2a2</a>
-                                    <button class="btn btn-link btn-sm" data-copy-text="obada1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2"><i class="far fa-copy"></i></button>
-                                </td>
-                                <td>0.00000000</td>
-                                <td>0</td>
-                                <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                                <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                                <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                            </tr>
-                        @endif
-                    </tbody>
-                </table>
-
-                <p><a href="{{ route('addresses.index', ['show_data' => 1, 'has_other_addresses' => 1, 'add_new_address' => 1]) }}" class="btn btn-primary">+ Enter Existing Address</a></p>
-            </section>
-        @endif
-
     @endif
 
 @endsection

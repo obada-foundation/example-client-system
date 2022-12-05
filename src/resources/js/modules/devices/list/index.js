@@ -9,8 +9,6 @@ import moment from 'moment';
 import {formatUSN} from "../../../utils/formatUSN";
 
 $(document).ready(() => {
-    // document.dispatchEvent(new CustomEvent('deviceReceived', {}));
-
     $('#deviceList').DataTable({
         order: [[6, 'desc']],
         "language": {
@@ -60,7 +58,7 @@ $(document).ready(() => {
                 sortable: true,
                 "render": function(data, type, full, meta) {
                     return type === 'display'
-                        ? '<a href="/devices/' + full.usn + '"><strong>' + formatUSN(full.usn) + '</strong></a>'
+                        ? '<a href="/devices/' + full.usn + '/show"><strong>' + formatUSN(full.usn) + '</strong></a>'
                         : full.usn;
                 }
             },
@@ -101,49 +99,4 @@ $(document).ready(() => {
             },
         ]
     });
-
-    /*$(document).on('click', '.btn-delete', (event) => {
-        var $btn = $(event.currentTarget);
-        var sid = $btn.attr('data-id');
-        var $tr = $('.dev-' + sid);
-        var dataTableRow = this.deviceList.row($tr[0]); // get the DT row so we can use the API on it
-        var rowData = dataTableRow.data();
-        removeDevice(rowData);
-    });*/
-
-    /*function removeDevice(device) {
-        swal({
-                title: "Are you sure?",
-                text: "This device will be removed completely.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes, remove it!",
-                cancelButtonText: "No",
-                closeOnConfirm: false,
-                closeOnCancel: true,
-                showLoaderOnConfirm: true
-            },
-            (isConfirm) => {
-                if (isConfirm) {
-
-                    axios.delete('/api/internal/device/' + device.id, {}).then((response) => {
-                        if (response.data.status === 0) {
-                            swal("Deleted!", "The Device has been removed", "success");
-                            this.userList.ajax.reload()
-                        } else {
-                            swal("Unable To Remove Device!", response.data.errorMessage, "error");
-                        }
-
-                    }).catch((e) => {
-                        if (e.response.data.hasOwnProperty('errorMessage')) {
-                            swal("Error!", e.response.data.errorMessage, "error");
-                        } else {
-                            swal("Error!", "We could not delete the device", "error");
-                        }
-                    });
-
-                }
-            });
-    }*/
 });

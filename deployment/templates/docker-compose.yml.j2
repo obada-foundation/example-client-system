@@ -72,6 +72,7 @@ services:
     restart: always
     user: ${UID}:${GID}
     volumes:
+      - ./client-helper/keyring:/home/obada/keyring
       - ./client-helper/data:/home/obada/data
       - ./client-helper/keys:/home/obada/keys
     environment:

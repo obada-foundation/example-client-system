@@ -23,6 +23,12 @@ class Device extends Model
         return $query;
     }
 
+    public function scopeByAddress($query, string $address) {
+        $query->where('address', $address);
+
+        return $query;
+    }
+
     public function scopeHasLocalObits($query) {
         $query->whereNotNull('obit_checksum');
 

@@ -18,6 +18,8 @@ class Edit extends Handler {
             return abort(404);
         }
 
+        $address = $device->address;
+
         $page = (object) [
             'title'       => 'Edit Device',
             'description' => '__description__',
@@ -25,6 +27,6 @@ class Edit extends Handler {
             'isEdit'      => true,
         ];
 
-        return view('devices.edit', compact('usn', 'page'));
+        return view('devices.edit', compact('usn', 'page', 'device', 'address'));
     }
 }

@@ -10,6 +10,7 @@ use function view;
 use Illuminate\Support\Facades\Auth;
 use App\ClientHelper\Token;
 use Obada\Api\AccountsApi;
+use Obada\Api\KeysApi;
 
 class Index extends Handler {
     public function __invoke(Request $request)
@@ -20,20 +21,40 @@ class Index extends Handler {
         $api->getConfig()
             ->setAccessToken($token);
 
-        $balance = $api->balance();
+        $accounts = [];
 
-        $address = $balance->getAddress();
+        if ($request->has('show_data')) {
+            $accounts = $api->accounts()->getData();
+        }
+
+        $accounts = collect($accounts)
+            ->map(function ($account) {
+
+                $address = $account->getAddress();
+
+                return [
+                    'address'       => $address,
+                    'short_address' => substr($address, 0, 10) . '...' . substr($address, -4),
+                    'balance'       => $account->getBalance(),
+                    'pub_key'       => $account->getPubKey(),
+                    'nft_count'     => $account->getNftCount(),
+                ];
+            })
+            ->toArray();
+
+        //$balance = $api->balance();
+
+      //  $address = $balance->getAddress();
 
         return view('addresses.index', [
-            'address' => $address,
-            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4),
-            'seed_phrase' => 'suggest quit betray lunar direct agent trial royal range feel spare awake',
-            'seed_phrase_short' => 'suggest ... awake',
-            'balance' => $balance->getBalance(),
-            'show_data' => $request->has('show_data'),
-            'add_new_address' => $request->has('add_new_address'),
-            'has_addresses' => $request->has('has_addresses'),
-            'has_other_addresses' => $request->has('has_other_addresses')
+            'seed_phrase'         => 'suggest quit betray lunar direct agent trial royal range feel spare awake',
+            'seed_phrase_short'   => 'suggest ... awake',
+            'balance'             => 0,//$balance->getBalance(),
+            'show_data'           => $request->has('show_data'),
+            'add_new_address'     => $request->has('add_new_address'),
+            'has_addresses'       => count($accounts),
+            'has_other_addresses' => $request->has('has_other_addresses'),
+            'accounts'            => $accounts,
         ]);
     }
 }

@@ -8,6 +8,7 @@ export default {
         'is_mobile',
         'events',
         'device_id',
+        'address',
         'loadDeviceUrl',
         'storeDocumentUrl',
         'deviceUrl',
@@ -300,7 +301,8 @@ export default {
                     serial_number: this.deviceForm.serial_number.value,
                     part_number: this.deviceForm.part_number.value,
                     documents: documents,
-                    documents_to_remove: this.documents_to_remove
+                    documents_to_remove: this.documents_to_remove,
+                    address: this.address,
                 };
 
                 axios(this.storeDeviceUrl, {
@@ -311,7 +313,7 @@ export default {
                     .then((response) => {
                         this.isLoading = false;
                         swal("Success!", "Device successfully saved!", "success");
-                        window.location.href = '/devices/' + response.data.device.usn;
+                        window.location.href = '/devices/' + response.data.device.usn + '/show';
                     })
                     .catch((e) => {
                         this.isLoading = false;
@@ -353,6 +355,11 @@ export default {
                             isValid: true,
                             isClean: true,
                             validations: ['required']
+                        },
+                        type: {
+                            value: "1",
+                            isValid: true,
+                            isClean: true,
                         }
                     });
                 });

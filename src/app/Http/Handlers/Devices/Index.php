@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Obada\Api\AccountsApi;
 
 class Index extends Handler {
-    public function __invoke()
+    public function __invoke(string $address)
     {
         $user = Auth::user();
         $token = app(Token::class)->create($user);
@@ -19,15 +19,12 @@ class Index extends Handler {
         $api->getConfig()
             ->setAccessToken($token);
 
-        $balance = $api->balance();
-
-
-        $devices_count = $user->devices()->count();
+        $account = $api->account($address);
 
         return view('devices.index', [
-            'address' => $balance->getAddress(),
-            'balance' => number_format($balance->getBalance(), 16),
-            'devices_count' => $devices_count
+            'address'       => $address,
+            'balance'       => number_format($account->getBalance(), 16),
+            'devices_count' => $account->getNftCount(),
         ]);
     }
 }

@@ -23,7 +23,8 @@ Route::namespace('\App\Http\Handlers\Wallet')
     ->prefix('obd')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/', \Index::class)->name('index');
+        Route::get('/{address}', \Index::class)->name('index');
+        Route::post('/{address}', \Send::class)->name('send');
     });
 
 Route::namespace('\App\Http\Handlers\NFT\Transfer')
@@ -40,6 +41,7 @@ Route::namespace('\App\Http\Handlers\NFT')
     ->prefix('nft')
     ->middleware('auth')
     ->group(function () {
+        Route::get('/{address}/mint-all', \MintAll::class)->name('mint-all');
         Route::post('/{usn}/mint', \Mint::class)->name('mint');
         Route::post('/{usn}/metadata', \UpdateMetadata::class)->name('update-metadata');
     });
@@ -72,6 +74,9 @@ Route::namespace('\App\Http\Handlers\Addresses')
         Route::get('/', \Index::class)->name('index');
         Route::get('/generate-phrase', \GeneratePhrase::class)->name('generate-phrase');
         Route::post('/save-phrase', \SavePhrase::class)->name('save-phrase');
+        Route::post('/import-wallet', \ImportWallet::class)->name('import-wallet');
+        Route::post('/import-account', \ImportAccount::class)->name('import-account');
+        Route::post('/new-account', \StorePrivateKey::class)->name('new-account');
     });
 
 Route::namespace('\App\Http\Handlers\Devices')
@@ -79,14 +84,20 @@ Route::namespace('\App\Http\Handlers\Devices')
     ->prefix('devices')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/create', \Create::class)->name('create');
+        Route::get('/{address}/create', \Create::class)->name('create');
         Route::get('/load-all', \LoadAll::class)->name('load-all');
-        Route::get('/import', \Import::class)->name('import');
-        Route::get('/{usn}', \Show::class)->name('show');
+        Route::get('/{usn}/show', \Show::class)->name('show');
         Route::get('/{usn}/load', \Load::class)->name('load');
         Route::get('/{usn}/edit', \Edit::class)->name('edit');
-        Route::get('/', \Index::class)->name('index');
+        Route::get('/{address}', \Index::class)->name('index');
         Route::post('/', \Save::class)->name('save');
+
+        Route::namespace('Import')
+            ->name('import.')
+            ->group(function () {
+                Route::get('/{address}/import', Index::class)->name('index');
+                Route::post('/{address}/import', HandleImport::class)->name('handle');
+            });
 
         Route::namespace('Documents')
             ->name('documents.')
