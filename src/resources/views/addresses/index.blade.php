@@ -192,7 +192,7 @@
                                 <select id="key_type" class="form-select" name="key_type" required>
                                     <option value="">Choose key type</option>
                                     <option value="1">Private Key</option>
-                                    <option value="2" disabled>Valet Key</option>
+                                    <option value="2" disabled>Admin Key</option>
                                     <option value="3" disabled>Read-Only Key</option>
                                 </select>
                                 @if ($errors->has('key_type'))
@@ -248,8 +248,8 @@
                                                  title='The Master Key (a.k.a. "Owners Key") provides complete control over all attached pNFTs and OBD.  Do not share or lose the Master Key.'><i
                                         class="fas fa-question-circle"></i></a></small>--></th>
                         <th class="text-center">
-                            Valet Key <small><a href="#" data-bs-toggle="tooltip"
-                                                title='The Valet Key (a.k.a "Management Key") allows the pNFT data to be edited, but does not allow the transfer of the pNFT, nor to any access any OBD attached. Software that manages or updates a pNFT will need to use a Valet Key in order to update the information.'><i
+                            Admin Key <small><a href="#" data-bs-toggle="tooltip"
+                                                title='The Admin Key (a.k.a "Management Key") allows the pNFT data to be edited, but does not allow the transfer of the pNFT, nor to any access any OBD attached. Software that manages or updates a pNFT will need to use a Admin Key in order to update the information.'><i
                                         class="fas fa-question-circle"></i></a></small></th>
                         <th class="text-center">
                             Read-Only Key <small><a href="#" data-bs-toggle="tooltip"
@@ -267,8 +267,8 @@
                                 <td>{{ number_format($account['balance'], 16) }}</td>
                                 <td>{{ $account['nft_count'] }} (format 25,030)</td>
                                 <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
-                                <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
-                                <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">generate</a></td>
+                                <td class="text-center">coming soon</td>
+                                <td class="text-center">coming soon</td>
                             </tr>
                         @endforeach
                     </tbody>

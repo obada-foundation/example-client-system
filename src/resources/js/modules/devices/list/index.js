@@ -49,9 +49,9 @@ $(document).ready(() => {
                     if (full.obit_checksum === full.blockchain_checksum) {
                         return '<i class="fas fa-check text-success" data-bs-toggle="tooltip" title="Synchronized with blockchain"></i>';
                     } else {
-                        return '<i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local version updated"></i>';
+                        return '<i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local newer"></i>';
                     }
-                    return '<i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain version updated"></i>';
+                    return '<i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain newer"></i>';
                 }
             },
             {
