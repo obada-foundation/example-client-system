@@ -100,8 +100,8 @@
     <div class="mt-4">
         <ul class="list-unstyled mb-0 d-lg-flex justify-content-lg-between">
             <li><i class="fas fa-check text-success"></i> - Synchronized with blockchain</li>
-            <li><i class="fas fa-sync text-danger"></i> - Blockchain version updated</li>
-            <li><i class="fas fa-sync text-warning"></i> - Local version updated</li>
+            <li><i class="fas fa-sync text-danger"></i> - Blockchain newer</li>
+            <li><i class="fas fa-sync text-warning"></i> - Local newer</li>
         </ul>
     </div>
 
