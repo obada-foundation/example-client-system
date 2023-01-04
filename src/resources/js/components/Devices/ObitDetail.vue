@@ -39,7 +39,6 @@
                        <p class="text-center">There are no documents attached to this device</p>
                    </li>
                    <device-row v-bind:key="'doc'+key" v-for="(value,key) in localObit.documents" :classes="{lower: true}" :bold_title="false" :title="value.name" :value="value.uri"></device-row>
-
                </ul>
             </li>
         </ul>

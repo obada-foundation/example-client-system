@@ -31,10 +31,11 @@ class ClientHelperSave
             ->map(function (Document $document) {                    
                 $filePath = substr($document->path, strpos($document->path, 'documents'));
                 $base64File = base64_encode(Storage::get($filePath));
-
+  
                 return (new DeviceDocument)
                     ->setName($document->name)
-                    ->setDocumentFile($base64File);
+                    ->setDocumentFile($base64File)
+                    ->setShouldEncrypt($document->encryption);
             })
             ->toArray();
 
