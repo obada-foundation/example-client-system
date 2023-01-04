@@ -224,6 +224,10 @@
 
     @if($show_data)
 
+        @if (count($errors))
+            <span class="form-helper text-danger">{{ ucfirst($errors->first()) }}</span>
+        @endif
+
         @if($has_addresses)
             <section class="mb-5">
                 <h3 class="d-inline-block">Seed Phrase:</h3> <small class="ms-2"><strong class="fs-5">{{ $seed_phrase_short }}</strong>

@@ -13,7 +13,7 @@ use Obada\Api\AccountsApi;
 use Obada\ClientHelper\MnemonicRequest;
 use App\ClientHelper\Token;
 use Illuminate\Support\Facades\Auth;
-use Throwable;
+use Obada\ApiException;
 
 class StorePrivateKey extends Handler {
     public function __invoke(Request $request)
@@ -24,7 +24,14 @@ class StorePrivateKey extends Handler {
         $api->getConfig()
             ->setAccessToken($token);
 
-        $api->newAccount();
+        try {
+            $api->newAccount();
+        } catch (ApiException $e) {
+            $newAccountError = json_decode($e->getResponseBody());
+
+            return Redirect::back()
+                ->withErrors([['new_account' => $newAccountError->details]]);
+        }
 
         return Redirect::route('addresses.index', ['show_data' => 1, 'has_addresses' => 1]);
     }
