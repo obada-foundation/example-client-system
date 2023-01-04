@@ -205,7 +205,7 @@
                                 <tr>
                                     <td>Other {{-- {{ $document->type }} --}}</td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked readonly disabled>{{-- {{ $document->is_encrypted }} --}}
+                                        <input type="checkbox" {{ $document->encryption ? 'checked' : '' }} readonly disabled>
                                     </td>
                                     <td>{{ $document->name }}</td>
                                     <td><a href="{{ $document->path }}">{{ $document->path }}</a></td>

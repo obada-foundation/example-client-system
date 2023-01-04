@@ -54,10 +54,11 @@ class Save extends Handler {
                 foreach ($request->get('documents', []) as $document) {
                     $filePath = substr($document['doc_path'], strpos($document['doc_path'], 'documents'));
                     Document::create([
-                        'device_id' => $existingDevice->id,
-                        'name'      => $document['doc_name'],
-                        'path'      => $document['doc_path'],
-                        'data_hash' => hash('sha256', Storage::get($filePath))
+                        'device_id'  => $existingDevice->id,
+                        'name'       => $document['doc_name'],
+                        'path'       => $document['doc_path'],
+                        'data_hash'  => hash('sha256', Storage::get($filePath)),
+                        'encryption' => $document['doc_encryption']
                     ]);
                 }
 

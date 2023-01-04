@@ -107,7 +107,7 @@
                                     </button>
                                 </td>
                                 <td class="text-center">
-                                    <input type="checkbox">
+                                    <input type="checkbox" v-model="doc.encryption.value">
                                 </td>
                                 <td>
                                     <select class="form-select"

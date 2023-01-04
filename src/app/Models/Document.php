@@ -16,6 +16,8 @@ class Document extends Model
 
     protected $guarded = [];
 
+    protected $casts = ['encryption' => 'boolean'];
+
     public function device()
     {
         return $this->belongsTo(Device::class, 'id', 'device_id');

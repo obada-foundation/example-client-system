@@ -94,6 +94,11 @@ export default {
                     isValid: true,
                     isClean: true,
                     validations: ['required']
+                },
+                encryption: {
+                    value: false,
+                    isValid: true,
+                    isClean: true,
                 }
             });
         },
@@ -276,7 +281,8 @@ export default {
                         var docs = {
                             doc_type: s.type.value,
                             doc_name: s.name.value,
-                            doc_path: s.url.value
+                            doc_path: s.url.value,
+                            doc_encryption: s.encryption.value
                         };
 
                         if (s.id) {
@@ -360,6 +366,11 @@ export default {
                             value: "1",
                             isValid: true,
                             isClean: true,
+                        },
+                        encryption: {
+                            value: s.encryption,
+                            isValid: true,
+                            isClean: true
                         }
                     });
                 });
