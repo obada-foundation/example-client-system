@@ -225,7 +225,11 @@
     @if($show_data)
 
         @if (count($errors))
-            <span class="form-helper text-danger">{{ ucfirst($errors->first()) }}</span>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    swal('Unable to add new account.','{{ ucfirst($errors->first()) }}','error');
+                })
+            </script>
         @endif
 
         @if($has_addresses)
@@ -270,7 +274,7 @@
                                 </td>
                                 <td>{{ number_format($account['balance'], 16) }}</td>
                                 <td>{{ $account['nft_count'] }} (format 25,030)</td>
-                                <td class="text-center"><a href="#exportKeyModal" data-bs-toggle="modal">export</a></td>
+                                <td class="text-center"><a href="{{ route('addresses.export-account', $account['address']) }}" target="_blank">download</a></td>
                                 <td class="text-center">coming soon</td>
                                 <td class="text-center">coming soon</td>
                             </tr>

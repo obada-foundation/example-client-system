@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as bootstrap from "bootstrap";
-import {showAlert} from "../../../utils/showAlert";
 import {formatUSN} from "../../../utils/formatUSN";
 
 export default {
