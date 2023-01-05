@@ -21,7 +21,7 @@
 
 
 @section('extra_breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('addresses.index', ['show_data' => 1, 'has_addresses' => 1]) }}">Addresses</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]) }}">Accounts</a></li>
 @endsection
 
 
@@ -38,7 +38,7 @@
                         {{ $address }}
                         <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
                         <span class="me-2 text-muted">|</span>
-                        <a href="{{ route('addresses.index', ['show_data' => 1, 'has_addresses' => 1]) }}" class="text-nowrap">Change Address</a>
+                        <a href="{{ route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]) }}" class="text-nowrap">Change Account</a>
                     </div>
                 </div>
             </li>

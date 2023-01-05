@@ -1,11 +1,11 @@
 @extends('layouts.app-with-nav',[
-    'page_title'=>'Manage Addresses',
+    'page_title'=>'Manage Accounts',
     'hide_breadcrumbs' => true
 ])
 
 
 @section('head')
-    <title>Manage Addresses</title>
+    <title>Manage Accounts</title>
     <meta name="description" content="__description__">
     <meta name="keywords" content="__keywords__">
 @endsection
@@ -112,7 +112,7 @@
 
 @section('extra_breadcrumbs')
     @if($show_data)
-        <li class="breadcrumb-item"><a href="{{ route('addresses.index') }}">Addresses</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Accounts</a></li>
     @endif
 @endsection
 
@@ -120,8 +120,8 @@
 @section('page_content')
 
     @if(!$show_data)
-        <p>A seed phrase is a set of short words which acts as a “master password”, controlling a list of addresses. <br>
-            The addresses under the seed phrase can each contain their own inventory list, and their own amount of OBD. <br>
+        <p>A seed phrase is a set of short words which acts as a “master password”, controlling a list of accounts. <br>
+            The accounts under the seed phrase can each contain their own inventory list, and their own amount of OBD. <br>
             An address that is unaffiliated with a seed phrase can also be opened in this wallet.</p>
 
         <p><strong>Security and Backup</strong><br>
@@ -132,11 +132,11 @@
 
             <div class="row">
                 <div class="col-12 col-sm-9 col-md-8">
-                    <p class="mb-0"><a href="{{ route('addresses.generate-phrase') }}?step=1" class="btn btn-primary">Generate</a></p>
+                    <p class="mb-0"><a href="{{ route('accounts.generate-phrase') }}?step=1" class="btn btn-primary">Generate</a></p>
                 </div>
 
                 <div class="col-12 col-sm-3 col-md-4">
-                    <div class="mt-2 mt-sm-0">This will allow you to generate a new list of addresses.</div>
+                    <div class="mt-2 mt-sm-0">This will allow you to generate a new list of accounts.</div>
                 </div>
             </div>
         </section>
@@ -151,7 +151,7 @@
 
             <div class="row">
                 <div class="col-12 col-sm-9 col-md-8">
-                    <form method="POST" action="{{ route('addresses.import-wallet') }}" class="row">
+                    <form method="POST" action="{{ route('accounts.import-wallet') }}" class="row">
                         @csrf
 
                         <div class="col-12 col-sm-9">
@@ -169,7 +169,7 @@
                 </div>
 
                 <div class="col-12 col-sm-3 col-md-4">
-                    <div class="mt-2 mt-sm-0 mt-md-2">Import an existing list of addresses.</div>
+                    <div class="mt-2 mt-sm-0 mt-md-2">Import an existing list of accounts.</div>
                 </div>
             </div>
         </section>
@@ -184,7 +184,7 @@
 
             <div class="row">
                 <div class="col-12 col-sm-9 col-md-8">
-                    <form action="{{ route('addresses.import-account') }}" method="POST" enctype="multipart/form-data" class="row">
+                    <form action="{{ route('accounts.import-account') }}" method="POST" enctype="multipart/form-data" class="row">
                         @csrf
 
                         <div class="col-12 col-sm-3">
@@ -232,13 +232,13 @@
             </script>
         @endif
 
-        @if($has_addresses)
+        @if($has_accounts)
             <section class="mb-5">
                 <h3 class="d-inline-block">Seed Phrase:</h3> <small class="ms-2"><strong class="fs-5">{{ $seed_phrase_short }}</strong>
                         <a href="#phraseConfirmationModal" class="ms-2 fs-6" data-bs-toggle="modal">Display</a></small>
 
                 <p>
-                    <a href="{{ route('addresses.index') }}">Switch Seed Phrase</a>
+                    <a href="{{ route('accounts.index') }}">Switch Seed Phrase</a>
                 </p>
 
                 <p id="phraseFull" class="collapse">
@@ -273,8 +273,8 @@
                                     <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
                                 </td>
                                 <td>{{ number_format($account['balance'], 16) }}</td>
-                                <td>{{ $account['nft_count'] }} (format 25,030)</td>
-                                <td class="text-center"><a href="{{ route('addresses.export-account', $account['address']) }}" target="_blank">download</a></td>
+                                <td>{{ number_format($account['nft_count'], 0, '.', ',') }}</td>
+                                <td class="text-center"><a href="{{ route('accounts.export-account', $account['address']) }}" target="_blank">download</a></td>
                                 <td class="text-center">coming soon</td>
                                 <td class="text-center">coming soon</td>
                             </tr>
@@ -282,7 +282,7 @@
                     </tbody>
                 </table>
 
-                <form action="{{ route('addresses.new-account') }}" method="POST">
+                <form action="{{ route('accounts.new-account') }}" method="POST">
                     @csrf
                     <p>
                         <button class="btn btn-primary">+ Generate New Address</button>

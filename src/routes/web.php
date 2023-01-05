@@ -63,14 +63,6 @@ Route::namespace('\App\Http\Handlers\Accounts')
     ->prefix('accounts')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/balance', \Balance::class)->name('balance');
-    });
-
-Route::namespace('\App\Http\Handlers\Addresses')
-    ->name('addresses.')
-    ->prefix('addresses')
-    ->middleware('auth')
-    ->group(function () {
         Route::get('/', \Index::class)->name('index');
         Route::get('/generate-phrase', \GeneratePhrase::class)->name('generate-phrase');
         Route::post('/save-phrase', \SavePhrase::class)->name('save-phrase');
@@ -78,6 +70,7 @@ Route::namespace('\App\Http\Handlers\Addresses')
         Route::post('/import-account', \ImportAccount::class)->name('import-account');
         Route::get('/export-account/{address}', \ExportAccount::class)->name('export-account');
         Route::post('/new-account', \StorePrivateKey::class)->name('new-account');
+        Route::get('/balance', \Balance::class)->name('balance');
     });
 
 Route::namespace('\App\Http\Handlers\Devices')

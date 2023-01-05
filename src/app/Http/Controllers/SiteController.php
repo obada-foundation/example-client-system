@@ -30,10 +30,10 @@ class SiteController extends Controller
             $accounts = $accountsApi->accounts();
 
             if (!$accounts->getData() || count($accounts->getData()) == 0) {
-                return redirect()->route('addresses.index');
+                return redirect()->route('accounts.index');
             } 
 
-            return redirect()->route('addresses.index', ['show_data' => 1]);
+            return redirect()->route('accounts.index', ['show_data' => 1]);
         } else {
             return view('pages.welcome', $this->getData([]));
         }
