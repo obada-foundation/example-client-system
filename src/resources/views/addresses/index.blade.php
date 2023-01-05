@@ -63,16 +63,16 @@
         </div>
     </div>
 
-    <div class="modal" id="keyConfirmationModal" tabindex="-1" aria-labelledby="keyConfirmationModalLabel" aria-hidden="true">
+    <div class="modal" id="exportKeyModal" tabindex="-1" aria-labelledby="exportKeyModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-center" id="keyConfirmationModalLabel">Warning!</h4>
+                    <h4 class="modal-title text-center" id="exportKeyModalLabel">Warning!</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="my-3">
-                        Anyone who knows your key can control your assets. Proceed?
+                        Anyone who controls your key can control your assets. Proceed?
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
@@ -248,7 +248,7 @@
                         <th>OBD Balance</th>
                         <th># pNFTs</th>
                         <th class="text-center">
-                            Public Key <!--<small><a href="#" data-bs-toggle="tooltip"
+                            Private Key <!--<small><a href="#" data-bs-toggle="tooltip"
                                                  title='The Master Key (a.k.a. "Owners Key") provides complete control over all attached pNFTs and OBD.  Do not share or lose the Master Key.'><i
                                         class="fas fa-question-circle"></i></a></small>--></th>
                         <th class="text-center">
@@ -270,7 +270,7 @@
                                 </td>
                                 <td>{{ number_format($account['balance'], 16) }}</td>
                                 <td>{{ $account['nft_count'] }} (format 25,030)</td>
-                                <td class="text-center"><a href="#keyConfirmationModal" data-bs-toggle="modal">display</a></td>
+                                <td class="text-center"><a href="#exportKeyModal" data-bs-toggle="modal">export</a></td>
                                 <td class="text-center">coming soon</td>
                                 <td class="text-center">coming soon</td>
                             </tr>

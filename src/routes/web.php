@@ -76,6 +76,7 @@ Route::namespace('\App\Http\Handlers\Addresses')
         Route::post('/save-phrase', \SavePhrase::class)->name('save-phrase');
         Route::post('/import-wallet', \ImportWallet::class)->name('import-wallet');
         Route::post('/import-account', \ImportAccount::class)->name('import-account');
+        Route::post('/export-account', \ExportAccount::class)->name('export-account');
         Route::post('/new-account', \StorePrivateKey::class)->name('new-account');
     });
 
