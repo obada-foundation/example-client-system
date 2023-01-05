@@ -32,3 +32,5 @@ document.addEventListener('deviceReceived', function() {
         type: 'info'
     });
 });
+
+
