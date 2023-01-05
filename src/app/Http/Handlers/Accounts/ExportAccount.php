@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Handlers\Addresses;
+namespace App\Http\Handlers\Accounts;
 
 use App\Http\Handlers\Handler;
 use Illuminate\Http\Request;

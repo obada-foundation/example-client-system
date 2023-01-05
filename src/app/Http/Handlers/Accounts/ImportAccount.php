@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Handlers\Addresses;
+namespace App\Http\Handlers\Accounts;
 
 use App\Http\Handlers\Handler;
 use Illuminate\Http\Request;
@@ -36,6 +36,6 @@ class ImportAccount extends Handler {
             return redirect()->back()->withErrors(['key_value' => 'Invalid private key file']);
         }
 
-        return redirect()->route('addresses.index', ['show_data' => 1, 'has_addresses' => 1]);
+        return redirect()->route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]);
     }
 }

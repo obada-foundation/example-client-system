@@ -15,7 +15,7 @@
 @endsection
 
 @section('extra_breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('addresses.index') }}">Addresses</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Accounts</a></li>
 @endsection
 
 
@@ -37,7 +37,7 @@
                 <br>
                 If you lose the seed phrase, you will lose access, and it can't be recovered.
             </div>
-            <p><a href="{{ route('addresses.generate-phrase') }}?step=2" class="btn btn-primary">I saved the seed phrase</a></p>
+            <p><a href="{{ route('accounts.generate-phrase') }}?step=2" class="btn btn-primary">I saved the seed phrase</a></p>
         </div>
 
     @elseif($step == 2)
@@ -46,7 +46,7 @@
             <h3>Enter two words from the new phrase to confirm:</h3>
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-6">
-                    <form method="POST" action="{{ route('addresses.save-phrase') }}" class="row">
+                    <form method="POST" action="{{ route('accounts.save-phrase') }}" class="row">
                         @csrf
 
                         <div class="col-12 col-sm-4">

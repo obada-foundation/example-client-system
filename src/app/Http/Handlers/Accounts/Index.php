@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Handlers\Addresses;
+namespace App\Http\Handlers\Accounts;
 
 use App\Http\Handlers\Handler;
 use Illuminate\Http\Request;
@@ -42,18 +42,13 @@ class Index extends Handler {
             })
             ->toArray();
 
-        //$balance = $api->balance();
-
-      //  $address = $balance->getAddress();
-
-        return view('addresses.index', [
+        return view('accounts.index', [
             'seed_phrase'         => 'suggest quit betray lunar direct agent trial royal range feel spare awake',
             'seed_phrase_short'   => 'suggest ... awake',
             'balance'             => 0,//$balance->getBalance(),
             'show_data'           => $request->has('show_data'),
             'add_new_address'     => $request->has('add_new_address'),
-            'has_addresses'       => count($accounts),
-            'has_other_addresses' => $request->has('has_other_addresses'),
+            'has_accounts'        => count($accounts),
             'accounts'            => $accounts,
         ]);
     }
