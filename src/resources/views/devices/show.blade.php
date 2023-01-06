@@ -170,12 +170,9 @@
 
     <div class="d-flex justify-content-between mb-2">
         <h2 class="mb-0">Device Data & Information</h2>
+
             <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary">
-                @if($device->documents->isEmpty())
-                    <i class="fas fa-plus"></i>&nbsp;Add Device
-                @else
-                    <i class="fas fa-edit"></i>&nbsp;Edit
-                @endif
+                <i class="fas fa-edit"></i>&nbsp;Edit
             </a>
     </div>
     <div class="card mb-5">
