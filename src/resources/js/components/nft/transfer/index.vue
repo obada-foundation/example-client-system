@@ -103,7 +103,13 @@ export default {
             .catch((e) => {
                 this.proccessingTransfer = false;
                 this.$refs.CloseTwoFa.click();
-                swal("Error!", "Something went wrong when tried to transfer pNFT", "error");
+
+                if (! e.response) {
+                    swal("Unable to transfer pNFT", "", "error");
+                    return
+                }
+
+                swal("Unable to transfer pNFT", "", "error");
             });
         }
     },

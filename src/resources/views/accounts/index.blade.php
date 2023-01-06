@@ -224,7 +224,7 @@
 
     @if($show_data)
 
-        @if (count($errors))
+        @if ($errors->any())
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     swal('Unable to add new account.','{{ ucfirst($errors->first()) }}','error');

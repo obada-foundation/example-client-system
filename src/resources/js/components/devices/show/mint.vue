@@ -64,7 +64,13 @@ export default {
             })
             .catch((e) => {
                 this.stopMinting(this)
-                swal("Error!", "Unable to mint pNFT", "error");
+
+                if (! e.response) {
+                    swal("Unable to mint pNFT", "", "error");
+                    return
+                }
+
+                swal("Unable to mint pNFT", e.response.data.errorMessage, "error");
             });
         }
     }

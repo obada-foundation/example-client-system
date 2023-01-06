@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\ClientHelper\Token;
 use Obada\Api\AccountsApi;
 use Obada\ClientHelper\SendCoinsRequest;
+use Obada\ApiException;
 
 class Send extends Handler {
     public function __invoke($address)
@@ -24,7 +25,15 @@ class Send extends Handler {
             ->setAmount(request()->get('amount'))
             ->setRecepientAddress(request()->get('recepient_address'));
 
-        $api->sendCoins($address, $req);
+        try {
+            $api->sendCoins($address, $req);
+        } catch (ApiException $e) {
+            report($e);
+
+            $apiError = json_decode($e->getResponseBody());
+            
+            return redirect()->back()->withInput()->withErrors(['error' => $apiError->error]);
+        }
 
         return redirect()->back();
     }

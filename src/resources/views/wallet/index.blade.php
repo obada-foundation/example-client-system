@@ -32,17 +32,26 @@
     <div class="mb-5">
         <h3>To Send OBD:</h3>
         <div class="row">
+
+            @if ($errors->any())
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        swal('Unable to send coins.','{{ ucfirst($errors->first()) }}','error');
+                    })
+                </script>
+            @endif
+
             <div class="col-12 col-sm-9 col-md-6">
                 <form action="{{ route('wallet.send', $address) }}" method="POST" class="row">
                     @csrf
                     
                     <div class="col-9">
-                        <input type="text" class="form-control" name="amount" placeholder="OBD amount" required>
+                        <input type="text" class="form-control" name="amount" placeholder="OBD amount" value="{{ old('amount') }}" required>
                     </div>
 
                     <div class="col-9">
                         <input type="text" id="address" class="form-control" name="recepient_address"
-                               placeholder="Enter Receiver Address" required>
+                               placeholder="Enter Receiver Address" value="{{ old('recepient_address') }}" required>
                         @if ($errors->has('recepient_address'))
                             <span class="form-helper text-danger">{{ $errors->first('recepient_address') }}</span>
                         @endif

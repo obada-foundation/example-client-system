@@ -69,7 +69,7 @@ Route::namespace('\App\Http\Handlers\Accounts')
         Route::post('/import-wallet', \ImportWallet::class)->name('import-wallet');
         Route::post('/import-account', \ImportAccount::class)->name('import-account');
         Route::get('/export-account/{address}', \ExportAccount::class)->name('export-account');
-        Route::post('/new-account', \StorePrivateKey::class)->name('new-account');
+        Route::post('/new-account', \StoreAccount::class)->name('new-account');
         Route::get('/balance', \Balance::class)->name('balance');
     });
 

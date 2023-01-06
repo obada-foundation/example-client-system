@@ -15,7 +15,7 @@ use App\ClientHelper\Token;
 use Illuminate\Support\Facades\Auth;
 use Obada\ApiException;
 
-class StorePrivateKey extends Handler {
+class StoreAccount extends Handler {
     public function __invoke(Request $request)
     {
         $token = app(Token::class)->create(Auth::user());

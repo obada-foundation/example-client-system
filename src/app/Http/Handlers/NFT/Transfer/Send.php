@@ -11,6 +11,7 @@ use Obada\Api\NFTApi;
 use Obada\ClientHelper\SendNFTRequest;
 use App\Http\Requests\NFT\SendRequest;
 use App\Models\Device;
+use Obada\ApiException;
 
 class Send extends Handler {
     public function __invoke(SendRequest $request, string $usn)
@@ -23,7 +24,17 @@ class Send extends Handler {
 
         $req = (new SendNFTRequest)->setReceiver($request->json('recipient'));
 
-        $api->send($usn, $req);
+        try {
+            $api->send($usn, $req);
+        } catch (ApiException $e) {
+            report($e);
+
+            $apiError = json_decode($e->getResponseBody());
+
+            return response()->json([
+                'errorMessage' => ucfirst($apiError->error)
+            ], 400);
+        }
 
         Device::byUsn($usn)->delete();
     }
