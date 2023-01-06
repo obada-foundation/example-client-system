@@ -13,6 +13,10 @@ use Obada\ClientHelper\DeviceDocument;
 
 class ClientHelperSave
 {
+    protected Token $tokenCreator;
+
+    protected ObitApi $api;
+
     public function __construct(ObitApi $api, Token $tokenCreator) 
     {
         $this->api = $api;

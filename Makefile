@@ -49,6 +49,24 @@ deps: deps/php deps/node
 run-local:
 	docker-compose -f docker-compose.yml up -d --force-recreate
 
+phpstan:
+	docker run \
+		--rm \
+		-t \
+		$(PROJECT_IMAGE) \
+		sh -c "./vendor/bin/phpstan analyse --memory-limit=2G"
+
+rector/local:
+	docker exec \
+		-it \
+		reference-design \
+		sh -c "vendor/bin/rector process --dry-run"
+
+rector/local/fix:
+	docker exec \
+		-it reference-design \
+		sh -c "vendor/bin/rector process"
+
 deploy/production:
 	ansible-playbook deployment/playbook.yml --limit rd.obada.io
 

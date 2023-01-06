@@ -145,7 +145,7 @@
                     </div>
 
                     <div v-if="documents.length === 0" class="text-center">
-                        <button class="btn btn-outline-info btn-floating" @click="addDocument()"><i class="fa fa-plus"></i> Add Document</button>
+                        <button class="btn btn-outline-info btn-floating" @click="addDocument()"><i class="fa fa-plus"></i> Add Data Object</button>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,6 @@ use Illuminate\Support\ServiceProvider;
 use Obada\Api\AccountsApi;
 use Obada\Api\ObitApi;
 use Obada\Api\UtilsApi;
-use Obada\Api\KeysApi;
 use Obada\Configuration;
 use App\ClientHelper\Token;
 
@@ -32,11 +31,6 @@ class ObadaServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(UtilsApi::class, fn() => new UtilsApi(
-            new Client(),
-            resolve(Configuration::class)
-        ));
-
-        $this->app->bind(KeysApi::class, fn() => new KeysApi(
             new Client(),
             resolve(Configuration::class)
         ));

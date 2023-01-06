@@ -7,6 +7,7 @@ namespace App\Http\Handlers\Devices;
 use App\Http\Handlers\Handler;
 use App\Models\Device;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class Load extends Handler {
     public function __invoke($usn)

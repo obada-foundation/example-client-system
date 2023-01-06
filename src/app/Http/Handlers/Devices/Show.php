@@ -30,8 +30,9 @@ class Show extends Handler
             ->first();
 
         if (!$device) {
-            // TODO: return with message
-            return redirect()->route('devices.index');
+            return redirect()
+                ->route('accounts.index', ['show_data' => 1])
+                ->withErrors(['error' => 'A device does not exist']);
         }
 
         $token = app(Token::class)->create($user);
@@ -70,10 +71,12 @@ class Show extends Handler
             ];
 
         } catch (Throwable $t) {
-            Log::error("Cannot generate obit", [
+            Log::error("Cannot generate obit checksum", [
                 'error'   => $t->getMessage(),
                 'context' => $t->getTraceAsString()
             ]);
+
+            return redirect()->back();
         }
 
         return view('devices.show', [

@@ -90,7 +90,7 @@
             <th>Manufacturer</th>
             <th>Part&nbsp;#</th>
             <th>Serial&nbsp;#</th>
-            <th>#&nbsp;of&nbsp;Documents</th>
+            <th>#&nbsp;of&nbsp;data&nbsp;objects</th>
             <th style="width: 75px;">Created</th>
         </tr>
         </thead>

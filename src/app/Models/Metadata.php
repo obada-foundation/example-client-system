@@ -28,7 +28,7 @@ class Metadata extends Model
     public function getLocalMetadata()
     {
         return new LocalObitMetadata([
-            'key' => $this->metadata_type_id,
+            'key'   => $this->metadata_type_id,
             'value' => $this->value()
         ]);
     }

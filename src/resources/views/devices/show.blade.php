@@ -181,7 +181,7 @@
             @if($device->documents->isEmpty())
                 <ul class="list-group list-group-flush mt-2">
                     <li class="list-group-item">
-                        <p class="mb-0 text-center">There are no documents attached to this device</p>
+                        <p class="mb-0 text-center">There are no data objects attached to this device</p>
                     </li>
                 </ul>
             @else

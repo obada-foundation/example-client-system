@@ -27,11 +27,6 @@ class JwtCreate extends Command
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle()
     {
         $userId = $this->argument('userId');
