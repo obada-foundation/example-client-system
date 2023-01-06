@@ -70,9 +70,11 @@
                                                                              data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button></p>
     </div>
 
-    <div class="mb-5">
-        <h3>OBADA Faucet:</h3>
-        <p><a target="_blank" href="{{ config('faucet.url') }}">Get a small amount for testing</a></p>
-    </div>
+    @if (env('APP_ENV') != 'production')
+        <div class="mb-5">
+            <h3>OBADA Faucet:</h3>
+            <p><a target="_blank" href="{{ config('faucet.url') }}">Get a small amount for testing</a></p>
+        </div>
+    @endif
 
 @endsection
