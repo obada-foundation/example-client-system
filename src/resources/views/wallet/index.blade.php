@@ -44,19 +44,20 @@
             <div class="col-12 col-sm-9 col-md-6">
                 <form action="{{ route('wallet.send', $address) }}" method="POST" class="row">
                     @csrf
-                    
-                    <div class="col-9">
-                        <input type="text" class="form-control" name="amount" placeholder="OBD amount" value="{{ old('amount') }}" required>
-                    </div>
 
-                    <div class="col-9">
+                    <div class="col-12 mb-2">
                         <input type="text" id="address" class="form-control" name="recepient_address"
                                placeholder="Enter Receiver Address" value="{{ old('recepient_address') }}" required>
                         @if ($errors->has('recepient_address'))
                             <span class="form-helper text-danger">{{ $errors->first('recepient_address') }}</span>
                         @endif
                     </div>
-                    <div class="col-3">
+
+                    <div class="col-8">
+                        <input type="text" class="form-control" name="amount" placeholder="Enter OBD amount" value="{{ old('amount') }}" required>
+                    </div>
+
+                    <div class="col-4">
                         <button type="submit" class="btn btn-primary w-100">Send</button>
                     </div>
                 </form>
