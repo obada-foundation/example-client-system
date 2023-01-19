@@ -30,7 +30,7 @@ class StoreAccount extends Handler {
             $newAccountError = json_decode($e->getResponseBody());
 
             return Redirect::back()
-                ->withErrors([['new_account' => $newAccountError->details]]);
+                ->withErrors([['new_account' => $newAccountError->error]]);
         }
 
         return Redirect::route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]);

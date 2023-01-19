@@ -13,7 +13,7 @@ use Obada\Api\AccountsApi;
 use Obada\ClientHelper\MnemonicRequest;
 use App\ClientHelper\Token;
 use Illuminate\Support\Facades\Auth;
-use Throwable;
+use Obada\ApiException;
 
 class SavePhrase extends Handler {
     public function __invoke(Request $request)
@@ -47,7 +47,14 @@ class SavePhrase extends Handler {
         $req = (new MnemonicRequest)
             ->setMnemonic(session()->get('mnemonic'));
 
-        $api->newWallet($req);
+        try {
+            $api->newWallet($req);
+        } catch (ApiException $e) {
+
+            return redirect()
+                ->back()
+                ->withErrors(['word2' => ucfirst(json_decode($e->getResponseBody())->error)]);
+        }
 
         return Redirect::route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]);
     }

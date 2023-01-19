@@ -13,7 +13,6 @@ use Obada\Api\AccountsApi;
 use Obada\ClientHelper\MnemonicRequest;
 use App\ClientHelper\Token;
 use Illuminate\Support\Facades\Auth;
-use Throwable;
 use Obada\ClientHelper\WalletExistsError;
 use Obada\ApiException;
 
