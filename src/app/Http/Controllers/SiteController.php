@@ -29,7 +29,7 @@ class SiteController extends Controller
 
             $accounts = $accountsApi->accounts();
 
-            if (!$accounts->getData() || count($accounts->getData()) == 0) {
+            if (count($accounts->getHdAccounts()) === 0 && count($accounts->getImportedAccounts()) === 0) {
                 return redirect()->route('accounts.manage');
             }
 

@@ -21,30 +21,32 @@ class Index extends Handler {
         $api->getConfig()
             ->setAccessToken($token);
 
-        $accounts = $api->accounts()->getData();
+        $accounts = $api->accounts();
+        $words    = explode(' ', session()->get('mnemonic', ''));
 
-        $accounts = collect($accounts)
-            ->map(function ($account) {
+        $proccessAccounts = function (array $accounts) {
+            return collect($accounts)
+                ->map(function ($account) {
 
-                $address = $account->getAddress();
+                    $address = $account->getAddress();
 
-                return [
-                    'address'       => $address,
-                    'short_address' => substr($address, 0, 10) . '...' . substr($address, -4),
-                    'balance'       => $account->getBalance(),
-                    'pub_key'       => $account->getPubKey(),
-                    'nft_count'     => $account->getNftCount(),
-                ];
-            })
-            ->toArray();
-
-        $words = explode(' ', session()->get('mnemonic'));
+                    return [
+                        'address'       => $address,
+                        'short_address' => substr($address, 0, 10) . '...' . substr($address, -4),
+                        'balance'       => $account->getBalance(),
+                        'pub_key'       => $account->getPubKey(),
+                        'nft_count'     => $account->getNftCount(),
+                    ];
+                })
+                ->toArray();
+        };
 
         return view('accounts.index', [
-            'seed_phrase'         => session()->get('mnemonic'),
-            'seed_phrase_short'   => $words[0] . ' ... ' . last($words),
-            'add_new_address'     => $request->has('add_new_address'),
-            'accounts'            => $accounts,
+            'seed_phrase'       => session()->get('mnemonic'),
+            'seed_phrase_short' => $words[0] . ' ... ' . last($words),
+            'add_new_address'   => $request->has('add_new_address'),
+            'hd_accounts'       => $proccessAccounts($accounts->getHdAccounts()),
+            'imported_accounts' => $proccessAccounts($accounts->getImportedAccounts()),
         ]);
     }
 }

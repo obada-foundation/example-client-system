@@ -51,7 +51,7 @@ class Sync extends Command
                         $documents = $nft['data']['documents'];
 
                         $assetIdentifierDoc = collect($documents)
-                            ->filter(fn ($document) => $document['name'] === 'physical_asset_identifier')
+                            ->filter(fn ($document) => $document['name'] === 'physicalAssetIdentifiers')
                             ->first();
 
                         if (! $assetIdentifierDoc) {
@@ -62,37 +62,35 @@ class Sync extends Command
                         $cid = $cidParts[1];
 
                         $assetIdentifierDocContent = json_decode(
-                            file_get_contents('http://ipfs:8080/ipfs/' . $cid), 
+                            file_get_contents(config('ipfs.gateway') . $cid), 
                             true
                         );
 
                         DB::transaction(function () use ($user, $nft, $assetIdentifierDocContent, $documents) {
                             $device = Device::create([
-                                    'user_id'      => $user->id,
-                                    'usn'          => $nft['data']['usn'],
-                                    'manufacturer' => $assetIdentifierDocContent['manufacturer'],
-                                    'part_number'  => $assetIdentifierDocContent['part_number'],
-                                    'serial_number' => $assetIdentifierDocContent['serial_number'],
-                                    'obit_did'      => $nft['id'],
-                                    'obit_checksum' => $nft['data']['checksum'],
+                                'user_id'       => $user->id,
+                                'usn'           => $nft['data']['usn'],
+                                'manufacturer'  => $assetIdentifierDocContent['manufacturer'],
+                                'part_number'   => $assetIdentifierDocContent['part_number'],
+                                'serial_number' => $assetIdentifierDocContent['serial_number'],
+                                'obit_did'      => $nft['id'],
+                                'obit_checksum' => $nft['data']['checksum'],
                             ]);
 
                             foreach ($documents as $document) {
-                                    if ($document['name'] === 'physical_asset_identifier') {
-                                        continue;
-                                    }
-
-                                    Document::create([
-                                            'device_id' => $device->id,
-                                            'name'      => $document['name'],
-                                            'data_hash' => $document['hash'],
-                                            'path'      => $document['uri']
-                                    ]);
+                                Document::create([
+                                    'device_id' => $device->id,
+                                    'name'      => $document['name'],
+                                    'data_hash' => $document['hash'],
+                                    'path'      => $document['uri']
+                                ]);
                             }
                         });
                     }
                 }
             } catch (Throwable $t) {
+                report($t);
+
                 $this->error($t->getMessage());
                 $this->error($t->getTraceAsString());
             }

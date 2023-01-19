@@ -102,7 +102,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @forelse($accounts as $account)
+                    @forelse($hd_accounts as $account)
                         <tr>
                             <td>
                                 <a href="{{ route('devices.index', $account['address']) }}">{{ $account['short_address'] }}</a>
@@ -156,7 +156,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{--@foreach($imported_accounts as $account)
+                @forelse($imported_accounts as $account)
                     <tr>
                         <td>
                             <a href="{{ route('devices.index', $account['address']) }}">{{ $account['short_address'] }}</a>
@@ -168,10 +168,11 @@
                         <td class="text-center">coming soon</td>
                         <td class="text-center">coming soon</td>
                     </tr>
-                @endforeach--}}
-                <tr>
-                    <td colspan="6" class="text-center">No imported accounts.</td>
-                </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center">No imported accounts.</td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
 
@@ -179,5 +180,4 @@
                 <a href="{{ route('accounts.import-account') }}" class="btn btn-primary">+ Import Account</a>
             </p>
         </section>
-
 @endsection
