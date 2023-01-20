@@ -21,11 +21,7 @@ class Index extends Handler {
         $api->getConfig()
             ->setAccessToken($token);
 
-        $accounts = [];
-
-        if ($request->has('show_data')) {
-            $accounts = $api->accounts()->getData();
-        }
+        $accounts = $api->accounts()->getData();
 
         $accounts = collect($accounts)
             ->map(function ($account) {
@@ -42,13 +38,12 @@ class Index extends Handler {
             })
             ->toArray();
 
+        $words = explode(' ', session()->get('mnemonic'));
+
         return view('accounts.index', [
-            'seed_phrase'         => 'suggest quit betray lunar direct agent trial royal range feel spare awake',
-            'seed_phrase_short'   => 'suggest ... awake',
-            'balance'             => 0,//$balance->getBalance(),
-            'show_data'           => $request->has('show_data'),
+            'seed_phrase'         => session()->get('mnemonic'),
+            'seed_phrase_short'   => $words[0] . ' ... ' . last($words),
             'add_new_address'     => $request->has('add_new_address'),
-            'has_accounts'        => count($accounts),
             'accounts'            => $accounts,
         ]);
     }

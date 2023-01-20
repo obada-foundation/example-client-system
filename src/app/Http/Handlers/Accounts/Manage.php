@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\ClientHelper\Token;
 use Obada\Api\AccountsApi;
 
-class ImportAccount extends Handler {
+class Manage extends Handler {
     public function __invoke(Request $request)
     {
         $token = app(Token::class)->create(Auth::user());
@@ -20,6 +20,6 @@ class ImportAccount extends Handler {
         $api->getConfig()
             ->setAccessToken($token);
 
-        return view('accounts.import-account');
+        return view('accounts.manage');
     }
 }

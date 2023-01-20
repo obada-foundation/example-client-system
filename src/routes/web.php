@@ -64,10 +64,12 @@ Route::namespace('\App\Http\Handlers\Accounts')
     ->middleware('auth')
     ->group(function () {
         Route::get('/', \Index::class)->name('index');
+        Route::get('/manage', \Manage::class)->name('manage');
+        Route::get('/import-account', \ImportAccount::class)->name('import-account');
         Route::get('/generate-phrase', \GeneratePhrase::class)->name('generate-phrase');
         Route::post('/save-phrase', \SavePhrase::class)->name('save-phrase');
         Route::post('/import-wallet', \ImportWallet::class)->name('import-wallet');
-        Route::post('/import-account', \ImportAccount::class)->name('import-account');
+        Route::post('/import-account-post', \ImportAccountPost::class)->name('import-account-post');
         Route::get('/export-account/{address}', \ExportAccount::class)->name('export-account');
         Route::post('/new-account', \StoreAccount::class)->name('new-account');
         Route::get('/balance', \Balance::class)->name('balance');

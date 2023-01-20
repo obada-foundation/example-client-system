@@ -7,9 +7,9 @@
         <div class="container-lg">
             <ul class="nav">
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link ps-0 dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Account</a>
+                    <a href="#" class="nav-link ps-0 dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Accounts</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="{{ route('accounts.index') }}">Switch Seed Phrase</a></li>
+                        <li class="dropdown-item"><a href="{{ route('accounts.manage') }}">Manage Seed Phrase</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a href="{{ route('documentation') }}" class="nav-link">Documentation</a></li>
