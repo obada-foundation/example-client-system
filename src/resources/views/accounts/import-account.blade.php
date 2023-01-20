@@ -1,10 +1,10 @@
 @extends('layouts.app-with-nav',[
-    'page_title'=>'Import Existing Key',
+    'page_title'=>'Import Account',
 ])
 
 
 @section('head')
-    <title>Import Existing Key</title>
+    <title>Import Account</title>
     <meta name="description" content="__description__">
     <meta name="keywords" content="__keywords__">
 @endsection
@@ -31,7 +31,7 @@
                       class="row">
                     @csrf
 
-                    <div class="col-12 col-sm-3">
+                    <div class="col-12 col-sm-4">
                         <div class="mb-2">
                             <select id="key_type" class="form-select" name="key_type" required>
                                 <option value="">Choose key type</option>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-5">
                         <div class="mb-3">
                             <input type="file" id="key_value" class="form-control" name="key_value"
                                    placeholder="Enter Key" required>
