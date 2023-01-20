@@ -30,7 +30,7 @@
             <span class="ms-2 me-2 text-muted">|</span>
             <a href="{{ route('accounts.manage') }}">Switch Seed Phrase</a>
 
-            <table class="table mt-5">
+            <table class="table mt-4">
                 <thead>
                 <tr>
                     <th>Address</th>
@@ -84,7 +84,7 @@
         <section class="mb-5">
             <h3>Standalone Accounts</h3>
 
-            <table class="table mt-5">
+            <table class="table mt-4">
                 <thead>
                 <tr>
                     <th>Address</th>
@@ -126,7 +126,7 @@
             </table>
 
             <p>
-                <a href="{{ route('accounts.import-account') }}" class="btn btn-primary">+ Import Account</a>
+                <a href="{{ route('accounts.import-account') }}">Import New Standalone Account</a>
             </p>
         </section>
 @endsection

@@ -1,10 +1,10 @@
 @extends('layouts.app-with-nav',[
-    'page_title' => 'My pNFT Wallet'
+    'page_title' => 'Account ' . $address_short
 ])
 
 
 @section('head')
-    <title>My pNFT Wallet</title>
+    <title>Account {{ $address_short }}</title>
     <meta name="description" content="Obada Reference App Inventory List">
     <meta name="keywords" content="devices">
 
@@ -38,7 +38,7 @@
                         {{ $address }}
                         <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
                         <span class="me-2 text-muted">|</span>
-                        <a href="{{ route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]) }}" class="text-nowrap">Change Account</a>
+                        <a href="{{ route('accounts.index') }}" class="text-nowrap">Change Account</a>
                     </div>
                 </div>
             </li>
@@ -59,17 +59,30 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-md-3">
-                        <strong class="d-inline-block mt-1">pNFTs</strong>
+                        <strong class="d-inline-block mt-1">Inventory</strong>
                     </div>
                     <div class="col-md-9 d-sm-flex justify-content-between align-items-center">
                         <div>
-                            <span class="d-inline-block mt-1">{{ $devices_count }}</span>
+                            <span class="d-inline-block mt-1">
+                                <span id="mintedCount">{{ $devices_count }}</span> &mdash; minted, <span id="unMintedCount">0</span> &mdash; unminted
+                            </span>
                             <span class="ms-2 me-2 text-muted">|</span>
                             <a href="{{ route('devices.create', $address) }}" class="d-inline-block">Add Device</a>
                             <span class="ms-2 me-2 text-muted">|</span>
                             <a href="{{ route('devices.import.index', $address) }}" class="d-inline-block">Import CSV</a>
                         </div>
-                        <button class="btn btn-primary mt-2 mt-sm-0">Check Blockchain for Updates</button>
+                    </div>
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong class="d-inline-block mt-2">Last checked</strong>
+                    </div>
+                    <div class="col-md-9 d-sm-flex align-items-center">
+                        <span id="currentTime" class="me-3">{{ date('Y-m-d') }}</span>
+                        <button class="btn btn-primary mt-2 mt-sm-0" onclick="window.location.reload();">Check Blockchain for Updates</button>
                     </div>
                 </div>
             </li>

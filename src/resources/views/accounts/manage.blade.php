@@ -48,6 +48,14 @@
             Anyone that knows your seed phrase or keys can control your assets.
             And if they are lost, your data will be unrecoverable.</p>
 
+        <div class="alert alert-warning mt-5" style="max-width: 655px;">
+            <small><i class="fas fa-exclamation-triangle me-1"></i></small> <strong>Warning</strong>
+            <br>
+            Any accounts associated the existing seed phrase will be deleted and replaced.
+            <br>
+            Stand-alone accounts (those not associated with the current seed phrase) will not be deleted.
+        </div>
+
         <section class="mt-5">
             <h3>Import Seed Phrase:</h3>
 
