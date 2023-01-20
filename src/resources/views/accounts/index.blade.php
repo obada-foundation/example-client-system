@@ -1,6 +1,6 @@
 @extends('layouts.app-with-nav',[
-    'page_title'=>'Manage Accounts',
-    'hide_breadcrumbs' => true
+    'page_title'=>'Manage Seed Phrase',
+    'hide_breadcrumbs' => true,
 ])
 
 
