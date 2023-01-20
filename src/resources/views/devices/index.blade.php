@@ -78,8 +78,9 @@
 
 
     <div id="addButtonContainer" class="text-start text-md-end h-md-0 mb-4 mb-md-0">
-        <a href="{{ route('nft.mint-all', $address) }}" class="btn btn-secondary"><small><i
-                    class="fas fa-upload me-2"></i></small>Mint All Changes</a>
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="coming soon">
+            <a href="#" class="btn btn-secondary" disabled><small><i
+                    class="fas fa-upload me-2"></i></small>Mint All</a></span>
     </div>
 
     <table class="table table-striped" id="deviceList">

@@ -42,8 +42,6 @@ class Index extends Handler {
         };
 
         return view('accounts.index', [
-            'seed_phrase'       => session()->get('mnemonic'),
-            'seed_phrase_short' => $words[0] . ' ... ' . last($words),
             'add_new_address'   => $request->has('add_new_address'),
             'hd_accounts'       => $proccessAccounts($accounts->getHdAccounts()),
             'imported_accounts' => $proccessAccounts($accounts->getImportedAccounts()),
