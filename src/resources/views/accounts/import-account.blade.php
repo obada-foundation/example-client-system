@@ -1,10 +1,10 @@
 @extends('layouts.app-with-nav',[
-    'page_title'=>'Import Account',
+    'page_title'=>'Import Standalone Account',
 ])
 
 
 @section('head')
-    <title>Import Account</title>
+    <title>Import Standalone Account</title>
     <meta name="description" content="__description__">
     <meta name="keywords" content="__keywords__">
 @endsection
@@ -16,14 +16,16 @@
 
 
 @section('extra_breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('accounts.manage') }}">Manage Seed Phrase</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Accounts</a></li>
 @endsection
 
 
 @section('page_content')
 
     <section class="mb-5">
-{{--        <h3>Import existing key:</h3>--}}
+        <h4 class="mb-5 mt-sm-0">Import a single standalone account, not controlled by the seed phrase here.</h4>
+
+        <p class="mb-2 mt-sm-0">Upload the file containing the key to the account you wish to import:</p>
 
         <div class="row">
             <div class="col-12 col-sm-9 col-md-8">
@@ -58,10 +60,6 @@
                         <button type="submit" class="btn btn-primary">Proceed</button>
                     </div>
                 </form>
-            </div>
-
-            <div class="col-12 col-sm-3 col-md-4">
-                <div class="mt-2 mt-sm-0">Import a single address, not controlled by the seed phrase here.</div>
             </div>
         </div>
     </section>

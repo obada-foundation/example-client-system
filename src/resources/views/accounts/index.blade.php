@@ -15,55 +15,6 @@
 @endsection
 
 
-@section('page_bottom')
-    <div class="modal" id="phraseConfirmationModal" tabindex="-1" aria-labelledby="phraseConfirmationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-center" id="phraseConfirmationModalLabel">Warning!</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="my-3">
-                        Anyone who knows your seed phrase can control your assets. Proceed?
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
-                        No, go back
-                    </button>
-                    <a href="#fullPhraseModal" data-bs-toggle="modal" class="btn btn-primary">
-                        Yes, show me full phrase
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="fullPhraseModal" tabindex="-1" aria-labelledby="fullPhraseModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-center" id="fullPhraseModalLabel">Seed Phrase</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="my-3 text-center">
-                        <strong>{{ $seed_phrase }}</strong>
-                        <button class="btn btn-link btn-sm" data-copy-text="{{ $seed_phrase }}"><i class="far fa-copy"></i></button>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
-
-
 @section('page_content')
 
         @if ($errors->any())
@@ -75,13 +26,11 @@
         @endif
 
         <section class="mb-5">
-            <h3 class="d-inline-block">Accounts under seed phrase:</h3>
-            <small class="ms-2"><strong class="fs-5">{{ $seed_phrase_short }}</strong>
-            <a href="#phraseConfirmationModal" class="ms-2 fs-6" data-bs-toggle="modal">Display</a></small>
+            <h3 class="d-inline-block">Seed Phrase Accounts</h3>
             <span class="ms-2 me-2 text-muted">|</span>
             <a href="{{ route('accounts.manage') }}">Switch Seed Phrase</a>
 
-            <table class="table mt-5">
+            <table class="table mt-4">
                 <thead>
                 <tr>
                     <th>Address</th>
@@ -133,9 +82,9 @@
         <hr class="mt-5 mb-5">
 
         <section class="mb-5">
-            <h3>Imported accounts (no seed phrase)</h3>
+            <h3>Standalone Accounts</h3>
 
-            <table class="table mt-5">
+            <table class="table mt-4">
                 <thead>
                 <tr>
                     <th>Address</th>
@@ -177,7 +126,7 @@
             </table>
 
             <p>
-                <a href="{{ route('accounts.import-account') }}" class="btn btn-primary">+ Import Account</a>
+                <a href="{{ route('accounts.import-account') }}">Import New Standalone Account</a>
             </p>
         </section>
 @endsection

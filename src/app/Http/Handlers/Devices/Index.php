@@ -23,6 +23,7 @@ class Index extends Handler {
 
         return view('devices.index', [
             'address'       => $address,
+            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4),
             'balance'       => number_format($account->getBalance(), 16),
             'devices_count' => $account->getNftCount(),
         ]);

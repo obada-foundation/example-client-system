@@ -9,7 +9,9 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link ps-0 dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Accounts</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="{{ route('accounts.manage') }}">Manage Seed Phrase</a></li>
+                        <li class="dropdown-item"><a href="{{ route('accounts.index') }}">View Accounts</a></li>
+                        <li class="dropdown-item"><a href="{{ route('accounts.manage') }}">Switch Seed Phrase</a></li>
+                        <li class="dropdown-item"><a href="{{ route('accounts.import-account') }}">Import Standalone Account</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a href="{{ route('documentation') }}" class="nav-link">Documentation</a></li>
