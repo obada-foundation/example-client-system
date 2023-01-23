@@ -65,7 +65,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center">No accounts to show.</td>
+                            <td colspan="6" class="text-center">No seed phrase accounts.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -119,7 +119,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center">No imported accounts.</td>
+                        <td colspan="6" class="text-center">No standalone accounts.</td>
                     </tr>
                 @endforelse
                 </tbody>
