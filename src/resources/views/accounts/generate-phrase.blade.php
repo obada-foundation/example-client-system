@@ -37,7 +37,8 @@
                 <br>
                 If you lose the seed phrase, you will lose access, and it can't be recovered.
             </div>
-            <p><a href="{{ route('accounts.generate-phrase') }}?step=2" class="btn btn-primary">I saved the seed phrase</a></p>
+
+            <p class="mt-4"><a href="{{ route('accounts.manage') }}">Go back to Manage Seed Phrase</a></p>
         </div>
 
     @elseif($step == 2)

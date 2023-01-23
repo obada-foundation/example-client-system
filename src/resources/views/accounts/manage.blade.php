@@ -51,9 +51,9 @@
         <div class="alert alert-warning mt-5" style="max-width: 655px;">
             <small><i class="fas fa-exclamation-triangle me-1"></i></small> <strong>Warning</strong>
             <br>
-            Any accounts associated the existing seed phrase will be deleted and replaced.
+            Any accounts associated with the existing seed phrase will be deleted and replaced.
             <br>
-            Stand-alone accounts (those not associated with the current seed phrase) will not be deleted.
+            Standalone accounts (those not associated with the current seed phrase) will not be deleted.
         </div>
 
         <section class="mt-5">
@@ -85,29 +85,7 @@
         </section>
 
         <section class="mt-4">
-            <a href="#" data-bs-toggle="collapse" data-bs-target="#generate_phrase" aria-expanded="false" aria-controls="generate_phrase">Generate New Seed Phrase</a>
-
-            <!-- TODO: replace with AJAX request to get the real seed phrase -->
-            <div id="generate_phrase" class="collapse">
-                <div class="border pt-4 pb-2 px-4 mt-4">
-                    <p>
-                        <strong class="fs-5">maze kit advance earn rough cool frequent soon rebuild fan oppose lecture chunk model little agent turtle such spider clay glass hollow into dutch</strong>
-                        <button class="btn btn-link btn-sm" data-copy-text="maze kit advance earn rough cool frequent soon rebuild fan oppose lecture chunk model little agent turtle such spider clay glass hollow into dutch"><i class="far fa-copy"></i></button>
-                    </p>
-
-                    <div class="alert alert-warning" style="max-width: 550px;">
-                        <small><i class="fas fa-exclamation-triangle me-1"></i></small> <strong>Save this phrase somewhere safe</strong>
-                        <br>
-                        Anyone who knows your seed phrase can control all of your assets.
-                        <br>
-                        If you lose the seed phrase, you will lose access, and it can't be recovered.
-                    </div>
-
-                    <p>
-                        <a href="#" data-bs-toggle="collapse" data-bs-target="#generate_phrase" aria-expanded="false" aria-controls="generate_phrase">I saved the seed phrase</a>
-                    </p>
-                </div>
-            </div>
+            <a href="{{ route('accounts.generate-phrase') }}?step=1">Generate New Seed Phrase</a>
         </section>
 
 @endsection
