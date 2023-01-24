@@ -1,10 +1,10 @@
 @extends('layouts.app-with-nav',[
-    'page_title'=>'Wallet Details'
+    'page_title'=>'Manage OBD'
 ])
 
 
 @section('head')
-    <title>Wallet</title>
+    <title>Manage OBD</title>
     <meta name="description" content="__description__">
     <meta name="keywords" content="__keywords__">
 @endsection
@@ -16,7 +16,7 @@
 
 
 @section('extra_breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('devices.index', $address) }}">Wallet</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Accounts</a></li>
 @endsection
 
 
