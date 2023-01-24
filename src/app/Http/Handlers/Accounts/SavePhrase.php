@@ -56,6 +56,6 @@ class SavePhrase extends Handler {
                 ->withErrors(['word2' => ucfirst(json_decode($e->getResponseBody())->error)]);
         }
 
-        return Redirect::route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]);
+        return Redirect::route('accounts.manage');
     }
 }
