@@ -9,8 +9,6 @@ import moment from 'moment';
 import {formatUSN} from "../../../utils/formatUSN";
 
 $(document).ready(() => {
-    let unMintedCount = 0;
-
     document.getElementById('currentTime').innerText = moment(new Date()).format('YYYY-MM-DD, LT');
 
     $('#deviceList').DataTable({
@@ -44,7 +42,6 @@ $(document).ready(() => {
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             });
-            document.getElementById('unMintedCount').innerText = unMintedCount.toString();
         },
         columns: [
             {
@@ -54,7 +51,6 @@ $(document).ready(() => {
                     if (full.obit_checksum === full.blockchain_checksum) {
                         return '<i class="fas fa-check text-success" data-bs-toggle="tooltip" title="Synchronized with blockchain"></i>';
                     } else {
-                        unMintedCount++;
                         return '<i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local newer"></i>';
                     }
                     return '<i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain newer"></i>';

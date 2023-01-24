@@ -23,9 +23,10 @@ class Index extends Handler {
 
         $nftCount = $account->getNftCount();
         $allByAddress = $user->devices()->where('address', $address)->count();
+        $mintedCount = 0;
 
         if ($nftCount) {
-            $mintedCount = int($allByAddress) - int($nftCount);
+            $mintedCount = $nftCount - $allByAddress;
         }
 
         return view('devices.index', [
