@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\DeviceSaved;
+use App\Events\DeviceImported;
 use App\Listeners\ClientHelperSave;
+use App\Listeners\ClientHelperImport;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -24,6 +26,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         DeviceSaved::class => [
             ClientHelperSave::class
+        ],
+
+        DeviceImpoted::class => [
+            ClientHelperImport::class
         ],
     ];
 

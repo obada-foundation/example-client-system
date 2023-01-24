@@ -38,6 +38,7 @@ class Show extends Handler
         $token = app(Token::class)->create($user);
         $obitApi->getConfig()->setAccessToken($token);
         $nftApi->getConfig()->setAccessToken($token);
+
         $obit = $obitApi->get($usn);
 
         $hasNFT = true;

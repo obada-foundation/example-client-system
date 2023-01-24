@@ -21,11 +21,19 @@ class Index extends Handler {
 
         $account = $api->account($address);
 
+        $nftCount = $account->getNftCount();
+        $allByAddress = $user->devices()->where('address', $address)->count();
+
+        if ($nftCount) {
+            $mintedCount = int($allByAddress) - int($nftCount);
+        }
+
         return view('devices.index', [
-            'address'       => $address,
-            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4),
-            'balance'       => number_format($account->getBalance(), 16),
-            'devices_count' => $account->getNftCount(),
+            'address'          => $address,
+            'address_short'    => substr($address, 0, 10) . '...' . substr($address, -4),
+            'balance'          => number_format($account->getBalance(), 16),
+            'nft_count'        => $account->getNftCount(),
+            'not_minted_count' => $mintedCount,
         ]);
     }
 }

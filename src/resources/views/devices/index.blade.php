@@ -64,7 +64,7 @@
                     <div class="col-md-9 d-sm-flex justify-content-between align-items-center">
                         <div>
                             <span class="d-inline-block mt-1">
-                                <span id="mintedCount">{{ $devices_count }}</span> &mdash; minted, <span id="unMintedCount">0</span> &mdash; unminted
+                                <span id="mintedCount">{{ $nft_count }}</span> &mdash; minted, {{ $not_minted_count }} &mdash; unminted
                             </span>
                             <span class="ms-2 me-2 text-muted">|</span>
                             <a href="{{ route('devices.create', $address) }}" class="d-inline-block">Add Device</a>

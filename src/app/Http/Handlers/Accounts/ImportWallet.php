@@ -34,16 +34,15 @@ class ImportWallet extends Handler {
             ->setAccessToken($token);
 
         $req = (new MnemonicRequest)
-            ->setMnemonic($mnemonic);
+            ->setMnemonic($mnemonic)
+            ->setForce(true);
 
         try {
             $api->importWallet($req);
         } catch (ApiException $t) {
-            if ($t->getResponseObject() instanceof WalletExistsError) {
-                return redirect()->back()->withErrors(['seed_phrase' => ucfirst($t->getResponseObject()->getError())]);
-            }
-            
-            throw $t;
+            report($t);
+
+            return redirect()->back()->withErrors(['seed_phrase' => ucfirst(json_decode($t->getResponseBody())->error)]);
         }
 
         return Redirect::route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]);
