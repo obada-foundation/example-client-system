@@ -40,7 +40,7 @@
 @section('page_content')
 
     <section>
-        <h4><a href="{{ route('accounts.generate-phrase') }}?step=1">Generate New Seed Phrase</a></h4>
+        <h3><a href="{{ route('accounts.generate-phrase') }}?step=1">Generate New Seed Phrase</a></h3>
     </section>
 
     <section class="mt-5">
