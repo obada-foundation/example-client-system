@@ -54,6 +54,8 @@
                         <span>{{ $balance }}&nbsp;OBD</span>
                         <span class="ms-2 me-2 text-muted">|</span>
                         <a href="{{ route('wallet.index', $address) }}" class="d-inline-block">Send or Receive</a>
+                        <span class="ms-2 me-2 text-muted">|</span>
+                        <a target="_blank" href="{{ config('faucet.url') }}">Get a small amount for testing</a>
                     </div>
                 </div>
             </li>
