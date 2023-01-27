@@ -34,13 +34,13 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-md-3">
-                        <strong class="d-inline-block mt-1">Address</strong>
+                        <strong class="d-inline-block mt-1">Address (Lot Name)</strong>
                     </div>
                     <div class="col-md-9">
                         {{ $address }}
                         <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
-                        <span class="me-2 text-muted">|</span>
-                        <a href="{{ route('accounts.index') }}" class="text-nowrap">Change Account</a>
+<!--                        <span class="me-2 text-muted">|</span>
+                        <a href="" class="text-nowrap">Rename</a>-->
                     </div>
                 </div>
             </li>
@@ -48,7 +48,7 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-md-3">
-                        <strong class="d-inline-block mt-1">OBD Balance</strong>
+                        <strong class="d-inline-block mt-1">System Credits (OBD Balance)</strong>
                     </div>
                     <div class="col-md-9">
                         <span>{{ $balance }}&nbsp;OBD</span>
@@ -68,12 +68,15 @@
                     <div class="col-md-9 d-sm-flex justify-content-between align-items-center">
                         <div>
                             <span class="d-inline-block mt-1">
-                                <span id="mintedCount">{{ $nft_count }}</span> &mdash; minted, {{ $not_minted_count }} &mdash; unminted
+                                {{ $total_nft_count }} items ({{ $nft_count }} minted, {{ $not_minted_count }} unminted)
                             </span>
                             <span class="ms-2 me-2 text-muted">|</span>
                             <a href="{{ route('devices.create', $address) }}" class="d-inline-block">Add Device</a>
                             <span class="ms-2 me-2 text-muted">|</span>
                             <a href="{{ route('devices.import.index', $address) }}" class="d-inline-block">Import CSV</a>
+                            <span class="ms-2 me-2 text-muted">|</span>
+                            <a href="javascript:void(0);" class="d-inline-block" aria-disabled="true"
+                               data-bs-toggle="tooltip" title="coming soon">Connect via API</a>
                         </div>
                     </div>
                 </div>
@@ -85,8 +88,9 @@
                         <strong class="d-inline-block mt-2">Last checked</strong>
                     </div>
                     <div class="col-md-9 d-sm-flex align-items-center">
-                        <span id="currentTime" class="me-3">{{ date('Y-m-d') }}</span>
-                        <button class="btn btn-primary mt-2 mt-sm-0" onclick="window.location.reload();">Check Blockchain for Updates</button>
+                        <span id="currentTime">{{ date('Y-m-d') }}</span>
+                        <span class="ms-2 me-2 text-muted">|</span>
+                        <button class="btn btn-link text-decoration-none p-0 mt-2 mt-sm-0" onclick="window.location.reload();">Check for updates</button>
                     </div>
                 </div>
             </li>
@@ -104,7 +108,7 @@
     <table class="table table-striped" id="deviceList">
         <thead>
         <tr>
-            <th></th>
+            <th style="max-width: 60px;"></th>
             <th style="width: 70px;">USN</th>
             <th>Manufacturer</th>
             <th>Part&nbsp;#</th>
