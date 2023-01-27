@@ -23,7 +23,7 @@ class Index extends Handler {
 
         return view('wallet.index', [
             'address' => $account->getAddress(),
-            'balance' => $account->getBalance()
+            'balance' => number_format($account->getBalance(), 2)
         ]);
     }
 }

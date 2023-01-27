@@ -26,15 +26,16 @@ class Index extends Handler {
         $mintedCount = 0;
 
         if ($nftCount) {
-            $mintedCount = $nftCount - $allByAddress;
+            $mintedCount = $allByAddress - $nftCount;
         }
 
         return view('devices.index', [
             'address'          => $address,
             'address_short'    => substr($address, 0, 10) . '...' . substr($address, -4),
-            'balance'          => number_format($account->getBalance(), 16),
+            'balance'          => number_format($account->getBalance(), 2),
             'nft_count'        => $account->getNftCount(),
             'not_minted_count' => $mintedCount,
+            'total_nft_count'  => $allByAddress
         ]);
     }
 }
