@@ -32,6 +32,7 @@ class Index extends Handler {
         return view('devices.index', [
             'address'          => $address,
             'address_short'    => substr($address, 0, 10) . '...' . substr($address, -4),
+            'name'             => $account->getName(),
             'balance'          => number_format($account->getBalance(), 2),
             'nft_count'        => $account->getNftCount(),
             'not_minted_count' => $mintedCount,
