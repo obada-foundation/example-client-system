@@ -8,7 +8,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title text-center" id="exampleModalLabel">2FA Verification</h4>
+                        <h4 class="modal-title text-center" id="twoFaModalLabel">2FA Verification</h4>
                         <button ref="CloseTwoFa" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
