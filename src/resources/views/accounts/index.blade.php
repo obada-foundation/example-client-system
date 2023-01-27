@@ -15,6 +15,82 @@
 @endsection
 
 
+@section('page_bottom')
+    <div class="modal" id="phraseConfirmationModal" tabindex="-1" aria-labelledby="phraseConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="phraseConfirmationModalLabel">Warning!</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="my-3">
+                        Anyone who knows your seed phrase can control your assets. Proceed?
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
+                        No, go back
+                    </button>
+                    <a href="#twoFaModal" data-bs-toggle="modal" class="btn btn-primary">
+                        Yes, show me full phrase
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="twoFaModal" tabindex="-1" aria-labelledby="twoFaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="twoFaModalLabel">2FA Verification</h4>
+                    <button ref="CloseTwoFa" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="my-3">
+                        <p><strong>A code has been sent to your phone to authorize your identity.</strong></p>
+                        <label for="" class="form-label">Enter authorization code</label>
+                        <input type="text" class="form-control" value="111111">
+                        <div class="form-text">This is just a demo. No code is needed. Just click Confirm.</div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <a href="#fullPhraseModal" data-bs-toggle="modal" class="btn btn-primary">
+                        Confirm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="fullPhraseModal" tabindex="-1" aria-labelledby="fullPhraseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="fullPhraseModalLabel">Seed Phrase</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="my-3 text-center">
+                        <strong>{{ $seed_phrase }}</strong>
+                        <button class="btn btn-link btn-sm" data-copy-text="{{ $seed_phrase }}"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+
 @section('page_content')
 
         @if ($errors->any())
@@ -30,7 +106,8 @@
         <section class="mb-5">
             <h3 class="d-inline-block">Main Accounts</h3>
             <p>
-                This account are derived from the seed phrase.
+                This account are derived from the seed phrase "{{ $seed_phrase_short }}"
+                (<a href="#phraseConfirmationModal" data-bs-toggle="modal">display</a>)
                 <span class="ms-2 me-2 text-muted">|</span>
                 <a href="{{ route('accounts.manage') }}">Switch Seed Phrase</a>
             </p>
@@ -59,8 +136,8 @@
                     @forelse($hd_accounts as $account)
                         <tr>
                             <td>
-                                <a href="{{ route('devices.index', $account['address']) }}">{{ $account['short_address'] }}</a>
-                                <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
+                                <a href="{{ route('devices.index', $account['address']) }}">{{ $account['name'] }}</a>
+{{--                                <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>--}}
                             </td>
                             <td class="text-center">{{ number_format($account['balance'], 2) }}</td>
                             <td class="text-center">{{ number_format($account['nft_count'], 0, '.', ',') }}</td>
@@ -114,8 +191,8 @@
                 @forelse($imported_accounts as $account)
                     <tr>
                         <td>
-                            <a href="{{ route('devices.index', $account['address']) }}">{{ $account['short_address'] }}</a>
-                            <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
+                            <a href="{{ route('devices.index', $account['address']) }}">{{ $account['name'] }}</a>
+{{--                            <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>--}}
                         </td>
                         <td class="text-center">{{ number_format($account['balance'], 2) }}</td>
                         <td class="text-center">{{ number_format($account['nft_count'], 0, '.', ',') }}</td>

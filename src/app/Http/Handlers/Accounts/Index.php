@@ -22,7 +22,6 @@ class Index extends Handler {
             ->setAccessToken($token);
 
         $accounts = $api->accounts();
-        $words    = explode(' ', session()->get('mnemonic', ''));
 
         $proccessAccounts = function (array $accounts) {
             return collect($accounts)
@@ -32,7 +31,9 @@ class Index extends Handler {
 
                     return [
                         'address'       => $address,
-                        'short_address' => substr($address, 0, 10) . '...' . substr($address, -4),
+                        'name'          => $account->getName()
+                            ? $account->getName() . ' (' . substr($address, -4) . ')'
+                            : substr($address, 0, 10) . '...' . substr($address, -4),
                         'balance'       => $account->getBalance(),
                         'pub_key'       => $account->getPubKey(),
                         'nft_count'     => $account->getNftCount(),
@@ -42,6 +43,8 @@ class Index extends Handler {
         };
 
         return view('accounts.index', [
+            'seed_phrase' => '1 2 3 4 5 6 7 8 9',
+            'seed_phrase_short' => '1 ... 2',
             'add_new_address'   => $request->has('add_new_address'),
             'hd_accounts'       => $proccessAccounts($accounts->getHdAccounts()),
             'imported_accounts' => $proccessAccounts($accounts->getImportedAccounts()),

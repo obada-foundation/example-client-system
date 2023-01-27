@@ -8,6 +8,14 @@ import * as bootstrap from "bootstrap";
 import moment from 'moment';
 import {formatUSN} from "../../../utils/formatUSN";
 import axios from "axios";
+import Vue from 'vue';
+
+
+Vue.component('rename-account', require('../../../components/devices/list/rename.vue').default);
+window.Events = new Vue({});
+window._app = new Vue({
+    el: '#app'
+});
 
 $(document).ready(() => {
     document.getElementById('currentTime').innerText = moment(new Date()).format('YYYY-MM-DD, LT');
@@ -90,8 +98,8 @@ $(document).ready(() => {
                     if (full.obit_checksum === full.blockchain_checksum) {
                         return '<i class="fas fa-check text-success" data-bs-toggle="tooltip" title="Synchronized with blockchain"></i>';
                     } else {
-                        return '<i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local newer"></i>' +
-                            '<button class="btn btn-link p-0 text-decoration-none ms-2" data-id="' + full.usn + '" data-action="mint">' +
+                        return '<i class="fas fa-sync text-warning align-middle" data-bs-toggle="tooltip" title="Local newer"></i>' +
+                            '<button class="btn btn-link p-0 text-decoration-none ms-2 align-middle" data-id="' + full.usn + '" data-action="mint" style="width: 32px;">' +
                             '   <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>' +
                             '   <span class="inner-text">mint</span>' +
                             '</button>';

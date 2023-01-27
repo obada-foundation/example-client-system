@@ -1,10 +1,11 @@
 @extends('layouts.app-with-nav',[
-    'page_title' => 'Account ' . $address_short
+    'page_title'      => 'Account (lot) ' . $address_short,
+    'breadcrumb_name' => $name ?: $address_short
 ])
 
 
 @section('head')
-    <title>Account {{ $address_short }}</title>
+    <title>Account (lot) {{ $address_short }}</title>
     <meta name="description" content="Obada Reference App Inventory List">
     <meta name="keywords" content="devices">
 
@@ -37,10 +38,21 @@
                         <strong class="d-inline-block mt-1">Address (Lot Name)</strong>
                     </div>
                     <div class="col-md-9">
-                        {{ $address }}
-                        <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
-<!--                        <span class="me-2 text-muted">|</span>
-                        <a href="" class="text-nowrap">Rename</a>-->
+                        <div class="mt-1 mb-1">
+                            {{ $address }}
+                            <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong class="d-inline-block mt-2">Nickname</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <rename-account name="{{ $name }}" save-name-url=""></rename-account>
                     </div>
                 </div>
             </li>
@@ -63,11 +75,11 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-md-3">
-                        <strong class="d-inline-block mt-1">Inventory</strong>
+                        <strong class="d-inline-block mt-1 mb-1">Inventory</strong>
                     </div>
                     <div class="col-md-9 d-sm-flex justify-content-between align-items-center">
                         <div>
-                            <span class="d-inline-block mt-1">
+                            <span class="d-inline-block mt-1 mb-1">
                                 {{ $total_nft_count }} items ({{ $nft_count }} minted, {{ $not_minted_count }} unminted)
                             </span>
                             <span class="ms-2 me-2 text-muted">|</span>
