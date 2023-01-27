@@ -15,6 +15,8 @@
 @section('scripts')
     <script>
         window.devicesLoadUrl = '{{ route('devices.load-all', ['address' => $address]) }}';
+        window.pageUrl = '{{ route('devices.index', ['address' => $address]) }}';
+        window.mintNftUrl = '{{ route('nft.mint', ['usn' => '@usn']) }}';
     </script>
     <script src="{{ mix('/js/devices_list.js') }}"></script>
 @endsection
@@ -99,7 +101,7 @@
     <table class="table table-striped" id="deviceList">
         <thead>
         <tr>
-            <th style="width: 20px;"></th>
+            <th></th>
             <th style="width: 70px;">USN</th>
             <th>Manufacturer</th>
             <th>Part&nbsp;#</th>

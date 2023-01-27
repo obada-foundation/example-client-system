@@ -7,6 +7,7 @@ import 'datatables.net-bs5';
 import * as bootstrap from "bootstrap";
 import moment from 'moment';
 import {formatUSN} from "../../../utils/formatUSN";
+import axios from "axios";
 
 $(document).ready(() => {
     document.getElementById('currentTime').innerText = moment(new Date()).format('YYYY-MM-DD, LT');
@@ -42,16 +43,58 @@ $(document).ready(() => {
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             });
+
+            $('[data-action=mint]').click(function() {
+                const me = this;
+                const usn = me.getAttribute('data-id');
+                const mintNftUrl = window.mintNftUrl.replace('@usn', usn);
+
+                me.setAttribute('disabled', 'disabled');
+                $(me).find('.inner-text').addClass('d-none');
+                $(me).find('.spinner-border').removeClass('d-none');
+
+                axios(mintNftUrl, {
+                    method: 'post',
+                    responseType: 'json',
+                })
+                .then((response) => {
+                    swal({
+                        title:  "Success!",
+                        text:   "NFT was minted",
+                        type:   "success"
+                    }, function() {
+                        setTimeout(function() {
+                            window.location.href = window.pageUrl + '?message=success';
+                        }, 500);
+                    });
+                })
+                .catch((e) => {
+                    swal({
+                        title:  "Unable to mint pNFT",
+                        text:   e.response.data.hasOwnProperty('errorMessage') ? e.response.data.errorMessage : '',
+                        type:   "error"
+                    }, function() {
+                        me.removeAttribute('disabled');
+                        $(me).find('.inner-text').removeClass('d-none');
+                        $(me).find('.spinner-border').addClass('d-none');
+                    });
+                });
+            });
         },
         columns: [
             {
+                className: 'text-nowrap',
                 sortable: false,
                 render: function(data, type, full, meta) {
                     // todo: check if blockchain is newer or local is newer or equal
                     if (full.obit_checksum === full.blockchain_checksum) {
                         return '<i class="fas fa-check text-success" data-bs-toggle="tooltip" title="Synchronized with blockchain"></i>';
                     } else {
-                        return '<i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local newer"></i>';
+                        return '<i class="fas fa-sync text-warning" data-bs-toggle="tooltip" title="Local newer"></i>' +
+                            '<button class="btn btn-link p-0 text-decoration-none ms-2" data-id="' + full.usn + '" data-action="mint">' +
+                            '   <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>' +
+                            '   <span class="inner-text">mint</span>' +
+                            '</button>';
                     }
                     return '<i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain newer"></i>';
                 }
