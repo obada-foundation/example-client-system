@@ -23,7 +23,7 @@
 
 
 @section('extra_breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]) }}">Accounts</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Accounts</a></li>
 @endsection
 
 
