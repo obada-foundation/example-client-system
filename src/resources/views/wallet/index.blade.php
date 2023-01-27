@@ -55,6 +55,7 @@
 
                     <div class="col-8">
                         <input type="text" class="form-control" name="amount" placeholder="Enter OBD amount" value="{{ old('amount') }}" required>
+                        <p class="mb-0 ms-2 text-black-40">Available balance: {{ $balance }} OBD</p>
                     </div>
 
                     <div class="col-4">
