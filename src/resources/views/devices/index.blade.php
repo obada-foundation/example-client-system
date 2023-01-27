@@ -91,6 +91,7 @@
         </ul>
     </div>
 
+    <p><small>* Gas Fee 1 OBD per transaction</small></p>
 
     <div id="addButtonContainer" class="text-start text-md-end h-md-0 mb-4 mb-md-0">
         <span class="d-inline-block" data-bs-toggle="tooltip" title="coming soon">
@@ -111,6 +112,7 @@
         </tr>
         </thead>
     </table>
+
     <hr>
 
     <div class="mt-4">
