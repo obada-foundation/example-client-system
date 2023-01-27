@@ -31,7 +31,9 @@ class Index extends Handler {
 
                     return [
                         'address'       => $address,
-                        'short_address' => substr($address, 0, 10) . '...' . substr($address, -4),
+                        'name'          => $account->getName()
+                            ? $account->getName() . ' (' . substr($address, -4) . ')'
+                            : substr($address, 0, 10) . '...' . substr($address, -4),
                         'balance'       => $account->getBalance(),
                         'pub_key'       => $account->getPubKey(),
                         'nft_count'     => $account->getNftCount(),

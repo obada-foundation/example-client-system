@@ -136,8 +136,8 @@
                     @forelse($hd_accounts as $account)
                         <tr>
                             <td>
-                                <a href="{{ route('devices.index', $account['address']) }}">{{ $account['short_address'] }}</a>
-                                <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
+                                <a href="{{ route('devices.index', $account['address']) }}">{{ $account['name'] }}</a>
+{{--                                <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>--}}
                             </td>
                             <td class="text-center">{{ number_format($account['balance'], 2) }}</td>
                             <td class="text-center">{{ number_format($account['nft_count'], 0, '.', ',') }}</td>
@@ -191,8 +191,8 @@
                 @forelse($imported_accounts as $account)
                     <tr>
                         <td>
-                            <a href="{{ route('devices.index', $account['address']) }}">{{ $account['short_address'] }}</a>
-                            <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
+                            <a href="{{ route('devices.index', $account['address']) }}">{{ $account['name'] }}</a>
+{{--                            <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>--}}
                         </td>
                         <td class="text-center">{{ number_format($account['balance'], 2) }}</td>
                         <td class="text-center">{{ number_format($account['nft_count'], 0, '.', ',') }}</td>

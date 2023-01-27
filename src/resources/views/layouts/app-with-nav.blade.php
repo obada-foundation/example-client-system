@@ -37,7 +37,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         @yield('extra_breadcrumbs')
-                        <li class="breadcrumb-item active" aria-current="page">{{ $page_title }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ isset($breadcrumb_name) ? $breadcrumb_name : $page_title }}</li>
                     </ol>
                 </nav>
             @endif
