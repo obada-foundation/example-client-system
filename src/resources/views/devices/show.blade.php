@@ -20,7 +20,7 @@
 
 
 @section('extra_breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('devices.index', $device->address) }}">Wallet</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('devices.index', $device->address) }}">Account</a></li>
 @endsection
 
 
