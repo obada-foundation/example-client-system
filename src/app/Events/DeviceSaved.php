@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Device;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -20,7 +21,7 @@ class DeviceSaved
      *
      * @return void
      */
-    public function __construct(public Device $device)
+    public function __construct(public User $user, public Device $device)
     {
     }
 

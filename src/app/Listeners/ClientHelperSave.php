@@ -25,7 +25,7 @@ class ClientHelperSave
 
     public function handle(DeviceSaved $event)
     {
-        $token = $this->tokenCreator->create(Auth::user());
+        $token = $this->tokenCreator->create($event->user);
 
         $this->api->getConfig()->setAccessToken($token);
 

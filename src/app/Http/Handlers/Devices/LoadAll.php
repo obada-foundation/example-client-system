@@ -27,6 +27,7 @@ class LoadAll extends Handler {
             ->addColumn('blockchain_checksum', function (Device $device) use ($api) {
                 //Get Client Obit
                 try {
+                    return '';
                     $pNFT = $api->nft($device->usn);
                     return $pNFT->getData()->getChecksum();
                 } catch (\Exception) {

@@ -1,5 +1,6 @@
 .idea
 etc
+redis
 docker-compose.yml
 src/vendor
 client-helper
