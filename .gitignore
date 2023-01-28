@@ -9,4 +9,5 @@ src/public/js
 src/public/css
 src/public/mix-manifest.json
 src/supervisord.pid
+src/supervisord.log
 ipfs
