@@ -1,5 +1,6 @@
 .idea
 etc
+redis
 docker-compose.yml
 src/vendor
 client-helper
@@ -8,4 +9,5 @@ src/public/js
 src/public/css
 src/public/mix-manifest.json
 src/supervisord.pid
+src/supervisord.log
 ipfs

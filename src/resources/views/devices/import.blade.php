@@ -25,7 +25,11 @@
         
         <div class="mb-4">
             <label for="csv" class="form-label">Cut & paste an inventory list in CSV format, one row per device using this column order: manufacturer, part number or model, serial number</label>
-            <textarea id="csv" name="csv" class="form-control" rows="5" placeholder="Enter CSV content"></textarea>
+            <textarea id="csv" name="csv" class="form-control" rows="5" placeholder="Enter CSV content">{{ old('csv') }}</textarea>
+
+            @if ($errors->has('csv'))
+                <span class="form-helper text-danger">{{ $errors->first('csv') }}</span>
+            @endif
         </div>
 
         <button class="btn btn-primary btn-lg">Submit</button>

@@ -52,7 +52,7 @@
                         <strong class="d-inline-block mt-2">Nickname</strong>
                     </div>
                     <div class="col-md-9">
-                        <rename-account name="{{ $name }}" save-name-url=""></rename-account>
+                        <rename-account name="{{ $name }}" save-name-url="{{ route('accounts.update-account', $address) }}"></rename-account>
                     </div>
                 </div>
             </li>
@@ -60,16 +60,14 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-md-3">
-                        <strong class="d-inline-block mt-1 mb-1">System Credits (OBD Balance)</strong>
+                        <strong class="d-inline-block mt-1">System Credits (OBD Balance)</strong>
                     </div>
                     <div class="col-md-9">
-                        <div class="mt-1 mb-1">
-                            <span>{{ $balance }}&nbsp;OBD</span>
-                            <span class="ms-2 me-2 text-muted">|</span>
-                            <a href="{{ route('wallet.index', $address) }}" class="d-inline-block">Send or Receive</a>
-                            <span class="ms-2 me-2 text-muted">|</span>
-                            <a target="_blank" href="{{ config('faucet.url') }}">Get a small amount for testing</a>
-                        </div>
+                        <span>{{ $balance }}&nbsp;OBD</span>
+                        <span class="ms-2 me-2 text-muted">|</span>
+                        <a href="{{ route('wallet.index', $address) }}" class="d-inline-block">Send or Receive</a>
+                        <span class="ms-2 me-2 text-muted">|</span>
+                        <a target="_blank" href="{{ config('faucet.url') }}">Get a small amount for testing</a>
                     </div>
                 </div>
             </li>

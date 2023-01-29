@@ -72,6 +72,7 @@ Route::namespace('\App\Http\Handlers\Accounts')
         Route::post('/import-account-post', \ImportAccountPost::class)->name('import-account-post');
         Route::get('/export-account/{address}', \ExportAccount::class)->name('export-account');
         Route::post('/new-account', \StoreAccount::class)->name('new-account');
+        Route::post('/{address}', \UpdateAccount::class)->name('update-account');
         Route::get('/balance', \Balance::class)->name('balance');
     });
 

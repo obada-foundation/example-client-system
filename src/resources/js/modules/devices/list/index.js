@@ -17,7 +17,6 @@ window._app = new Vue({
     el: '#app'
 });
 
-
 $(document).ready(() => {
     document.getElementById('currentTime').innerText = moment(new Date()).format('YYYY-MM-DD, LT');
 

@@ -6,41 +6,37 @@ namespace App\Http\Handlers\Devices\Import;
 
 use App\Http\Handlers\Handler;
 use Illuminate\Support\Facades\Auth;
-use Obada\ClientHelper\GenerateObitDIDRequest;
-use App\Events\DeviceSaved;
-use Obada\Api\UtilsApi;
-use App\Models\Device;
+use Throwable;
+use App\Jobs\ProccessCsvLine;
 
 class HandleImport extends Handler {
-    public function __invoke(UtilsApi $utilsApi, string $address)
+    public function __invoke(string $address)
     {
         $importData = explode(PHP_EOL, request()->get('csv'));
 
         foreach ($importData as $importDeviceStr) {
-            $importDevice = str_getcsv($importDeviceStr);
+            try {
+                if (!strlen($importDeviceStr)) {
+                    continue;
+                }
 
-            $did = $utilsApi->generateDID(
-                (new GenerateObitDIDRequest())
-                    ->setSerialNumber($importDevice[2])
-                    ->setManufacturer($importDevice[0])
-                    ->setPartNumber($importDevice[1])
-            );
+                $importDevice = str_getcsv($importDeviceStr);
 
-            $existingDevice = Device::byUsn($did->getUsn())->first();
-            
-            if ($existingDevice) continue;
+                ProccessCsvLine::dispatch(
+                    Auth::user(),
+                    $address,
+                    trim($importDevice[2]),
+                    trim($importDevice[0]),
+                    trim($importDevice[1])
+                );
+            } catch (Throwable $t) {
+                report($t);
 
-            $device = Device::create([
-                'user_id'       => Auth::user()->id,
-                'serial_number' => $importDevice[2],
-                'manufacturer'  => $importDevice[0],
-                'part_number'   => $importDevice[1],
-                'address'       => $address,
-                'usn'           => $did->getUsn(),
-                'obit_did'      => $did->getDid(),
-            ]);
-
-            DeviceSaved::dispatch($device);
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->withErrors(['csv' => sprintf('Wrong data format. Invalid line: %s.', $importDeviceStr)]);
+            }
         }
 
         return redirect()->route('devices.index', $address);
