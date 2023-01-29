@@ -52,7 +52,7 @@
                         <strong class="d-inline-block mt-2">Nickname</strong>
                     </div>
                     <div class="col-md-9">
-                        <rename-account name="{{ $name }}" save-name-url=""></rename-account>
+                        <rename-account name="{{ $name }}" save-name-url="{{ route('accounts.update-account', $address) }}"></rename-account>
                     </div>
                 </div>
             </li>

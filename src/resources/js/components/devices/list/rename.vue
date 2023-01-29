@@ -60,6 +60,7 @@
                 })
                 .then(response => {
                     this.isBusy = false;
+                    this.switchEdit()
                 })
                 .catch(e => {
                     this.isBusy = false;

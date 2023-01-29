@@ -27,7 +27,9 @@ class Index extends Handler {
         $mnemonic = '';
 
         try {
-            $mnemonic = $api->getMnemonic();
+            $mnemonic = $api->getMnemonic()
+                ->getMnemonic();
+
         } catch (ApiException $e) {
             $error = json_decode($e->getResponseBody())->error;
 
@@ -55,14 +57,14 @@ class Index extends Handler {
                 ->toArray();
         };
 
-       $words = explode(" ", $mnemonic->getMnemonic());
+       $words = explode(" ", $mnemonic);
 
        $shortMnemonic = count($words)
             ? sprintf("%s .. %s", $words[0], last($words))
             : "";
 
         return view('accounts.index', [
-            'seed_phrase'       => $mnemonic->getMnemonic(),
+            'seed_phrase'       => $mnemonic,
             'seed_phrase_short' => $shortMnemonic,
             'add_new_address'   => $request->has('add_new_address'),
             'hd_accounts'       => $proccessAccounts($accounts->getHdAccounts()),
