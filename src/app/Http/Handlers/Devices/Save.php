@@ -52,6 +52,10 @@ class Save extends Handler {
                 $existingDevice->documents()->delete();
 
                 foreach ($request->get('documents', []) as $document) {
+                    if (strpos($document['doc_path'], 'ipfs://') !== false) {
+                        continue;
+                    }
+
                     $filePath = substr($document['doc_path'], strpos($document['doc_path'], 'documents'));
                     Document::create([
                         'device_id'  => $existingDevice->id,
@@ -62,7 +66,7 @@ class Save extends Handler {
                     ]);
                 }
 
-                DeviceSaved::dispatch($existingDevice);
+                DeviceSaved::dispatch($user, $existingDevice);
             });
 
             return response()->json([

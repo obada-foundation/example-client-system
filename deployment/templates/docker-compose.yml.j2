@@ -81,6 +81,48 @@ services:
       - NODE_RPC_URL=tcp://node.alpha.obada.io:26657
     networks:
       - backend
+      
+  events:
+    image: obada/reference-design:develop
+    volumes:
+{% if app_env == 'local' %}
+      - ./src:/app
+{% endif %}
+      - ./etc/.env:/app/.env
+    restart: always
+    command: php artisan client-helper:events
+    depends_on:
+      - db
+      - redis
+    networks:
+      - backend
+
+  worker:
+    image: obada/reference-design:develop
+    volumes:
+{% if app_env == 'local' %}
+      - ./src:/app
+{% endif %}
+      - ./etc/.env:/app/.env
+    restart: always
+    command: php artisan queue:work -v
+    scale: 1
+    depends_on:
+      - db
+      - redis
+    networks:
+      - backend
+
+  redis:
+    image: redis
+    restart: always
+    container_name: redis
+    ports:
+      - '127.0.0.1:6379:6379'
+    volumes: 
+      - ./redis:/data
+    networks:
+      - backend
 
   db:
     image: mysql:8
