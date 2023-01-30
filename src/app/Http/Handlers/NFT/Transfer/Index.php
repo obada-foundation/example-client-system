@@ -17,6 +17,10 @@ class Index extends Handler {
             return abort(404);
         }
 
-        return view('transfer.index', ['usn' => $usn, 'address' => $device->address]);
+        return view('transfer.index', [
+            'usn' => $usn,
+            'address' => $device->address,
+            'address_short' => substr($device->address, 0, 10) . '...' . substr($device->address, -4)
+        ]);
     }
 }
