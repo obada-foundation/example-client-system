@@ -66,9 +66,9 @@ class Index extends Handler {
         return view('accounts.index', [
             'seed_phrase'       => $mnemonic,
             'seed_phrase_short' => $shortMnemonic,
-            'add_new_address'   => $request->has('add_new_address'),
             'hd_accounts'       => $proccessAccounts($accounts->getHdAccounts()),
             'imported_accounts' => $proccessAccounts($accounts->getImportedAccounts()),
+            'show_message'      => $request->has('show_message')
         ]);
     }
 }
