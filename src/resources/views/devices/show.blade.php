@@ -1,5 +1,6 @@
 @extends('layouts.app-with-nav',[
     'page_title' => $page_title,
+    'breadcrumb_name' => $usn,
     'has_title_action' => true
 ])
 
@@ -20,7 +21,8 @@
 
 
 @section('extra_breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('devices.index', $device->address) }}">Account</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Accounts</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('devices.index', $device->address) }}">{{ $address_short }}</a></li>
 @endsection
 
 

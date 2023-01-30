@@ -86,9 +86,6 @@
                             <a href="{{ route('devices.create', $address) }}" class="d-inline-block">Add Device</a>
                             <span class="ms-2 me-2 text-muted">|</span>
                             <a href="{{ route('devices.import.index', $address) }}" class="d-inline-block">Import CSV</a>
-                            <span class="ms-2 me-2 text-muted">|</span>
-                            <a href="javascript:void(0);" class="d-inline-block" aria-disabled="true"
-                               data-bs-toggle="tooltip" title="coming soon">Connect via API</a>
                         </div>
                     </div>
                 </div>
@@ -101,20 +98,17 @@
                     </div>
                     <div class="col-md-9 d-sm-flex align-items-center">
                         <span id="currentTime">{{ date('Y-m-d') }}</span>
-                        <span class="ms-2 me-2 text-muted">|</span>
-                        <button class="btn btn-link text-decoration-none p-0 mt-2 mt-sm-0" onclick="window.location.reload();">Check for updates</button>
+                        <button class="btn btn-outline-info ms-3 mt-1 mt-sm-0" onclick="window.location.reload();">Check for updates</button>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
 
-    <p><small>* Gas Fee 1 OBD per transaction</small></p>
-
     <div id="addButtonContainer" class="text-start text-md-end h-md-0 mb-4 mb-md-0">
         <span class="d-inline-block" data-bs-toggle="tooltip" title="coming soon">
-            <a href="#" class="btn btn-secondary" disabled><small><i
-                    class="fas fa-upload me-2"></i></small>Mint All</a></span>
+            <button href="#" class="btn btn-secondary" disabled><small><i
+                    class="fas fa-upload me-2"></i></small>Mint All</button></span>
     </div>
 
     <table class="table table-striped" id="deviceList">

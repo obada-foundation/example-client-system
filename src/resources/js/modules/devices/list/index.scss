@@ -18,6 +18,17 @@
             }
         }
     }
+
+    div.dataTables_info {
+        padding-top: 0.5em !important;
+
+        &::before {
+            content: '* Gas Fee 1 OBD per transaction';
+            display: block;
+            margin-bottom: 0.5em;
+            font-size: 0.85em;
+        }
+    }
 }
 
 .dataTables_filter {

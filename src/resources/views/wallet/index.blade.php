@@ -17,6 +17,7 @@
 
 @section('extra_breadcrumbs')
     <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Accounts</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('devices.index', $address) }}">{{ $address_short }}</a></li>
 @endsection
 
 
@@ -53,13 +54,14 @@
                         @endif
                     </div>
 
-                    <div class="col-8">
+                    <div class="col-7">
                         <input type="text" class="form-control" name="amount" placeholder="Enter OBD amount" value="{{ old('amount') }}" required>
                         <p class="mb-0 ms-2 text-black-40">Available balance: {{ $balance }} OBD</p>
                     </div>
 
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary w-100">Send</button>
+                    <div class="col-5">
+                        <button type="submit" class="btn btn-primary w-100">Send<sup>*</sup></button>
+                        <p class="mb-0 text-black-40 text-center">* Gas Fee &mdash; 1&nbsp;OBD</p>
                     </div>
                 </form>
             </div>
