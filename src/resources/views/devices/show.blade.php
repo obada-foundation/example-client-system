@@ -26,9 +26,13 @@
 
 @section('title_action')
     @if ($hasNFT)
-        <div>
+        <div class="pb-5 pb-md-0">
             <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#networkFeesModal">Update pNFT metadata</button>
+            <div class="position-relative d-inline-block">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#networkFeesModal">Update to Blockchain</button>
+                <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">Updates the blockchain.<br>A gas fee will be charged.</small>
+            </div>
+
         </div>
     @else
         <div>
