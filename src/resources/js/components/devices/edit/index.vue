@@ -93,7 +93,7 @@
                             <tr>
                                 <th>Attach</th>
                                 <th>Encrypt</th>
-                                <th>Information Type</th>
+                                <th>Asset Data Type</th>
                                 <th>Description</th>
                                 <th style="width: 50%;">Link to File</th>
                                 <th>Delete</th>
