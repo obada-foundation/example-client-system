@@ -93,7 +93,7 @@
                             <tr>
                                 <th>Attach</th>
                                 <th>Encrypt</th>
-                                <th>Asset Data Type</th>
+                                <th>Data Object Types</th>
                                 <th>Description</th>
                                 <th style="width: 50%;">Link to File</th>
                                 <th>Delete</th>
@@ -110,12 +110,12 @@
                                     <input type="checkbox" v-model="doc.encryption.value">
                                 </td>
                                 <td>
-                                    <select class="form-select"
-                                            v-model="doc.type.value">
-                                        <option value="1">Device Picture</option>
-                                        <option value="2">Proof of Functionality</option>
-                                        <option value="3">Proof of Data Destruction</option>
-                                        <option value="4">Other</option>
+                                    <select class="form-select" v-model="doc.type.value">
+                                        <option value="1">image - An image of the asset.</option>
+                                        <option value="2">mainImage - Main image to be used for the asset.</option>
+                                        <option value="3">functionalityReport - Used to prove repair.</option>
+                                        <option value="4">dataSanitizationReport - Report of data destruction by either digital erasure of physical destruction of device.</option>
+                                        <option value="5">dispositionReport - A report showing a claim the asset entered reuse or was recycled.</option>
                                     </select>
                                 </td>
                                 <td>
