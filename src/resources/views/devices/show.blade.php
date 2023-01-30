@@ -31,7 +31,7 @@
         <div class="flex-shrink-0">
             <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
             <div class="position-relative d-inline-block mb-5 mb-md-0">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#networkFeesModal">Update to Blockchain</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#twoFaModal">Update to Blockchain</button>
                 <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">Updates the blockchain.<br>A gas fee will be charged.</small>
             </div>
             <div class="position-relative d-inline-block mb-4 mb-md-0">
@@ -44,7 +44,7 @@
             <span class="d-inline-block" data-bs-toggle="tooltip" title="Mint pNFT first">
                 <button class="btn btn-outline-primary" disabled><i class="fas fa-exchange-alt"></i> Transfer pNFT</button>
             </span>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#networkFeesModal">Mint pNFT</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#twoFaModal">Mint pNFT</button>
         </div>
     @endif
 @endsection
