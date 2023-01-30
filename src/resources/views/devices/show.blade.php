@@ -197,7 +197,7 @@
                     <table class="table table-striped" style="vertical-align: middle;">
                         <thead>
                             <tr>
-                                <th>Asset Data Type</th>
+                                <th>Data Object Types</th>
                                 <th>Encrypted</th>
                                 <th>Description</th>
                                 <th style="width: 50%;">Link to File</th>
@@ -208,14 +208,14 @@
                         <tbody>
                             @foreach($device->documents as $document)
                                 <tr>
-                                    <td>Other {{-- {{ $document->type }} --}}</td>
+                                    <td>image {{-- {{ $document->type }} --}}</td>
                                     <td class="text-center">
                                         <input type="checkbox" {{ $document->encryption ? 'checked' : '' }} readonly disabled>
                                     </td>
                                     <td>{{ $document->name }}</td>
                                     <td><a href="{{ $document->path }}">{{ $document->path }}</a></td>
                                     <td><a href="#">Device Owner</a><br>[JWT token]</td>
-                                    <td><span style="white-space: nowrap">June 21, 2022</span></td>
+                                    <td>-</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -273,8 +273,8 @@
     <h2>Change History</h2>
     <div class="card mb-5">
         <div class="card-body">
-            <em>Coming Soon.</em>
-<!--            <div class="table-responsive p-2">
+{{--            <em>Coming Soon.</em>--}}
+            <div class="table-responsive p-2">
                 <table class="table table-striped" style="vertical-align: middle;">
                     <thead>
                     <tr>
@@ -284,7 +284,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>June 21, 2022 7:50 UTC</td>
+                            <td>-</td>
                             <td>
                                 @isset($obit['checksum'])
                                     <a href="{{ route('devices.show', $device->usn) }}.{{ $obit['checksum'] }}">{{ $obit['checksum'] }}</a>
@@ -293,7 +293,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>-->
+            </div>
         </div>
     </div>
 @endsection
