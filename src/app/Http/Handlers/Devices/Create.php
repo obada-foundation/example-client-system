@@ -10,12 +10,17 @@ class Create extends Handler {
     public function __invoke(string $address)
     {
         $page = (object) [
-            'title'       => 'Add New Device',
-            'description' => '__description__',
-            'keywords'    => '__keywords__',
-            'isEdit'      => false
+            'title'             => 'Add New Device',
+            'breadcrumb_name'   => 'Add New Device',
+            'description'       => '__description__',
+            'keywords'          => '__keywords__',
+            'isEdit'            => false
         ];
 
-        return view('devices.edit', compact('page', 'address'));
+        return view('devices.edit', [
+            'page'          => $page,
+            'address'       => $address,
+            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4)
+        ]);
     }
 }

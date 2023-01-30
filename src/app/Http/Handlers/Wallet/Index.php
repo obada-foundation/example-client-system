@@ -22,8 +22,9 @@ class Index extends Handler {
         $account = $api->account($address);
 
         return view('wallet.index', [
-            'address' => $account->getAddress(),
-            'balance' => number_format($account->getBalance(), 2)
+            'address'       => $account->getAddress(),
+            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4),
+            'balance'       => number_format($account->getBalance(), 2)
         ]);
     }
 }

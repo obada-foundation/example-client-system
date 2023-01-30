@@ -15,6 +15,10 @@ class Index extends Handler {
             'keywords'    => '__keywords__'
         ];
 
-        return view('devices.import', compact('page', 'address'));
+        return view('devices.import', [
+            'page'          => $page,
+            'address'       => $address,
+            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4)
+        ]);
     }
 }

@@ -88,7 +88,8 @@ class Show extends Handler
             'obit'          => $obit,
             'usn_data'      => $usn_data,
             'hasNFT'        => $hasNFT,
-            'compute_log'   => str_replace(['<|', '|>'], ['<br/><br />',''], $respChecksum->getComputeLog())
+            'compute_log'   => str_replace(['<|', '|>'], ['<br/><br />',''], $respChecksum->getComputeLog()),
+            'address_short' => substr($device->address, 0, 10) . '...' . substr($device->address, -4)
         ]);
     }
 

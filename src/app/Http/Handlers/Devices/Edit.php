@@ -21,12 +21,19 @@ class Edit extends Handler {
         $address = $device->address;
 
         $page = (object) [
-            'title'       => 'Edit Device',
-            'description' => '__description__',
-            'keywords'    => '__keywords__',
-            'isEdit'      => true,
+            'title'             => 'Edit Device — USN ' . $device->usn,
+            'breadcrumb_name'   => 'Edit Device',
+            'description'       => '__description__',
+            'keywords'          => '__keywords__',
+            'isEdit'            => true,
         ];
 
-        return view('devices.edit', compact('usn', 'page', 'device', 'address'));
+        return view('devices.edit', [
+            'page'          => $page,
+            'address'       => $address,
+            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4),
+            'device'        => $device,
+            'usn'           => $usn
+        ]);
     }
 }
