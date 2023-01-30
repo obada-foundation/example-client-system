@@ -194,12 +194,6 @@
                 </button>
 
                 <p><small>Saves to the local database and the Client Helper.</small></p>
-
-                <p v-if="!isEdit && usn_data.usn !== ''" class="mt-3">
-                    Minting registers your pNFT.<br>
-                    USN: <strong>{{ usn_data.usn }}</strong><br>
-                    Obit DID: <strong>{{ usn_data.did }}</strong>
-                </p>
             </div>
         </form>
     </div>
