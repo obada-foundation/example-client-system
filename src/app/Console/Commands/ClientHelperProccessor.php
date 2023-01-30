@@ -15,10 +15,6 @@ class ClientHelperProccessor extends Command
 
     public function handle()
     {
-        Redis::publish('test-channel', json_encode([
-            'name' => 'Adam Wathan'
-        ]));
-
         Redis::psubscribe(['*'], function ($message, $channel) {
             switch ($channel) {
                 case 'device.saved':
