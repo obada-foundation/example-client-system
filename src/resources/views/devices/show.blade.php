@@ -35,7 +35,7 @@
             <span class="d-inline-block" data-bs-toggle="tooltip" title="Mint pNFT first">
                 <button class="btn btn-outline-primary" disabled><i class="fas fa-exchange-alt"></i> Transfer pNFT</button>
             </span>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#networkFeesModal" >Mint pNFT</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#networkFeesModal">Mint pNFT</button>
         </div>
     @endif
 @endsection
@@ -55,48 +55,73 @@
             usn="{{ $device->usn }}"></update-metadata>
     @endif
 
-    <h2>Physical Asset</h2>
+    <h2 class="mb-1">Physical Asset Identifiers (PAIs)</h2>
+    <p class="mb-2">Immutable identifiers are read from the physical asset and stored in an attached data object called &ldquo;physicalAssetIdentifiers&rdquo;.</p>
     <div class="card mb-5">
         <div class="card-body">
-
             <ul class="list-group list-group-flush mt-3 mb-3">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <strong>Manufacturer</strong>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             {{ $device->manufacturer }}
                         </div>
                     </div>
                 </li>
-
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <strong>Part Number</strong>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             {{ $device->part_number }}
                         </div>
                     </div>
                 </li>
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <strong>Serial Number</strong>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             {{ $device->serial_number }}
                         </div>
                     </div>
                 </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <h2 class="mb-1">Decentralized Identifiers (DIDs)</h2>
+    <p class="mb-2">The identifiers of the digital representation are algorithmically generated based on the PAIs.</p>
+    <div class="card mb-5">
+        <div class="card-body">
+            <ul class="list-group list-group-flush mt-4 mb-2">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-3">
-                            <strong>USN</strong><br><small>Universal Serial Number</small>
+                        <div class="col-md-4">
+                            <strong>DID</strong> (Decentralized Identifier)<br>
+                            <small class="lh-sm d-inline-block text-black-50 mt-1">For system use</small>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
+                            @isset($obit['did'])
+                                <strong>{{ $obit['did'] }}</strong><button class="btn btn-link btn-sm" data-copy-text="{{ $obit['did'] }}"><i class="far fa-copy"></i></button>
+                            @endisset
+                            <br>
+                            <small><em>Checksum and versioning digits have not been implemented yet.</em></small>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row align-items-md-center">
+                        <div class="col-md-4">
+                            <strong>USN</strong> (Universal Serial Number)<br>
+                            <small class="lh-sm d-inline-block text-black-50 mt-1">Shortened version for human readability</small>
+                        </div>
+                        <div class="col-md-8">
                             <strong class="text-success">{{ $formatted_usn }}</strong><button
                                 class="btn btn-link btn-sm" data-copy-text="{{ $device->usn }}"><i class="far fa-copy"></i></button>
                         </div>
@@ -111,65 +136,48 @@
                     'usn_data' => $usn_data
                 ])
             </div>
+
         </div>
     </div>
 
 
-    <h2>pNFT Address</h2>
+    <h2 class="mb-1">Digital Representation Address</h2>
+    <p class="mb-2">Information about where the digital representation is stored.</p>
     <div class="card mb-5">
         <div class="card-body">
-            <ul class="list-group list-group-flush mt-4 mb-2">
+            <ul class="list-group list-group-flush mt-2 mb-2">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-3">
-                            <strong>Obit DID</strong><br><small>Blockchain Address</small>
+                        <div class="col-md-4">
+                            <strong>Verifiable Data Registry</strong><br>
+                            <small class="lh-sm d-inline-block text-black-50 mt-1">Name of the decentralized registry which stores the digital representation.</small>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
+                            <a href="https://forum.obada.io/">OBADA DAO</a> ITAD Registry<br>
+                            <small class="lh-sm d-inline-block text-black-50">Based on Cosmos SDK</small>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row align-items-md-center">
+                        <div class="col-md-4">
+                            <strong>DID URL</strong><br>
+                            <small class="lh-sm d-inline-block text-black-50 mt-1">The full &ldquo;blockchain address&rdquo; for the digital representation.</small>
+                        </div>
+                        <div class="col-md-8">
                             @isset($obit['did'])
                                 <strong>{{ $obit['did'] }}</strong><button class="btn btn-link btn-sm" data-copy-text="{{ $obit['did'] }}"><i class="far fa-copy"></i></button>
                             @endisset
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <strong>DID Registry</strong><br><small>Blockchain Registry</small>
-                        </div>
-                        <div class="col-md-9">
-                            <a href="https://forum.obada.io/">OBADA DAO</a> ITAD Registry<br><small>Based on Cosmos SDK</small>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <strong>pNFT Created</strong>
-                        </div>
-                        <div class="col-md-9">
-                            June 21, 2022 7:05 UTC
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <strong>Synchronized</strong>
-                        </div>
-                        <div class="col-md-9">
-                            June 21, 2022 7:10 UTC
-                            <i class="fas fa-sync text-warning ms-1" data-bs-toggle="tooltip" title="Local version updated"></i>
-                        </div>
-                    </div>
-                </li>
             </ul>
-
         </div>
     </div>
 
 
     <div class="d-flex justify-content-between mb-2">
-        <h2 class="mb-0">Device Data & Information</h2>
+        <h2 class="mb-0">Data Objects & Verified Credentials</h2>
 
             <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary">
                 <i class="fas fa-edit"></i>&nbsp;Edit
@@ -189,7 +197,7 @@
                     <table class="table table-striped" style="vertical-align: middle;">
                         <thead>
                             <tr>
-                                <th>Information Type</th>
+                                <th>Data Object Types</th>
                                 <th>Encrypted</th>
                                 <th>Description</th>
                                 <th style="width: 50%;">Link to File</th>
@@ -200,14 +208,14 @@
                         <tbody>
                             @foreach($device->documents as $document)
                                 <tr>
-                                    <td>Other {{-- {{ $document->type }} --}}</td>
+                                    <td>image {{-- {{ $document->type }} --}}</td>
                                     <td class="text-center">
                                         <input type="checkbox" {{ $document->encryption ? 'checked' : '' }} readonly disabled>
                                     </td>
                                     <td>{{ $document->name }}</td>
                                     <td><a href="{{ $document->path }}">{{ $document->path }}</a></td>
                                     <td><a href="#">Device Owner</a><br>[JWT token]</td>
-                                    <td><span style="white-space: nowrap">June 21, 2022</span></td>
+                                    <td>-</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -220,10 +228,10 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <p><strong>pNFT Checksum</strong></p>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             @isset($obit['checksum'])
                                 <p>{{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button></p>
                             @endisset
@@ -244,29 +252,29 @@
     </div>
 
 
-    <div class="d-flex justify-content-between mb-2">
-        <h2 class="mb-0">Proof of Ownership</h2>
-    </div>
-    <div class="card mb-5">
-        <div class="card-body">
-            <em>Coming Soon.</em>
-<!--            <ul class="list-group list-group-flush mt-3 mb-2">
-                <li class="list-group-item">
-                    View <a href="#">JSON Web Token</a> verification of identity signed by Tradeloop
-                </li>
-                <li class="list-group-item">
-                    View <a href="#">JSON Web Token</a> verification of identity signed by Tradeloop
-                </li>
-            </ul>-->
+    <!--    <div class="d-flex justify-content-between mb-2">
+            <h2 class="mb-0">Proof of Ownership</h2>
         </div>
-    </div>
+        <div class="card mb-5">
+            <div class="card-body">
+                <em>Coming Soon.</em>
+                <ul class="list-group list-group-flush mt-3 mb-2">
+                    <li class="list-group-item">
+                        View <a href="#">JSON Web Token</a> verification of identity signed by Tradeloop
+                    </li>
+                    <li class="list-group-item">
+                        View <a href="#">JSON Web Token</a> verification of identity signed by Tradeloop
+                    </li>
+                </ul>
+        </div>
+    </div>-->
 
 
-    <h2>pNFT Version History</h2>
+    <h2>Change History</h2>
     <div class="card mb-5">
         <div class="card-body">
-            <em>Coming Soon.</em>
-<!--            <div class="table-responsive p-2">
+{{--            <em>Coming Soon.</em>--}}
+            <div class="table-responsive p-2">
                 <table class="table table-striped" style="vertical-align: middle;">
                     <thead>
                     <tr>
@@ -276,7 +284,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>June 21, 2022 7:50 UTC</td>
+                            <td>-</td>
                             <td>
                                 @isset($obit['checksum'])
                                     <a href="{{ route('devices.show', $device->usn) }}.{{ $obit['checksum'] }}">{{ $obit['checksum'] }}</a>
@@ -285,7 +293,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>-->
+            </div>
         </div>
     </div>
 @endsection
