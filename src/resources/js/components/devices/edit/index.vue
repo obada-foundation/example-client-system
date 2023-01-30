@@ -190,8 +190,10 @@
                         class="spinner-border spinner-border-sm"
                         role="status"
                         aria-hidden="true"></span>
-                    Save Changes
+                    Update Local Database
                 </button>
+
+                <p><small>Saves to the local database and the Client Helper.</small></p>
 
                 <p v-if="!isEdit && usn_data.usn !== ''" class="mt-3">
                     Minting registers your pNFT.<br>
