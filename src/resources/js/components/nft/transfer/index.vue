@@ -34,7 +34,7 @@
                 :disabled="!canPreview"
                 class="btn btn-primary btn-lg"
                 data-bs-toggle="modal"
-                data-bs-target="#networkFeesModal">
+                data-bs-target="#twoFaModal">
                 Preview
             </button>
             <p class="mt-3">Authorization code will be send to your phone for verification.</p>
