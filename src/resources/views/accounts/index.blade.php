@@ -91,6 +91,17 @@
 @endsection
 
 
+@section('alerts')
+    @if($show_message)
+        <div class="alert alert-info mt-4 mb-0">
+            <small><i class="fas fa-info-circle me-1 fs-6"></i></small>
+            Existing accounts imported.
+            A new unused account has been added to your list.
+        </div>
+    @endif
+@endsection
+
+
 @section('page_content')
 
         @if ($errors->any())

@@ -31,7 +31,7 @@ class Show extends Handler
 
         if (!$device) {
             return redirect()
-                ->route('accounts.index', ['show_data' => 1])
+                ->route('accounts.index')
                 ->withErrors(['error' => 'A device does not exist']);
         }
 

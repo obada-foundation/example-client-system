@@ -45,6 +45,6 @@ class ImportWallet extends Handler {
             return redirect()->back()->withErrors(['seed_phrase' => ucfirst(json_decode($t->getResponseBody())->error)]);
         }
 
-        return Redirect::route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]);
+        return Redirect::route('accounts.index', ['show_message' => 1]);
     }
 }

@@ -19,6 +19,10 @@
         </div>
     </div>
 
+    <div class="container-lg">
+        @yield('alerts')
+    </div>
+
     <div class="main">
         <div class="container-lg">
             @if(isset($has_title_action) && $has_title_action)

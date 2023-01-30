@@ -31,6 +31,6 @@ class StoreAccount extends Handler {
                 ->withErrors([['new_account' => $newAccountError->error]]);
         }
 
-        return Redirect::route('accounts.index', ['show_data' => 1, 'has_accounts' => 1]);
+        return Redirect::route('accounts.index');
     }
 }
