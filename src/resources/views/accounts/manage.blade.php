@@ -14,15 +14,21 @@
     <script src="{{ mix('/js/base.js') }}"></script>
 
     <script>
+        var hasAccounts = "{{ $has_accounts }}";
+
         function showAlert() {
-            swal({
-            title: 'All accounts associated with the existing seed phrase will be deleted, including any unsaved local changes. Proceed?',
-                showCancelButton: true,
-                confirmButtonText: 'Yes'
-            },
-            function() {
+            if (!!window.hasAccounts) {
+                swal({
+                        title: 'All accounts associated with the existing seed phrase will be deleted, including any unsaved local changes. Proceed?',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes'
+                    },
+                    function() {
+                        submit();
+                    });
+            } else {
                 submit();
-            });
+            }
         }
 
         function submit() {
@@ -40,12 +46,15 @@
 @section('page_content')
 
     <section>
-        <h3><a href="{{ route('accounts.generate-phrase') }}?step=1">Generate New Seed Phrase</a></h3>
-    </section>
+        <h2 class="mb-5">Welcome to the OBADA Reference Design.</h2>
 
-    <section class="mt-5">
+        <h4 class="mb-5">Let's get started. Please choose one of the following:</h4>
 
-        <h3>Import Seed Phrase:</h3>
+        <p class="mb-3 fs-5"><strong><a href="{{ route('accounts.generate-phrase') }}?step=1">Generate New Seed Phrase</a></strong> <small class="text-black-50"><em>This will act as a "master password" for your accounts.</em></small></p>
+
+        <p>or</p>
+
+        <p class="mt-3 fs-5"><strong>Import Seed Phrase</strong> <small class="text-black-50"><em>To import an existing set of accounts.</em></small></p>
 
         <div class="row">
             <div class="col-12 col-sm-9 col-md-8">
@@ -66,9 +75,9 @@
                 </form>
             </div>
 
-            <div class="col-12 col-sm-3 col-md-4">
-                <div class="mt-2 mt-sm-0 mt-md-2">Import an existing list of accounts.</div>
-            </div>
+{{--            <div class="col-12 col-sm-3 col-md-4">--}}
+{{--                <div class="mt-2 mt-sm-0 mt-md-2">Import an existing list of accounts.</div>--}}
+{{--            </div>--}}
         </div>
 
         <div class="alert alert-warning mb-5" style="max-width: 560px;">
