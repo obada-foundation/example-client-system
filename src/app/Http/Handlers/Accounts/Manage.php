@@ -20,6 +20,10 @@ class Manage extends Handler {
         $api->getConfig()
             ->setAccessToken($token);
 
-        return view('accounts.manage');
+        $accounts = count($api->accounts()->getHdAccounts()) > 0;
+
+        return view('accounts.manage', [
+            'has_accounts' => $accounts
+        ]);
     }
 }
