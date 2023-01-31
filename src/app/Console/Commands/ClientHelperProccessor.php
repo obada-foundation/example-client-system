@@ -4,8 +4,11 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Redis;
+use App\Models\User;
 use App\Models\Device;
 use App\Models\Document;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class ClientHelperProccessor extends Command 
 {
@@ -18,40 +21,116 @@ class ClientHelperProccessor extends Command
         Redis::psubscribe(['*'], function ($message, $channel) {
             switch ($channel) {
                 case 'device.saved':
-                    $jsonDevice = json_decode($message);
+                    $json   = json_decode($message);
+                    dump($json);
+                    $userId = (int) $json->profile_id; 
+
+                    if (! $userId) {
+                        throw new Exception('Received an empty profile id');
+                    }
                     
-                    $device = Device::where('usn', $jsonDevice->usn)->first();
+                    $device = Device::where('usn', $json->device->usn)
+                        ->where('user_id', $userId)
+                        ->first();
 
-                    $device->obit_checksum = $jsonDevice->checksum;
-
-                    foreach ($jsonDevice->documents as $jsonDoc) {
-                        $document = $device->documents()->where('name', $jsonDoc->name)->first();
-                        if (! $document) {
-                            Document::create([
-                                'device_id'  => $device->id,
-                                'name'       => $jsonDoc->name,
-                                'path'       => $jsonDoc->uri,
-                                'data_hash'  => $jsonDoc->hash,
-                                'encryption' => $jsonDoc->encrypted,
-                            ]);
-
-                            continue;
-                        }
-
-                        if ($document->data_hash != $jsonDoc->hash) {
-                            $document->path       = $jsonDoc->uri;
-                            $document->data_hash  = $jsonDoc->hash;
-                            $document->encryption = $jsonDoc->encrypted;
-
-                            $document->save();
-                        }
+                    if (! $device) {
+                        $this->createDevice($userId, $json->device);
+                    } else {
+                        $this->updateDevice($device, $json->device);
                     }
 
-                    $device->save();
+                    $this->info(sprintf("Obit with USN %s was imported", $json->device->usn));
 
                     break;
             }
         });
+    }
+
+    public function createDevice($userId, object $jsonDevice) 
+    {
+        $user = User::findOrFail($userId);
+
+        $documents = $jsonDevice->documents;
+
+        $assetIdentifierDoc = collect($documents)
+            ->filter(fn ($document) => $document->name === 'physicalAssetIdentifiers')
+            ->first();
+
+        if (! $assetIdentifierDoc) {
+            throw new Exception('Missing physical identifier');
+        }
+
+        $cidParts = explode('://', $assetIdentifierDoc->uri);
+        $cid      = $cidParts[1];
+
+        $assetIdentifierDocContent = json_decode(
+            file_get_contents(config('ipfs.gateway') . $cid), 
+            true
+        );
+
+        DB::transaction(function () use ($user, $jsonDevice, $assetIdentifierDocContent, $documents) {
+            $device = Device::create([
+                'user_id'       => $user->id,
+                'usn'           => $jsonDevice->usn,
+                'manufacturer'  => $assetIdentifierDocContent['manufacturer'],
+                'part_number'   => $assetIdentifierDocContent['part_number'],
+                'serial_number' => $assetIdentifierDocContent['serial_number'],
+                'obit_did'      => $jsonDevice->did,
+                'obit_checksum' => $jsonDevice->checksum,
+                'address'       => $jsonDevice->address,
+            ]);
+
+            foreach ($documents as $document) {
+                Document::create([
+                    'device_id'  => $device->id,
+                    'name'       => $document->name,
+                    'data_hash'  => $document->hash,
+                    'path'       => $document->uri,
+                    'encryption' => $document->encrypted,
+                ]);
+            }
+        });
+    }
+
+    public function updateDevice(Device $device, object $jsonDevice) 
+    {
+        $device->obit_checksum = $jsonDevice->checksum;
+
+        $docs = collect($jsonDevice->documents)
+            ->map(function ($jsonDoc) use ($device) {
+                $localDoc = $device->documents()
+                    ->where('name', $jsonDoc->name)
+                    ->first();
+
+                if (! $localDoc) {
+                    return $jsonDoc;
+                }
+
+                if ($localDoc->data_hash != $jsonDoc->hash) {
+                    return $jsonDoc;
+                }
+
+                return (object) [
+                    'name'      => $localDoc->name,
+                    'uri'       => $localDoc->path,
+                    'hash'      => $localDoc->data_hash,
+                    'encrypted' => $localDoc->encryption,
+                ];
+            });
+
+        $device->documents()->delete();
+
+        foreach ($docs as $jsonDoc) {
+            Document::create([
+                'device_id'  => $device->id,
+                'name'       => $jsonDoc->name,
+                'path'       => $jsonDoc->uri,
+                'data_hash'  => $jsonDoc->hash,
+                'encryption' => $jsonDoc->encrypted,
+            ]); 
+        }
+
+        $device->save();
     }
 }
 

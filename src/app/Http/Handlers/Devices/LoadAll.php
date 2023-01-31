@@ -19,6 +19,7 @@ class LoadAll extends Handler {
         $api->getConfig()->setAccessToken($token);
 
         $devices = $user->devices()
+            ->with(['documents'])
             ->where('address', request()->query('address'))
             ->orderBy('id', 'asc');
 
@@ -27,10 +28,10 @@ class LoadAll extends Handler {
             ->addColumn('blockchain_checksum', function (Device $device) use ($api) {
                 //Get Client Obit
                 try {
-                    return '';
+                   // return '';
                     $pNFT = $api->nft($device->usn);
                     return $pNFT->getData()->getChecksum();
-                } catch (\Exception) {
+                } catch (\Exception $e) {
                     return '';
                 }
             })

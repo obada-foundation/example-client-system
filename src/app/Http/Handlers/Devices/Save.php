@@ -51,23 +51,31 @@ class Save extends Handler {
 
                 $existingDevice->documents()->delete();
 
-                foreach ($request->get('documents', []) as $document) {
-                    if (strpos($document['doc_path'], 'ipfs://') !== false) {
-                        continue;
+                foreach ($request->get('documents', []) as $document) { 
+                    $ipfsUrl = strpos($document['doc_path'], 'ipfs://');
+
+                    if ($ipfsUrl !== false) {
+                        Document::create([
+                            'device_id'  => $existingDevice->id,
+                            'name'       => $document['doc_name'],
+                            'path'       => $document['doc_path'],
+                            'data_hash'  => '',
+                            'encryption' => $document['doc_encryption']
+                        ]);
+                    } else {
+                        $filePath = substr($document['doc_path'], strpos($document['doc_path'], 'documents'));
+                        Document::create([
+                            'device_id'  => $existingDevice->id,
+                            'name'       => $document['doc_name'],
+                            'path'       => $document['doc_path'],
+                            'data_hash'  => hash('sha256', Storage::get($filePath)),
+                            'encryption' => $document['doc_encryption']
+                        ]);
                     }
-
-                    $filePath = substr($document['doc_path'], strpos($document['doc_path'], 'documents'));
-                    Document::create([
-                        'device_id'  => $existingDevice->id,
-                        'name'       => $document['doc_name'],
-                        'path'       => $document['doc_path'],
-                        'data_hash'  => hash('sha256', Storage::get($filePath)),
-                        'encryption' => $document['doc_encryption']
-                    ]);
                 }
-
-                DeviceSaved::dispatch($user, $existingDevice);
             });
+
+            DeviceSaved::dispatch($user, $existingDevice);
 
             return response()->json([
                 'status'    => 0,
