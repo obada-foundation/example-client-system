@@ -13,6 +13,7 @@ use App\Events\DeviceSaved;
 use Obada\Api\UtilsApi;
 use App\Models\Device;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProccessCsvLine implements ShouldQueue
 {
@@ -37,7 +38,10 @@ class ProccessCsvLine implements ShouldQueue
                 ->setPartNumber($this->partNumber)
         );
 
-        $existingDevice = Device::byUsn($did->getUsn())->first();
+        $existingDevice = Device::byUsn($did->getUsn())
+            ->where('user_id', $this->user->id)
+            ->where('address', $this->address)
+            ->first();
 
         if ($existingDevice) return;
 
