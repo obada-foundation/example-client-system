@@ -18,8 +18,6 @@ window._app = new Vue({
 });
 
 $(document).ready(() => {
-    document.getElementById('currentTime').innerText = moment(new Date()).format('YYYY-MM-DD, LT');
-
     $('#deviceList').DataTable({
         order: [[6, 'desc']],
         "language": {

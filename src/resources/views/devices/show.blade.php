@@ -237,10 +237,48 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-4">
-                            <p><strong>pNFT Checksum</strong></p>
+                        <div class="col-md-2">
+                            <p><strong>Device Checksums</strong></p>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-3">
+                            <p><strong>Last Checked Date/Time</strong></p>
+                        </div>
+                        <div class="col-md-7">
+                            <p><strong>Checksum</strong></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p><strong>Local: </strong></p>
+                        </div>
+                        <div class="col-md-3">
+                            
+                        </div>
+                        <div class="col-md-7">
+                            @isset($obit['checksum'])
+                                <p>{{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button></p>
+                            @endisset
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p><strong>Client-helper: </strong></p>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-7">
+                            @isset($obit['checksum'])
+                                <p>{{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button></p>
+                            @endisset
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p><strong>Blockchain: </strong></p>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-7">
                             @isset($obit['checksum'])
                                 <p>{{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button></p>
                             @endisset
