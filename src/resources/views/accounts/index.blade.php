@@ -147,8 +147,14 @@
                     @forelse($hd_accounts as $account)
                         <tr>
                             <td>
-                                <a href="{{ route('devices.index', $account['address']) }}">{{ $account['name'] }}</a>
-{{--                                <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>--}}
+                                @if($account['name'])
+                                    <span class="text-break">{{ $account['name'] }}</span>
+                                    <span class="text-nowrap">( <a href="{{ route('devices.index', $account['address']) }}">...{{ substr($account['address'], -4) }}</a>
+                                    <button class="btn btn-link btn-sm ps-2 pe-1" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>)</span>
+                                @else
+                                    <a href="{{ route('devices.index', $account['address']) }}">{{ $account['address_short'] }}</a>
+                                    <button class="btn btn-link btn-sm px-2" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
+                                @endif
                             </td>
                             <td class="text-center">{{ number_format($account['balance'], 2) }}</td>
                             <td class="text-center">{{ number_format($account['nft_count'], 0, '.', ',') }}</td>
@@ -203,7 +209,7 @@
                     <tr>
                         <td>
                             <a href="{{ route('devices.index', $account['address']) }}">{{ $account['name'] }}</a>
-{{--                            <button class="btn btn-link btn-sm" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>--}}
+                            <button class="btn btn-link btn-sm px-2" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
                         </td>
                         <td class="text-center">{{ number_format($account['balance'], 2) }}</td>
                         <td class="text-center">{{ number_format($account['nft_count'], 0, '.', ',') }}</td>

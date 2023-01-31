@@ -49,7 +49,7 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-md-3">
-                        <strong class="d-inline-block mt-2">Nickname</strong>
+                        <strong class="d-inline-block mt-2">Account Name</strong>
                     </div>
                     <div class="col-md-9">
                         <rename-account name="{{ $name }}" save-name-url="{{ route('accounts.update-account', $address) }}"></rename-account>
@@ -98,11 +98,6 @@
                     </div>
                     <div class="col-md-9 d-sm-flex align-items-center">
                         <span id="currentTime">{{ date('Y-m-d') }}</span>
-                        <span class="text-center border-start ps-4 ms-3">
-                            <button class="btn btn-sm btn-secondary" onclick="window.location.reload();">Download Updates from Blockchain</button>
-                            <br>
-                            <small>Warning: Will overwrite the local data.</small>
-                        </span>
                     </div>
                 </div>
             </li>
