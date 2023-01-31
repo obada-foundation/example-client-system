@@ -80,6 +80,16 @@ class Show extends Handler
             return redirect()->back();
         }
 
+        $device->documents->map(function ($document) {
+            if (preg_match('/^(ipfs):\/\/(.*)$/m', $document->path, $ipfsUrl)) {
+                $ipfsHash = $ipfsUrl[2];
+
+                $document->path = 'http://ipfs.alpha.obada.io:8080/ipfs/' . $ipfsHash;
+            }
+
+            return $document;
+        });
+
         return view('devices.show', [
             'page_title'    => 'Device Details — USN ' . $device->usn,
             'usn'           => $usn,
