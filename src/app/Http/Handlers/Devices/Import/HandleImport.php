@@ -8,6 +8,7 @@ use App\Http\Handlers\Handler;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
 use App\Jobs\ProccessCsvLine;
+use Illuminate\Validation\ValidationException;
 
 class HandleImport extends Handler {
     public function __invoke(string $address)
@@ -29,6 +30,11 @@ class HandleImport extends Handler {
                     trim($importDevice[0]),
                     trim($importDevice[1])
                 );
+            } catch (ValidationException $e) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->withErrors(['csv' => $e->errors()['csv'][0]]);
             } catch (Throwable $t) {
                 report($t);
 
