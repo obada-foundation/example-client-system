@@ -12,17 +12,15 @@ use Obada\Api\AccountsApi;
 class Index extends Handler {
     public function __invoke(string $address)
     {
-        $user = Auth::user();
-        $token = app(Token::class)->create($user);
-
-        $api = app(AccountsApi::class);
-        $api->getConfig()
-            ->setAccessToken($token);
-
-        $account = $api->account($address);
+        $account = request()->get('ch-account');
 
         $nftCount = $account->getNftCount();
-        $allByAddress = $user->devices()->where('address', $address)->count();
+        
+        $allByAddress = Auth::user()
+            ->devices()
+            ->where('address', $address)
+            ->count();
+
         $mintedCount = 0;
 
         if ($nftCount) {
@@ -30,11 +28,7 @@ class Index extends Handler {
         }
 
         return view('devices.index', [
-            'address'          => $address,
-            'address_short'    => substr($address, 0, 10) . '...' . substr($address, -4),
-            'name'             => $account->getName(),
-            'balance'          => number_format($account->getBalance(), 2),
-            'nft_count'        => $account->getNftCount(),
+            'account'          => $account,
             'not_minted_count' => $mintedCount,
             'total_nft_count'  => $allByAddress
         ]);

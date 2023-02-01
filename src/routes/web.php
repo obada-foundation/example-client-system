@@ -23,7 +23,9 @@ Route::namespace('\App\Http\Handlers\Wallet')
     ->prefix('obd')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/{address}', \Index::class)->name('index');
+        Route::middleware(['ch-token', 'ch-account'])
+            ->get('/{address}', \Index::class)->name('index');
+
         Route::post('/{address}', \Send::class)->name('send');
     });
 
@@ -32,7 +34,10 @@ Route::namespace('\App\Http\Handlers\NFT\Transfer')
     ->prefix('nft')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/{usn}/transfer', \Index::class)->name('index');
+        Route::middleware(['ch-token', 'ch-account'])
+            ->get('/{usn}/transfer', \Index::class)
+            ->name('index');
+
         Route::post('/{usn}/transfer', \Send::class)->name('send');
     });
 
@@ -81,18 +86,26 @@ Route::namespace('\App\Http\Handlers\Devices')
     ->prefix('devices')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/{address}/create', \Create::class)->name('create');
+
         Route::get('/load-all', \LoadAll::class)->name('load-all');
-        Route::get('/{usn}/show', \Show::class)->name('show');
         Route::get('/{usn}/load', \Load::class)->name('load');
-        Route::get('/{usn}/edit', \Edit::class)->name('edit');
-        Route::get('/{address}', \Index::class)->name('index');
         Route::post('/', \Save::class)->name('save');
+
+        Route::middleware(['ch-token', 'ch-account'])
+            ->group(function () {
+                Route::get('/{address}', \Index::class)->name('index');
+                Route::get('/{address}/create', \Create::class)->name('create');
+                Route::get('/{usn}/edit', \Edit::class)->name('edit');
+                Route::get('/{usn}/show', \Show::class)->name('show');
+            });
 
         Route::namespace('Import')
             ->name('import.')
             ->group(function () {
-                Route::get('/{address}/import', Index::class)->name('index');
+                Route::middleware(['ch-token', 'ch-account'])
+                    ->get('/{address}/import', Index::class)
+                    ->name('index');
+
                 Route::post('/{address}/import', HandleImport::class)->name('handle');
             });
 

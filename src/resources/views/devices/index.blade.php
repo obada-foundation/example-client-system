@@ -1,11 +1,11 @@
 @extends('layouts.app-with-nav',[
-    'page_title'      => 'Account (lot) ' . $address_short,
-    'breadcrumb_name' => $name ?: $address_short
+    'page_title'      => 'Account (lot) ' . $account->getShortAddress(),
+    'breadcrumb_name' => $account->getBreadCrumbsAddress()
 ])
 
 
 @section('head')
-    <title>Account (lot) {{ $address_short }}</title>
+    <title>Account (lot) {{ $account->getShortAddress() }}</title>
     <meta name="description" content="Obada Reference App Inventory List">
     <meta name="keywords" content="devices">
 
@@ -15,8 +15,8 @@
 
 @section('scripts')
     <script>
-        window.devicesLoadUrl = '{{ route('devices.load-all', ['address' => $address]) }}';
-        window.pageUrl = '{{ route('devices.index', ['address' => $address]) }}';
+        window.devicesLoadUrl = '{{ route('devices.load-all', ['address' => $account->getAddress()]) }}';
+        window.pageUrl = '{{ route('devices.index', $account->getAddress()) }}';
         window.mintNftUrl = '{{ route('nft.mint', ['usn' => '@usn']) }}';
     </script>
     <script src="{{ mix('/js/devices_list.js') }}"></script>
@@ -39,8 +39,8 @@
                     </div>
                     <div class="col-md-9">
                         <div class="mt-1 mb-1">
-                            {{ $address }}
-                            <button class="btn btn-link btn-sm" data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button>
+                            {{ $account->getAddress() }}
+                            <button class="btn btn-link btn-sm" data-copy-text="{{ $account->getAddress() }}"><i class="far fa-copy"></i></button>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         <strong class="d-inline-block mt-2">Account Name</strong>
                     </div>
                     <div class="col-md-9">
-                        <rename-account name="{{ $name }}" save-name-url="{{ route('accounts.update-account', $address) }}"></rename-account>
+                        <rename-account name="{{ $account->getName() }}" save-name-url="{{ route('accounts.update-account', $account->getAddress()) }}"></rename-account>
                     </div>
                 </div>
             </li>
@@ -63,9 +63,9 @@
                         <strong class="d-inline-block mt-1">System Credits (OBD Balance)</strong>
                     </div>
                     <div class="col-md-9">
-                        <span>{{ $balance }}&nbsp;OBD</span>
+                        <span>{{ $account->getFormattedBalance() }}&nbsp;OBD</span>
                         <span class="ms-2 me-2 text-muted">|</span>
-                        <a href="{{ route('wallet.index', $address) }}" class="d-inline-block">Send or Receive</a>
+                        <a href="{{ route('wallet.index', $account->getAddress()) }}" class="d-inline-block">Send or Receive</a>
                         <span class="ms-2 me-2 text-muted">|</span>
                         <a target="_blank" href="{{ config('faucet.url') }}">Get a small amount for testing</a>
                     </div>
@@ -80,12 +80,12 @@
                     <div class="col-md-9 d-sm-flex justify-content-between align-items-center">
                         <div>
                             <span class="d-inline-block mt-1 mb-1">
-                                {{ $total_nft_count }} items ({{ $nft_count }} minted, {{ $not_minted_count }} unminted)
+                                {{ $total_nft_count }} items ({{ $account->getNftCount() }} minted, {{ $not_minted_count }} unminted)
                             </span>
                             <span class="ms-2 me-2 text-muted">|</span>
-                            <a href="{{ route('devices.create', $address) }}" class="d-inline-block">Add Device</a>
+                            <a href="{{ route('devices.create', $account->getAddress()) }}" class="d-inline-block">Add Device</a>
                             <span class="ms-2 me-2 text-muted">|</span>
-                            <a href="{{ route('devices.import.index', $address) }}" class="d-inline-block">Import CSV</a>
+                            <a href="{{ route('devices.import.index', $account->getAddress()) }}" class="d-inline-block">Import CSV</a>
                         </div>
                     </div>
                 </div>

@@ -7,24 +7,14 @@ namespace App\Http\Handlers\Wallet;
 use App\Http\Handlers\Handler;
 use function view;
 use Illuminate\Support\Facades\Auth;
-use App\ClientHelper\Token;
-use Obada\Api\AccountsApi;
 
 class Index extends Handler {
     public function __invoke($address)
     {
-        $token = app(Token::class)->create(Auth::user());
-
-        $api = app(AccountsApi::class);
-        $api->getConfig()
-            ->setAccessToken($token);
-
-        $account = $api->account($address);
+        $account = request()->get('ch-account');
 
         return view('wallet.index', [
-            'address'       => $account->getAddress(),
-            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4),
-            'balance'       => number_format($account->getBalance(), 2)
+            'account' => $account,
         ]);
     }
 }
