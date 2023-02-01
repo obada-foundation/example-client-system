@@ -79,7 +79,7 @@ export default {
     data: function () {
         return {
             recepientAddress: "",
-            legalAgreement: false,
+            legalAgreement: true,
             proccessingTransfer: false
         }
     },

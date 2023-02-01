@@ -45,6 +45,6 @@ class ImportWallet extends Handler {
             return redirect()->back()->withErrors(['seed_phrase' => ucfirst(json_decode($t->getResponseBody())->error)]);
         }
 
-        return Redirect::route('accounts.index', ['show_message' => 1]);
+        return redirect()->route('accounts.index')->with('message', 'Existing accounts imported. A new unused account has been added to your list.');
     }
 }

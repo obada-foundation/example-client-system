@@ -49,7 +49,7 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-md-3">
-                        <strong class="d-inline-block mt-2">Nickname</strong>
+                        <strong class="d-inline-block mt-2">Account Name</strong>
                     </div>
                     <div class="col-md-9">
                         <rename-account name="{{ $name }}" save-name-url="{{ route('accounts.update-account', $address) }}"></rename-account>

@@ -30,13 +30,9 @@
     @if ($hasNFT)
         <div class="flex-shrink-0">
             <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
-            <div class="position-relative d-inline-block mb-5 mb-md-0">
+            <div class="position-relative d-inline-block ms-1 mb-4 mb-md-0">
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#twoFaModal">Update to Blockchain</button>
-                <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">Updates the blockchain.<br>A gas fee will be charged.</small>
-            </div>
-            <div class="position-relative d-inline-block mb-4 mb-md-0">
-                <button class="btn btn-primary">Download Updates from Blockchain</button>
-                <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">Warning: Will overwrite the local data.</small>
+                <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">Gas Fee &mdash; 1&nbsp;OBD</small>
             </div>
         </div>
     @else
@@ -44,7 +40,10 @@
             <span class="d-inline-block" data-bs-toggle="tooltip" title="Mint pNFT first">
                 <button class="btn btn-outline-primary" disabled><i class="fas fa-exchange-alt"></i> Transfer pNFT</button>
             </span>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#twoFaModal">Mint pNFT</button>
+            <div class="position-relative d-inline-block ms-1 mb-4 mb-md-0">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#twoFaModal" style="min-width: 125px;">Mint pNFT</button>
+                <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">Gas Fee &mdash; 1&nbsp;OBD</small>
+            </div>
         </div>
     @endif
 @endsection
@@ -206,8 +205,8 @@
                     <table class="table table-striped" style="vertical-align: middle;">
                         <thead>
                             <tr>
-                                <th>Data Object Types</th>
-                                <th>Encrypted</th>
+<!--                                <th>Data Object Types</th>
+                                <th>Encrypted</th>-->
                                 <th>Description</th>
                                 <th style="width: 50%;">Link to File</th>
                                 <th>Signed by</th>
@@ -217,13 +216,13 @@
                         <tbody>
                             @foreach($device->documents as $document)
                                 <tr>
-                                    <td>image {{-- {{ $document->type }} --}}</td>
+<!--                                    <td>{{ $document->type }}</td>
                                     <td class="text-center">
                                         <input type="checkbox" {{ $document->encryption ? 'checked' : '' }} readonly disabled>
-                                    </td>
+                                    </td>-->
                                     <td>{{ $document->name }}</td>
-                                    <td><a href="{{ $document->path }}">{{ $document->path }}</a></td>
-                                    <td><a href="#">Device Owner</a><br>[JWT token]</td>
+                                    <td><a href="{{ $document->path }}" class="text-break">{{ $document->path }}</a></td>
+                                    <td>Owner&nbsp;[JWT&nbsp;token]</td>
                                     <td>-</td>
                                 </tr>
                             @endforeach
@@ -320,7 +319,6 @@
     <h2>Change History</h2>
     <div class="card mb-5">
         <div class="card-body">
-{{--            <em>Coming Soon.</em>--}}
             <div class="table-responsive p-2">
                 <table class="table table-striped" style="vertical-align: middle;">
                     <thead>
@@ -331,12 +329,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>-</td>
+<!--                            <td>-</td>
                             <td>
                                 @isset($obit['checksum'])
                                     <a href="{{ route('devices.show', $device->usn) }}.{{ $obit['checksum'] }}">{{ $obit['checksum'] }}</a>
                                 @endisset
-                            </td>
+                            </td>-->
+                            <td colspan="2"><em class="text-black-50">(coming soon)</em></td>
                         </tr>
                     </tbody>
                 </table>

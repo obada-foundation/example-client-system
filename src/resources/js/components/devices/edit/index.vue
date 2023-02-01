@@ -111,6 +111,7 @@
                                 </td>
                                 <td>
                                     <select class="form-select" v-model="doc.type.value">
+                                        <option value="0">physicalAssetIdentifiers - An array containing the text of the manufacturer, model or part number, and serial number that were used to generate the DID as per section 1.1.</option>
                                         <option value="1">image - An image of the asset.</option>
                                         <option value="2">mainImage - Main image to be used for the asset.</option>
                                         <option value="3">functionalityReport - Used to prove repair.</option>

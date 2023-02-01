@@ -60,7 +60,7 @@ export default {
             documents: [],
             documents_to_remove: [],
             legal_agreement: {
-                value: false,
+                value: true,
                 validations: ['required']
             }
         };

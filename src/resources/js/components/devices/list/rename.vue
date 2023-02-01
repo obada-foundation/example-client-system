@@ -4,7 +4,7 @@
             <span>{{ accountName }}</span>
             <button v-on:click="switchEdit" class="btn btn-link btn-icon text-decoration-none">
                 <i v-if="accountName !== ''" class="fas fa-pen"></i>
-                <span v-if="accountName === ''">Add Nickname</span>
+                <span v-if="accountName === ''">Add Name</span>
             </button>
         </div>
         <div v-show="isEdit" class="input-group" style="max-width: 325px;">
@@ -60,7 +60,8 @@
                 })
                 .then(response => {
                     this.isBusy = false;
-                    this.switchEdit()
+                    this.switchEdit();
+                    document.querySelector('.breadcrumb-item.active').innerHTML = this.accountName;
                 })
                 .catch(e => {
                     this.isBusy = false;
@@ -68,7 +69,7 @@
 
                     this.errorMessage = e.response && e.response.data.errorMessage
                         ? e.response.data.errorMessage
-                        : 'Error while saving new nickname. Please, try again later.';
+                        : 'Error while saving new account name. Please, try again later.';
                 });
             }
         }

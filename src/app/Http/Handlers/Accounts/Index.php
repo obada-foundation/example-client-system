@@ -42,13 +42,10 @@ class Index extends Handler {
             return collect($accounts)
                 ->map(function ($account) {
                     $address = $account->getAddress();
-                    $name    = $account->getName()
-                        ? $account->getName() . ' (' . substr($address, -4) . ')'
-                        : substr($address, 0, 10) . '...' . substr($address, -4);
-
                     return [
                         'address'       => $address,
-                        'name'          => $name,
+                        'address_short' => substr($address, 0, 10) . '...' . substr($address, -4),
+                        'name'          => $account->getName(),
                         'balance'       => $account->getBalance(),
                         'pub_key'       => $account->getPubKey(),
                         'nft_count'     => $account->getNftCount(),
@@ -60,7 +57,7 @@ class Index extends Handler {
        $words = explode(" ", $mnemonic);
 
        $shortMnemonic = count($words)
-            ? sprintf("%s .. %s", $words[0], last($words))
+            ? sprintf("%s ... %s", $words[0], last($words))
             : "";
 
         return view('accounts.index', [

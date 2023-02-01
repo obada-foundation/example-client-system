@@ -31,10 +31,13 @@ class Send extends Handler {
             report($e);
 
             $apiError = json_decode($e->getResponseBody());
-            
+
             return redirect()->back()->withInput()->withErrors(['error' => $apiError->error]);
         }
 
-        return redirect()->back();
+        $recipient_address_short = substr(request()->get('recepient_address'), 0, 10) . '...' . substr(request()->get('recepient_address'), -4);
+        return redirect()->back()
+            ->with('message', 'Sent ' . request()->get('amount'). ' OBD to <strong>' . $recipient_address_short . '</strong>. Gas fee &mdash; 1 OBD')
+            ->with('message_type', 'success');
     }
 }
