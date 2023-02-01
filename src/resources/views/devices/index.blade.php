@@ -90,17 +90,6 @@
                     </div>
                 </div>
             </li>
-
-            <li class="list-group-item">
-                <div class="row align-items-center">
-                    <div class="col-md-3">
-                        <strong class="d-inline-block mt-2">Last checked</strong>
-                    </div>
-                    <div class="col-md-9 d-sm-flex align-items-center">
-                        <span id="currentTime">{{ date('Y-m-d') }}</span>
-                    </div>
-                </div>
-            </li>
         </ul>
     </div>
 

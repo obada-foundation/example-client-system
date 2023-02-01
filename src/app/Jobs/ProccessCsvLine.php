@@ -13,6 +13,8 @@ use App\Events\DeviceSaved;
 use Obada\Api\UtilsApi;
 use App\Models\Device;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class ProccessCsvLine implements ShouldQueue
 {
@@ -39,7 +41,16 @@ class ProccessCsvLine implements ShouldQueue
 
         $existingDevice = Device::byUsn($did->getUsn())->first();
 
-        if ($existingDevice) return;
+        if ($existingDevice) {
+            throw ValidationException::withMessages([
+                'csv' => sprintf(
+                    'PAI is already exists in the system for the given serial number: "%s", manufacturer: "%s", part number: "%s"',
+                    $this->serialNumber,
+                    $this->manufacturer,
+                    $this->partNumber
+                )
+            ]);
+        };
 
         $device = Device::create([
             'user_id'       => $this->user->id,

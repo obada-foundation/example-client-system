@@ -46,7 +46,7 @@ class Save extends Handler {
                 }
 
                 if ($user->id != $existingDevice->user_id) {
-                    abort(404);
+                    abort(401);
                 }
 
                 $existingDevice->documents()->delete();
