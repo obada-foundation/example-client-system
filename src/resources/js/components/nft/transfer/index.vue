@@ -33,10 +33,12 @@
             <button
                 :disabled="!canPreview"
                 class="btn btn-primary btn-lg"
+                style="min-width: 120px;"
                 data-bs-toggle="modal"
                 data-bs-target="#twoFaModal">
-                Preview
+                Transfer
             </button>
+            <p class="mb-0 text-black-40 text-center">Gas Fee &mdash; 1&nbsp;OBD</p>
             <p class="mt-3">Authorization code will be send to your phone for verification.</p>
         </div>
 
@@ -97,8 +99,8 @@ export default {
             .then((response) => {
                 this.proccessingTransfer = false;
                 this.$refs.CloseTwoFa.click();
-                swal("Transfer completed!", `You are not owner of ${this.usn} anymore`, "success");
-                window.location.href = this.devicesOverviewUrl
+                // swal("Transfer completed!", `You are not owner of ${this.usn} anymore`, "success");
+                window.location.href = this.devicesOverviewUrl + '?transfer_success=1'
             })
             .catch((e) => {
                 this.proccessingTransfer = false;

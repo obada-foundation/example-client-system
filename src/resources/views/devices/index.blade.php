@@ -23,6 +23,16 @@
 @endsection
 
 
+@section('extra_alerts')
+    @if($transfer_success == 1)
+        <div class="alert alert-success mt-4 mb-0">
+            <small><i class="fas fa-info-circle me-1 fs-6"></i></small>
+            pNFT successfully transferred
+        </div>
+    @endif
+@endsection
+
+
 @section('extra_breadcrumbs')
     <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Accounts</a></li>
 @endsection

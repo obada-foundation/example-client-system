@@ -26,6 +26,8 @@
                 {!!html_entity_decode(session()->get('message'))!!}
             </div>
         @endif
+
+        @yield('extra_alerts')
     </div>
 
     <div class="main">
