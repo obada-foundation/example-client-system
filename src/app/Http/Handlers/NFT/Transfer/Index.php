@@ -18,9 +18,9 @@ class Index extends Handler {
         }
 
         return view('transfer.index', [
-            'usn' => $usn,
+            'usn'     => $usn,
             'address' => $device->address,
-            'address_short' => substr($device->address, 0, 10) . '...' . substr($device->address, -4)
+            'account' => request()->get('ch-account')
         ]);
     }
 }

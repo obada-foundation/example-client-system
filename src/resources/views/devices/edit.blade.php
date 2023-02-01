@@ -18,7 +18,7 @@
 
 @section('extra_breadcrumbs')
     <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Accounts</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('devices.index', $address) }}">{{ $address_short }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('devices.index', $account->getAddress()) }}">{{ $account->getBreadCrumbsAddress() }}</a></li>
     @if($page->isEdit)
         <li class="breadcrumb-item"><a href="{{ route('devices.show', $usn) }}">{{ $usn }}</a></li>
     @endif
@@ -36,7 +36,7 @@
         </edit-device>
     @else
         <edit-device :device_id="0"
-                     address="{{ $address }}"
+                     address="{{ $account->getAddress() }}"
                      get-usn-url="{{ route('generate.usn.compute') }}"
                      store-device-url="{{ route('devices.save') }}"
                      store-document-url="{{ route('devices.documents.store') }}">

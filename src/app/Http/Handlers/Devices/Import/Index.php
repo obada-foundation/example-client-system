@@ -16,9 +16,9 @@ class Index extends Handler {
         ];
 
         return view('devices.import', [
-            'page'          => $page,
-            'address'       => $address,
-            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4)
+            'page'    => $page,
+            'address' => $address,
+            'account' => request()->get('ch-account'),
         ]);
     }
 }

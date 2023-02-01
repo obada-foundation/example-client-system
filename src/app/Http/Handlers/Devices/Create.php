@@ -16,11 +16,10 @@ class Create extends Handler {
             'keywords'          => '__keywords__',
             'isEdit'            => false
         ];
-
+        
         return view('devices.edit', [
-            'page'          => $page,
-            'address'       => $address,
-            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4)
+            'page'    => $page,
+            'account' => request()->get('ch-account'),
         ]);
     }
 }

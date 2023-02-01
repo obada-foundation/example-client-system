@@ -17,7 +17,7 @@
 
 @section('extra_breadcrumbs')
     <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Accounts</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('devices.index', $address) }}">{{ $address_short }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('devices.index', $account->getAddress()) }}">{{ $account->getBreadCrumbsAddress() }}</a></li>
 @endsection
 
 
@@ -25,8 +25,8 @@
 
     <div class="mb-5">
         <h3>Address:</h3>
-        <p>{{ $address }}<button class="btn btn-link btn-sm"
-                                 data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button></p>
+        <p>{{ $account->getAddress() }}<button class="btn btn-link btn-sm"
+                                 data-copy-text="{{ $account->getAddress() }}"><i class="far fa-copy"></i></button></p>
     </div>
 
 
@@ -43,7 +43,7 @@
             @endif
 
             <div class="col-12 col-sm-9 col-md-6">
-                <form action="{{ route('wallet.send', $address) }}" method="POST" class="row">
+                <form action="{{ route('wallet.send', $account->getAddress()) }}" method="POST" class="row">
                     @csrf
 
                     <div class="col-12 mb-2">
@@ -56,7 +56,7 @@
 
                     <div class="col-7">
                         <input type="text" class="form-control" name="amount" placeholder="Enter OBD amount" value="{{ old('amount') }}" required>
-                        <p class="mb-0 ms-2 text-black-40">Available balance &mdash; {{ $balance }} OBD</p>
+                        <p class="mb-0 ms-2 text-black-40">Available balance &mdash; {{ $account->getFormattedBalance() }} OBD</p>
                     </div>
 
                     <div class="col-5">
@@ -70,8 +70,8 @@
 
     <div class="mb-5">
         <h3>To Receive OBD:</h3>
-        <p>Tell the sender to send to <strong>{{ $address }}</strong><button class="btn btn-link btn-sm"
-                                                                             data-copy-text="{{ $address }}"><i class="far fa-copy"></i></button></p>
+        <p>Tell the sender to send to <strong>{{ $account->getAddress() }}</strong><button class="btn btn-link btn-sm"
+                                                                             data-copy-text="{{ $account->getAddress() }}"><i class="far fa-copy"></i></button></p>
     </div>
 
     @if (env('APP_ENV') != 'production')

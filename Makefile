@@ -26,6 +26,15 @@ deps/php/update:
 		 composer:2.2.12 \
 		sh -c "composer update obada-foundation/client-api-library-php --ignore-platform-req=ext-bcmath"
 
+php/dump-autoload:
+	docker run \
+		--rm \
+		 -it \
+		 -v $$(pwd)/src:/app \
+		 -w /app \
+		 composer:2.2.12 \
+		sh -c "composer dump-autoload --ignore-platform-req=ext-bcmath"
+
 deps/node:
 	docker run \
 		--rm \

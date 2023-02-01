@@ -11,14 +11,14 @@ use App\ClientHelper\Token;
 class Edit extends Handler {
     public function __invoke(string $usn)
     {
-        $user   = Auth::user();
-        $device = $user->devices()->byUsn($usn)->first();
+        $device = Auth::user()
+            ->devices()
+            ->byUsn($usn)
+            ->first();
 
         if (! $device) {
             return abort(404);
         }
-
-        $address = $device->address;
 
         $page = (object) [
             'title'             => 'Edit Device — USN ' . $device->usn,
@@ -27,11 +27,10 @@ class Edit extends Handler {
             'keywords'          => '__keywords__',
             'isEdit'            => true,
         ];
-
+        
         return view('devices.edit', [
             'page'          => $page,
-            'address'       => $address,
-            'address_short' => substr($address, 0, 10) . '...' . substr($address, -4),
+            'account'       => request()->get('ch-account'),
             'device'        => $device,
             'usn'           => $usn
         ]);
