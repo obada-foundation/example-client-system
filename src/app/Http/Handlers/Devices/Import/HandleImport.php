@@ -45,6 +45,8 @@ class HandleImport extends Handler {
             }
         }
 
-        return redirect()->route('devices.index', $address);
+        return redirect()->route('devices.index', $address)
+            ->with('message', 'Devices successfully imported')
+            ->with('message_type', 'success');
     }
 }

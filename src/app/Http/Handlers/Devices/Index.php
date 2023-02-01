@@ -6,11 +6,12 @@ namespace App\Http\Handlers\Devices;
 
 use App\ClientHelper\Token;
 use App\Http\Handlers\Handler;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Obada\Api\AccountsApi;
 
 class Index extends Handler {
-    public function __invoke(string $address)
+    public function __invoke(Request $request, string $address)
     {
         $user = Auth::user();
         $token = app(Token::class)->create($user);
@@ -36,7 +37,8 @@ class Index extends Handler {
             'balance'          => number_format($account->getBalance(), 2),
             'nft_count'        => $account->getNftCount(),
             'not_minted_count' => $mintedCount,
-            'total_nft_count'  => $allByAddress
+            'total_nft_count'  => $allByAddress,
+            'transfer_success' => $request->has('transfer_success')
         ]);
     }
 }
