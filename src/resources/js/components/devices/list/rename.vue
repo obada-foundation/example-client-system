@@ -60,7 +60,8 @@
                 })
                 .then(response => {
                     this.isBusy = false;
-                    this.switchEdit()
+                    this.switchEdit();
+                    document.querySelector('.breadcrumb-item.active').innerHTML = this.accountName;
                 })
                 .catch(e => {
                     this.isBusy = false;

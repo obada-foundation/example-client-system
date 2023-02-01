@@ -57,7 +57,7 @@ class Index extends Handler {
        $words = explode(" ", $mnemonic);
 
        $shortMnemonic = count($words)
-            ? sprintf("%s .. %s", $words[0], last($words))
+            ? sprintf("%s ... %s", $words[0], last($words))
             : "";
 
         return view('accounts.index', [

@@ -20,7 +20,12 @@
     </div>
 
     <div class="container-lg">
-        @yield('alerts')
+        @if(session()->has('message'))
+            <div class="alert {{ session()->has('message_type') ? 'alert-' . session()->get('message_type') : 'alert-info' }} mt-4 mb-0">
+                <small><i class="fas fa-info-circle me-1 fs-6"></i></small>
+                {!!html_entity_decode(session()->get('message'))!!}
+            </div>
+        @endif
     </div>
 
     <div class="main">

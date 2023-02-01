@@ -77,7 +77,8 @@
                 <div class="modal-body">
                     <div class="my-3 text-center">
                         <strong>{{ $seed_phrase }}</strong>
-                        <button class="btn btn-link btn-sm" data-copy-text="{{ $seed_phrase }}"><i class="far fa-copy"></i></button>
+                        <!-- todo: fix functionality -->
+{{--                        <button class="btn btn-link btn-sm" data-copy-text="{{ $seed_phrase }}"><i class="far fa-copy"></i></button>--}}
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
@@ -88,17 +89,6 @@
             </div>
         </div>
     </div>
-@endsection
-
-
-@section('alerts')
-    @if($show_message)
-        <div class="alert alert-info mt-4 mb-0">
-            <small><i class="fas fa-info-circle me-1 fs-6"></i></small>
-            Existing accounts imported.
-            A new unused account has been added to your list.
-        </div>
-    @endif
 @endsection
 
 
