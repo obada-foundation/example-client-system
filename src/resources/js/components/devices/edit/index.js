@@ -28,14 +28,12 @@ export default {
                 usn_base58: ''
             },
             cmOptions: {
-                // codemirror options
                 tabSize: 2,
                 mode: 'json',
                 theme: 'base16-light',
                 lineNumbers: true,
                 line: true,
                 autoRefresh: true
-                // more codemirror options, 更多 codemirror 的高级配置...
             },
             deviceForm: {
                 manufacturer: {

@@ -66,6 +66,7 @@ $(document).ready(() => {
                 .then((response) => {
                     // show green checkmark with tooltip (?)
                     $(me).addClass('d-none');
+                    $(me).prev('.fa-sync').addClass('d-none');
                     $(me).next('.fa-check').removeClass('d-none');
                 })
                 .catch((e) => {
