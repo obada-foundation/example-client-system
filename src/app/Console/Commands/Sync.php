@@ -27,7 +27,6 @@ class Sync extends Command
 
     public function handle()
     { 
-        return;
         $users = User::all();
 
         $users->each(function (User $user) {

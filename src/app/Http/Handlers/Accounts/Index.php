@@ -48,9 +48,9 @@ class Index extends Handler {
 
        $words = explode(" ", $mnemonic);
 
-       $shortMnemonic = count($words)
+       $shortMnemonic = strlen($mnemonic)
             ? sprintf("%s ... %s", $words[0], last($words))
-            : "";
+            : $mnemonic;
 
         return view('accounts.index', [
             'seed_phrase'       => $mnemonic,

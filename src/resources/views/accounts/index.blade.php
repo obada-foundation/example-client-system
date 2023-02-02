@@ -107,10 +107,14 @@
         <section class="mb-5">
             <h3 class="d-inline-block">Main Accounts</h3>
             <p>
-                This account are derived from the seed phrase "{{ $seed_phrase_short }}"
-                (<a href="#phraseConfirmationModal" data-bs-toggle="modal">display</a>)
-                <span class="ms-2 me-2 text-muted">|</span>
-                <a href="{{ route('accounts.manage') }}">Switch Seed Phrase</a>
+                @if ($seed_phrase_short)
+                    This account are derived from the seed phrase "{{ $seed_phrase_short }}"
+                    (<a href="#phraseConfirmationModal" data-bs-toggle="modal">display</a>)
+                    <span class="ms-2 me-2 text-muted">|</span>
+                    <a href="{{ route('accounts.manage') }}">Switch Seed Phrase</a>
+                @else
+                    <a href="{{ route('accounts.manage') }}">Enter a Seed Phrase</a>
+                @endif
             </p>
 
             <table class="table mt-4">
