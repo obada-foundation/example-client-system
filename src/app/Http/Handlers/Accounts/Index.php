@@ -8,6 +8,7 @@ use App\Http\Handlers\Handler;
 use Illuminate\Http\Request;
 use function view;
 use Illuminate\Support\Facades\Auth;
+use App\ClientHelper\Account;
 use App\ClientHelper\Token;
 use Obada\Api\AccountsApi;
 use Obada\Api\KeysApi;
@@ -41,17 +42,8 @@ class Index extends Handler {
         $proccessAccounts = function (array $accounts) {
             return collect($accounts)
                 ->map(function ($account) {
-                    $address = $account->getAddress();
-                    return [
-                        'address'       => $address,
-                        'address_short' => substr($address, 0, 10) . '...' . substr($address, -4),
-                        'name'          => $account->getName(),
-                        'balance'       => $account->getBalance(),
-                        'pub_key'       => $account->getPubKey(),
-                        'nft_count'     => $account->getNftCount(),
-                    ];
-                })
-                ->toArray();
+                    return Account::make($account);
+                });
         };
 
        $words = explode(" ", $mnemonic);

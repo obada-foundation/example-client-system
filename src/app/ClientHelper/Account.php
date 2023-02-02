@@ -39,4 +39,9 @@ class Account {
     {
         return number_format($this->account->getBalance(), 2);
     }
+
+    public function getFormattedNftCount()
+    {
+        return number_format($this->account->getNftCount(), 0, '.', ',');
+    }
 }

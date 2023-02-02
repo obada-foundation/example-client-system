@@ -137,18 +137,18 @@
                     @forelse($hd_accounts as $account)
                         <tr>
                             <td>
-                                @if($account['name'])
-                                    <span class="text-break">{{ $account['name'] }}</span>
-                                    <span class="text-nowrap">( <a href="{{ route('devices.index', $account['address']) }}">...{{ substr($account['address'], -4) }}</a>
-                                    <button class="btn btn-link btn-sm ps-2 pe-1" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>)</span>
+                                @if($account->getName())
+                                    <span class="text-break">{{ $account->getName() }}</span>
+                                    <span class="text-nowrap">( <a href="{{ route('devices.index', $account->getAddress()) }}">...{{ substr($account->getAddress(), -4) }}</a>
+                                    <button class="btn btn-link btn-sm ps-2 pe-1" data-copy-text="{{ $account->getAddress() }}"><i class="far fa-copy"></i></button>)</span>
                                 @else
-                                    <a href="{{ route('devices.index', $account['address']) }}">{{ $account['address_short'] }}</a>
-                                    <button class="btn btn-link btn-sm px-2" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
+                                    <a href="{{ route('devices.index', $account->getAddress()) }}">{{ $account->getShortAddress() }}</a>
+                                    <button class="btn btn-link btn-sm px-2" data-copy-text="{{ $account->getAddress() }}"><i class="far fa-copy"></i></button>
                                 @endif
                             </td>
-                            <td class="text-center">{{ number_format($account['balance'], 2) }}</td>
-                            <td class="text-center">{{ number_format($account['nft_count'], 0, '.', ',') }}</td>
-                            <td class="text-center"><a href="{{ route('accounts.export-account', $account['address']) }}" target="_blank">download</a></td>
+                            <td class="text-center">{{ $account->getFormattedBalance() }}</td>
+                            <td class="text-center">{{ $account->getFormattedNftCount() }}</td>
+                            <td class="text-center"><a href="{{ route('accounts.export-account', $account->getAddress()) }}" target="_blank">download</a></td>
                             <td class="text-center">coming soon</td>
                             <td class="text-center">coming soon</td>
                         </tr>
@@ -198,12 +198,18 @@
                 @forelse($imported_accounts as $account)
                     <tr>
                         <td>
-                            <a href="{{ route('devices.index', $account['address']) }}">{{ $account['name'] }}</a>
-                            <button class="btn btn-link btn-sm px-2" data-copy-text="{{ $account['address'] }}"><i class="far fa-copy"></i></button>
+                            @if($account->getName())
+                                <span class="text-break">{{ $account->getName() }}</span>
+                                <span class="text-nowrap">( <a href="{{ route('devices.index', $account->getAddress()) }}">...{{ substr($account->getAddress(), -4) }}</a>
+                                <button class="btn btn-link btn-sm ps-2 pe-1" data-copy-text="{{ $account->getAddress() }}"><i class="far fa-copy"></i></button>)</span>
+                            @else
+                                <a href="{{ route('devices.index', $account->getAddress()) }}">{{ $account->getShortAddress() }}</a>
+                                <button class="btn btn-link btn-sm px-2" data-copy-text="{{ $account->getAddress() }}"><i class="far fa-copy"></i></button>
+                            @endif
                         </td>
-                        <td class="text-center">{{ number_format($account['balance'], 2) }}</td>
-                        <td class="text-center">{{ number_format($account['nft_count'], 0, '.', ',') }}</td>
-                        <td class="text-center"><a href="{{ route('accounts.export-account', $account['address']) }}" target="_blank">download</a></td>
+                        <td class="text-center">{{ $account->getFormattedBalance() }}</td>
+                        <td class="text-center">{{ $account->getFormattedNftCount() }}</td>
+                        <td class="text-center"><a href="{{ route('accounts.export-account', $account->getAddress()) }}" target="_blank">download</a></td>
                         <td class="text-center">coming soon</td>
                         <td class="text-center">coming soon</td>
                     </tr>
