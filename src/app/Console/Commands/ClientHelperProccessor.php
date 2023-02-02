@@ -22,7 +22,6 @@ class ClientHelperProccessor extends Command
             switch ($channel) {
                 case 'device.saved':
                     $json   = json_decode($message);
-                    dump($json);
                     $userId = (int) $json->profile_id; 
 
                     if (! $userId) {
