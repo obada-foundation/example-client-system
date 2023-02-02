@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Obada\Api\AccountsApi;
 use App\ClientHelper\Account;
-use InvalidArgumentException;
 use Illuminate\Support\Facades\Auth;
 
 class ClientHelperAccount
@@ -39,7 +38,7 @@ class ClientHelperAccount
         }
 
         if (! isset($account)) {
-            throw new InvalidArgumentException;
+            abort(401);
         }
 
         $request->merge(['ch-account' => $account]);

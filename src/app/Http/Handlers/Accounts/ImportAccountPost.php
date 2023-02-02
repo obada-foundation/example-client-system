@@ -31,8 +31,6 @@ class ImportAccountPost extends Handler {
         try {
             $api->importAccount($req);
         } catch (ApiException $e) {
-            report($e);
-
             return redirect()->back()->withErrors(['key_value' => 'Invalid private key file']);
         }
 
