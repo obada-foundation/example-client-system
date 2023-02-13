@@ -7,8 +7,8 @@ export function showAlert(options) {
         autoclose: false
     };
     options = Object.assign({}, default_options, options);
-    const container = document.getElementById('alerts_container');
-    let classes = 'alert alert-' + options.type;
+    const container = document.getElementById('js_alerts_container');
+    let classes = 'alert alert-' + options.type + ' mt-4 mb-0';
 
     if (!options.autoclose) {
         classes += ' alert-dismissible';

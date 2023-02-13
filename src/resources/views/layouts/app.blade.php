@@ -44,8 +44,6 @@
 <body>
 
     <div id="app">
-        <div id="alerts_container" class="alerts-container"></div>
-
         @yield('content')
     </div>
 
