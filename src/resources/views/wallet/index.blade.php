@@ -61,7 +61,7 @@
 
                     <div class="col-5">
                         <button type="submit" class="btn btn-primary w-100">Send</button>
-                        <p class="mb-0 text-black-40 text-center">Gas Fee &mdash; 1&nbsp;OBD</p>
+                        <p class="mb-0 text-black-40 text-center">{{ config('view.gas_fee_text') }}</p>
                     </div>
                 </form>
             </div>

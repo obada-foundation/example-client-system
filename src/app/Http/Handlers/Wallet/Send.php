@@ -37,7 +37,7 @@ class Send extends Handler {
 
         $recipient_address_short = substr(request()->get('recepient_address'), 0, 10) . '...' . substr(request()->get('recepient_address'), -4);
         return redirect()->back()
-            ->with('message', 'Sent ' . request()->get('amount'). ' OBD to <strong>' . $recipient_address_short . '</strong>. Gas fee &mdash; 1 OBD')
+            ->with('message', 'Sent ' . request()->get('amount'). ' OBD to <strong>' . $recipient_address_short . '</strong>.' . config('view.gas_fee_text'))
             ->with('message_type', 'success');
     }
 }
