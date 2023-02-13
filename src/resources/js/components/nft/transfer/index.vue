@@ -38,7 +38,7 @@
                 data-bs-target="#twoFaModal">
                 Transfer
             </button>
-            <p class="mb-0 text-black-40 text-center">{{ window.gas_fee_text }}</p>
+            <p class="mb-0 text-black-40 text-center">{{ gas_fee_text }}</p>
             <p class="mt-3">Authorization code will be send to your phone for verification.</p>
         </div>
 
@@ -82,7 +82,8 @@ export default {
         return {
             recepientAddress: "",
             legalAgreement: true,
-            proccessingTransfer: false
+            proccessingTransfer: false,
+            gas_fee_text: window.gas_fee_text
         }
     },
     methods: {
