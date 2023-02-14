@@ -31,9 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const address = button.getAttribute('data-id');
             const shortAddress = button.getAttribute('data-short-id');
             const url = button.getAttribute('data-delete-url');
+
             window.swal({
-                    title: 'Are you sure you want to delete this account?',
-                    text: shortAddress,
+                    title: '',
+                    text: 'Deleting an account only removes it from the local system. It is not possible to delete an account from the blockchain. Reimporting the seed phrase or private key will restore the account.<br><strong class="fw-bold">WARNING:</strong> If you lose the seed phrase or private key you will lose the account and there is no recovery.<br><br>Are you sure you want to delete this account?<br><strong class="fw-bold">' + shortAddress + '</strong>',
+                    html: true,
                     showCancelButton: true,
                     confirmButtonText: 'Yes'
                 },
