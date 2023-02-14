@@ -23,7 +23,7 @@
         padding-top: 0.5em !important;
 
         &::before {
-            content: '* Gas Fee 1 OBD per transaction';
+            content: var(--gas-fee-text);
             display: block;
             margin-bottom: 0.5em;
             font-size: 0.85em;
