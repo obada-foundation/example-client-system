@@ -39,6 +39,6 @@ return [
      */
     'gas_fee_text'     => env(
         'GAS_FEE_TEXT',
-        'Gas Fee — 0.01 OBD'
+        'Gas Fee — ' . config('app.gas_fee') . ' OBD'
     ),
 ];
