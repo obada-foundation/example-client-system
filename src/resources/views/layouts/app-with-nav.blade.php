@@ -30,6 +30,8 @@
         @yield('extra_alerts')
     </div>
 
+    <div id="js_alerts_container" class="container-lg"></div>
+
     <div class="main">
         <div class="container-lg">
             @if(isset($has_title_action) && $has_title_action)
