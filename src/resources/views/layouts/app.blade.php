@@ -15,7 +15,14 @@
 
     <link rel="stylesheet" href="{{ mix('/css/base.css') }}">
 
+    <style>
+        :root {
+            --gas-fee-text: '* {{ config('view.gas_fee_text') }} per transaction';
+        }
+    </style>
+
     <script>
+        window.gas_fee_text = '{{ config('view.gas_fee_text') }}';
         window.Laravel = {!! json_encode([
             'user' => [
                 'authenticated' => auth()->check(),

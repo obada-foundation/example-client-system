@@ -214,4 +214,9 @@ return [
         'AWS' => Aws\Laravel\AwsFacade::class,
     ])->toArray(),
 
+    /*
+     *  Gas Fee amount
+     */
+
+    'gas_fee' => env('GAS_FEE_AMOUNT', '0.01'),
 ];

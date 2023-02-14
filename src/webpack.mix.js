@@ -21,5 +21,6 @@ mix.js('resources/js/modules/devices/list/index.js', 'public/js/devices_list.js'
 mix.js('resources/js/modules/devices/edit.js', 'public/js/devices_edit.js');
 mix.js('resources/js/modules/devices/show.js', 'public/js/devices_show.js');
 mix.js('resources/js/modules/nft/transfer.js', 'public/js/nft_transfer.js');
+mix.js('resources/js/modules/wallet/index.js', 'public/js/wallet_index.js');
 
 mix.version();

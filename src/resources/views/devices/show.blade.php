@@ -32,7 +32,7 @@
             <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
             <div class="position-relative d-inline-block ms-1 mb-4 mb-md-0">
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#twoFaModal">Update to Blockchain</button>
-                <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">Gas Fee &mdash; 1&nbsp;OBD</small>
+                <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">{{ config('view.gas_fee_text') }}</small>
             </div>
         </div>
     @else
@@ -42,7 +42,7 @@
             </span>
             <div class="position-relative d-inline-block ms-1 mb-4 mb-md-0">
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#twoFaModal" style="min-width: 125px;">Mint pNFT</button>
-                <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">Gas Fee &mdash; 1&nbsp;OBD</small>
+                <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">{{ config('view.gas_fee_text') }}</small>
             </div>
         </div>
     @endif
@@ -251,7 +251,7 @@
                             <p><strong>Local: </strong></p>
                         </div>
                         <div class="col-md-3">
-                            
+
                         </div>
                         <div class="col-md-7">
                             @isset($obit['checksum'])

@@ -33,4 +33,12 @@ return [
         realpath(storage_path('framework/views'))
     ),
 
+
+    /*
+     *  Defines how gas fee is shown
+     */
+    'gas_fee_text'     => env(
+        'GAS_FEE_TEXT',
+        'Gas Fee — ' . config('app.gas_fee') . ' OBD'
+    ),
 ];
