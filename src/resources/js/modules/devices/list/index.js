@@ -102,6 +102,13 @@ $(document).ready(() => {
                 }
             },
             {
+                sortable: false,
+                "render": function(data, type, full, meta) {
+                    return !!full.image ? '<img src="' + full.image + '" width="60">' : '-';
+                },
+                class: 'text-center'
+            },
+            {
                 sortable: true,
                 "render": function(data, type, full, meta) {
                     return type === 'display'
