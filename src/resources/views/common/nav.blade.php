@@ -2,7 +2,7 @@
     <div class="container-lg">
         <a class="navbar-brand" href="/">
             <div>
-                <img src="{{ config('frontend.logo_path') }}" alt="Tradeloop" height="{{ config('frontend.logo_height') }}">
+                <img src="{{ config('frontend.logo_path') }}" alt="{{ config('frontend.logo_text') }}" height="{{ config('frontend.logo_height') }}">
                 <span class="d-block" style="top: 0;">{{ config('frontend.logo_text') }}</span>
             </div>
         </a>
