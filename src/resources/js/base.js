@@ -40,24 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     confirmButtonText: 'Yes'
                 },
                 function() {
-                    axios(url, {
-                        method: 'post',
-                        responseType: 'json'
-                    })
-                        .then((response) => {
-                            document.querySelector('tr[data-id="' + address + '"]').style.display = 'none';
-                            bootstrap.Tooltip.getOrCreateInstance('tr[data-id="' + address + '"] [data-bs-toggle="tooltip"  ]').hide();
-                            showAlert({
-                                message: 'Account <strong>' + shortAddress + '</strong> successfully deleted.',
-                                type: 'success'
-                            });
-                        })
-                        .catch((e) => {
-                            showAlert({
-                                message: 'Could not delete account <strong>' + shortAddress + '</strong>.',
-                                type: 'danger'
-                            });
-                        });
+                    window.location.href = url
                 });
         })
     })

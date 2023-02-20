@@ -16,7 +16,9 @@
             Read-Only Key <small><a href="#" data-bs-toggle="tooltip"
                                     title='The Read-Only Key (or "View Key") decrypts the pNFT data, allowing a third-party to view the pNFT information.'><i
                         class="fas fa-question-circle"></i></a></small></th>
-        <th class="text-center" style="width: 30px;"></th>
+        @if ($canDelete)
+            <th class="text-center" style="width: 30px;"></th>
+        @endif
     </tr>
     </thead>
     <tbody>
@@ -37,15 +39,17 @@
             <td class="text-center"><a href="{{ route('accounts.export-account', $account->getAddress()) }}" target="_blank">download</a></td>
             <td class="text-center">coming soon</td>
             <td class="text-center">coming soon</td>
-            <td class="text-center" style="width: 30px;">
-                <span data-bs-toggle="tooltip" title="Delete Account">
-                    <button class="btn btn-link btn-sm ps-2 pe-2"
-                            data-action="delete-account"
-                            data-id="{{ $account->getAddress() }}"
-                            data-short-id="{{ $account->getShortAddress() }}"
-                            data-delete-url="{{ route('accounts.delete-account', $account->getAddress()) }}"><i class="fas fa-trash-alt"></i></button>
-                </span>
-            </td>
+            @if ($canDelete)
+                <td class="text-center" style="width: 30px;">
+                    <span data-bs-toggle="tooltip" title="Delete Account">
+                        <button class="btn btn-link btn-sm ps-2 pe-2"
+                                data-action="delete-account"
+                                data-id="{{ $account->getAddress() }}"
+                                data-short-id="{{ $account->getShortAddress() }}"
+                                data-delete-url="{{ route('accounts.delete-account', $account->getAddress()) }}"><i class="fas fa-trash-alt"></i></button>
+                    </span>
+                </td>
+            @endif
         </tr>
     @empty
         <tr>

@@ -14,7 +14,6 @@
     <script src="{{ mix('/js/base.js') }}"></script>
 @endsection
 
-
 @section('page_bottom')
     <div class="modal" id="phraseConfirmationModal" tabindex="-1" aria-labelledby="phraseConfirmationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -97,7 +96,7 @@
         @if ($errors->any())
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
-                    swal('Unable to add new account.','{{ ucfirst($errors->first()) }}','error');
+                    swal('Unable to complete operation.','{{ ucfirst($errors->first()) }}','error');
                 })
             </script>
         @endif
@@ -118,8 +117,9 @@
             </p>
 
             @include('accounts.includes.accounts-table', [
-                'accounts' => $hd_accounts,
-                'noAccountsText' => 'No accounts.'
+                'accounts'       => $hd_accounts,
+                'noAccountsText' => 'No accounts.',
+                'canDelete'      => false
             ])
 
             <form action="{{ route('accounts.new-account') }}" method="POST">
@@ -137,8 +137,9 @@
             <p>This standalone accounts are individually imported and not derived from the seed phrase above.</p>
 
             @include('accounts.includes.accounts-table', [
-                'accounts' => $imported_accounts,
-                'noAccountsText' => 'No imported accounts.'
+                'accounts'       => $imported_accounts,
+                'noAccountsText' => 'No imported accounts.',
+                'canDelete'      => true
             ])
 
             <p>

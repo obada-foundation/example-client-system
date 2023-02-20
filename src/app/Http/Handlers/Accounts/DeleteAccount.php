@@ -12,6 +12,7 @@ use Obada\ClientHelper\AccountRequest;
 use App\ClientHelper\Token;
 use Illuminate\Support\Facades\Auth;
 use Obada\ApiException;
+use Throwable;
 
 class DeleteAccount extends Handler {
     public function __invoke(Request $request, $address)
@@ -23,14 +24,17 @@ class DeleteAccount extends Handler {
             ->setAccessToken($token);
 
         try {
-            return response()->json([
-                'status' => 0,
-                'devices' => []
-            ], 200);
-        } catch (Exception $e) {
-            return response()->json([
-                'errorMessage' => 'message'
-            ], 400);
+            $api->deleteImportedAccount($address);
+
+            return redirect()
+                ->back()
+                ->with('message', 'Account <strong>' . $address . '</strong> successfully deleted.');
+        } catch (Throwable $e) {
+            report($e);
+
+            return redirect()
+                ->back()
+                ->withErrors([['account' => 'Cannot delete account with address ' . $address]]);
         }
     }
 }

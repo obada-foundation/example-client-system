@@ -78,7 +78,11 @@ Route::namespace('\App\Http\Handlers\Accounts')
         Route::get('/export-account/{address}', \ExportAccount::class)->name('export-account');
         Route::post('/new-account', \StoreAccount::class)->name('new-account');
         Route::post('/{address}', \UpdateAccount::class)->name('update-account');
-        Route::post('/{address}/delete', \DeleteAccount::class)->name('delete-account');
+        
+        Route::middleware(['ch-token', 'ch-account'])
+            ->get('/{address}/delete', \DeleteAccount::class)
+            ->name('delete-account');
+
         Route::get('/balance', \Balance::class)->name('balance');
     });
 

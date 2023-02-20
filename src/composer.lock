@@ -3055,12 +3055,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/obada-foundation/client-api-library-php.git",
-                "reference": "8d5d8ab60216f7b2c0a652114eb6bf555644f33b"
+                "reference": "a898afe7b1cdbd82388f53f7ec73de0858cdbb62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/obada-foundation/client-api-library-php/zipball/8d5d8ab60216f7b2c0a652114eb6bf555644f33b",
-                "reference": "8d5d8ab60216f7b2c0a652114eb6bf555644f33b",
+                "url": "https://api.github.com/repos/obada-foundation/client-api-library-php/zipball/a898afe7b1cdbd82388f53f7ec73de0858cdbb62",
+                "reference": "a898afe7b1cdbd82388f53f7ec73de0858cdbb62",
                 "shasum": ""
             },
             "require": {
@@ -3111,7 +3111,7 @@
                 "source": "https://github.com/obada-foundation/client-api-library-php/tree/main",
                 "issues": "https://github.com/obada-foundation/client-api-library-php/issues"
             },
-            "time": "2023-01-28T00:32:27+00:00"
+            "time": "2023-02-05T02:13:52+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
