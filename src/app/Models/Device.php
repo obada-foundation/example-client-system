@@ -136,4 +136,19 @@ class Device extends Model
             'modifiedOn' => (new \DateTime($this->updated_at))->getTimestamp()
         ]);
     }
+
+    public function getImageAttribute(): ?string {
+        return $this->documents
+            ->filter(fn ($d) => $d->name === 'image')
+            ->map(function ($d) {
+                if (preg_match('/^(ipfs):\/\/(.*)$/m', $d->path, $ipfsUrl)) {
+                    $ipfsHash = $ipfsUrl[2];
+    
+                    return 'http://ipfs.alpha.obada.io:8080/ipfs/' . $ipfsHash;
+                }
+
+                return $document->path;
+            })
+            ->first();
+    }
 }
