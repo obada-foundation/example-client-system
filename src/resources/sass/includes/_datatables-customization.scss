@@ -4,6 +4,10 @@ table.dataTable {
     border-radius: $border-radius;
     border: $border-width solid $border-color;
     background-color: $white;
+
+    tr {
+        vertical-align: middle;
+    }
 }
 
 .page-link {

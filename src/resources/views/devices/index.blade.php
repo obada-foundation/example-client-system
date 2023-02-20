@@ -113,6 +113,7 @@
         <thead>
         <tr>
             <th style="max-width: 60px;"></th>
+            <th style="width: 60px;">Image</th>
             <th style="width: 70px;">USN</th>
             <th>Manufacturer</th>
             <th>Part&nbsp;#</th>

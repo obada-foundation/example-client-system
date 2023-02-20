@@ -36,6 +36,14 @@ class LoadAll extends Handler {
                 }
             })
             ->addColumn('documents_count', fn(Device $device) => $device->documents->count())
+            ->addColumn('image', function (Device $device) {
+                $image = $device->documents->first(function($document) {
+                    return $document->name == 'image';
+                });
+
+//                return $image ? $image->path : '';
+                return $image ? '/images/laptop.png' : '';
+            })
             ->make(true);
     }
 }
