@@ -105,16 +105,7 @@ class ClientHelperProccessor extends Command
                     return $jsonDoc;
                 }
 
-                if ($localDoc->data_hash != $jsonDoc->hash) {
-                    return $jsonDoc;
-                }
-
-                return (object) [
-                    'name'      => $localDoc->name,
-                    'uri'       => $localDoc->path,
-                    'hash'      => $localDoc->data_hash,
-                    'encrypted' => $localDoc->encryption,
-                ];
+                return $jsonDoc;
             });
 
         $device->documents()->delete();
