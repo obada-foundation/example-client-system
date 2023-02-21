@@ -342,4 +342,10 @@
             </div>
         </div>
     </div>
+
+    <p class="mb-2"><a href="#" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#nft_code" aria-expanded="false" aria-controls="calculations2">Show NFT code</a></p>
+
+    <div id="nft_code" class="collapse">
+        <nft-code did="{{ isset($obit['did']) ? $obit['did'] : '' }}" minted="{{ $hasNFT }}"></nft-code>
+    </div>
 @endsection
