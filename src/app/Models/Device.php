@@ -143,11 +143,11 @@ class Device extends Model
             ->map(function ($d) {
                 if (preg_match('/^(ipfs):\/\/(.*)$/m', $d->path, $ipfsUrl)) {
                     $ipfsHash = $ipfsUrl[2];
-    
+
                     return 'http://ipfs.alpha.obada.io:8080/ipfs/' . $ipfsHash;
                 }
 
-                return $document->path;
+                return $d->path;
             })
             ->first();
     }
