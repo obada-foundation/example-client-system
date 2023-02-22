@@ -35,6 +35,15 @@ return [
 
 
     /*
+     *  Site name for the initial page
+     */
+    'site_name' => env(
+        'SITE_NAME',
+        'OBADA Reference Design'
+    ),
+
+
+    /*
      *  Defines how gas fee is shown
      */
     'gas_fee_text'     => env(
