@@ -30,9 +30,9 @@
                     The OBADA Foundation and the OBADA DAO were formed by a coalition in the IT Asset Disposition (ITAD) Sector.
                 </h4>
 
-                <h5 class="text-center"><a href="{{ route('login.index') }}">Login</a> or <a href="{{ route('register.index') }}">Register</a></h5>
+                <h3 class="text-center pt-4 pb-4"><a href="{{ route('login.index') }}">Login</a> or <a href="{{ route('register.index') }}">Register</a></h3>
 
-                <h2 class="mt-5 pt-4 text-center">This website demonstrates three components</h2>
+                <h2 class="mt-5 text-center">This website demonstrates three components</h2>
                 <ul>
                     <li class="mb-2"><strong>The "Reference Design".</strong> <a href="https://github.com/obada-foundation/reference-design">View source code on Github.</a>
                         <ul>

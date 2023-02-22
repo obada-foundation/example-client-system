@@ -63,7 +63,7 @@
             usn="{{ $device->usn }}"></update-metadata>
     @endif
 
-    <h2 class="mb-1">Physical Asset Identifiers (PAIs) <sup class="fst-italic fs-6 text-success" style="top: -1em;">section 5.1 *</sup></h2>
+    <h2 class="mb-1">Physical Asset Identifiers (PAIs) <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 5.1]</sup></h2>
     <p class="mb-2">Immutable identifiers are read from the physical asset and stored in an attached data object called &ldquo;physicalAssetIdentifiers&rdquo;.</p>
     <div class="card mb-5">
         <div class="card-body">
@@ -103,7 +103,7 @@
     </div>
 
 
-    <h2 class="mb-1">Decentralized Identifiers (DIDs) <sup class="fst-italic fs-6 text-success" style="top: -1em;">section 5.2 *</sup></h2>
+    <h2 class="mb-1">Decentralized Identifiers (DIDs) <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 5.2]</sup></h2>
     <p class="mb-2">The identifiers of the digital representation are algorithmically generated based on the PAIs.</p>
     <div class="card mb-5">
         <div class="card-body">
@@ -111,7 +111,7 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-4">
-                            <strong>DID</strong> (Decentralized Identifier) <sup class="fst-italic text-success">section 5.2.3 *</sup><br>
+                            <strong>DID</strong> (Decentralized Identifier) <sup class="fst-italic text-success">[section 5.2.3]</sup><br>
                             <small class="lh-sm d-inline-block text-black-50 mt-1">For system use</small>
                         </div>
                         <div class="col-md-8">
@@ -126,7 +126,7 @@
                 <li class="list-group-item">
                     <div class="row align-items-md-center">
                         <div class="col-md-4">
-                            <strong>USN</strong> (Universal Serial Number) <sup class="fst-italic text-success">section 5.3 *</sup><br>
+                            <strong>USN</strong> (Universal Serial Number) <sup class="fst-italic text-success">[section 5.3]</sup><br>
                             <small class="lh-sm d-inline-block text-black-50 mt-1">Shortened version for human readability</small>
                         </div>
                         <div class="col-md-8">
@@ -149,7 +149,7 @@
     </div>
 
 
-    <h2 class="mb-1">Digital Representation Address <sup class="fst-italic fs-6 text-success" style="top: -1em;">section 7 *</sup></h2>
+    <h2 class="mb-1">Digital Representation Address <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 7]</sup></h2>
     <p class="mb-2">Information about where the digital representation is stored.</p>
     <div class="card mb-5">
         <div class="card-body">
@@ -185,7 +185,7 @@
 
 
     <div class="d-flex justify-content-between mb-2">
-        <h2 class="mb-0">Data Objects & Verified Credentials <sup class="fst-italic fs-6 text-success" style="top: -1em;">section 6 *</sup> <sup class="fst-italic fs-6 text-success" style="top: -1em;">section 5.2.4 *</sup></h2>
+        <h2 class="mb-0">Data Objects & Verified Credentials <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 6]</sup> <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 5.2.4]</sup></h2>
 
             <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary">
                 <i class="fas fa-edit"></i>&nbsp;Edit
@@ -316,7 +316,7 @@
     </div>-->
 
 
-    <h2>Change History <sup class="fst-italic fs-6 text-success" style="top: -1em;">section 6.3 *</sup></h2>
+    <h2>Change History <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 6.3]</sup></h2>
     <div class="card mb-5">
         <div class="card-body">
             <div class="table-responsive p-2">
@@ -351,5 +351,5 @@
 
     <hr class="mt-5">
 
-    <p><span class="fst-italic text-success">section X *</span> &mdash;  See this section of <a href="https://github.com/obada-foundation/standard/blob/main/proposed-changes/index.md">the standard</a>.</p>
+    <p><span class="fst-italic text-success">[section X]</span> &mdash;  See this section of <a href="https://github.com/obada-foundation/standard/blob/main/proposed-changes/index.md">the standard</a>.</p>
 @endsection
