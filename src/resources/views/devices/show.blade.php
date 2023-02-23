@@ -64,8 +64,10 @@
     @endif
 
     <h2 class="mb-1">Physical Asset Identifiers (PAIs) <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 5.1]</sup></h2>
-    <p class="mb-2">Immutable identifiers are read from the physical asset and stored in an attached data object called &ldquo;physicalAssetIdentifiers&rdquo;.</p>
-    <div class="card mb-5">
+
+    <p class="mt-4 mb-1 fw-bold fs-5">Immutable identifiers</p>
+    <p>Unique and unchanging identifiers, permanently embedded by the manufacturer as part of the product. They remain fixed and can be resolved by either visible means or via firmware at any point in the entire lifecycle of the product. These identifiers, along with information about the retrieval method and the software used to read them, are stored in a required data object called &ldquo;physicalAssetIdentifiers&rdquo;.</p>
+    <div class="card mb-4">
         <div class="card-body">
             <ul class="list-group list-group-flush mt-3 mb-3">
                 <li class="list-group-item">
@@ -98,7 +100,36 @@
                         </div>
                     </div>
                 </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>Other</strong>
+                        </div>
+                        <div class="col-md-8">
+                            <em class="text-black-50">(coming soon)</em>
+                        </div>
+                    </div>
+                </li>
             </ul>
+        </div>
+    </div>
+
+    <p class="mt-4 mb-1 fw-bold fs-5">Non-immutable Identifiers</p>
+    <p>Additional product identifiers that can help identify the product which are non permanently embedded as part of the product. Non-immutable identifiers are stored in a data object to be defined in the standard.</p>
+    <div class="card mb-5">
+        <div class="card-body">
+            <ul class="list-group list-group-flush mt-3 mb-3">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-4">
+                    <strong>GTIN, UPC, SKU, etc</strong>
+                </div>
+                <div class="col-md-8">
+                    <em class="text-black-50">(coming soon)</em>
+                </div>
+            </div>
+        </li>
+    </ul>
         </div>
     </div>
 
