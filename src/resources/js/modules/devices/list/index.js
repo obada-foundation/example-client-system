@@ -17,6 +17,8 @@ window._app = new Vue({
     el: '#app'
 });
 
+const isLocked = [];
+
 $(document).ready(() => {
     $('#deviceList').DataTable({
         order: [[6, 'desc']],
@@ -104,7 +106,36 @@ $(document).ready(() => {
             {
                 sortable: false,
                 "render": function(data, type, full, meta) {
-                    return !!full.image ? '<img src="' + full.image + '" width="60">' : '-';
+                    if (!!full.image) {
+
+                        // chrome relies on mime type, so we're forcing blob type for images
+
+                        const myRequest = new Request(full.image);
+
+                        // protection from duplicated requests
+                        if (isLocked[full.usn] === undefined) {
+                            isLocked[full.usn] = true;
+
+                            fetch(myRequest)
+                                .then((response) => {
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! Status: ${response.status}`);
+                                    }
+
+                                    return response.blob();
+                                })
+                                .then((response) => {
+                                    document.getElementById('image' + full.usn).src = URL.createObjectURL(response);
+                                })
+                                .catch(error => {
+                                    // console.log(error);
+                                });
+                        }
+
+                        return '<img id="image' + full.usn + '" src="" width="60">';
+                    } else {
+                        return '-';
+                    }
                 },
                 class: 'text-center'
             },
