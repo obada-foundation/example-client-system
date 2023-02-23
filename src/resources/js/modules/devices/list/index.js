@@ -104,7 +104,29 @@ $(document).ready(() => {
             {
                 sortable: false,
                 "render": function(data, type, full, meta) {
-                    return !!full.image ? '<img src="' + full.image + '" width="60">' : '-';
+                    if (!!full.image) {
+                        // chrome relies on mime type
+                        // download image to some storage; make base64 out of it; add to img tag
+                        const myRequest = new Request(full.image);
+                        fetch(myRequest)
+                            .then((response) => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! Status: ${response.status}`);
+                                }
+
+                                return response.blob();
+                            })
+                            .then((response) => {
+                                document.getElementById('image' + full.usn).src = URL.createObjectURL(response);
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+
+                        return '<img id="image' + full.usn + '" src="" width="60">';
+                    } else {
+                        return '-';
+                    }
                 },
                 class: 'text-center'
             },
