@@ -37,7 +37,7 @@ export default {
             return;
         }
 
-        axios('http://node.alpha.obada.io:1317/obada-foundation/fullcore/nft/' + encodeURIComponent(encodeURIComponent(this.did)), {
+        axios('https://node.alpha.obada.io:1317/obada-foundation/fullcore/nft/' + encodeURIComponent(encodeURIComponent(this.did)), {
             method: 'get',
             responseType: 'json'
         })

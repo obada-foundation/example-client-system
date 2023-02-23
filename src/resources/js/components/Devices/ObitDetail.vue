@@ -47,7 +47,7 @@
             <tbody>
             <tr  v-show="blockchainObit.data.checksum !== null && blockchainObit.data.checksum.length > 0">
                 <td>
-                    Exists on Blockchain. <a  v-bind:href="'http://node.alpha.obada.io:1317/obada-foundation/fullcore/nft/'+blockchainObit.id">Click to View.</a>
+                    Exists on Blockchain. <a  v-bind:href="'https://node.alpha.obada.io:1317/obada-foundation/fullcore/nft/'+blockchainObit.id">Click to View.</a>
                 </td>
             </tr>
             <tr>
