@@ -44,7 +44,9 @@ class ProccessCsvLine implements ShouldQueue
         if ($existingDevice) {
             throw ValidationException::withMessages([
                 'csv' => sprintf(
-                    'PAI is already exists in the system for the given serial number: "%s", manufacturer: "%s", part number: "%s"',
+                    'PAI is already exists in the system for the given serial number:' .
+                    '"%s", manufacturer: "%s", part number: "%s". Items up to here were imported. ' .
+                    'Items after this were not imported.',
                     $this->serialNumber,
                     $this->manufacturer,
                     $this->partNumber
