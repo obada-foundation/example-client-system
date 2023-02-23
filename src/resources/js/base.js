@@ -1,7 +1,8 @@
 import * as bootstrap from 'bootstrap';
 import {copyToClipboard} from "./utils/copyToClipboard";
-import {showAlert} from "./utils/showAlert";
-import axios from "axios";
+import * as Sentry from "@sentry/browser";
+import { BrowserTracing } from "@sentry/tracing";
+
 require('bootstrap-sweetalert/dist/sweetalert');
 
 const token = document.head.querySelector('meta[name="csrf-token"]');
@@ -44,6 +45,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         })
     })
+});
+
+Sentry.init({
+    dsn: "https://9d59d70efe9949b4812956393002c504@sentry.tradeloopproto.com/4",
+
+    // Alternatively, use `process.env.npm_package_version` for a dynamic release version
+    // if your build tool supports it.
+    release: "develop",
+    integrations: [new BrowserTracing()],
+
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
 });
 
 

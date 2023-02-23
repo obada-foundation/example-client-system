@@ -29,6 +29,8 @@
         "@cosmjs/encoding": "^0.28.10",
         "@fortawesome/fontawesome-free": "^5.5.0",
         "@popperjs/core": "^2.11.5",
+        "@sentry/browser": "^7.38.0",
+        "@sentry/tracing": "^7.38.0",
         "bootstrap-sweetalert": "^1.0.1",
         "datatables.net": "^1.10.21",
         "datatables.net-bs5": "^1.12.1",
