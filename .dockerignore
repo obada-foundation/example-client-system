@@ -4,3 +4,4 @@ src/storage/app/documents
 src/storage/logs/laravel.log
 src/supervisord.*
 client-helper
+blockchain_data/

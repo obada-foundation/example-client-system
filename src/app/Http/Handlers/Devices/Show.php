@@ -84,7 +84,7 @@ class Show extends Handler
             if (preg_match('/^(ipfs):\/\/(.*)$/m', $document->path, $ipfsUrl)) {
                 $ipfsHash = $ipfsUrl[2];
 
-                $document->path = 'http://ipfs.alpha.obada.io:8080/ipfs/' . $ipfsHash;
+                $document->path = config('ipfs.gateway') . $ipfsHash;
             }
 
             return $document;

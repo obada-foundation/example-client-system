@@ -144,7 +144,7 @@ class Device extends Model
                 if (preg_match('/^(ipfs):\/\/(.*)$/m', $d->path, $ipfsUrl)) {
                     $ipfsHash = $ipfsUrl[2];
 
-                    return 'http://ipfs.alpha.obada.io:8080/ipfs/' . $ipfsHash;
+                    return config('ipfs.gateway') . $ipfsHash;
                 }
 
                 return $d->path;

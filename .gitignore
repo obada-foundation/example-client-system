@@ -4,6 +4,7 @@ redis
 docker-compose.yml
 src/vendor
 client-helper
+blockchain_data
 .vscode
 src/public/js
 src/public/css
