@@ -14,7 +14,8 @@ const mix = require('laravel-mix');
 mix.js('resources/js/base.js', 'public/js')
     .sass('resources/sass/base.scss', 'public/css');
 
-mix.js('resources/js/base-vue.js', 'public/js');
+mix.js('resources/js/base-vue.js', 'public/js')
+    .vue({ version: 2 });
 
 mix.js('resources/js/modules/devices/list/index.js', 'public/js/devices_list.js')
     .sass('resources/js/modules/devices/list/index.scss', 'public/css/devices_list.css');
@@ -22,5 +23,7 @@ mix.js('resources/js/modules/devices/edit.js', 'public/js/devices_edit.js');
 mix.js('resources/js/modules/devices/show.js', 'public/js/devices_show.js');
 mix.js('resources/js/modules/nft/transfer.js', 'public/js/nft_transfer.js');
 mix.js('resources/js/modules/wallet/index.js', 'public/js/wallet_index.js');
+mix.js('resources/js/modules/verify/index.js', 'public/js/verify_index.js')
+    .sass('resources/js/modules/verify/index.scss', 'public/css/verify_index.css');
 
 mix.version();

@@ -57,4 +57,9 @@ class SiteController extends Controller
     {
         return view('pages.documentation', $this->getData([]));
     }
+
+    public function verify(Request $request)
+    {
+        return view('pages.verify', $this->getData([]));
+    }
 }
