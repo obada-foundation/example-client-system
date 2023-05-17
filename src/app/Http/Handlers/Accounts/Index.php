@@ -24,7 +24,6 @@ class Index extends Handler {
             ->setAccessToken($token);
 
         $accounts = $api->accounts();
-
         $mnemonic = '';
 
         try {

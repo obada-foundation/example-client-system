@@ -37,7 +37,7 @@ class Account {
 
     public function getFormattedBalance()
     {
-        return number_format($this->account->getBalance(), 2);
+        return number_format($this->account->getBalance()->getAmount(), 2);
     }
 
     public function getFormattedNftCount()
