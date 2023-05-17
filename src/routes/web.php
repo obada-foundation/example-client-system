@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'SiteController@welcome');
 Route::get('/documentation', 'SiteController@documentation')->name('documentation');
 Route::get('/retrieve/obit', 'SiteController@retrieveObit');
+Route::get('/verify-document', 'SiteController@verify')->name('verify-document');
 
 Route::namespace('\App\Http\Handlers\Wallet')
     ->name('wallet.')
@@ -78,7 +79,7 @@ Route::namespace('\App\Http\Handlers\Accounts')
         Route::get('/export-account/{address}', \ExportAccount::class)->name('export-account');
         Route::post('/new-account', \StoreAccount::class)->name('new-account');
         Route::post('/{address}', \UpdateAccount::class)->name('update-account');
-        
+
         Route::middleware(['ch-token', 'ch-account'])
             ->get('/{address}/delete', \DeleteAccount::class)
             ->name('delete-account');

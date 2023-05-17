@@ -1,0 +1,8 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "dropzone/dist/dropzone.css";
+
+.dropzone {
+    border: $input-border-width dashed $input-border-color;
+    background: $input-bg;
+}
