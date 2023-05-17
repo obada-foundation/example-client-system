@@ -55,7 +55,7 @@
                 </nav>
             @endif
 
-            <main class="position-relative mt-5">
+            <main class="position-relative @if(!(isset($hide_h1) && $hide_h1)) mt-5 @endif">
                 @yield('page_content')
             </main>
         </div>

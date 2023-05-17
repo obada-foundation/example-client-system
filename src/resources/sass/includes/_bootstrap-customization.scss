@@ -271,3 +271,14 @@
         }
     }
 }
+
+
+/**
+ * Helpers
+ */
+
+.w-md-50 {
+    @include media-breakpoint-up(md) {
+        width: 50% !important;
+    }
+}
