@@ -111,12 +111,12 @@
                                 </td>
                                 <td>
                                     <select class="form-select" v-model="doc.type.value">
-                                        <option value="0">physicalAssetIdentifiers - An array containing the text of the manufacturer, model or part number, and serial number that were used to generate the DID as per section 1.1.</option>
-                                        <option value="1">image - An image of the asset.</option>
-                                        <option value="2">mainImage - Main image to be used for the asset.</option>
-                                        <option value="3">functionalityReport - Used to prove repair.</option>
-                                        <option value="4">dataSanitizationReport - Report of data destruction by either digital erasure of physical destruction of device.</option>
-                                        <option value="5">dispositionReport - A report showing a claim the asset entered reuse or was recycled.</option>
+                                        <option value="physicalAssetIdentifiers">physicalAssetIdentifiers - An array containing the text of the manufacturer, model or part number, and serial number that were used to generate the DID as per section 1.1.</option>
+                                        <option value="image">image - An image of the asset.</option>
+                                        <option value="mainImage">mainImage - Main image to be used for the asset.</option>
+                                        <option value="functionalityReport">functionalityReport - Used to prove repair.</option>
+                                        <option value="dataSanitizationReport">dataSanitizationReport - Report of data destruction by either digital erasure of physical destruction of device.</option>
+                                        <option value="dispositionReport">dispositionReport - A report showing a claim the asset entered reuse or was recycled.</option>
                                     </select>
                                 </td>
                                 <td>

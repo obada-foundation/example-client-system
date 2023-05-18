@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Handlers\Devices;
 
 use App\Http\Handlers\Handler;
-use App;
 use App\Events\DeviceSaved;
 use Obada\Api\UtilsApi;
 use Obada\ClientHelper\GenerateObitDIDRequest;
@@ -59,6 +58,7 @@ class Save extends Handler {
                             'device_id'  => $existingDevice->id,
                             'name'       => $document['doc_name'],
                             'path'       => $document['doc_path'],
+                            'type'       => $document['doc_type'],
                             'data_hash'  => '',
                             'encryption' => $document['doc_encryption']
                         ]);
@@ -68,6 +68,7 @@ class Save extends Handler {
                             'device_id'  => $existingDevice->id,
                             'name'       => $document['doc_name'],
                             'path'       => $document['doc_path'],
+                            'type'       => $document['doc_type'],
                             'data_hash'  => hash('sha256', Storage::get($filePath)),
                             'encryption' => $document['doc_encryption']
                         ]);

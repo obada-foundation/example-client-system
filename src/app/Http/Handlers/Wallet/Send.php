@@ -23,7 +23,7 @@ class Send extends Handler {
         $req = (new SendCoinsRequest)
             ->setDenom('obd')
             ->setAmount(request()->get('amount'))
-            ->setRecepientAddress(request()->get('recepient_address'));
+            ->setRecipientAddress(request()->get('recepient_address'));
 
         try {
             $api->sendCoins($address, $req);

@@ -236,8 +236,8 @@
                     <table class="table table-striped" style="vertical-align: middle;">
                         <thead>
                             <tr>
-<!--                                <th>Data Object Types</th>
-                                <th>Encrypted</th>-->
+                               <th>Data Object Types</th>
+                                <th>Encrypted</th>
                                 <th>Description</th>
                                 <th style="width: 50%;">Link to File</th>
                                 <th>Signed by</th>
@@ -247,10 +247,10 @@
                         <tbody>
                             @foreach($device->documents as $document)
                                 <tr>
-<!--                                    <td>{{ $document->type }}</td>
+                                    <td>{{ $document->type }}</td>
                                     <td class="text-center">
                                         <input type="checkbox" {{ $document->encryption ? 'checked' : '' }} readonly disabled>
-                                    </td>-->
+                                    </td>
                                     <td>{{ $document->name }}</td>
                                     <td><a href="{{ $document->path }}" class="text-break">{{ $document->path }}</a></td>
                                     <td>Owner&nbsp;[JWT&nbsp;token]</td>
@@ -354,20 +354,23 @@
                 <table class="table table-striped" style="vertical-align: middle;">
                     <thead>
                     <tr>
-                        <th>Date</th>
-                        <th style="width: 75%;">Checksum</th>
+                        <th>Version</th>
+                        <th>Version Hash</th>
+                        <th style="width: 75%;">Root Hash</th>
                     </tr>
                     </thead>
                     <tbody>
+                        @foreach ($history as $version => $historyRecord)
                         <tr>
-<!--                            <td>-</td>
+                            <td>{{ $version }}</td>
                             <td>
-                                @isset($obit['checksum'])
-                                    <a href="{{ route('devices.show', $device->usn) }}.{{ $obit['checksum'] }}">{{ $obit['checksum'] }}</a>
-                                @endisset
-                            </td>-->
-                            <td colspan="2"><em class="text-black-50">(coming soon)</em></td>
+                                {{ $historyRecord->getVersionHash() }}
+                            </td>
+                            <td colspan="2">
+                                {{ $historyRecord->getRootHash() }}
+                            </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

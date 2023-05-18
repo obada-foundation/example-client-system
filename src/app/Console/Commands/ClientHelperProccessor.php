@@ -85,6 +85,7 @@ class ClientHelperProccessor extends Command
                     'name'       => $document->name,
                     'data_hash'  => $document->hash,
                     'path'       => $document->uri,
+                    'type'       => $document->type,
                     'encryption' => $document->encrypted,
                 ]);
             }
@@ -115,6 +116,7 @@ class ClientHelperProccessor extends Command
                 'device_id'  => $device->id,
                 'name'       => $jsonDoc->name,
                 'path'       => $jsonDoc->uri,
+                'type'       => $jsonDoc->type,
                 'data_hash'  => $jsonDoc->hash,
                 'encryption' => $jsonDoc->encrypted,
             ]); 

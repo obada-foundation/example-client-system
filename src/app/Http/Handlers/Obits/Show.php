@@ -54,13 +54,13 @@ class Show extends Handler {
         }
 
         return view('devices.show', [
-            'page_title' => 'Device Details — USN ' . $device->usn,
-            'is_obit_page' => true,
-            'usn' => $key,
+            'page_title'    => 'Device Details — USN ' . $device->usn,
+            'is_obit_page'  => true,
+            'usn'           => $key,
             'formatted_usn' => $this->formatUsn($key),
-            'device' => $device,
-            'obit' => $obit,
-            'usn_data' => $usn_data
+            'device'        => $device,
+            'obit'          => $obit,
+            'usn_data'      => $usn_data
         ]);
     }
 

@@ -360,9 +360,10 @@ export default {
                             validations: ['required']
                         },
                         type: {
-                            value: "1",
+                            value: s.type,
                             isValid: true,
                             isClean: true,
+                            validations: ['required']
                         },
                         encryption: {
                             value: s.encryption,

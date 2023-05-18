@@ -40,6 +40,9 @@ class Show extends Handler
         $nftApi->getConfig()->setAccessToken($token);
 
         $obit = $obitApi->get($usn);
+        
+        $history = $obitApi->history($usn);
+        krsort($history, SORT_NUMERIC);
 
         $hasNFT = true;
 
@@ -96,6 +99,7 @@ class Show extends Handler
             'formatted_usn' => $this->formatUsn($usn),
             'device'        => $device,
             'obit'          => $obit,
+            'history'       => $history,
             'usn_data'      => $usn_data,
             'hasNFT'        => $hasNFT,
             'account'       => request()->get('ch-account'),

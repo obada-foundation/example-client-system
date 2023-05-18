@@ -38,6 +38,7 @@ class ClientHelperSave
   
                 return (new DeviceDocument)
                     ->setName($document->name)
+                    ->setType($document->type)
                     ->setDocumentFile($base64File)
                     ->setShouldEncrypt($document->encryption);
             })
