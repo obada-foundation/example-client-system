@@ -23,29 +23,26 @@
 
     <div class="w-md-75 mx-auto">
         <h1 class="text-center">Timestamp Certificate</h1>
-        <p class="text-center mb-5">This timestamp was created with <em>Ethereum</em></p>
+        <p class="text-center mb-5">This timestamp was created according to the the pNFT Standard being developed by the OBADA Foundation</p>
 
         <hr>
 
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <h2 class="mb-0">Timestamp</h2>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-8">
                 <h2 class="mb-0">Oct-14-2022 06:00:11 UTC</h2>
             </div>
         </div>
 
         <hr>
 
-        <h4>Comment:</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi beatae, culpa cumque debitis doloremque eius exercitationem expedita harum incidunt labore nihil, omnis placeat possimus quia ratione saepe similique, totam!</p>
-
-        <div class="row mt-5">
-            <div class="col-sm-5 text-center">
+        <div class="row mt-4">
+            <div class="col-sm-4">
                 <img id="verification-qr" src="" alt="">
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-8">
                 <dl>
                     <dt>Hash:</dt>
                     <dd><small class="text-break">12a66ae17e2581e8ec3669524c3f992c00504ed97cc687757ca1dc37c9d228</small></dd>
@@ -59,9 +56,9 @@
             </div>
         </div>
 
-        <p class="text-center mt-4"><a id="verification-link" href="{{ route('verify') }}?verified=1">Click here to verify your timestamp.</a></p>
+        <p class="mt-4"><a id="verification-link" href="{{ route('verify') }}?verified=1">Click here to verify your timestamp.</a></p>
 
-        <p class="text-center">This certificate is only valid in combination with the original file and OBADA's
+        <p class="">This certificate is only valid in combination with the original file and OBADA's
             open procedure. <br>More information on <a href="{{ route('verify') }}">{{ route('verify') }}</a>.</p>
 
         <hr class="mt-4 mb-4">
@@ -120,54 +117,28 @@
 
         <h2>Verification</h2>
 
-        <p>OBADA uses various blockchains like
-            the Bitcoin Blockchain to create tamper-proof timestamps for your data.
-            Instead of backing up your data, OBADA embeds a cryptographic
-            fingerprint in the blockchain. It is de facto impossible to deduce the
-            content of your data from your fingerprint. Therefore, the data remains in
-            your company and is not publicly accessible. All you need to do is send
-            this fingerprint to OBADA via the interface. The integration of the
-            RESTful API is very simple and convenient and allows all data to be easily
-            tagged with a tamper-proof timestamp. This document shows the
-            procedure and gives instructions for verifying a timestamp created with
-            OBADA.</p>
+        <p>OBADA uses cryptographic methods to create tamper-proof timestamps for your data. Instead of backing up your data, OBADA embeds a cryptographic fingerprint in the blockchain. It is de facto impossible to deduce the content of your data from your fingerprint. Therefore, the data remains in your company and is not publicly accessible. All you need to do is send this fingerprint to OBADA via the interface. The integration of the RESTful API is very simple and convenient and allows all data to be easily tagged with a tamper-proof timestamp. This document shows the procedure and gives instructions for verifying a timestamp created with OBADA.</p>
 
         <h3>1. Determine the SHA-256 of your original file</h3>
-        <p>There are numerous programs and libraries to calculate the SHA-256 of
-            a file, such as <a href="https://md5file.com/calculator">MD5FILE</a>. Simply drag and drop or select your file, to
-            retrieve the SHA-256 of your file.</p>
+        <p>There are numerous programs and libraries to calculate the SHA-256 of a file, such as <a href="https://md5file.com/calculator">MD5FILE</a>. Simply drag and drop or select your file, to retrieve the SHA-256 of your file.</p>
+
         <h3>2. Validate your proof</h3>
-        <p>First, it must be verified that the hash of the original is part of the
-            evidence. In order to check this, the proof can be opened with a
-            conventional editor and its content can be searched for the hash. If the
-            hash cannot be found, either the file was manipulated or the wrong
-            evidence was selected.</p>
+        <p>First, it must be verified that the hash of the original is part of the evidence. In order to check this, the proof can be opened with a conventional editor and its content can be searched for the hash. If the hash cannot be found, either the file was manipulated or the wrong evidence was selected.</p>
+
         <h3>3. Determine the root hash</h3>
-        <p>The Merkle tree is a tree structure, that allows to organize the seed more
-            efficient than a plain-text seed file. The tree is built from the bottom to
-            the top and follows a defined schema. The value of a node is
-            determined by the aggregated hash of its children.</p>
+        <p>The Merkle tree is a tree structure, that allows to organize the seed more efficient than a plain-text seed file. The tree is built from the bottom to the top and follows a defined schema. The value of a node is determined by the aggregated hash of its children.</p>
         <p class="text-break">
             Left child = <br><span style="color: deeppink;">a8eb9f308b08397df77443697de4959c156fd4c68c489995163285dbd3eeda</span> <br>
             Right child = <br><span style="color: darkorange;">ab95adaee8eb02219d556082a7f4fb70d19b8000097848112eb85b1d2fca8f</span> <br>
             Node = SHA-256(<span style="color: deeppink;">a8eb9f308b08397df77443697de4959c156fd4c68c489995163285dbd3eeda</span><span style="color: darkorange;">ab95adaee8eb02219d556082a7f4fb70d19b8000097848112eb85b1d2fca8f</span>) = 47e47c96302eeba62ed443dd0c89b3411bbddd2c1ff6bdfb1f833fa11e060b85
         </p>
-        <p>This step is performed for all levels of the tree until the hash of the root
-            has been calculated. If the hash of the root is identical as proof, the
-            calculation was successful and the root hash is verified. The top hash
-            corresponds to the root hash we embedded in the blockchain through a
-            transaction. For a more detailed explanation of the Merkle tree, we want
-            to refer to <a href="https://en.wikipedia.org/wiki/Merkle_tree">Wikipedia</a>.</p>
-        <h3>4. Determine the Ethereum Transaction</h3>
-        <p>Having determined the root hash in the previous step, we store this hash
-            in a <a href="https://etherscan.io/address/111">Smart Contract in the Ethereum blockchain</a>.</p>
+        <p>This step is performed for all levels of the tree until the hash of the root has been calculated. If the hash of the root is identical as proof, the calculation was successful and the root hash is verified. The top hash corresponds to the root hash we embedded in the blockchain through a transaction. For a more detailed explanation of the Merkle tree, we want to refer to <a href="https://en.wikipedia.org/wiki/Merkle_tree">Wikipedia</a>.</p>
+
+        <h3>4. Determine the pNFT address</h3>
+        <p>Having determined the root hash in the previous step, we store this hash in a decentralized registry at a digital address for the physical asset.</p>
+
         <h3>5. Check the transactions</h3>
-        <p>The respective log events must be searched for each transaction in this
-            contract. These events are divided into topics. The root hash should be
-            contained in a topic. Caution: Some services display the hashes with a
-            0x prefix. As soon as the transaction has been found, the block time is
-            the actual tamper-proof timestamp. To simplify the search, we added the
-            transaction to the certificate.</p>
+        <p>The respective log events must be searched for each transaction in this contract. These events are divided into topics. The root hash should be contained in a topic. Caution: Some services display the hashes with a 0x prefix. As soon as the transaction has been found, the block time is the actual tamper-proof timestamp. To simplify the search, we added the transaction to the certificate.</p>
     </div>
 
 @endsection
