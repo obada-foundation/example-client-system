@@ -60,13 +60,6 @@ class SiteController extends Controller
 
     public function verify(Request $request)
     {
-        return view('pages.verify', array_merge([
-            'verified' => $request->input('verified'),
-        ], $this->getData([])));
-    }
-
-    public function certificate(Request $request)
-    {
-        return view('pages.certificate', $this->getData([]));
+        return view('pages.verify', $this->getData([]));
     }
 }

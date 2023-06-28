@@ -139,7 +139,7 @@ class Device extends Model
 
     public function getImageAttribute(): ?string {
         return $this->documents
-            ->filter(fn ($d) => $d->name === 'image')
+            ->filter(fn ($d) => $d->type === 'mainImage')
             ->map(function ($d) {
                 if (preg_match('/^(ipfs):\/\/(.*)$/m', $d->path, $ipfsUrl)) {
                     $ipfsHash = $ipfsUrl[2];

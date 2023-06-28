@@ -45,9 +45,10 @@ class Show extends Handler
         krsort($history, SORT_NUMERIC);
 
         $hasNFT = true;
+        $nft = null;
 
         try {
-            $nftApi->nft($usn);
+            $nft = $nftApi->nft($usn);
         } catch (ApiException $t) {
             $hasNFT = false;
         }
@@ -102,6 +103,7 @@ class Show extends Handler
             'history'       => $history,
             'usn_data'      => $usn_data,
             'hasNFT'        => $hasNFT,
+            'nft'           => $nft,
             'account'       => request()->get('ch-account'),
             'compute_log'   => str_replace(['<|', '|>'], ['<br/><br />',''], $respChecksum->getComputeLog()),
         ]);

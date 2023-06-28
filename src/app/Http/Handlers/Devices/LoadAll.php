@@ -26,11 +26,9 @@ class LoadAll extends Handler {
         return $datatables->eloquent($devices)
             ->rawColumns(['id', 'manufacturer','part_number','serial_number', 'obit_checksum'])
             ->addColumn('blockchain_checksum', function (Device $device) use ($api) {
-                //Get Client Obit
                 try {
-                   // return '';
                     $pNFT = $api->nft($device->usn);
-                    return $pNFT->getData()->getChecksum();
+                    return $pNFT->getUriHash();
                 } catch (\Exception $e) {
                     return '';
                 }

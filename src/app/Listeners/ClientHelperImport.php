@@ -33,8 +33,17 @@ class ClientHelperImport
             ->documents()
             ->get()
             ->map(function (Document $document) {                    
-                $filePath = substr($document->path, strpos($document->path, 'documents'));
-                $base64File = base64_encode(Storage::get($filePath));
+                $ipfsUrl = strpos($document->path, 'ipfs://');
+                $base64File = '';
+                if ($ipfsUrl !== false) {
+                    $cidParts = explode('://', $document->path);
+                    $cid      = $cidParts[1];
+            
+                    $base64File = base64_encode(file_get_contents(config('ipfs.gateway') . $cid, true));
+                } else {
+                    $filePath = substr($document->path, strpos($document->path, 'documents'));
+                    $base64File = base64_encode(Storage::get($filePath));
+                }
   
                 return (new DeviceDocument)
                     ->setName($document->name)

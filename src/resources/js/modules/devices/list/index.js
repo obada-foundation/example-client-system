@@ -89,18 +89,21 @@ $(document).ready(() => {
                 className: 'text-nowrap',
                 sortable: false,
                 render: function(data, type, full, meta) {
+                    if (full.blockchain_checksum.length === 0) {
+                        return '<i class="fas fa-sync text-warning align-middle" data-bs-toggle="tooltip" title="Local newer"></i>' +
+                        '<button class="btn btn-secondary p-0 text-decoration-none ms-2 align-middle px-1 border-1" data-id="' + full.usn + '" data-action="mint" style="width: 45px;">' +
+                        '   <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>' +
+                        '   <span class="inner-text">mint<sup>*</sup></span>' +
+                        '</button>' +
+                        '<i class="fas fa-check text-success ms-2 ps-3 pe-2 d-none" aria-label="minted" data-bs-toggle="tooltip" title="Minted succesfully"></i>';
+                    }
                     // todo: check if blockchain is newer or local is newer or equal
                     if (full.obit_checksum === full.blockchain_checksum) {
                         return '<i class="fas fa-check text-success" data-bs-toggle="tooltip" title="Synchronized with blockchain"></i>';
                     } else {
-                        return '<i class="fas fa-sync text-warning align-middle" data-bs-toggle="tooltip" title="Local newer"></i>' +
-                            '<button class="btn btn-secondary p-0 text-decoration-none ms-2 align-middle px-1 border-1" data-id="' + full.usn + '" data-action="mint" style="width: 45px;">' +
-                            '   <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>' +
-                            '   <span class="inner-text">mint<sup>*</sup></span>' +
-                            '</button>' +
-                            '<i class="fas fa-check text-success ms-2 ps-3 pe-2 d-none" aria-label="minted" data-bs-toggle="tooltip" title="Minted succesfully"></i>';
+                        return '<i class="fas fa-sync text-warning align-middle" data-bs-toggle="tooltip" title="Local newer"></i>';
                     }
-                    return '<i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain newer"></i>';
+                    //return '<i class="fas fa-sync text-danger" data-bs-toggle="tooltip" title="Blockchain newer"></i>';
                 }
             },
             {

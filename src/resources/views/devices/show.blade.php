@@ -31,7 +31,7 @@
         <div class="flex-shrink-0">
             <a href="{{ route('nft.transfer.index', $device->usn) }}" class="btn btn-outline-primary"><i class="fas fa-exchange-alt"></i> Transfer pNFT</a>
             <div class="position-relative d-inline-block ms-1 mb-4 mb-md-0">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#twoFaModal">Update to Blockchain</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#twoFaModal" @if ($nft->getUriHash() === $obit['checksum']) disabled @endif >re-mint</button>
                 <small class="d-block lh-sm position-absolute top-100 w-100 text-center pt-1">{{ config('view.gas_fee_text') }}</small>
             </div>
         </div>
@@ -309,9 +309,9 @@
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-7">
-                            @isset($obit['checksum'])
-                                <p>{{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button></p>
-                            @endisset
+                            @if ($hasNFT)
+                                <p>{{ $nft->getUriHash() }}<button class="btn btn-link btn-sm" data-copy-text="{{ $nft->getUriHash() }}"><i class="far fa-copy"></i></button></p>
+                            @endif
                         </div>
                     </div>
                 </li>

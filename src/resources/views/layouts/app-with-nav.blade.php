@@ -15,14 +15,6 @@
                     </ul>
                 </li>
                 <li class="nav-item"><a href="{{ route('documentation') }}" class="nav-link">Documentation</a></li>
-                <li class="nav-item"><span class="nav-link ps-0 pe-0" style="color: #adb5bd;">|</span></li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Experimental Features</a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="{{ route('verify') }}">Verify Document</a></li>
-                        <li class="dropdown-item"><a href="{{ route('timestamp-certificate') }}">Timestamp Certificate</a></li>
-                    </ul>
-                </li>
             </ul>
         </div>
     </div>

@@ -33,7 +33,7 @@ class Mint extends Handler {
 
             $api->mint($usn);
 
-            Redis::subscribe(['nft.minted'], function ($did) use ($usn, $device) {
+            Redis::subscribe(['nft.minted'], function ($did) {
                 Log::info('NFT ' . $did . ' was minted');
                 exit(0);
             });
