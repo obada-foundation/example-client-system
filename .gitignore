@@ -12,3 +12,4 @@ src/public/mix-manifest.json
 src/supervisord.pid
 src/supervisord.log
 ipfs
+node_modules
