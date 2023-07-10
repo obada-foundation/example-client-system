@@ -79,6 +79,12 @@ services:
       - DB_PATH=/home/obada/data
       - IPFS_RPC_URL=ipfs:5001
       - NODE_RPC_URL=tcp://node.alpha.obada.io:26657
+      - NODE_GRPC_URL=node.alpha.obada.io:9090
+      - SENTRY_DSN=https://9d59d70efe9949b4812956393002c504@sentry.tradeloopproto.com/4
+      - REGISTRY_URL=registry.beta.obada.io:2018
+      - REGISTRY_HTTP_URL=https://registry.beta.obada.io
+    logging:
+
     networks:
       - backend
       
