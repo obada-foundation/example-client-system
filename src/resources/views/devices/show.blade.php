@@ -216,101 +216,135 @@
 
 
     <div class="d-flex justify-content-between mb-2">
-        <h2 class="mb-0">Data Objects & Verified Credentials <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 6]</sup> <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 5.2.4]</sup></h2>
+        <h2 class="mb-0">Data Objects <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 5.2.4]</sup> <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 6]</sup></h2>
 
             <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary">
                 <i class="fas fa-edit"></i>&nbsp;Edit
             </a>
     </div>
-    <div class="card mb-5">
+    <div class="card mb-4">
         <div class="card-body">
 
-            @if($device->documents->isEmpty())
+            @if(!$device->documents->isEmpty())
                 <ul class="list-group list-group-flush mt-2">
                     <li class="list-group-item">
                         <p class="mb-0 text-center">There are no data objects attached to this device</p>
                     </li>
                 </ul>
             @else
-                <div class="table-responsive p-2">
-                    <table class="table table-striped" style="vertical-align: middle;">
-                        <thead>
-                            <tr>
-                               <th>Data Object Types</th>
-                                <th>Encrypted</th>
-                                <th>Description</th>
-                                <th style="width: 50%;">Link to File</th>
-                                <th>Signed by</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($device->documents as $document)
-                                <tr>
-                                    <td>{{ $document->type }}</td>
-                                    <td class="text-center">
-                                        <input type="checkbox" {{ $document->encryption ? 'checked' : '' }} readonly disabled>
-                                    </td>
-                                    <td>{{ $document->name }}</td>
-                                    <td><a href="{{ $document->path }}" class="text-break">{{ $document->path }}</a></td>
-                                    <td>Owner&nbsp;[JWT&nbsp;token]</td>
-                                    <td>-</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                <ul class="list-group list-group-flush">
+{{--                    @foreach($device->version as $version)--}}
+                        <li class="list-group-item mb-4">
+                            <h3>DID Document Version #</h3>
+
+                            <ul class="list-group list-group-flush">
+{{--                                @foreach($version->documents as $document)--}}
+                                    <li class="list-group-item">
+                                        <h4>Data Object #</h4>
+                                        <ul class="mb-2">
+                                            <li>
+                                                <strong>Metadata</strong>
+                                                <ul>
+                                                    <li>versionID:</li>
+                                                    <li>date:</li>
+                                                    <li>type: {{--{{ $document->type }}--}}</li>
+                                                    <li>name:</li>
+                                                    <li>description: {{--{{ $document->name }}--}}</li>
+                                                    <li>isEncrypted:</li>
+                                                </ul>
+                                            </li>
+
+                                            <li>
+                                                <strong>Data</strong>
+                                                <ul>
+                                                    <li>url:</li>
+                                                    <li>isEncrypted:</li>
+                                                </ul>
+                                            </li>
+
+                                            <li>
+                                                <strong>Hashes</strong>
+                                                <ul>
+                                                    <li>hashUnencryptedMetadata:</li>
+                                                    <li>hashEncryptedMetadata:</li>
+                                                    <li>hashUnencryptedDataObject:</li>
+                                                    <li>hashEncryptedDataObject:</li>
+                                                    <li>dataObjectHash:</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+{{--                                @endforeach--}}
+                                <li class="list-group-item">
+                                    <h4 class="mt-2">Version # versionHash:</h4>
+                                    <ul>
+                                        <li>{hash}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+{{--                    @endforeach--}}
+                </ul>
             @endif
+        </div>
+    </div>
 
-            <hr>
 
+    <div class="card mb-5">
+        <div class="card-body">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-2">
-                            <p><strong>Device Checksums</strong></p>
+                            <strong>Ledger Location</strong>
                         </div>
                         <div class="col-md-3">
-                            <p><strong>Last Checked Date/Time</strong></p>
+                            <strong>Last Checked Date/Time</strong>
                         </div>
                         <div class="col-md-7">
-                            <p><strong>Checksum</strong></p>
+                            <strong>rootHash</strong>
                         </div>
                     </div>
+                </li>
+                <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-2">
-                            <p><strong>Local: </strong></p>
+                            <strong>Local</strong>
                         </div>
                         <div class="col-md-3">
 
                         </div>
                         <div class="col-md-7">
                             @isset($obit['checksum'])
-                                <p>{{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button></p>
+                                {{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button>
                             @endisset
                         </div>
                     </div>
+                </li>
+                <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-2">
-                            <p><strong>Client-helper: </strong></p>
+                            <strong>Client-helper</strong>
                         </div>
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-7">
                             @isset($obit['checksum'])
-                                <p>{{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button></p>
+                                {{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button>
                             @endisset
                         </div>
                     </div>
+                </li>
+                <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-2">
-                            <p><strong>Blockchain: </strong></p>
+                            <strong>Blockchain</strong>
                         </div>
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-7">
                             @if ($hasNFT)
-                                <p>{{ $nft->getUriHash() }}<button class="btn btn-link btn-sm" data-copy-text="{{ $nft->getUriHash() }}"><i class="far fa-copy"></i></button></p>
+                                {{ $nft->getUriHash() }}<button class="btn btn-link btn-sm" data-copy-text="{{ $nft->getUriHash() }}"><i class="far fa-copy"></i></button>
                             @endif
                         </div>
                     </div>
@@ -347,7 +381,7 @@
     </div>-->
 
 
-    <h2>Change History <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 6.3]</sup></h2>
+<!--    <h2>Change History <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 6.3]</sup></h2>
     <div class="card mb-5">
         <div class="card-body">
             <div class="table-responsive p-2">
@@ -375,7 +409,7 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <p class="mb-2"><a href="#" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#nft_code" aria-expanded="false" aria-controls="calculations2">Show Raw Data</a></p>
 
