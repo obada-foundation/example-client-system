@@ -225,8 +225,8 @@
     <div class="card mb-4">
         <div class="card-body">
 
-            @if(!$device->documents->isEmpty())
-                <ul class="list-group list-group-flush mt-2">
+            @if($device->documents->isEmpty())
+                <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <p class="mb-0 text-center">There are no data objects attached to this device</p>
                     </li>
@@ -238,7 +238,7 @@
                             <h3>DID Document Version #</h3>
 
                             <ul class="list-group list-group-flush">
-{{--                                @foreach($version->documents as $document)--}}
+                                @foreach($version->documents as $document)
                                     <li class="list-group-item">
                                         <h4>Data Object #</h4>
                                         <ul class="mb-2">
@@ -247,9 +247,9 @@
                                                 <ul>
                                                     <li>versionID:</li>
                                                     <li>date:</li>
-                                                    <li>type: {{--{{ $document->type }}--}}</li>
+                                                    <li>type: {{ $document->type }}</li>
                                                     <li>name:</li>
-                                                    <li>description: {{--{{ $document->name }}--}}</li>
+                                                    <li>description: {{ $document->name }}</li>
                                                     <li>isEncrypted:</li>
                                                 </ul>
                                             </li>
@@ -274,7 +274,7 @@
                                             </li>
                                         </ul>
                                     </li>
-{{--                                @endforeach--}}
+                                @endforeach
                                 <li class="list-group-item">
                                     <h4 class="mt-2">Version # versionHash:</h4>
                                     <ul>
