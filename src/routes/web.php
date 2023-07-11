@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'SiteController@welcome');
 Route::get('/documentation', 'SiteController@documentation')->name('documentation');
 Route::get('/retrieve/obit', 'SiteController@retrieveObit');
-Route::get('/verify-document', 'SiteController@verify')->name('verify-document');
+Route::get('/verify', 'SiteController@verify')->name('verify');
+Route::get('/verify/certificate', 'SiteController@certificate')->name('timestamp-certificate');
 
 Route::namespace('\App\Http\Handlers\Wallet')
     ->name('wallet.')
