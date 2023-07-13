@@ -82,7 +82,7 @@ class ClientHelperProccessor extends Command
             foreach ($documents as $document) {
                 Document::create([
                     'device_id'  => $device->id,
-                    'name'       => $document->name,
+                    'name'       => (string) $document->name,
                     'data_hash'  => $document->hash,
                     'path'       => $document->uri,
                     'type'       => $document->type,
@@ -114,7 +114,7 @@ class ClientHelperProccessor extends Command
         foreach ($docs as $jsonDoc) {
             Document::create([
                 'device_id'  => $device->id,
-                'name'       => $jsonDoc->name,
+                'name'       => (string) $jsonDoc->name,
                 'path'       => $jsonDoc->uri,
                 'type'       => $jsonDoc->type,
                 'data_hash'  => $jsonDoc->hash,

@@ -86,7 +86,7 @@ class Sync extends Command
                                 foreach ($documents as $document) {
                                     Document::create([
                                         'device_id' => $device->id,
-                                        'name'      => $document['name'],
+                                        'name'      => (string) $document['name'],
                                         'data_hash' => $document['hash'],
                                         'path'      => $document['uri']
                                     ]);
