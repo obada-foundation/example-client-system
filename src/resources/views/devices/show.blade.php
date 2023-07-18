@@ -223,10 +223,10 @@
             </a>
     </div>
     <div class="card mb-4">
-        <div class="card-body">
+        <div class="card-body pt-0">
 
             @if($device->documents->isEmpty())
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush mt-3">
                     <li class="list-group-item">
                         <p class="mb-0 text-center">There are no data objects attached to this device</p>
                     </li>
@@ -234,52 +234,73 @@
             @else
                 <ul class="list-group list-group-flush">
 {{--                    @foreach($device->version as $version)--}}
-                        <li class="list-group-item mb-4">
-                            <h3>DID Document Version #</h3>
+                        <li class="list-group-item">
+                            <h3 class="mt-3">Version 2</h3>
 
-                            <ul class="list-group list-group-flush">
-                                @foreach($version->documents as $document)
-                                    <li class="list-group-item">
-                                        <h4>Data Object #</h4>
-                                        <ul class="mb-2">
-                                            <li>
-                                                <strong>Metadata</strong>
-                                                <ul>
-                                                    <li>versionID:</li>
-                                                    <li>date:</li>
-                                                    <li>type: {{ $document->type }}</li>
-                                                    <li>name:</li>
-                                                    <li>description: {{ $document->name }}</li>
-                                                    <li>isEncrypted:</li>
-                                                </ul>
-                                            </li>
-
-                                            <li>
-                                                <strong>Data</strong>
-                                                <ul>
-                                                    <li>url:</li>
-                                                    <li>isEncrypted:</li>
-                                                </ul>
-                                            </li>
-
-                                            <li>
-                                                <strong>Hashes</strong>
-                                                <ul>
-                                                    <li>hashUnencryptedMetadata:</li>
-                                                    <li>hashEncryptedMetadata:</li>
-                                                    <li>hashUnencryptedDataObject:</li>
-                                                    <li>hashEncryptedDataObject:</li>
-                                                    <li>dataObjectHash:</li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                @endforeach
-                                <li class="list-group-item">
-                                    <h4 class="mt-2">Version # versionHash:</h4>
+                            <ul class="mt-3">
+                                <li class="mt-2 mb-3">
+                                    <strong>Version 1 roothash:</strong>
+                                </li>
+                                <li class="mt-2 mb-3">
+                                    <strong>Data Object 1</strong>
                                     <ul>
-                                        <li>{hash}</li>
+                                        <li>versionID:</li>
+                                        <li>date:</li>
+                                        <li>type:</li>
+                                        <li>name:</li>
+                                        <li>description:</li>
+                                        <li>[etc...]</li>
+                                        <li>dataObjectHash1:</li>
                                     </ul>
+                                </li>
+                                <li class="mt-2 mb-3">
+                                    <strong>Data Object 2</strong>
+                                    <ul>
+                                        <li>versionID:</li>
+                                        <li>date:</li>
+                                        <li>type:</li>
+                                        <li>name:</li>
+                                        <li>description:</li>
+                                        <li>[etc...]</li>
+                                        <li>dataObjectHash2:</li>
+                                    </ul>
+                                </li>
+                                <li class="mt-2 mb-3">
+                                    <strong>Version 2 roothash:</strong>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="list-group-item">
+                            <h3 class="mt-3">Version 1</h3>
+
+                            <ul class="mt-3">
+                                <li class="mt-2 mb-3">
+                                    <strong>Data Object 1</strong>
+                                    <ul>
+                                        <li>versionID:</li>
+                                        <li>date:</li>
+                                        <li>type:</li>
+                                        <li>name:</li>
+                                        <li>description:</li>
+                                        <li>[etc...]</li>
+                                        <li>dataObjectHash1:</li>
+                                    </ul>
+                                </li>
+                                <li class="mt-2 mb-3">
+                                    <strong>Data Object 2</strong>
+                                    <ul>
+                                        <li>versionID:</li>
+                                        <li>date:</li>
+                                        <li>type:</li>
+                                        <li>name:</li>
+                                        <li>description:</li>
+                                        <li>[etc...]</li>
+                                        <li>dataObjectHash2:</li>
+                                    </ul>
+                                </li>
+                                <li class="mt-2 mb-3">
+                                    <strong>Version 1 roothash:</strong>
                                 </li>
                             </ul>
                         </li>
@@ -290,68 +311,9 @@
     </div>
 
 
-    <div class="card mb-5">
+<!--    <div class="card mb-5">
         <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <strong>Ledger Location</strong>
-                        </div>
-                        <div class="col-md-3">
-                            <strong>Last Checked Date/Time</strong>
-                        </div>
-                        <div class="col-md-7">
-                            <strong>rootHash</strong>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <strong>Local</strong>
-                        </div>
-                        <div class="col-md-3">
-
-                        </div>
-                        <div class="col-md-7">
-                            @isset($obit['checksum'])
-                                {{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button>
-                            @endisset
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <strong>Client-helper</strong>
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-7">
-                            @isset($obit['checksum'])
-                                {{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button>
-                            @endisset
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <strong>Blockchain</strong>
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-7">
-                            @if ($hasNFT)
-                                {{ $nft->getUriHash() }}<button class="btn btn-link btn-sm" data-copy-text="{{ $nft->getUriHash() }}"><i class="far fa-copy"></i></button>
-                            @endif
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-            <!-- TODO: add checksum compute log -->
+            &lt;!&ndash; TODO: add checksum compute log &ndash;&gt;
             <p class="mt-2 mb-2"><a href="#" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#calculations2" aria-expanded="false" aria-controls="calculations2">Show Calculations</a></p>
 
             <div id="calculations2" class="collapse">
@@ -360,7 +322,7 @@
                 <code v-pre>{!! $compute_log !!}</code>
             </div>
         </div>
-    </div>
+    </div>-->
 
 
     <!--    <div class="d-flex justify-content-between mb-2">
