@@ -56,7 +56,7 @@ class Save extends Handler {
                     if ($ipfsUrl !== false) {
                         Document::create([
                             'device_id'  => $existingDevice->id,
-                            'name'       => $document['doc_name'],
+                            'name'       => (string) $document['doc_name'],
                             'path'       => $document['doc_path'],
                             'type'       => $document['doc_type'],
                             'data_hash'  => '',
@@ -66,7 +66,7 @@ class Save extends Handler {
                         $filePath = substr($document['doc_path'], strpos($document['doc_path'], 'documents'));
                         Document::create([
                             'device_id'  => $existingDevice->id,
-                            'name'       => $document['doc_name'],
+                            'name'       => (string) $document['doc_name'],
                             'path'       => $document['doc_path'],
                             'type'       => $document['doc_type'],
                             'data_hash'  => hash('sha256', Storage::get($filePath)),

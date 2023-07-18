@@ -45,7 +45,7 @@ class Sync extends Command
 
                 foreach ($allAccounts as $account) {
                     $nfts = json_decode(
-                        file_get_contents('https://node.alpha.obada.io:1317/obada-foundation/fullcore/nfts/' . $account->getAddress()), 
+                        file_get_contents('https://node.alpha.obada.io/obada-foundation/fullcore/nfts/' . $account->getAddress()), 
                         true
                     );
 
@@ -86,7 +86,7 @@ class Sync extends Command
                                 foreach ($documents as $document) {
                                     Document::create([
                                         'device_id' => $device->id,
-                                        'name'      => $document['name'],
+                                        'name'      => (string) $document['name'],
                                         'data_hash' => $document['hash'],
                                         'path'      => $document['uri']
                                     ]);

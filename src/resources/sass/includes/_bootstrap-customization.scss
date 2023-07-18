@@ -282,3 +282,9 @@
         width: 50% !important;
     }
 }
+
+.w-md-75 {
+    @include media-breakpoint-up(md) {
+        width: 75% !important;
+    }
+}
