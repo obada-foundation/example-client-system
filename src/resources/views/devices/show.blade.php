@@ -311,9 +311,68 @@
     </div>
 
 
-<!--    <div class="card mb-5">
+    <div class="card mb-5">
         <div class="card-body">
-            &lt;!&ndash; TODO: add checksum compute log &ndash;&gt;
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <strong>Ledger Location</strong>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Last Checked Date/Time</strong>
+                        </div>
+                        <div class="col-md-7">
+                            <strong>rootHash</strong>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <strong>Local</strong>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-7">
+                            @isset($obit['checksum'])
+                                {{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button>
+                            @endisset
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <strong>Client-helper</strong>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-7">
+                            @isset($obit['checksum'])
+                                {{ $obit['checksum'] }}<button class="btn btn-link btn-sm" data-copy-text="{{ $obit['checksum'] }}"><i class="far fa-copy"></i></button>
+                            @endisset
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <strong>Blockchain</strong>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-7">
+                            @if ($hasNFT)
+                                {{ $nft->getUriHash() }}<button class="btn btn-link btn-sm" data-copy-text="{{ $nft->getUriHash() }}"><i class="far fa-copy"></i></button>
+                            @endif
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- TODO: add checksum compute log -->
             <p class="mt-2 mb-2"><a href="#" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#calculations2" aria-expanded="false" aria-controls="calculations2">Show Calculations</a></p>
 
             <div id="calculations2" class="collapse">
@@ -322,7 +381,7 @@
                 <code v-pre>{!! $compute_log !!}</code>
             </div>
         </div>
-    </div>-->
+    </div>
 
 
     <!--    <div class="d-flex justify-content-between mb-2">
