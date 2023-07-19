@@ -216,7 +216,11 @@
 
 
     <div class="d-flex justify-content-between mb-2">
-        <h2 class="mb-0">Data Objects <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 5.2.4]</sup> <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 6]</sup></h2>
+        <h2 class="mb-0">
+            Version History
+            <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 5.2.4]</sup>
+            <sup class="fst-italic fs-6 text-success" style="top: -1em;">[section 6]</sup>
+        </h2>
 
             <a href="{{ route('devices.edit', $device->usn) }}#documents" class="btn btn-outline-primary">
                 <i class="fas fa-edit"></i>&nbsp;Edit
@@ -233,16 +237,14 @@
                 </ul>
             @else
                 <ul class="list-group list-group-flush">
+                    <!-- data structure example -->
 {{--                    @foreach($device->version as $version)--}}
                         <li class="list-group-item">
-                            <h3 class="mt-3">Version 2</h3>
+                            <h3 class="mt-3">Version 2 <sup class="fst-italic fs-6 text-black-50">(current version)</sup></h3>
 
                             <ul class="mt-3">
                                 <li class="mt-2 mb-3">
-                                    <strong>Version 1 roothash:</strong>
-                                </li>
-                                <li class="mt-2 mb-3">
-                                    <strong>Data Object 1</strong>
+                                    <strong>Data Object 1</strong> <em class="fs-6 text-black-50">(key/value array)</em>
                                     <ul>
                                         <li>versionID:</li>
                                         <li>date:</li>
@@ -250,11 +252,14 @@
                                         <li>name:</li>
                                         <li>description:</li>
                                         <li>[etc...]</li>
-                                        <li>dataObjectHash1:</li>
+                                        <li>
+                                            dataObjectHash1: <em class="fs-6 text-black-50">(hash of entire array)</em><br>
+                                            [hash]<button class="btn btn-link btn-sm" data-copy-text="[hash]"><i class="far fa-copy"></i></button>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="mt-2 mb-3">
-                                    <strong>Data Object 2</strong>
+                                    <strong>Data Object 2</strong> <em class="fs-6 text-black-50">(key/value array)</em>
                                     <ul>
                                         <li>versionID:</li>
                                         <li>date:</li>
@@ -262,11 +267,19 @@
                                         <li>name:</li>
                                         <li>description:</li>
                                         <li>[etc...]</li>
-                                        <li>dataObjectHash2:</li>
+                                        <li>
+                                            dataObjectHash2: <em class="fs-6 text-black-50">(hash of entire array)</em><br>
+                                            [hash]<button class="btn btn-link btn-sm" data-copy-text="[hash]"><i class="far fa-copy"></i></button>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="mt-2 mb-3">
-                                    <strong>Version 2 roothash:</strong>
+                                    <strong>Prior Version roothash:</strong><br>
+                                    [hash]<button class="btn btn-link btn-sm" data-copy-text="[hash]"><i class="far fa-copy"></i></button>
+                                </li>
+                                <li class="mt-2 mb-3">
+                                    <strong>Version 2 roothash:</strong> <em class="fs-6 text-black-50">(hash of array hashes with prior version roothash)</em><br>
+                                    [hash]<button class="btn btn-link btn-sm" data-copy-text="[hash]"><i class="far fa-copy"></i></button>
                                 </li>
                             </ul>
                         </li>
@@ -276,7 +289,7 @@
 
                             <ul class="mt-3">
                                 <li class="mt-2 mb-3">
-                                    <strong>Data Object 1</strong>
+                                    <strong>Data Object 1</strong> <em class="fs-6 text-black-50">(key/value array)</em>
                                     <ul>
                                         <li>versionID:</li>
                                         <li>date:</li>
@@ -284,11 +297,14 @@
                                         <li>name:</li>
                                         <li>description:</li>
                                         <li>[etc...]</li>
-                                        <li>dataObjectHash1:</li>
+                                        <li>
+                                            dataObjectHash1: <em class="fs-6 text-black-50">(hash of entire array)</em><br>
+                                            [hash]<button class="btn btn-link btn-sm" data-copy-text="[hash]"><i class="far fa-copy"></i></button>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="mt-2 mb-3">
-                                    <strong>Data Object 2</strong>
+                                    <strong>Data Object 2</strong> <em class="fs-6 text-black-50">(key/value array)</em>
                                     <ul>
                                         <li>versionID:</li>
                                         <li>date:</li>
@@ -296,11 +312,15 @@
                                         <li>name:</li>
                                         <li>description:</li>
                                         <li>[etc...]</li>
-                                        <li>dataObjectHash2:</li>
+                                        <li>
+                                            dataObjectHash2: <em class="fs-6 text-black-50">(hash of entire array)</em><br>
+                                            [hash]<button class="btn btn-link btn-sm" data-copy-text="[hash]"><i class="far fa-copy"></i></button>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="mt-2 mb-3">
-                                    <strong>Version 1 roothash:</strong>
+                                    <strong>Version 1 roothash:</strong> <em class="fs-6 text-black-50">(hash of array hashes with prior version roothash)</em><br>
+                                    [hash]<button class="btn btn-link btn-sm" data-copy-text="[hash]"><i class="far fa-copy"></i></button>
                                 </li>
                             </ul>
                         </li>
