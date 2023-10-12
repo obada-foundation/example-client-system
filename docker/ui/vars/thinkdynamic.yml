@@ -1,0 +1,46 @@
+---
+# Docker image name
+customize_docker_image: obada/reference-design:thinkdynamic
+
+# Site name for the initial page
+site_name: "Dynamic Lifecycle Innovations Reference Design"
+
+# Logo path
+customize_logo_path: https://thinkdynamic.com/wp-content/uploads/Dynamic_RGB.svg
+
+# Logo text
+customize_logo_text: ""
+
+# Logo height
+logo_height: 40
+
+# Footer text
+customize_footer_text: "©2023 Dynamic Lifecycle Innovations."
+
+# Page background color
+background_color: "#ffffff"
+
+# Main text color
+text_color: "#5f656d"
+
+# Main text size
+text_size_base: 16px
+
+# Links text color
+link_color: "#76be44"
+
+# Background color for top navigation (header)
+header_background_color: "#ffffff"
+
+# Text color for top navigation (header)
+header_text_color: "rgba(34,41,49,1)"
+
+# Background color for bottom navigation (footer)
+footer_background_color: "#F5F6F6"
+
+# Text color for bottom navigation (footer)
+footer_text_color: "#AEB6BE"
+
+# Primary color
+primary_color: "#76BE44"
+

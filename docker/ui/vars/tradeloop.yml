@@ -1,0 +1,45 @@
+---
+# Docker image name
+customize_docker_image: obada/reference-design:tradeloop
+
+# Site name for the initial page
+site_name: "Tradeloop Reference Design"
+
+# Logo path:
+customize_logo_path: https://public.tradeloopproto.com/img/tradeloop-logo.svg
+
+# Logo text
+customize_logo_text: "Blockchain Demo Site"
+
+# Logo height
+logo_height: 20
+
+# Footer text
+customize_footer_text: "Copyright © 1995-2023 Tradeloop Corporation"
+
+# Page background color
+background_color: "#eff1f4"
+
+# Main text color
+text_color: "#555555"
+
+# Main text size
+text_size_base: 15px
+
+# Links text color
+link_color: "#3a99d8"
+
+# Background color for top navigation (header)
+header_background_color: "#ffffff"
+
+# Text color for top navigation (header)
+header_text_color: "#555555"
+
+# Background color for bottom navigation (footer)
+footer_background_color: "#cacaca"
+
+# Text color for bottom navigation (footer)
+footer_text_color: "#ffffff"
+
+# Primary color
+primary_color: "#e74c3c"

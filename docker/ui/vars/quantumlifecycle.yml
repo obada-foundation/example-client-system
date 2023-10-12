@@ -1,0 +1,46 @@
+---
+# Docker image name
+customize_docker_image: obada/reference-design:quantumlifecycle
+
+# Site name for the initial page
+site_name: "Quantum Lifecycle Partners Reference Design"
+
+# Logo path
+customize_logo_path: https://quantumlifecycle.com/wp-content/uploads/2022/10/quantum-logo-1.svg
+
+# Logo text
+customize_logo_text: "Blockchain Demo Site"
+
+# Logo height
+logo_height: 55
+
+# Footer text
+customize_footer_text: "© Quantum Lifecycle Partners, All Rights Reserved."
+
+# Page background color
+background_color: "#ffffff"
+
+# Main text color
+text_color: "#565559"
+
+# Main text size
+text_size_base: 16px
+
+# Links text color
+link_color: "#237e9f"
+
+# Background color for top navigation (header)
+header_background_color: "#ffffff"
+
+# Text color for top navigation (header)
+header_text_color: "#333"
+
+# Background color for bottom navigation (footer)
+footer_background_color: "rgb(0,108,167)"
+
+# Text color for bottom navigation (footer)
+footer_text_color: "#ffffff"
+
+# Primary color
+primary_color: "#348721"
+

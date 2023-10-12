@@ -1,0 +1,33 @@
+---
+- name: Reference Design Custom UI containers buils 
+  hosts: localhost
+
+  vars:
+    build_path: "orgs/{{ org }}"
+
+  tasks:
+    - name: Create customize folder.
+      file:
+        path: "{{ build_path }}"
+        state: directory
+        
+    - name: Copy Dockerfile.
+      template:
+        src: "Dockerfile.j2"
+        dest: "orgs/{{ org }}/Dockerfile"
+        mode: 0644
+
+    - name: Copy scss config file.
+      template:
+        src: "_config.scss.j2"
+        dest: "orgs/{{ org }}/_config.scss"
+        mode: 0644
+
+    - name: Build customized reference design image
+      ansible.builtin.shell: |
+        docker pull obada/reference-design:develop
+        docker build -t {{ customize_docker_image }} -f orgs/{{ org }}/Dockerfile orgs/{{ org }}
+
+    - name: Push customized reference design image
+      ansible.builtin.shell: |
+        docker push {{ customize_docker_image }}

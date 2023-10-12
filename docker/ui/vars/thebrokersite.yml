@@ -1,0 +1,45 @@
+---
+# Docker image name
+customize_docker_image: obada/reference-design:thebrokersite
+
+# Site name for the initial page
+site_name: "The Broker Site Reference Design"
+
+# Logo path
+customize_logo_path: https://www.thebrokersite.com/img/tbs_logo_new_white.6e39b5f0.png
+
+# Logo text
+customize_logo_text: "Blockchain TBS Demo Site"
+
+# Logo height
+logo_height: 20
+
+# Footer text
+customize_footer_text: "© Copyright 1999 - 2023 The Broker Site BV. All rights reserved."
+
+# Page background color
+background_color: "#f4f5f7"
+
+# Main text color
+text_color: "#161e2e"
+
+# Main text size
+text_size_base: 15px
+
+# Links text color
+link_color: "#c81e1e"
+
+# Background color for top navigation (header)
+header_background_color: "#c81e1e"
+
+# Text color for top navigation (header)
+header_text_color: "#fff"
+
+# Background color for bottom navigation (footer)
+footer_background_color: "#161e2e"
+
+# Text color for bottom navigation (footer)
+footer_text_color: "#9fa6b2"
+
+# Primary color
+primary_color: "#e02424"

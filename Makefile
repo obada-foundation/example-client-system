@@ -7,6 +7,23 @@ PROJECT_TAG_IMAGE = $(PROJECT):$(COMMIT_TAG)
 
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
+ORGS = \
+	thebrokersite tradeloop ascdi \
+	wdpi usody thinkdynamic \
+	quantumlifecycle
+
+build: build/develop build/ui
+
+build/develop:
+	docker build -t $(PROJECT_IMAGE) -f docker/app/Dockerfile . --build-arg APP_ENV=dev
+
+build/ui:
+	@for ORG in $(ORGS); do \
+		echo "Building a docker container for organization: \"$$ORG\""; \
+		ansible-playbook docker/ui/playbook.yml \
+			--extra-vars "org=$$ORG" \
+			--extra-vars "@docker/ui/vars/$$ORG.yml"; \
+	done
 
 deps/php:
 	docker run \

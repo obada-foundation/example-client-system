@@ -1,0 +1,46 @@
+---
+# Docker image name
+customize_docker_image: obada/reference-design:usody
+
+# Site name for the initial page
+site_name: "Usody Reference Design"
+
+# Logo path
+customize_logo_path: https://app.usody.com/static/img/usody_logo_transparent_noicon-y-purple-120x41.png
+
+# Logo text
+customize_logo_text: "Blockchain Demo Site"
+
+# Logo height
+logo_height: 30
+
+# Footer text
+customize_footer_text: "©2023 Usody"
+
+# Page background color
+background_color: "#ffffff"
+
+# Main text color
+text_color: "#1a1a1a"
+
+# Main text size
+text_size_base: 15px
+
+# Links text color
+link_color: "rgb(153, 51, 101)"
+
+# Background color for top navigation (header)
+header_background_color: "#ffffff"
+
+# Text color for top navigation (header)
+header_text_color: "#111111"
+
+# Background color for bottom navigation (footer)
+footer_background_color: "#f6f9ff"
+
+# Text color for bottom navigation (footer)
+footer_text_color: "#646464"
+
+# Primary color
+primary_color: "rgb(153, 51, 101)"
+
