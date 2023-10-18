@@ -351,7 +351,6 @@ export default {
                             value: s.name,
                             isValid: true,
                             isClean: true,
-                            validations: ['required']
                         },
                         url: {
                             value: s.path,
